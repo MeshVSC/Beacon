@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beacon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root,[data-theme="light"]{
+  --bg:#f7f6f2;--surface:#f0efeb;--surface-2:#e8e6e1;--border:rgba(40,37,29,0.1);
+  --text:#28251d;--text-muted:#7a7974;--text-faint:#bab9b4;
+  --accent:#01696f;--accent-hover:#0c4e54;--accent-bg:rgba(1,105,111,0.08);
+  --radius:12px;
+}
+[data-theme="dark"]{
+  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.07);
+  --text:#d4d3d0;--text-muted:#6b6a68;--text-faint:#3a3937;
+  --accent:#4f98a3;--accent-hover:#3d8490;--accent-bg:rgba(79,152,163,0.1);
+  --radius:12px;
+}
+html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
+body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+
+/* NAV */
+nav{display:flex;align-items:center;padding:0 40px;height:58px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{font-size:14px;font-weight:600;letter-spacing:2.5px;color:var(--text);text-transform:uppercase}
+.nav-right{margin-left:auto;display:flex;align-items:center;gap:6px}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--text-muted);font-size:13px;transition:all 0.15s}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* HERO */
+.hero{max-width:760px;margin:0 auto;padding:96px 40px 72px;text-align:center}
+.hero-tag{display:inline-block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;font-weight:500}
+.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-0.5px;line-height:1.1;margin-bottom:20px;color:var(--text)}
+.hero p{font-size:15px;color:var(--text-muted);max-width:480px;margin:0 auto 40px;line-height:1.7}
+.search-hero{display:flex;align-items:center;max-width:440px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color 0.15s}
+.search-hero:focus-within{border-color:var(--accent)}
+.search-hero input{flex:1;background:none;border:none;padding:12px 16px;font-size:14px;color:var(--text);outline:none}
+.search-hero input::placeholder{color:var(--text-faint)}
+.search-hero span{padding:0 14px;color:var(--text-faint);font-size:12px;letter-spacing:1px}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:40px;padding:0 40px 72px;border-bottom:1px solid var(--border);max-width:760px;margin:0 auto}
+.stat{text-align:center}
+.stat-num{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
+.stat-label{font-size:11px;color:var(--text-faint);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+
+/* CATEGORIES */
+.categories{max-width:960px;margin:0 auto;padding:72px 40px}
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-faint);margin-bottom:32px;font-weight:500}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{text-decoration:none;display:block;padding:20px 0;position:relative;transition:opacity 0.2s}
+.card:hover{opacity:0.7}
+.card-icon{width:36px;height:36px;margin-bottom:20px;color:var(--accent)}
+.card h3{font-size:15px;font-weight:600;color:var(--text);margin-bottom:6px}
+.card p{font-size:12px;color:var(--text-muted);line-height:1.6}
+.card-count{position:absolute;top:0;right:0;font-size:10px;letter-spacing:1px;color:var(--text-faint);font-weight:500}
+.card-soon{opacity:1;cursor:default}
+.badge-soon{position:absolute;top:0;right:0;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);border:1px solid var(--border);border-radius:20px;padding:2px 8px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;font-size:11px;color:var(--text-faint);letter-spacing:0.5px}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#">
+    <svg viewBox="0 0 28 28" width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="14,2 26,9 26,21 14,28 2,21 2,9" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+    </svg>
+    <span class="logo-name">Beacon</span>
+  </a>
+  <div class="nav-right">
+    <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">☀</button>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-tag">Curated by developers, for developers</div>
+  <h1>Everything you need.<br>All in one place.</h1>
+  <p>A curated directory of tools, inspiration, libraries, templates, fonts and assets for builders and creatives.</p>
+  <div class="search-hero">
+    <input type="text" placeholder="Search across Beacon..." id="hero-search">
+    <span>↵</span>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num">161</div><div class="stat-label">Tools</div></div>
+  <div class="stat"><div class="stat-num">6</div><div class="stat-label">Categories</div></div>
+  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Curated</div></div>
+</div>
+
+<section class="categories">
+  <div class="section-label">Browse</div>
+  <div class="grid">
+
+    <a class="card" href="./beacon.html">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="card-count">161 tools</span>
+      <h3>Apps & Web Tools</h3>
+      <p>AI tools, automation, design, video, builders, coding utilities and more.</p>
+    </a>
+
+    <div class="card card-soon">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span class="badge-soon">Soon</span>
+      <h3>Inspiration</h3>
+      <p>Awwwards, Dribbble, Behance, Mobbin and more design galleries.</p>
+    </div>
+
+    <div class="card card-soon">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+      <span class="badge-soon">Soon</span>
+      <h3>Libraries & UI Kits</h3>
+      <p>shadcn, Tailwind, Radix, Framer Motion and component libraries.</p>
+    </div>
+
+    <div class="card card-soon">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 17h6M17 14v6"/></svg>
+      <span class="badge-soon">Soon</span>
+      <h3>Templates</h3>
+      <p>HTML, React, Figma and design system starter templates.</p>
+    </div>
+
+    <div class="card card-soon">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h3m0 0V4m0 3a5 5 0 0 0 10 0m0 0V4m0 3h3M4 20h16"/><text x="7" y="19" font-size="7" fill="currentColor" stroke="none" font-family="serif">Aa</text></svg>
+      <span class="badge-soon">Soon</span>
+      <h3>Fonts</h3>
+      <p>Google Fonts, Fontshare, type foundries and free typefaces.</p>
+    </div>
+
+    <div class="card card-soon">
+      <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M7 12h.01"/><path d="M17 12h.01"/></svg>
+      <span class="badge-soon">Soon</span>
+      <h3>Assets</h3>
+      <p>Icons, illustrations, stock photos, 3D models and free resources.</p>
+    </div>
+
+  </div>
+</section>
+
+<footer>Beacon · A curated index for builders and creatives</footer>
+
+<script>
+const root=document.documentElement;
+const toggleBtn=document.getElementById('theme-toggle');
+let theme='dark';
+toggleBtn.addEventListener('click',()=>{
+  theme=theme==='dark'?'light':'dark';
+  root.setAttribute('data-theme',theme);
+  toggleBtn.textContent=theme==='dark'?'☀':'☾';
+});
+document.getElementById('hero-search').addEventListener('keydown',e=>{
+  if(e.key==='Enter'&&e.target.value.trim()){
+    window.location.href='beacon.html?q='+encodeURIComponent(e.target.value.trim());
+  }
+});
+</script>
+</body>
+</html>
