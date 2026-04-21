@@ -16,56 +16,96 @@
   --shadow:0 2px 8px rgba(40,37,29,0.08);--radius:10px;
 }
 [data-theme="dark"]{
-  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.07);
-  --text:#d4d3d0;--text-muted:#6b6a68;--text-faint:#3a3937;
-  --accent:#4f98a3;--accent-hover:#3d8490;--accent-bg:rgba(79,152,163,0.1);
+  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.1);
+  --text:#eeeded;--text-muted:#a8a7a5;--text-faint:#6b6a68;
+  --accent:#5eb8c4;--accent-hover:#4ca8b5;--accent-bg:rgba(94,184,196,0.12);
   --shadow:0 2px 8px rgba(0,0,0,0.3);--radius:10px;
 }
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
-.app{display:grid;grid-template-rows:56px 1fr;grid-template-columns:220px 1fr;height:100vh;overflow:hidden}
-.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px;border-bottom:1px solid var(--border);background:var(--bg);z-index:10}
-.sidebar{border-right:1px solid var(--border);overflow-y:auto;padding:16px 0;background:var(--surface)}
-.main{overflow-y:auto;padding:24px}
+.app{display:flex;flex-direction:column;height:100vh;overflow:hidden}
+.topbar{display:flex;align-items:center;gap:16px;padding:0 20px;height:56px;border-bottom:1px solid var(--border);background:var(--bg);z-index:10;flex-shrink:0}
+.main{overflow-y:auto;padding:24px;width:100%;max-width:1400px;margin:0 auto;flex:1}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
 .logo-name{font-size:15px;font-weight:600;letter-spacing:2px;color:var(--text);text-transform:uppercase}
 .search-wrap{flex:1;max-width:420px}
-.search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:13px;color:var(--text);outline:none;transition:border-color 0.15s}
+.search-wrap input{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;color:var(--text);outline:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
 .search-wrap input::placeholder{color:var(--text-faint)}
-.search-wrap input:focus{border-color:var(--accent)}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg);transform:scale(1.01)}
 .topbar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
 .count-badge{font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
 .theme-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--text-muted);font-size:13px;transition:all 0.15s}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-.sidebar-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-faint);padding:0 16px 8px}
-.cat-btn{display:block;width:100%;text-align:left;background:none;border:none;padding:7px 16px;font-size:13px;color:var(--text-muted);cursor:pointer;border-left:2px solid transparent;transition:all 0.12s}
-.cat-btn:hover{color:var(--text);background:var(--accent-bg)}
-.cat-btn.active{color:var(--accent);border-left-color:var(--accent);font-weight:500}
-.cat-count{float:right;font-size:11px;color:var(--text-faint);margin-top:1px}
-.table-wrap{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden}
-.section-header{padding:16px 20px 12px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.section-title{font-size:13px;font-weight:600;letter-spacing:0.3px}
-.result-count{font-size:11px;color:var(--text-muted)}
+.hero-header{margin-bottom:32px;padding:24px 0 8px;animation:fade-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;display:flex;justify-content:space-between;gap:32px;align-items:stretch}
+.hero-header-left{flex-shrink:0;max-width:360px;display:flex;flex-direction:column;justify-content:space-between}
+.hero-header-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:20px}
+.section-title{display:block;font-size:clamp(2.5rem, 5vw, 4rem);line-height:0.95;font-weight:700;letter-spacing:-1.8px;color:var(--text);margin-top:-6px}
+.horizontal-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.cat-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 500;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.cat-btn:hover { background: var(--surface); color: var(--text); border-color: var(--accent); transform:translateY(-1px); box-shadow:0 4px 12px rgba(0,0,0,0.05); }
+.cat-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow:0 4px 16px var(--accent-bg); transform:translateY(-1px); }
+.cat-count { font-size: 11px; color: var(--text-faint); padding: 2px 8px; background: rgba(0,0,0,0.1); border-radius: 12px; transition:all 0.2s; }
+.cat-btn.active .cat-count { color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.2); }
+.table-wrap{background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);overflow:hidden;box-shadow:var(--shadow)}
+.result-count{font-size:12px;color:var(--text-muted);font-weight:500}
 table{width:100%;border-collapse:collapse}
-thead th{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);font-weight:500;padding:10px 16px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
-tbody tr{border-bottom:1px solid var(--border);transition:background 0.1s}
+thead th{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-faint);font-weight:500;padding:12px 20px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap;background:rgba(0,0,0,0.02)}
+tbody tr{border-bottom:1px solid var(--border);transition:all 0.2s cubic-bezier(0.4, 0, 0.2, 1);opacity:0; animation: fade-up 0.4s ease-out forwards;}
+@keyframes fade-up { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(10px); } }
+@keyframes fade-down { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(-10px); } }
 tbody tr:last-child{border-bottom:none}
-tbody tr:hover{background:var(--surface-2)}
-td{padding:11px 16px;vertical-align:middle}
-.td-site a{color:var(--accent);text-decoration:none;font-size:13px;font-weight:500}
-.td-site a:hover{text-decoration:underline}
+tbody tr:hover{background:var(--surface-2);transform:scale(1.005) translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,0.08);position:relative;z-index:2;border-radius:8px;}
+td{padding:14px 20px;vertical-align:middle}
+.td-site{width:1%;white-space:nowrap;padding-right:32px}
+.td-site a{color:var(--text);text-decoration:none;font-size:14px;font-weight:600;transition:color 0.2s}
+.td-site a:hover{color:var(--accent)}
 .td-desc{color:var(--text-muted);font-size:12px;max-width:260px}
-.td-cat{font-size:11px;color:var(--text-faint)}
+.td-cat{font-size:12px;color:var(--text-muted);font-weight:600;letter-spacing:0.3px}
 .badge{display:inline-block;font-size:10px;letter-spacing:0.5px;padding:2px 8px;border-radius:20px;font-weight:500}
 .badge-free{background:rgba(67,122,34,0.12);color:#6daa45}
 .badge-freemium{background:var(--accent-bg);color:var(--accent)}
 .empty{padding:64px 20px;text-align:center;color:var(--text-muted);font-size:13px}
+th.sortable{cursor:pointer;user-select:none;transition:color 0.15s}
+th.sortable:hover{color:var(--text)}
+th.sortable svg{width:14px;height:14px;margin-left:6px;vertical-align:-3px;opacity:0.2;transition:all 0.2s}
+th.sortable:hover svg{opacity:0.6}
+th.sort-active{color:var(--text)}
+th.sort-active svg{opacity:1 !important;stroke:var(--accent)}
+th.sort-desc svg{transform:rotate(180deg)}
+.header-right{display:flex;align-items:center;gap:16px}
+.price-filters{display:flex;align-items:center;background:var(--surface-2);padding:4px;border-radius:12px;border:1px solid var(--border)}
+.price-btn{background:none;border:none;border-radius:8px;padding:6px 16px;font-size:12px;color:var(--text-muted);cursor:pointer;transition:all 0.2s cubic-bezier(0.4, 0, 0.2, 1);font-weight:600}
+.price-btn:hover{color:var(--text)}
+.price-btn.active{background:var(--surface);color:var(--text);box-shadow:var(--shadow);transform:scale(1.02)}
+.dev-star{cursor:pointer;opacity:0.2;margin-right:8px;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);font-size:14px;user-select:none;display:inline-block}
+.dev-star:hover{opacity:0.8}
+.dev-star.active{color:#f59e0b;opacity:1}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="topbar">
-    <a class="logo" href="#">
+    <a class="logo" href="index.html">
       <svg viewBox="0 0 28 28" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
         <polygon points="14,2 26,9 26,21 14,28 2,21 2,9" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
       </svg>
@@ -75,35 +115,36 @@ td{padding:11px 16px;vertical-align:middle}
       <input type="text" id="search" placeholder="Search tools..." autocomplete="off">
     </div>
     <div class="topbar-right">
-      <span class="count-badge" id="count-label">161 tools</span>
+      <span class="count-badge" id="count-label">194 tools</span>
       <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">☀</button>
     </div>
   </header>
-  <nav class="sidebar">
-    <div class="sidebar-label">Categories</div>
-    <button class="cat-btn active" data-cat="All">All <span class="cat-count" id="cnt-All">161</span></button>
-    <button class="cat-btn" data-cat="AI & Multi-Model">AI & Multi-Model <span class="cat-count" id="cnt-AI"></span></button>
-    <button class="cat-btn" data-cat="Automation">Automation <span class="cat-count" id="cnt-Auto"></span></button>
-    <button class="cat-btn" data-cat="Design & Image">Design & Image <span class="cat-count" id="cnt-Design"></span></button>
-    <button class="cat-btn" data-cat="Video & Animation">Video & Animation <span class="cat-count" id="cnt-Video"></span></button>
-    <button class="cat-btn" data-cat="Website & App Builders">Website & App Builders <span class="cat-count" id="cnt-Web"></span></button>
-    <button class="cat-btn" data-cat="Coding & Dev">Coding & Dev <span class="cat-count" id="cnt-Code"></span></button>
-    <button class="cat-btn" data-cat="PDF & Documents">PDF & Documents <span class="cat-count" id="cnt-PDF"></span></button>
-    <button class="cat-btn" data-cat="Audio & Music">Audio & Music <span class="cat-count" id="cnt-Audio"></span></button>
-    <button class="cat-btn" data-cat="Home & Interior">Home & Interior <span class="cat-count" id="cnt-Home"></span></button>
-    <button class="cat-btn" data-cat="Travel & Geography">Travel & Geography <span class="cat-count" id="cnt-Travel"></span></button>
-    <button class="cat-btn" data-cat="Learning & Productivity">Learning & Productivity <span class="cat-count" id="cnt-Learn"></span></button>
-    <button class="cat-btn" data-cat="Utilities">Utilities <span class="cat-count" id="cnt-Util"></span></button>
-  </nav>
+
   <main class="main">
-    <div class="table-wrap">
-      <div class="section-header">
-        <span class="section-title" id="section-title">All Tools</span>
-        <span class="result-count" id="result-count"></span>
+    <div class="hero-header">
+      <div class="hero-header-left">
+        <h1 class="section-title" id="section-title">All Tools</h1>
+        <span class="result-count" id="result-count" style="font-size:14px;color:var(--text-muted);font-weight:500;letter-spacing:0.5px"></span>
       </div>
+      <div class="hero-header-right">
+        <div class="price-filters">
+          <button class="price-btn active" data-price="All">All</button>
+          <button class="price-btn" data-price="Free">Free</button>
+          <button class="price-btn" data-price="Freemium">Freemium</button>
+        </div>
+        <div class="horizontal-nav" id="sidebar-btns">
+          <!-- Dynamic categories load here -->
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-wrap">
       <table>
         <thead><tr>
-          <th>Website</th><th>Description</th><th>Category</th><th>Pricing</th>
+          <th class="sortable sort-active" data-sort="domain">Website <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="description">Description <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="category">Category <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="pricing">Pricing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
         </tr></thead>
         <tbody id="table-body"></tbody>
       </table>
@@ -111,53 +152,647 @@ td{padding:11px 16px;vertical-align:middle}
     </div>
   </main>
 </div>
+
+<dialog id="suggest-modal" style="margin:auto; padding:24px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg); color:var(--text); max-width:500px; width:100%; box-shadow:var(--shadow);">
+  <h3 style="margin-bottom:16px; font-weight:600;">User Suggestions</h3>
+  <ul id="suggest-list" style="list-style:none; padding:0; margin-bottom:16px; max-height:300px; overflow-y:auto; display:flex; flex-direction:column; gap:8px;"></ul>
+  <div style="display:flex; justify-content:flex-end; gap:8px;">
+    <button onclick="localStorage.removeItem('beacon_suggestions'); renderSuggestions();" style="padding:6px 12px; border-radius:6px; border:1px solid #ef4444; background:transparent; color:#ef4444; cursor:pointer; font-size:13px;">Delete All</button>
+    <button onclick="document.getElementById('suggest-modal').close()" style="padding:6px 12px; border-radius:6px; background:var(--text); color:var(--bg); border:none; cursor:pointer; font-weight:600; font-size:13px;">Close</button>
+  </div>
+</dialog>
+<button id="btn-admin-suggest" style="display:none; position:fixed; bottom:20px; right:20px; padding:10px 18px; border-radius:20px; background:var(--accent); color:#fff; border:none; font-weight:600; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.2); z-index:100;">Suggestions</button>
+
 <script>
-const TOOLS = [{"category": "AI & Multi-Model", "domain": "abacus.ai/chatllm", "url": "https://abacus.ai/chatllm", "description": "Multi-AI chat platform", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "chatplayground.ai", "url": "https://chatplayground.ai/", "description": "Multi-model AI chat", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "aithor.com", "url": "https://aithor.com/", "description": "AI essay writing assistant", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "mathgpt.ai", "url": "https://mathgpt.ai/", "description": "Math homework solver", "pricing": "Free"}, {"category": "AI & Multi-Model", "domain": "schoolgoat.com", "url": "https://schoolgoat.com/", "description": "Homework problem solver", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "nbi.ai", "url": "https://nbi.ai/", "description": "AI data analysis platform", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "mindgrasp.ai", "url": "https://mindgrasp.ai/", "description": "Study material to mindmap", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "napkin.ai", "url": "https://napkin.ai/", "description": "Text-to-visual graphics", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "summarybox.com", "url": "https://summarybox.com/", "description": "AI content summarizer", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "shepherd.study", "url": "https://shepherd.study/", "description": "AI lecture note-taking", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "adsdog.ai", "url": "https://adsdog.ai/", "description": "AI ad creation platform", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "ai-toolbox.co", "url": "https://ai-toolbox.co/", "description": "Collection of AI utilities", "pricing": "Free"}, {"category": "AI & Multi-Model", "domain": "backpackbot.ai", "url": "https://backpackbot.ai/", "description": "AI research assistant", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "bigteam.ai", "url": "https://bigteam.ai/", "description": "AI business team builder", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "blaze.ai", "url": "https://blaze.ai/", "description": "AI content creation suite", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "browsercopilot.ai", "url": "https://browsercopilot.ai/", "description": "AI browser assistant", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "copycopter.ai", "url": "https://copycopter.ai/", "description": "AI copywriting tool", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "edenx.ai", "url": "https://edenx.ai/", "description": "AI creative assistant", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "socialbu.com", "url": "https://socialbu.com/", "description": "AI social media manager", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "socialsonic.com", "url": "https://socialsonic.com/", "description": "AI LinkedIn content tool", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "notebooklm.google.com", "url": "https://notebooklm.google.com/", "description": "Upload docs, AI becomes expert on them", "pricing": "Free"}, {"category": "AI & Multi-Model", "domain": "perplexity.ai", "url": "https://perplexity.ai/", "description": "AI-powered search engine", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "julius.ai", "url": "https://julius.ai/", "description": "AI spreadsheet/data analyst", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "wisprflow.ai", "url": "https://wisprflow.ai/", "description": "Context-aware voice-to-text", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "higgsfield.ai", "url": "https://higgsfield.ai/", "description": "AI video creation studio", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "elicit.com", "url": "https://elicit.com/", "description": "AI research paper analysis", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "consensus.app", "url": "https://consensus.app/", "description": "AI scientific research search", "pricing": "Freemium"}, {"category": "AI & Multi-Model", "domain": "explainpaper.com", "url": "https://explainpaper.com/", "description": "Simplifies academic papers", "pricing": "Free"}, {"category": "AI & Multi-Model", "domain": "phind.com", "url": "https://phind.com/", "description": "AI search for developers", "pricing": "Freemium"}, {"category": "Automation", "domain": "n8n.io", "url": "https://n8n.io/", "description": "Self-hostable workflow automation", "pricing": "Freemium"}, {"category": "Automation", "domain": "make.com", "url": "https://make.com/", "description": "No-code automation platform", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "freepik.com/ai", "url": "https://freepik.com/ai", "description": "AI image generation", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "krea.ai", "url": "https://krea.ai/", "description": "AI image/video editor", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "playgroundai.com", "url": "https://playgroundai.com/", "description": "AI art/image editor", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "recraft.ai", "url": "https://recraft.ai/", "description": "AI vector image creator", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "logodiffusion.com", "url": "https://logodiffusion.com/", "description": "Image-to-logo tool", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "stockimg.ai", "url": "https://stockimg.ai/", "description": "AI logo/image creator", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "kittl.com", "url": "https://kittl.com/", "description": "AI design tools suite", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "insmind.com", "url": "https://insmind.com/", "description": "AI photo editing", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "picwish.com", "url": "https://picwish.com/", "description": "Photo enhancement", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "promeai.pro", "url": "https://promeai.pro/", "description": "Image transformation", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "magic.chenjungfeng.xyz", "url": "https://magic.chenjungfeng.xyz/", "description": "Sketch-to-art converter", "pricing": "Free"}, {"category": "Design & Image", "domain": "en.eagle.cool", "url": "https://en.eagle.cool/", "description": "Design inspiration browser", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "jitter.video", "url": "https://jitter.video/", "description": "Animated graphic design", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "lordicon.com", "url": "https://lordicon.com/", "description": "Animated icon library", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "eyecannndy.com", "url": "https://eyecannndy.com/", "description": "Visual effects templates", "pricing": "Free"}, {"category": "Design & Image", "domain": "inkarnate.com", "url": "https://inkarnate.com/", "description": "Fantasy map creator", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "nvidia.com/en-us/studio/canvas", "url": "https://nvidia.com/en-us/studio/canvas", "description": "Sketch-to-landscape art", "pricing": "Free"}, {"category": "Design & Image", "domain": "artflow.ai", "url": "https://artflow.ai/", "description": "AI character/scene creator", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "faceswapper.ai", "url": "https://faceswapper.ai/", "description": "AI face swap tool", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "piccopilot.com", "url": "https://piccopilot.com/", "description": "AI product photo editor", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "pacdora.com", "url": "https://pacdora.com/", "description": "Packaging design platform", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "design.com", "url": "https://design.com/", "description": "AI brand/logo designer", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "canva.com", "url": "https://canva.com/", "description": "AI-powered design platform", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "leonardo.ai", "url": "https://leonardo.ai/", "description": "Daily free credits AI image generator", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "ideogram.ai", "url": "https://ideogram.ai/", "description": "AI image generation with accurate text", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "magnific.ai", "url": "https://magnific.ai/", "description": "AI image upscaler/enhancer", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "remove.bg", "url": "https://remove.bg/", "description": "Background remover", "pricing": "Freemium"}, {"category": "Design & Image", "domain": "squoosh.app", "url": "https://squoosh.app/", "description": "Browser-based image compressor", "pricing": "Free"}, {"category": "Video & Animation", "domain": "lumalabs.ai/dream-machine", "url": "https://lumalabs.ai/dream-machine", "description": "Image-to-video generation", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "kling.ai", "url": "https://kling.ai/", "description": "Image-to-video AI", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "pixverse.ai", "url": "https://pixverse.ai/", "description": "AI video generator", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "hailuoai.video", "url": "https://hailuoai.video/", "description": "AI video generation", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "hedra.com", "url": "https://hedra.com/", "description": "AI character video creator", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "invideo.io", "url": "https://invideo.io/", "description": "AI reel/video creator", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "magichour.ai", "url": "https://magichour.ai/", "description": "AI appearance modifier", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "instableep.com", "url": "https://instableep.com/", "description": "Auto video censoring", "pricing": "Free"}, {"category": "Video & Animation", "domain": "clipshort.co", "url": "https://clipshort.co/", "description": "Video-to-shorts converter", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "clipgoat.com", "url": "https://clipgoat.com/", "description": "Video-to-course generator", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "ssemble.com", "url": "https://ssemble.com/", "description": "Smart video editor", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "podcastle.ai", "url": "https://podcastle.ai/", "description": "Video/audio editing suite", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "dupdub.com", "url": "https://dupdub.com/", "description": "Photo/audio lip-sync", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "sketch.metademolab.com", "url": "https://sketch.metademolab.com/", "description": "Drawing-to-animated character", "pricing": "Free"}, {"category": "Video & Animation", "domain": "phase.com", "url": "https://phase.com/", "description": "Design-to-animation", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "alpha.genmo.ai", "url": "https://alpha.genmo.ai/", "description": "AI video/motion creator", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "apob.ai", "url": "https://apob.ai/", "description": "AI video personalization", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "hautech.ai", "url": "https://hautech.ai/", "description": "AI fashion photography", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "democreator.wondershare.com", "url": "https://democreator.wondershare.com/", "description": "Screen recorder/video editor", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "filmora.wondershare.com", "url": "https://filmora.wondershare.com/", "description": "AI video editor", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "runwayml.com", "url": "https://runwayml.com/", "description": "AI video/image generation", "pricing": "Freemium"}, {"category": "Video & Animation", "domain": "pika.art", "url": "https://pika.art/", "description": "AI video generator", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "10web.io", "url": "https://10web.io/", "description": "AI website builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "durable.co", "url": "https://durable.co/", "description": "Instant AI website builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "softgen.ai", "url": "https://softgen.ai/", "description": "Text-to-website/app builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "relume.io", "url": "https://relume.io/", "description": "Professional website builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "gamma.app", "url": "https://gamma.app/", "description": "AI presentation/website creator", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "plusdocs.com", "url": "https://plusdocs.com/", "description": "Multi-AI presentation generator", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "slideteam.net", "url": "https://slideteam.net/", "description": "AI presentation maker", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "co.dev", "url": "https://co.dev/", "description": "Text-to-app builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "dora.run", "url": "https://dora.run/", "description": "3D animated website builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "chatbase.co", "url": "https://chatbase.co/", "description": "AI chatbot builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "replit.com", "url": "https://replit.com/", "description": "Browser-based coding + AI app builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "bolt.new", "url": "https://bolt.new/", "description": "AI full-stack app builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "lovable.dev", "url": "https://lovable.dev/", "description": "Text-to-app builder", "pricing": "Freemium"}, {"category": "Website & App Builders", "domain": "v0.dev", "url": "https://v0.dev/", "description": "AI UI component generator", "pricing": "Freemium"}, {"category": "Coding & Dev", "domain": "codeium.com", "url": "https://codeium.com/", "description": "AI coding assistant", "pricing": "Freemium"}, {"category": "Coding & Dev", "domain": "coddy.tech", "url": "https://coddy.tech/", "description": "Learn coding by practice", "pricing": "Freemium"}, {"category": "Coding & Dev", "domain": "leetcodewizard.io", "url": "https://leetcodewizard.io/", "description": "Coding interview assistant", "pricing": "Freemium"}, {"category": "Coding & Dev", "domain": "roadmap.sh", "url": "https://roadmap.sh/", "description": "Developer career path guide", "pricing": "Free"}, {"category": "Coding & Dev", "domain": "hackertyper.net", "url": "https://hackertyper.net/", "description": "Fake hacker typing simulator", "pricing": "Free"}, {"category": "Coding & Dev", "domain": "explorer.globe.engineer", "url": "https://explorer.globe.engineer/", "description": "Visual topic breakdown", "pricing": "Free"}, {"category": "Coding & Dev", "domain": "github.com/features/copilot", "url": "https://github.com/features/copilot", "description": "AI coding assistant by GitHub", "pricing": "Freemium"}, {"category": "Coding & Dev", "domain": "cursor.com", "url": "https://cursor.com/", "description": "AI-first code editor", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "lightpdf.com", "url": "https://lightpdf.com/", "description": "PDF chat and analysis", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "hipdf.com", "url": "https://hipdf.com/", "description": "Interactive PDF tools", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "simplepdf.eu", "url": "https://simplepdf.eu/", "description": "Browser-based PDF editor", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "scribehow.com", "url": "https://scribehow.com/", "description": "Process documentation tool", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "nodsgy.com", "url": "https://nodsgy.com/", "description": "PDF-to-diagram converter", "pricing": "Freemium"}, {"category": "PDF & Documents", "domain": "sobrief.com", "url": "https://sobrief.com/", "description": "Book summary with audio", "pricing": "Free"}, {"category": "PDF & Documents", "domain": "pdf.wondershare.com", "url": "https://pdf.wondershare.com/", "description": "AI PDF editor", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "flowvoice.ai", "url": "https://flowvoice.ai/", "description": "Voice-to-text converter", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "castmagic.io", "url": "https://castmagic.io/", "description": "Audio/video to content", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "spellar.ai", "url": "https://spellar.ai/", "description": "Meeting transcription tool", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "meeting.ai", "url": "https://meeting.ai/", "description": "Meeting recording/transcription", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "tempolor.com", "url": "https://tempolor.com/", "description": "Video music suggestion AI", "pricing": "Freemium"}, {"category": "Audio & Music", "domain": "radio.garden", "url": "https://radio.garden/", "description": "Global radio streaming", "pricing": "Free"}, {"category": "Home & Interior", "domain": "collov.ai", "url": "https://collov.ai/", "description": "AI interior design tool", "pricing": "Freemium"}, {"category": "Home & Interior", "domain": "home.by.me", "url": "https://home.by.me/", "description": "Interior design planner", "pricing": "Freemium"}, {"category": "Home & Interior", "domain": "homedesigns.ai", "url": "https://homedesigns.ai/", "description": "AI home furniture visualizer", "pricing": "Freemium"}, {"category": "Travel & Geography", "domain": "layla.ai", "url": "https://layla.ai/", "description": "AI travel planner", "pricing": "Free"}, {"category": "Travel & Geography", "domain": "map-this.com", "url": "https://map-this.com/", "description": "Study material to itinerary", "pricing": "Freemium"}, {"category": "Travel & Geography", "domain": "flightaware.com", "url": "https://flightaware.com/", "description": "Real-time flight tracker", "pricing": "Freemium"}, {"category": "Travel & Geography", "domain": "geo-fs.com", "url": "https://geo-fs.com/", "description": "Virtual flight simulator", "pricing": "Free"}, {"category": "Travel & Geography", "domain": "slowroads.io", "url": "https://slowroads.io/", "description": "Virtual endless driving", "pricing": "Free"}, {"category": "Travel & Geography", "domain": "thetruesize.com", "url": "https://thetruesize.com/", "description": "World size comparison map", "pricing": "Free"}, {"category": "Travel & Geography", "domain": "lostgamer.io", "url": "https://lostgamer.io/", "description": "Geography guessing game", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "learn-anything.xyz", "url": "https://learn-anything.xyz/", "description": "Educational learning platform", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "gitmind.com", "url": "https://gitmind.com/", "description": "AI mind map generator", "pricing": "Freemium"}, {"category": "Learning & Productivity", "domain": "edraw.ai", "url": "https://edraw.ai/", "description": "AI mind map generator", "pricing": "Freemium"}, {"category": "Learning & Productivity", "domain": "edrawmax.wondershare.com", "url": "https://edrawmax.wondershare.com/", "description": "Advanced diagramming tool", "pricing": "Freemium"}, {"category": "Learning & Productivity", "domain": "edrawsoft.com/edrawmind", "url": "https://edrawsoft.com/edrawmind", "description": "Mind mapping software", "pricing": "Freemium"}, {"category": "Learning & Productivity", "domain": "entertain.ed.app", "url": "https://entertain.ed.app/", "description": "Typing + reading practice", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "openlibrary.org", "url": "https://openlibrary.org/", "description": "Free digital book library", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "musclewiki.com", "url": "https://musclewiki.com/", "description": "Workout finder by muscle group", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "supercook.com", "url": "https://supercook.com/", "description": "AI recipe suggestions", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "namesnack.com", "url": "https://namesnack.com/", "description": "Business name generator", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "keyboardsimulator.xyz", "url": "https://keyboardsimulator.xyz/", "description": "Virtual keyboard simulator", "pricing": "Free"}, {"category": "Learning & Productivity", "domain": "retrogames.onl", "url": "https://retrogames.onl/", "description": "Browser retro game collection", "pricing": "Free"}, {"category": "Utilities", "domain": "media.io", "url": "https://media.io/", "description": "Multi-purpose file converter", "pricing": "Freemium"}, {"category": "Utilities", "domain": "recoverit.wondershare.com", "url": "https://recoverit.wondershare.com/", "description": "File recovery tool", "pricing": "Freemium"}, {"category": "Utilities", "domain": "tinywow.com", "url": "https://tinywow.com/", "description": "Multi-purpose file toolkit", "pricing": "Free"}, {"category": "Utilities", "domain": "govdeals.com", "url": "https://govdeals.com/", "description": "Government surplus auctions", "pricing": "Free"}, {"category": "Utilities", "domain": "myretrotvs.com", "url": "https://myretrotvs.com/", "description": "Vintage TV channel browser", "pricing": "Free"}, {"category": "Utilities", "domain": "graphy.app", "url": "https://graphy.app/", "description": "Data visualization tool", "pricing": "Freemium"}, {"category": "Utilities", "domain": "meshy.ai", "url": "https://meshy.ai/", "description": "Text-to-3D model generator", "pricing": "Freemium"}, {"category": "Utilities", "domain": "skybox.blockadelabs.com", "url": "https://skybox.blockadelabs.com/", "description": "3D world creator", "pricing": "Freemium"}, {"category": "Utilities", "domain": "rxresu.me", "url": "https://rxresu.me/", "description": "Open-source resume builder", "pricing": "Free"}, {"category": "Utilities", "domain": "kickresume.com", "url": "https://kickresume.com/", "description": "Professional resume builder", "pricing": "Freemium"}, {"category": "Utilities", "domain": "shopyourtv.com", "url": "https://shopyourtv.com/", "description": "Actor outfit identifier", "pricing": "Free"}, {"category": "Utilities", "domain": "startmycar.com", "url": "https://startmycar.com/", "description": "Car repair/maintenance guides", "pricing": "Free"}, {"category": "Utilities", "domain": "bricklink.com/v3/studio", "url": "https://bricklink.com/v3/studio", "description": "Digital LEGO builder", "pricing": "Free"}, {"category": "Utilities", "domain": "tjukanovt.github.io/notable-people", "url": "https://tjukanovt.github.io/notable-people", "description": "Notable people location map", "pricing": "Free"}, {"category": "Utilities", "domain": "printify.com", "url": "https://printify.com/", "description": "Product packaging design", "pricing": "Freemium"}, {"category": "Utilities", "domain": "aicomicfactory.com", "url": "https://aicomicfactory.com/", "description": "Story-to-comic converter", "pricing": "Free"}, {"category": "Utilities", "domain": "drfone.wondershare.com", "url": "https://drfone.wondershare.com/", "description": "Phone data recovery/transfer", "pricing": "Freemium"}, {"category": "Utilities", "domain": "carcarekiosk.com", "url": "https://carcarekiosk.com/", "description": "Car maintenance guides", "pricing": "Free"}, {"category": "Utilities", "domain": "atlas.org", "url": "https://atlas.org/", "description": "Global data visualization", "pricing": "Free"}, {"category": "Utilities", "domain": "12ft.io", "url": "https://12ft.io/", "description": "Bypass article paywalls", "pricing": "Free"}, {"category": "Utilities", "domain": "temp-mail.org", "url": "https://temp-mail.org/", "description": "Temporary email addresses", "pricing": "Free"}, {"category": "Utilities", "domain": "haveibeenpwned.com", "url": "https://haveibeenpwned.com/", "description": "Check if your data was breached", "pricing": "Free"}, {"category": "Utilities", "domain": "web.archive.org", "url": "https://web.archive.org/", "description": "Wayback Machine internet archive", "pricing": "Free"}];
-const catCountMap = {
-  'AI & Multi-Model':'cnt-AI','Automation':'cnt-Auto','Design & Image':'cnt-Design',
-  'Video & Animation':'cnt-Video','Website & App Builders':'cnt-Web','Coding & Dev':'cnt-Code',
-  'PDF & Documents':'cnt-PDF','Audio & Music':'cnt-Audio','Home & Interior':'cnt-Home',
-  'Travel & Geography':'cnt-Travel','Learning & Productivity':'cnt-Learn','Utilities':'cnt-Util'
-};
-Object.entries(catCountMap).forEach(([cat,id])=>{
-  const el=document.getElementById(id);
-  if(el) el.textContent=TOOLS.filter(t=>t.category===cat).length;
-});
-let currentCat='All',currentSearch='';
-function pricingBadge(p){
-  if(p==='Free') return '<span class="badge badge-free">Free</span>';
+(() => {
+
+const TOOLS = [
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "abacus.ai/chatllm", "url": "https://abacus.ai/chatllm", "description": "Build custom AI agents, deploy workflows, and write code seamlessly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "chatplayground.ai", "url": "https://chatplayground.ai/", "description": "Compare and chat with multiple premium AI models simultaneously.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "aithor.com", "url": "https://aithor.com/", "description": "AI essay and academic writing assistant with undetectable generation.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "mathgpt.ai", "url": "https://mathgpt.ai/", "description": "Upload math problems and get detailed, step-by-step AI solutions.", "pricing": "Free"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "schoolgoat.com", "url": "https://schoolgoat.com/", "description": "Instant homework problem solver designed specifically for students.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "nbi.ai", "url": "https://nbi.ai/", "description": "Advanced data analysis platform converting raw numbers into insights.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "mindgrasp.ai", "url": "https://mindgrasp.ai/", "description": "Convert study materials and lectures into interactive AI mind maps.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "napkin.ai", "url": "https://napkin.ai/", "description": "Instantly transform your text into engaging visual graphics.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "summarybox.com", "url": "https://summarybox.com/", "description": "Summarize long articles and extract core concepts in seconds.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "shepherd.study", "url": "https://shepherd.study/", "description": "AI-powered lecture note-taking and customized study assistant.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "adsdog.ai", "url": "https://adsdog.ai/", "description": "Automated ad creation platform for highly converting creatives.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "ai-toolbox.co", "url": "https://ai-toolbox.co/", "description": "A comprehensive directory and collection of specialized AI utilities.", "pricing": "Free"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "backpackbot.ai", "url": "https://backpackbot.ai/", "description": "Your personal AI research assistant for organizing complex data.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "bigteam.ai", "url": "https://bigteam.ai/", "description": "Build an entire virtual business team using specialized AI agents.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "blaze.ai", "url": "https://blaze.ai/", "description": "All-in-one AI content creation suite tailored for marketers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "browsercopilot.ai", "url": "https://browsercopilot.ai/", "description": "Inline browser assistant for instant writing, editing, and data extraction.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "copycopter.ai", "url": "https://copycopter.ai/", "description": "High-conversion AI copywriting engine for ads and landing pages.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "edenx.ai", "url": "https://edenx.ai/", "description": "Versatile AI creative assistant for seamless content generation.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "socialbu.com", "url": "https://socialbu.com/", "description": "Automate, plan, and optimize massive social media campaigns.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "socialsonic.com", "url": "https://socialsonic.com/", "description": "Generate viral, professional LinkedIn posts from simple prompts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "notebooklm.google.com", "url": "https://notebooklm.google.com/", "description": "Upload your documents and let AI answer questions based purely on them.", "pricing": "Free"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "perplexity.ai", "url": "https://perplexity.ai/", "description": "Conversational AI search engine delivering cited, real-time answers.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "julius.ai", "url": "https://julius.ai/", "description": "Connect your spreadsheet data and let AI act as your personal analyst.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "wisprflow.ai", "url": "https://wisprflow.ai/", "description": "Contextually-aware dictation tool that formats your voice perfectly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "higgsfield.ai", "url": "https://higgsfield.ai/", "description": "Professional AI-driven video creation studio for high-end production.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "elicit.com", "url": "https://elicit.com/", "description": "Analyze and extract data from millions of academic research papers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "consensus.app", "url": "https://consensus.app/", "description": "Search engine specifically extracting insights from scientific research.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "explainpaper.com", "url": "https://explainpaper.com/", "description": "Highlight confusing academic text and receive simple explanations.", "pricing": "Free"},
+  {"section": "Apps", "category": "Automation", "domain": "make.com", "url": "https://make.com/", "description": "Powerful visual no-code platform to automate tasks across thousands of apps.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Design & Image", "domain": "freepik.com/ai", "url": "https://freepik.com/ai", "description": "Built-in AI engine to generate unique stock photos and illustrations.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "krea.ai", "url": "https://krea.ai/", "description": "Real-time AI canvas for live image and video generation editing.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "playgroundai.com", "url": "https://playgroundai.com/", "description": "Versatile AI canvas providing precise control over art generation.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "recraft.ai", "url": "https://recraft.ai/", "description": "Generate infinitely scalable SVG vectors and 3D icons.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "logodiffusion.com", "url": "https://logodiffusion.com/", "description": "Draw custom sketches and watch AI transform them into clean logos.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "stockimg.ai", "url": "https://stockimg.ai/", "description": "Generate custom wallpapers, book covers, and stock imagery.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "kittl.com", "url": "https://kittl.com/", "description": "Modern design suite featuring AI tools tailored for graphic designers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "insmind.com", "url": "https://insmind.com/", "description": "Advanced AI photo editing focused on portrait enhancement.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "picwish.com", "url": "https://picwish.com/", "description": "Quickly unblur images and remove backgrounds with AI precision.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "promeai.pro", "url": "https://promeai.pro/", "description": "Transform architectural sketches and 3D models into photorealistic renders.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "magic.chenjungfeng.xyz", "url": "https://magic.chenjungfeng.xyz/", "description": "Convert rough, basic sketches into highly detailed illustrations.", "pricing": "Free"},
+  {"section": "Apps", "category": "Design & Image", "domain": "en.eagle.cool", "url": "https://en.eagle.cool/", "description": "Organize, tag, and browse your massive visual design asset library.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "jitter.video", "url": "https://jitter.video/", "description": "Create smooth, professional motion graphics and UI animations.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "lordicon.com", "url": "https://lordicon.com/", "description": "Extensive library of highly customizable animated Lottie icons.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "eyecannndy.com", "url": "https://eyecannndy.com/", "description": "Huge repository of viral visual effects templates and creative techniques.", "pricing": "Free"},
+  {"section": "Apps", "category": "Design & Image", "domain": "inkarnate.com", "url": "https://inkarnate.com/", "description": "Create highly detailed, stunning fantasy maps for worldbuilding.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "nvidia.com/en-us/studio/canvas", "url": "https://nvidia.com/en-us/studio/canvas", "description": "Paint simple shapes and have AI render them into realistic landscapes.", "pricing": "Free"},
+  {"section": "Apps", "category": "Design & Image", "domain": "artflow.ai", "url": "https://artflow.ai/", "description": "Generate persistent characters and place them into animated scenes.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "faceswapper.ai", "url": "https://faceswapper.ai/", "description": "Seamlessly swap faces in photos and videos maintaining realistic lighting.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "piccopilot.com", "url": "https://piccopilot.com/", "description": "Generate professional e-commerce product staging and photography.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "pacdora.com", "url": "https://pacdora.com/", "description": "Create custom 3D packaging mockups directly in your browser.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "design.com", "url": "https://design.com/", "description": "All-in-one brand identity tool for generating logos and business cards.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "canva.com", "url": "https://canva.com/", "description": "Industry standard collaborative design platform for modern graphics.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Design & Image", "domain": "leonardo.ai", "url": "https://leonardo.ai/", "description": "Highly versatile AI generation suite specifically tuned for game assets.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "ideogram.ai", "url": "https://ideogram.ai/", "description": "Generate high-quality images with perfectly rendered internal text.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "magnific.ai", "url": "https://magnific.ai/", "description": "Magical AI image upscaler that hallucinates stunning missing details.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "remove.bg", "url": "https://remove.bg/", "description": "The gold-standard reliable tool for removing image backgrounds instantly.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Design & Image", "domain": "squoosh.app", "url": "https://squoosh.app/", "description": "Browser-based tool for fine-tuning image compression and formats.", "pricing": "Free"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "lumalabs.ai/dream-machine", "url": "https://lumalabs.ai/dream-machine", "description": "High-fidelity AI model for converting static images into dynamic video.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "kling.ai", "url": "https://kling.ai/", "description": "Generate photorealistic or stylized motion video directly from text.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "pixverse.ai", "url": "https://pixverse.ai/", "description": "Accessible AI platform for generating creative B-roll and animations.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "hailuoai.video", "url": "https://hailuoai.video/", "description": "Advanced AI engine focusing on producing highly lifelike human motion.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "hedra.com", "url": "https://hedra.com/", "description": "Transform static facial photos into expressive, speaking avatars.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "invideo.io", "url": "https://invideo.io/", "description": "Instantly create professional YouTube shorts and Reels from a text prompt.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "magichour.ai", "url": "https://magichour.ai/", "description": "Apply stylized visual filters to completely alter video appearances.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "instableep.com", "url": "https://instableep.com/", "description": "Automatically detect and bleep profanity from your uploaded videos.", "pricing": "Free"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "clipshort.co", "url": "https://clipshort.co/", "description": "Slice long-form podcasts into viral vertical clips automatically.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "clipgoat.com", "url": "https://clipgoat.com/", "description": "Structure raw video recordings into fully segmented educational courses.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "ssemble.com", "url": "https://ssemble.com/", "description": "Browser-based video editor offering a suite of intelligent smart plugins.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "podcastle.ai", "url": "https://podcastle.ai/", "description": "Studio-quality podcast recording platform with AI-powered noise removal.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "dupdub.com", "url": "https://dupdub.com/", "description": "Seamlessly sync audio to facial photos for realistic talking head videos.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "sketch.metademolab.com", "url": "https://sketch.metademolab.com/", "description": "Upload a child's drawing and watch AI automatically animate its limbs.", "pricing": "Free"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "phase.com", "url": "https://phase.com/", "description": "Interactive UI motion design tool tailored for app and web designers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "alpha.genmo.ai", "url": "https://alpha.genmo.ai/", "description": "Animate static elements within imagery into mesmerizing looping videos.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "apob.ai", "url": "https://apob.ai/", "description": "Generate bulk personalized messaging videos using custom AI avatars.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "hautech.ai", "url": "https://hautech.ai/", "description": "AI fashion engine designed to generate flawless garment photoshoots.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "democreator.wondershare.com", "url": "https://democreator.wondershare.com/", "description": "All-in-one screen recorder offering powerful tutorial editing features.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "filmora.wondershare.com", "url": "https://filmora.wondershare.com/", "description": "Consumer desktop video editor loaded with AI enhancement tools.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "runwayml.com", "url": "https://runwayml.com/", "description": "The elite creative AI suite driving the future of cinematic generation.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "pika.art", "url": "https://pika.art/", "description": "Prompt-based video creation platform famous for stunning stylized outputs.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "10web.io", "url": "https://10web.io/", "description": "Automated WordPress AI website builder providing integrated hosting.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "durable.co", "url": "https://durable.co/", "description": "Generate a completely styled business website instantly from a prompt.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "softgen.ai", "url": "https://softgen.ai/", "description": "Easily construct functioning web applications without writing code.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "relume.io", "url": "https://relume.io/", "description": "Generate complex website wireframes and architecture using AI.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "gamma.app", "url": "https://gamma.app/", "description": "Generate gorgeous, interactive pitch decks and presentations instantly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "plusdocs.com", "url": "https://plusdocs.com/", "description": "Native AI slide generator perfectly integrated into Google Slides.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "slideteam.net", "url": "https://slideteam.net/", "description": "Massive library of professional templates merged with an AI slide engine.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "co.dev", "url": "https://co.dev/", "description": "Conversational interface allowing you to build software in plain english.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "dora.run", "url": "https://dora.run/", "description": "Design stunning, animated 3D websites utilizing an intuitive node editor.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "chatbase.co", "url": "https://chatbase.co/", "description": "Train a custom support chatbot on your data and embed it on your site.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "replit.com", "url": "https://replit.com/", "description": "Online coding environment enhanced with an incredibly capable AI agent.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "bolt.new", "url": "https://bolt.new/", "description": "Generate, run, and host complete full-stack web applications in-browser.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "lovable.dev", "url": "https://lovable.dev/", "description": "Build incredibly polished web interfaces by simply describing them.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "v0.dev", "url": "https://v0.dev/", "description": "Vercel's powerful tool that turns UI ideas into perfect React/Tailwind code.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "codeium.com", "url": "https://codeium.com/", "description": "Highly capable free alternative extension for AI code completion.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "coddy.tech", "url": "https://coddy.tech/", "description": "Interactive coding courses designed focusing entirely on practical exercises.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "leetcodewizard.io", "url": "https://leetcodewizard.io/", "description": "AI companion assisting you directly during complex algorithm interviews.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "roadmap.sh", "url": "https://roadmap.sh/", "description": "Community-driven visual learning maps for every software career path.", "pricing": "Free"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "hackertyper.net", "url": "https://hackertyper.net/", "description": "Mash keys to simulate writing complex code like a movie hacker.", "pricing": "Free"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "explorer.globe.engineer", "url": "https://explorer.globe.engineer/", "description": "Visually break down system architecture into interactive, explorable topics.", "pricing": "Free"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "github.com/features/copilot", "url": "https://github.com/features/copilot", "description": "The industry standard AI pair programmer deeply integrated into Git.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "cursor.com", "url": "https://cursor.com/", "description": "The premier AI-first code editor combining familiar UX with extreme intelligence.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "lightpdf.com", "url": "https://lightpdf.com/", "description": "Chat directly with your uploaded PDFs to instantly query information.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "hipdf.com", "url": "https://hipdf.com/", "description": "Full suite of reliable browser tools for compressing and splitting PDFs.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "simplepdf.eu", "url": "https://simplepdf.eu/", "description": "Clean, privacy-friendly browser editor for filling out and signing forms.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "scribehow.com", "url": "https://scribehow.com/", "description": "Auto-generates step-by-step documentation just by recording your clicks.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "nodsgy.com", "url": "https://nodsgy.com/", "description": "Converts dense, complex PDF documents into clear visual flowcharts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "sobrief.com", "url": "https://sobrief.com/", "description": "Get concise text and audio summaries for almost any published book.", "pricing": "Free"},
+  {"section": "Apps", "category": "PDF & Documents", "domain": "pdf.wondershare.com", "url": "https://pdf.wondershare.com/", "description": "Robust desktop PDF modifier featuring built-in AI summarization utilities.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "flowvoice.ai", "url": "https://flowvoice.ai/", "description": "Dictate long thoughts and have AI format them into perfect paragraphs.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "castmagic.io", "url": "https://castmagic.io/", "description": "Transform hour-long audio podcasts into highly engaging written marketing copy.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "spellar.ai", "url": "https://spellar.ai/", "description": "Automated meeting client providing real-time transcription and summaries.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "meeting.ai", "url": "https://meeting.ai/", "description": "Record digital meetings and instantly generate actionable follow-up tasks.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "tempolor.com", "url": "https://tempolor.com/", "description": "Intelligently suggests similar musical tracks based on specific tempos.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Audio & Music", "domain": "radio.garden", "url": "https://radio.garden/", "description": "Explore and listen to thousands of live radio streams mapped out across a 3D globe.", "pricing": "Free"},
+  {"section": "Apps", "category": "Home & Interior", "domain": "collov.ai", "url": "https://collov.ai/", "description": "Upload a bare room photo and generate fully rendered interior design ideas.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Home & Interior", "domain": "home.by.me", "url": "https://home.by.me/", "description": "Draft precise floor plans and visualize your future home in full 3D.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Home & Interior", "domain": "homedesigns.ai", "url": "https://homedesigns.ai/", "description": "Instantly restyle existing furniture and rooms into dramatically new themes.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "layla.ai", "url": "https://layla.ai/", "description": "Chat with an AI travel agent to craft custom, highly personalized itineraries.", "pricing": "Free"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "map-this.com", "url": "https://map-this.com/", "description": "Translates dense study materials and geographical data into mapped itineraries.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "flightaware.com", "url": "https://flightaware.com/", "description": "The definitive resource for comprehensive live global flight tracking.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "geo-fs.com", "url": "https://geo-fs.com/", "description": "Free, browser-based multiplayer flight simulator spanning the actual globe.", "pricing": "Free"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "slowroads.io", "url": "https://slowroads.io/", "description": "Endless, procedurally generated virtual roads built specifically for relaxing driving.", "pricing": "Free"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "thetruesize.com", "url": "https://thetruesize.com/", "description": "An interactive map tool exploring the actual, non-distorted scale of countries.", "pricing": "Free"},
+  {"section": "Apps", "category": "Travel & Geography", "domain": "lostgamer.io", "url": "https://lostgamer.io/", "description": "Geography-guessing game testing your location awareness within video games.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "learn-anything.xyz", "url": "https://learn-anything.xyz/", "description": "An open community catalog mapping out the optimal paths to master any specific topic.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "gitmind.com", "url": "https://gitmind.com/", "description": "Collaborative, AI-enhanced brainstorming engine for structuring complex ideas.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "edraw.ai", "url": "https://edraw.ai/", "description": "Instantly spin up visual mind maps and flowcharts from basic text prompts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "edrawmax.wondershare.com", "url": "https://edrawmax.wondershare.com/", "description": "Versatile all-purpose diagramming tool rivaling standard professional software.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "edrawsoft.com/edrawmind", "url": "https://edrawsoft.com/edrawmind", "description": "Standalone mind-mapping software incorporating modern AI generation concepts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "entertain.ed.app", "url": "https://entertain.ed.app/", "description": "Educational platform focused entirely on enhancing reading comprehension practice.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "openlibrary.org", "url": "https://openlibrary.org/", "description": "Massive public database providing free universal access to millions of digital books.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "musclewiki.com", "url": "https://musclewiki.com/", "description": "Click any muscle on a human body diagram to receive comprehensive workout videos.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "supercook.com", "url": "https://supercook.com/", "description": "Input ingredients currently sitting in your fridge to discover matching recipes.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "namesnack.com", "url": "https://namesnack.com/", "description": "Generate available, catchy brand names relying on industry-specific keywords.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "keyboardsimulator.xyz", "url": "https://keyboardsimulator.xyz/", "description": "Customize and test intricate mechanical keyboard sound profiles via browser simulator.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "retrogames.onl", "url": "https://retrogames.onl/", "description": "A massive, perfectly emulated archive allowing you to play classic retro games directly in browser.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "media.io", "url": "https://media.io/", "description": "Comprehensive suite of browser-native audio and video formatting converters.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "recoverit.wondershare.com", "url": "https://recoverit.wondershare.com/", "description": "Heavy-duty software specifically engineered to salvage permanently deleted deep files.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "tinywow.com", "url": "https://tinywow.com/", "description": "Hundreds of completely free micro-tools addressing common PDF, video, and image manipulations.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "govdeals.com", "url": "https://govdeals.com/", "description": "Public auction platform selling off highly discounted local government surplus property.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "myretrotvs.com", "url": "https://myretrotvs.com/", "description": "An incredibly nostalgic browser project simulating vintage television broadcasts sequentially by decade.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "graphy.app", "url": "https://graphy.app/", "description": "Transform boring spread-sheet numbers into stunning, interactive and vibrant web charts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "meshy.ai", "url": "https://meshy.ai/", "description": "A cutting-edge generative model rapidly constructing fully textured 3D models from simple text prompts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "skybox.blockadelabs.com", "url": "https://skybox.blockadelabs.com/", "description": "Simply sketch simple layouts, and watch the AI synthesize massive, cohesive 360-degree environments.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "rxresu.me", "url": "https://rxresu.me/", "description": "A completely free, privacy-friendly, deeply customizable resume building utility.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "kickresume.com", "url": "https://kickresume.com/", "description": "An auto-generating resume platform employing language models to craft hyper-professional bullet points.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "shopyourtv.com", "url": "https://shopyourtv.com/", "description": "A highly specific crowdsourced database identifying the precise wardrobe outfits featured in your favorite shows.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "startmycar.com", "url": "https://startmycar.com/", "description": "A comprehensive database hosting extensive technical manuals, fuse box diagrams, and warning light guides for automobiles.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "bricklink.com/v3/studio", "url": "https://bricklink.com/v3/studio", "description": "The definitive, robust digital sandbox engine for constructing, rendering, and buying extreme LEGO models.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "tjukanovt.github.io/notable-people", "url": "https://tjukanovt.github.io/notable-people", "description": "An interactive globe visually mapping the explicit birthplaces of Earth's most historically significant figures.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "printify.com", "url": "https://printify.com/", "description": "A massive drop-shipping infrastructure allowing you to attach customized designs to hundreds of physical blank products.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "aicomicfactory.com", "url": "https://aicomicfactory.com/", "description": "Provide a simple short story concept, and process it into a fully paneled, stylistically cohesive comic strip.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "drfone.wondershare.com", "url": "https://drfone.wondershare.com/", "description": "A dense utility suite exclusively focused on facilitating difficult smartphone data back-ups and delicate cross-platform transfers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "carcarekiosk.com", "url": "https://carcarekiosk.com/", "description": "A highly valuable library consisting of brief, specific, model-accurate vehicle maintenance instruction videos.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "atlas.org", "url": "https://atlas.org/", "description": "A robust macroscopic data visualization project designed to analyze immensely complex global trade networks.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "12ft.io", "url": "https://12ft.io/", "description": "A straightforward proxy service attempting to render unreadable paywalled news articles completely accessible.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "temp-mail.org", "url": "https://temp-mail.org/", "description": "Generates a highly disposable, totally anonymous email inbox preventing spam associated with mandatory registrations.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "haveibeenpwned.com", "url": "https://haveibeenpwned.com/", "description": "The authoritative database reliably checking your email addresses against globally recognized historical data breaches.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "web.archive.org", "url": "https://web.archive.org/", "description": "The internet's fundamental backbone library, constantly capturing and historically preserving the lifespan of billions of distinct webpages.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "lmarena.ai", "url": "https://lmarena.ai/", "description": "A blind testing playground pitting top-tier foundational models against each other simultaneously.", "pricing": "Free", "isEssential": true},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "g4f.dev", "url": "https://g4f.dev/", "description": "An impressive open-source aggregator scraping conversational access to over 200 distinct premium and boutique AI models.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "meta.ai", "url": "https://meta.ai/", "description": "Meta's flagship consumer interface, providing rapid, unfettered access directly to the incredibly robust Llama architectural models.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "sur.pollinations.ai", "url": "https://sur.pollinations.ai/", "description": "A surprisingly fluid, stripped-back interface allowing entirely frictionless conversations spanning multiple backend models.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "deepinfra.com/chat", "url": "https://deepinfra.com/chat", "description": "A heavily specialized developer playground allowing instant conversational checking of open source models like DeepSeek and Qwen.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "mirexa.vercel.app", "url": "https://mirexa.vercel.app/", "description": "A sleek, lightweight custom frontend wrapper unlocking simple web access to premium APIs like GPT-4 and targeted DeepSeek instances.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "umint-ai.hf.space", "url": "https://umint-ai.hf.space/", "description": "A community-hosted HuggingFace node specifically serving raw conversational interactions for models like Grok and expansive DeepSeek versions.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "sharedchat.cn", "url": "https://sharedchat.cn/", "description": "An internationally hosted shared resource pool attempting to continuously distribute restricted premium GPT-4 access openly.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "aichatgptfree.org", "url": "https://aichatgptfree.org/", "description": "A dedicated, heavily-optimized site specifically architected around providing completely unmetered access to advanced GPT-based interactions.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "copilot.microsoft.com", "url": "https://copilot.microsoft.com/", "description": "Microsoft's deeply integrated ecosystem companion, natively powered by the absolute latest and most advanced iterations of OpenAI technology.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "groq.com", "url": "https://groq.com/", "description": "An astoundingly fast inference engine explicitly designed around proprietary LPU hardware, generating hundreds of intelligent tokens per second.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "heck.ai", "url": "https://heck.ai/", "description": "A streamlined multi-purpose platform rapidly alternating connections specifically targeting fast instances of DeepSeek and Google's Gemini grids.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "link.fuckicoding.com", "url": "https://link.fuckicoding.com/", "description": "An aggressive workaround proxy specifically tuned to bypass general API limits while surfacing capable instances of Claude and GPT subsets.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "pi.ai", "url": "https://pi.ai/", "description": "An intimately tuned conversational companion explicitly focused on providing highly empathetic, emotionally supportive, back-and-forth dialogue.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "origin.eqing.tech", "url": "https://origin.eqing.tech/", "description": "An authenticated but generous service gateway surfacing direct conversational integrations linking major industry models like GPT-4o and advanced iterations of Claude.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "lobechat.com", "url": "https://lobechat.com/", "description": "A robust, fully-featured open-source desktop and web framework uniquely supporting massive plugin networks while routing highly capable models.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "yupp.ai", "url": "https://yupp.ai/", "description": "An organizational powerhouse specifically collating access, prompting mechanisms, and user experiences across an aggregation of over 200 disparate AI networks.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "chat.deepseek.com", "url": "https://chat.deepseek.com/", "description": "The official consumer-facing gateway providing explicit, high-priority access specifically to incredibly complex reasoning structures via DeepSeek R1 and Coder.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "huggingface.co/spaces", "url": "https://huggingface.co/spaces", "description": "An absolutely fundamental resource allowing the entire machine learning community to freely experiment with bleeding-edge functional prototypes and open model deployments.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (Signup)", "domain": "kimi.com", "url": "https://kimi.com/", "description": "An exceptionally capable assistant deeply specialized in executing complex, long-context document analysis and managing massive continuous operational memories.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "AI Terminal & Tasks", "domain": "warp.dev", "url": "https://warp.dev/", "description": "A heavily modernized terminal written entirely in Rust, fundamentally integrating generative intelligence directly into command-line interface methodologies.", "pricing": "Free", "isEssential": true},
+  {"section": "FreeAI", "category": "AI Terminal & Tasks", "domain": "goblin.tools", "url": "https://goblin.tools/", "description": "An accessible, remarkably tuned suite utilizing intelligence solely to atomize overwhelming executive functions into highly manageable, bite-sized daily checklists.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "ai.google.dev", "url": "https://ai.google.dev/", "description": "Google's direct developmental portal furnishing software engineers with entirely free, massively scalable programmatic access explicitly targeting the complex Gemini architecture.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "llm7.io", "url": "https://llm7.io/", "description": "A streamlined API clearinghouse effectively consolidating developer access across a dizzying array comprising over thirty distinct intelligence providers into singular endpoints.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "uncloseai.com", "url": "https://uncloseai.com/", "description": "A highly specialized infrastructure deliberately mimicking the exact formatting of standard OpenAI structures to rapidly grant unmetered access to competing models seamlessly.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "g4f.dev/docs", "url": "https://g4f.dev/docs", "description": "The comprehensive technical documentation strictly defining how engineers should accurately mount, query, and sustain automated pathways utilizing the massive G4F aggregator network.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "developer.puter.com", "url": "https://developer.puter.com/", "description": "An experimental, entirely server-less web operating environment natively injecting multi-modal capabilities completely eliminating the necessity for complex internal authentication flows.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "phind.com", "url": "https://phind.com/", "description": "An incredibly sophisticated search engine extensively engineered and aggressively calibrated explicitly to assist software developers unravel complicated technical paradigms efficiently.", "pricing": "Free", "isEssential": true},
+  {"section": "FreeAI", "category": "Image & Video Gen", "domain": "pollinations.ai", "url": "https://pollinations.ai/", "description": "A completely frictionless frontend portal heavily utilizing latent diffusion architectures allowing consumers to rapidly prototype complex visually generative concepts unrestricted.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Image & Video Gen", "domain": "vheer.com", "url": "https://vheer.com/", "description": "A minimalist, hyper-focused generative asset generator strictly built around producing highly stylized, inherently clean foundational imagery targeting modern aesthetic applications.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Image & Video Gen", "domain": "perchance.org/wtr90dexsn", "url": "https://perchance.org/wtr90dexsn", "description": "An exceptionally unique, heavily randomized, and utterly unconstrained text-to-imagery engine relying fundamentally on entirely open-source structural mechanics constantly.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Image & Video Gen", "domain": "bing.com/images/create", "url": "https://bing.com/images/create", "description": "Microsoft's deeply integrated consumer tool funneling completely unmodified, extremely robust generation requests securely across OpenAI's formidable DALL-E 3 network.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free AI APIs", "domain": "n8n.io", "url": "https://n8n.io/", "description": "A tremendously powerful open-source visual workflow automation suite deeply facilitating explicit architectural connections intersecting intelligence nodes perfectly.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "awwwards.com", "url": "https://awwwards.com/", "description": "The globally recognized benchmark awarding elite digital design and incredible front-end web development.", "pricing": "Free", "isEssential": true},
+  {"section": "Inspiration", "category": "Web Design", "domain": "mobbin.com", "url": "https://mobbin.com/", "description": "A massively comprehensive, searchable library consisting entirely of meticulously captured authentic mobile and web UI patterns.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Inspiration", "category": "Web Design", "domain": "godly.website", "url": "https://godly.website/", "description": "An astoundingly curated collection exclusively showcasing the absolute pinnacle of bleeding-edge animated web design layouts.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "lapaninja.com", "url": "https://lapaninja.com/", "description": "A dense repository heavily focusing directly on highly effective, extremely beautiful modern landing page architecture.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "siteinspire.com", "url": "https://siteinspire.com/", "description": "A cleanly categorized gallery highlighting minimalist, extremely refined grid-based interactive design philosophies.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "maxibestof.one", "url": "https://maxibestof.one/", "description": "A fast, hyper-curated selection presenting extraordinarily striking, modern-focused responsive web templates.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "pageflows.com", "url": "https://pageflows.com/", "description": "A massive collection explicitly dedicated to recording, analyzing, and structuring perfect user onboarding flows.", "pricing": "Freemium"},
+  {"section": "Inspiration", "category": "Web Design", "domain": "curated.design", "url": "https://curated.design/", "description": "An extensively cataloged resource highlighting extremely polished interface elements and full application layouts.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Creative & Branding", "domain": "dribbble.com", "url": "https://dribbble.com/", "description": "The industry-standard community platform explicitly built entirely for discovering top-tier visual and motion creatives.", "pricing": "Free", "isEssential": true},
+  {"section": "Inspiration", "category": "Creative & Branding", "domain": "behance.net", "url": "https://behance.net/", "description": "Adobe's gargantuan creative network natively showcasing breathtaking professional branding and illustration portfolios.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Creative & Branding", "domain": "savee.it", "url": "https://savee.it/", "description": "A distinctly elegant, Pinterest-alternative explicitly designed to seamlessly organize raw mood boards without clutter.", "pricing": "Freemium"},
+  {"section": "Inspiration", "category": "Creative & Branding", "domain": "muz.li", "url": "https://muz.li/", "description": "A heavily optimized browser extension continually surfacing massive aggregations of daily design inspiration feeds.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "Creative & Branding", "domain": "creativeboom.com", "url": "https://creativeboom.com/", "description": "An internationally acclaimed digital magazine consistently publishing highly inspiring photography and art.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "UI Elements", "domain": "ui-patterns.com", "url": "https://ui-patterns.com/", "description": "A robust, systematically structured database actively categorizing recurring psychological solutions targeting interface problems.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "UI Elements", "domain": "uigarage.net", "url": "https://uigarage.net/", "description": "A daily-updated repository specifically harvesting intricate navigation menus, footers, and granular UI elements.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "UI Elements", "domain": "darkmodedesign.com", "url": "https://darkmodedesign.com/", "description": "A specialized gallery entirely devoted exclusively to wonderfully executed, inherently contrast-heavy dark mode interfaces.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "UI Elements", "domain": "saaslandingpage.com", "url": "https://saaslandingpage.com/", "description": "An incredibly focused archive explicitly collecting highly converting, densely engineered SaaS landing pages.", "pricing": "Free"},
+  {"section": "Inspiration", "category": "UI Elements", "domain": "footer.design", "url": "https://footer.design/", "description": "A deeply hyper-focused gallery specifically collecting uniquely structured, flawlessly designed website footers.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "ui.shadcn.com", "url": "https://ui.shadcn.com/", "description": "An outrageously popular, unstyled, completely accessible foundational component library heavily leveraging strict Tailwind architecture.", "pricing": "Free", "isEssential": true},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "radix-ui.com", "url": "https://radix-ui.com/", "description": "An unopinionated collection perfectly supplying primitive, highly accessible components fundamentally powering complex modern frameworks.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "chakra-ui.com", "url": "https://chakra-ui.com/", "description": "A distinctly modular, extensively accessible React framework inherently optimized purely for massive development speed.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "mantine.dev", "url": "https://mantine.dev/", "description": "A densely packed React framework offering hundreds of expertly constructed hooks alongside highly functional interfaces.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "mui.com", "url": "https://mui.com/", "description": "The monolithic, industry-standard React framework massively implementing Google's complex Material Design guidelines flawlessly.", "pricing": "Freemium"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "nextui.org", "url": "https://nextui.org/", "description": "A beautifully optimized UI library explicitly engineered around rendering fundamentally beautiful components incredibly fast.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "daisyui.com", "url": "https://daisyui.com/", "description": "An absurdly popular, completely free Tailwind plugin drastically reducing massive HTML bloat via semantic utility classes.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "flowbite.com", "url": "https://flowbite.com/", "description": "A robust, open-source library aggressively assembling highly functional interfaces entirely through strict Tailwind conventions.", "pricing": "Freemium"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "headlessui.com", "url": "https://headlessui.com/", "description": "A collection explicitly emphasizing completely unstyled, perfectly accessible UI elements engineered directly by Tailwind labs.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Animations", "domain": "framer.com/motion", "url": "https://framer.com/motion", "description": "A production-ready animation engine natively bringing extraordinarily fluid, complex motion interactions exclusively to React components.", "pricing": "Free", "isEssential": true},
+  {"section": "Libraries", "category": "Animations", "domain": "gsap.com", "url": "https://gsap.com/", "description": "A legendary, extremely robust JavaScript execution platform powering millions of incredibly intricate web animations globally.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Libraries", "category": "Animations", "domain": "auto-animate.formkit.com", "url": "https://auto-animate.formkit.com/", "description": "A zero-configuration, incredibly lightweight primitive completely automating simple DOM structural transitions instantaneously.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Animations", "domain": "lottiefiles.com", "url": "https://lottiefiles.com/", "description": "The massive, globally standard ecosystem allowing impossibly small, perfectly scalable vector animations directly inside responsive interfaces.", "pricing": "Freemium"},
+  {"section": "Libraries", "category": "CSS Frameworks", "domain": "tailwindcss.com", "url": "https://tailwindcss.com/", "description": "A profoundly transformative utility-first CSS framework completely redefining how developers rapidly construct modern applications physically.", "pricing": "Free", "isEssential": true},
+  {"section": "Libraries", "category": "CSS Frameworks", "domain": "getbootstrap.com", "url": "https://getbootstrap.com/", "description": "The historically undeniable front-end toolkit constantly providing extremely reliable scaffolding targeting mobile-first web logic architectures.", "pricing": "Free"},
+  {"section": "Libraries", "category": "CSS Frameworks", "domain": "bulma.io", "url": "https://bulma.io/", "description": "A deeply versatile, highly intuitive framework fundamentally grounded heavily within modern Flexbox grid standards entirely.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Advanced Layouts", "domain": "magicui.design", "url": "https://magicui.design/", "description": "A densely populated gallery specifically offering intensely animated, highly experimental complex React application interfaces seamlessly.", "pricing": "Freemium"},
+  {"section": "Libraries", "category": "Advanced Layouts", "domain": "aceternity.com", "url": "https://aceternity.com/", "description": "An incredibly stylized library explicitly generating visually mind-bending, heavily graphical Tailwind and Framer motion elements comprehensively.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Advanced Layouts", "domain": "tremor.so", "url": "https://tremor.so/", "description": "A heavily specialized repository explicitly focused upon rapidly charting gorgeous, complex internal dashboard analytics simply.", "pricing": "Free"},
+  {"section": "Templates", "category": "E-Commerce", "domain": "vercel.com/templates", "url": "https://vercel.com/templates", "description": "The official Next.js deployment template library, incredibly optimized directly for massive scale enterprise deployment instantly.", "pricing": "Free", "isEssential": true},
+  {"section": "Templates", "category": "E-Commerce", "domain": "shopify.com/themes", "url": "https://shopify.com/themes", "description": "The absolute industry standard ecosystem featuring highly trusted, fundamentally optimized e-commerce retail deployment aesthetics.", "pricing": "Paid"},
+  {"section": "Templates", "category": "Landing Pages", "domain": "tailwindui.com", "url": "https://tailwindui.com/", "description": "The official, extremely premium directory offering completely flawless component collections masterminded directly by Tailwind's creators.", "pricing": "Paid", "isEssential": true},
+  {"section": "Templates", "category": "Landing Pages", "domain": "cruip.com", "url": "https://cruip.com/", "description": "A beautifully refined, sharply designed collection precisely assembling stunning, highly convertible startup page frameworks quickly.", "pricing": "Freemium"},
+  {"section": "Templates", "category": "Landing Pages", "domain": "html5up.net", "url": "https://html5up.net/", "description": "An absolutely classic, famously reliable resource freely distributing incredibly solid, beautifully responsive HTML5 portfolio structures flawlessly.", "pricing": "Free"},
+  {"section": "Templates", "category": "Landing Pages", "domain": "ui8.net", "url": "https://ui8.net/", "description": "A gargantuan marketplace intensely packed containing literally thousands of highly experimental, bleeding-edge premium design kits physically.", "pricing": "Paid"},
+  {"section": "Templates", "category": "Webflow & Framer", "domain": "framer.com/templates", "url": "https://framer.com/templates", "description": "An enormous, meticulously verified grid offering incredibly stunning, flawlessly animated immediate layouts natively supporting Framer structures.", "pricing": "Freemium"},
+  {"section": "Templates", "category": "Webflow & Framer", "domain": "webflow.com/templates", "url": "https://webflow.com/templates", "description": "The incredibly massive, globally recognized store serving utterly comprehensive responsive architectures directly powering Webflow applications efficiently.", "pricing": "Paid"},
+  {"section": "Templates", "category": "Dashboards", "domain": "creative-tim.com", "url": "https://creative-tim.com/", "description": "A very expansive platform highly dedicated specifically toward supplying complicated application backend panels functionally.", "pricing": "Freemium"},
+  {"section": "Templates", "category": "Dashboards", "domain": "themeforest.net", "url": "https://themeforest.net/", "description": "The largest, most historically significant repository globally distributing thousands of comprehensively coded website infrastructures daily.", "pricing": "Paid"},
+  {"section": "Templates", "category": "Dashboards", "domain": "mui.com/store", "url": "https://mui.com/store", "description": "The premium repository intrinsically connected directly to Material UI supplying intensely complex enterprise interfaces globally.", "pricing": "Paid"},
+  {"section": "Templates", "category": "Portfolios", "domain": "astro.build/themes", "url": "https://astro.build/themes", "description": "A blisteringly fast, exceptionally modern grid specifically hosting ultra-performant Astro architecture applications constantly.", "pricing": "Free"},
+  {"section": "Templates", "category": "Portfolios", "domain": "themes.gohugo.io", "url": "https://themes.gohugo.io/", "description": "The foundational index constantly offering completely stripped-back, massively fast static markdown blog generation themes.", "pricing": "Free"},
+  {"section": "Templates", "category": "Portfolios", "domain": "ghost.org/themes", "url": "https://ghost.org/themes", "description": "A beautifully crafted, heavily refined ecosystem definitively supporting extremely elegant typographic journalism deployments flawlessly.", "pricing": "Freemium"},
+  {"section": "Fonts", "category": "General Foundries", "domain": "fonts.google.com", "url": "https://fonts.google.com/", "description": "The absolutely foundational, overwhelmingly comprehensive open-source typographical directory empowering half the internet instantly.", "pricing": "Free", "isEssential": true},
+  {"section": "Fonts", "category": "General Foundries", "domain": "fontshare.com", "url": "https://fontshare.com/", "description": "An incredibly stunning, free premium font service flawlessly offered explicitly targeting modern digital aesthetics gracefully.", "pricing": "Free", "isEssential": true},
+  {"section": "Fonts", "category": "General Foundries", "domain": "typewolf.com", "url": "https://typewolf.com/", "description": "The industry's most trusted independent curation resource extensively profiling breathtaking font pairings constantly.", "pricing": "Free"},
+  {"section": "Fonts", "category": "General Foundries", "domain": "dafont.com", "url": "https://dafont.com/", "description": "The undeniably classic, endlessly chaotic repository containing tens of thousands of deeply experimental freeware typography.", "pricing": "Free"},
+  {"section": "Fonts", "category": "Premium Typefaces", "domain": "pangrampangram.com", "url": "https://pangrampangram.com/", "description": "A stunningly modern foundry exclusively responsible fundamentally crafting the absolute cleanest sans-serif architectures available globally.", "pricing": "Freemium"},
+  {"section": "Fonts", "category": "Premium Typefaces", "domain": "myfonts.com", "url": "https://myfonts.com/", "description": "The single most exhaustive commercial typographical index hosting literally thousands of immensely complex premium families.", "pricing": "Paid"},
+  {"section": "Fonts", "category": "Premium Typefaces", "domain": "fonts.adobe.com", "url": "https://fonts.adobe.com/", "description": "A tremendously massive, seamless ecosystem exclusively powering high-end typographic deployments heavily integrated natively into Adobe.", "pricing": "Paid"},
+  {"section": "Fonts", "category": "Icons & Symbols", "domain": "fontawesome.com", "url": "https://fontawesome.com/", "description": "The astronomically massive foundational icon framework exclusively powering simple vector graphics across countless platforms globally.", "pricing": "Freemium"},
+  {"section": "Fonts", "category": "Icons & Symbols", "domain": "fonts.google.com/icons", "url": "https://fonts.google.com/icons", "description": "Google's incredibly strict standard heavily defining flawlessly optimized interface iconography across material design perfectly.", "pricing": "Free"},
+  {"section": "Fonts", "category": "Icons & Symbols", "domain": "lucide.dev", "url": "https://lucide.dev/", "description": "A beautifully balanced, immensely clear vector framework completely modernizing explicitly crisp interface symbol standards.", "pricing": "Free"},
+  {"section": "Fonts", "category": "Specialty & Display", "domain": "uncut.wtf", "url": "https://uncut.wtf/", "description": "An incredibly avant-garde catalog entirely focused solely on cataloging exceptionally strange, totally open-source typefaces reliably.", "pricing": "Free"},
+  {"section": "Fonts", "category": "Specialty & Display", "domain": "velvetyne.fr", "url": "https://velvetyne.fr/", "description": "A fiercely independent open-source collective persistently distributing radically unique wildly experimental display concepts continually.", "pricing": "Free"},
+  {"section": "Assets", "category": "Stock Photography", "domain": "unsplash.com", "url": "https://unsplash.com/", "description": "The overwhelmingly fundamental destination entirely supplying breathtaking, completely free aesthetic photography everywhere globally.", "pricing": "Free", "isEssential": true},
+  {"section": "Assets", "category": "Stock Photography", "domain": "pexels.com", "url": "https://pexels.com/", "description": "A fantastically massive database consistently cataloging extremely high-resolution, completely uncopyrighted imagery elegantly.", "pricing": "Free"},
+  {"section": "Assets", "category": "Stock Photography", "domain": "pixabay.com", "url": "https://pixabay.com/", "description": "An unbelievably vast framework freely distributing literally millions of distinct, copyright-free community submitted multimedia assets.", "pricing": "Free"},
+  {"section": "Assets", "category": "Stock Photography", "domain": "stocksy.com", "url": "https://stocksy.com/", "description": "A fiercely curated, highly premium co-op exclusively supplying distinctly artistic, utterly authentic royalty-free media natively.", "pricing": "Paid"},
+  {"section": "Assets", "category": "Icons & Vectors", "domain": "flaticon.com", "url": "https://flaticon.com/", "description": "The single largest unified vector library thoroughly containing millions of distinctly styled graphic icons constantly.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Assets", "category": "Icons & Vectors", "domain": "svgrepo.com", "url": "https://svgrepo.com/", "description": "A profoundly comprehensive open-source search engine incredibly dedicated specifically to supplying perfectly clean scalable vectors.", "pricing": "Free"},
+  {"section": "Assets", "category": "Icons & Vectors", "domain": "streamlinehq.com", "url": "https://streamlinehq.com/", "description": "An absurdly extensive, perfectly consistent vector framework physically containing hundreds of thousands of distinct interface graphics.", "pricing": "Freemium"},
+  {"section": "Assets", "category": "Icons & Vectors", "domain": "freepik.com", "url": "https://freepik.com/", "description": "A heavily relied-upon standard definitively serving massive compilations of essential vector templates effortlessly globally.", "pricing": "Freemium"},
+  {"section": "Assets", "category": "Icons & Vectors", "domain": "iconfinder.com", "url": "https://iconfinder.com/", "description": "An incredibly large global marketplace exclusively serving highly specialized, premiumly crafted custom interface icon arrays.", "pricing": "Freemium"},
+  {"section": "Assets", "category": "Illustrations", "domain": "undraw.co", "url": "https://undraw.co/", "description": "An incredibly popular, totally free library exclusively focusing on distinct, beautifully scalable vector illustrations.", "pricing": "Free"},
+  {"section": "Assets", "category": "Illustrations", "domain": "humaaans.com", "url": "https://humaaans.com/", "description": "A remarkably dynamic mix-and-match library explicitly designed to playfully combine completely scalable human vectors constantly.", "pricing": "Free"},
+  {"section": "Assets", "category": "Illustrations", "domain": "illustrations.co", "url": "https://illustrations.co/", "description": "A tightly curated beautiful open-source framework exclusively detailing hundreds of clean minimal graphic interfaces completely.", "pricing": "Free"},
+  {"section": "Assets", "category": "Illustrations", "domain": "opendoodles.com", "url": "https://opendoodles.com/", "description": "An entirely open-source gallery supplying deeply charming delightfully chaotic hand-drawn sketchy visuals reliably.", "pricing": "Free"},
+  {"section": "Assets", "category": "3D Models & Elements", "domain": "sketchfab.com", "url": "https://sketchfab.com/", "description": "The unequivocally massive industry standard platform deeply managing intensely complicated realtime 3D model processing.", "pricing": "Freemium"},
+  {"section": "Assets", "category": "3D Models & Elements", "domain": "polyhaven.com", "url": "https://polyhaven.com/", "description": "A fiercely protected public domain warehouse freely exclusively rendering unbelievably complex unconstrained graphical geometries.", "pricing": "Free"},
+  {"section": "Assets", "category": "3D Models & Elements", "domain": "spline.design", "url": "https://spline.design/", "description": "An astoundingly accessible browser editor inherently bridging extremely complex three-dimensional objects intuitively entirely.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Assets", "category": "3D Models & Elements", "domain": "turbosquid.com", "url": "https://turbosquid.com/", "description": "The single most dominant marketplace intensely housing millions of flawlessly crafted commercial polygon geometries functionally.", "pricing": "Paid"},
+  {"section": "Assets", "category": "Video & Audio", "domain": "mixkit.co", "url": "https://mixkit.co/", "description": "An extremely reliable, high-quality gallery absolutely offering immensely clean royalty-free cinematic transitions gracefully.", "pricing": "Free"},
+  {"section": "Assets", "category": "Video & Audio", "domain": "coverr.co", "url": "https://coverr.co/", "description": "A definitively beautiful uncopyrighted library strictly dedicated specifically towards serving massive high-fidelity looping backgrounds.", "pricing": "Free"},
+  {"section": "Assets", "category": "Video & Audio", "domain": "videezy.com", "url": "https://videezy.com/", "description": "An unbelievably enormous repository consistently hosting massive quantities of heavily distinct 4k video compositions easily.", "pricing": "Freemium"},
+  {"section": "Assets", "category": "Video & Audio", "domain": "bensound.com", "url": "https://bensound.com/", "description": "A notably classic catalog fundamentally offering strictly composed, exceptionally crisp background atmospheric orchestrations instantly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "wellfound.com", "url": "https://wellfound.com/", "description": "The premier exclusive directory actively connecting ambitious talent specifically with heavily funded startups.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "upwork.com", "url": "https://upwork.com/", "description": "The overwhelmingly massive, globally utilized freelance marketplace extensively bridging clients with specialized independent contractors.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "weworkremotely.com", "url": "https://weworkremotely.com/", "description": "An incredibly foundational community precisely cataloging hundreds of high-quality verified remote engineering and design positions.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "nodesk.co", "url": "https://nodesk.co/", "description": "A cleanly curated aggregator explicitly tracking highly flexible asynchronous remote career opportunities constantly.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "flexjobs.com", "url": "https://flexjobs.com/", "description": "A distinctly premium, rigorously hand-screened board strictly validating totally legitimate hybrid and global remote roles.", "pricing": "Paid"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "remoters.net", "url": "https://remoters.net/", "description": "A comprehensive hub delivering expansive resources explicitly targeting professional digital nomads exploring widespread remote work.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "workingnomads.com", "url": "https://workingnomads.com/", "description": "A very heavily newsletter-driven platform directly surfacing carefully organized remote development and digital marketing openings.", "pricing": "Free"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "bubble.io", "url": "https://bubble.io/", "description": "An astoundingly powerful, fully exhaustive visual programming suite deeply replacing entire backend engineering dependencies completely.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "flutterflow.io", "url": "https://flutterflow.io/", "description": "An incredibly sophisticated visual editor cleanly outputting flawlessly compiled, natively deployable comprehensive Flutter architectures.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "softr.io", "url": "https://softr.io/", "description": "A wildly fast logic layer incredibly designed specifically to immediately translate raw Airtable databases into interactive client portals.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "glideapps.com", "url": "https://glideapps.com/", "description": "An exceptionally intuitive engine powerfully deriving fully navigable, impressively responsive mobile applications strictly from spreadsheets.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "weweb.io", "url": "https://weweb.io/", "description": "A profoundly flexible front-end canvas elegantly binding visually styled DOM elements directly onto external database structures.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "adalo.com", "url": "https://adalo.com/", "description": "A highly intuitive drag-and-drop constructor expressly focusing on incredibly rapid mobile application store deployments directly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "backendless.com", "url": "https://backendless.com/", "description": "A terribly dense, extremely capable monolithic platform actively handling massive real-time database management natively via visual blocks.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "zapier.com/interfaces", "url": "https://zapier.com/interfaces", "description": "An exceptionally integrated tool dynamically generating interactive public forms immediately triggering countless complex background automations.", "pricing": "Freemium"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "kokonutui.com", "url": "https://kokonutui.com/", "description": "A distinctly elegant, highly modernized open-source component collection primarily focused entirely upon polished interactive web aesthetics.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Animations", "domain": "animejs.com", "url": "https://animejs.com/", "description": "A brilliantly structured, enormously lightweight animation motor completely dominating extremely complex DOM CSS property transitions heavily.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Animations", "domain": "motion-primitives.com", "url": "https://motion-primitives.com/", "description": "A strictly stylized ecosystem offering impeccably crafted, highly expressive interaction elements expressly built complementing modern React architectures.", "pricing": "Free"},
+  {"section": "Libraries", "category": "Component Libraries", "domain": "21st.dev", "url": "https://21st.dev/", "description": "A phenomenally curated hub relentlessly surfacing hundreds of entirely unbelievable, extremely experimental bleeding-edge UI abstractions.", "pricing": "Free"},
+  {"section": "Apps", "category": "Design & Image", "domain": "figma.com", "url": "https://figma.com/", "description": "The undeniably foundational collaborative vector environment completely redefining exactly how modern organizations conceptualize digital interfaces.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Design & Image", "domain": "brandbird.app", "url": "https://brandbird.app/", "description": "A delightfully specialized utility actively converting boring raw screenshots into thoroughly stylized, immensely engaging marketing graphics.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "uizard.io", "url": "https://uizard.io/", "description": "An incredibly futuristic whiteboard strongly leveraging generative AI exclusively for instantly transmuting basic scribbles into interactive wireframes.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "ngrok.com", "url": "https://ngrok.com/", "description": "An unequivocally mandated software gateway violently forcing secure public URLs completely straight through highly restrictive local firewalls.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "apidog.com", "url": "https://apidog.com/", "description": "An extremely expansive structural suite perfectly handling deeply complex API lifecycle documentation, debugging, targeting, and massive testing loops.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Coding & Dev", "domain": "firebase.google.com", "url": "https://firebase.google.com/", "description": "Google's monolithic backend-as-a-service natively powering millions of intricate scalable databases entirely securely and rapidly.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "lindy.ai", "url": "https://lindy.ai/", "description": "A phenomenally advanced autonomous entity inherently capable entirely navigating incredibly diverse personal and organizational enterprise workflows.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "flowiseai.com", "url": "https://flowiseai.com/", "description": "A massively explicit drag-and-drop architectural canvas directly engineering extraordinarily complex custom LLM orchestration pathways visually.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "pitch.com", "url": "https://pitch.com/", "description": "An astoundingly polished, incredibly collaborative visual editing environment structurally replacing traditional presentation engines utterly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "slidesgo.com", "url": "https://slidesgo.com/", "description": "An unbelievably gargantuan archive constantly supplying incredibly beautiful, widely diverse completely free template structures exclusively for Google Slides.", "pricing": "Free"},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "minicoursegenerator.com", "url": "https://minicoursegenerator.com/", "description": "A distinctly unique platform heavily relying upon intelligence systems directly extracting deeply engaging interactive curriculums natively from raw texts.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "vidu.studio", "url": "https://vidu.studio/", "description": "A spectacularly aggressive generation engine thoroughly pushing extremely specific prompt interpretations strongly into extraordinarily distinct stylized video.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "creatify.ai", "url": "https://creatify.ai/", "description": "An intentionally structured framework specifically rendering deeply persuasive, uniquely compelling automated e-commerce video advertisements instantly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "ozone.pro", "url": "https://ozone.pro/", "description": "A profoundly fast cloud-native video editing processor strictly integrating overwhelmingly precise multi-modal assistive AI heavily throughout.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "E-Commerce & Merch", "domain": "redbubble.com", "url": "https://redbubble.com/", "description": "An astronomically large retail infrastructure completely relying upon extremely specialized independent artwork explicitly for mass production.", "pricing": "Free"},
+  {"section": "Apps", "category": "E-Commerce & Merch", "domain": "teepublic.com", "url": "https://teepublic.com/", "description": "A closely related gigantic competitor intensely supporting highly diverse deeply creative graphic design communities widely across physical mediums.", "pricing": "Free"},
+  {"section": "Apps", "category": "E-Commerce & Merch", "domain": "merch.amazon.com", "url": "https://merch.amazon.com/", "description": "The undeniably dominant force heavily injecting entirely custom printable physical product requests aggressively directly into global Amazon logistics.", "pricing": "Free"},
+  {"section": "Apps", "category": "E-Commerce & Merch", "domain": "kdp.amazon.com", "url": "https://kdp.amazon.com/", "description": "The absolutely foundational publishing system natively providing insanely comprehensive access directly linking custom literature deeply into global markets.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "AI Terminal & Tasks", "domain": "mcp.run", "url": "https://mcp.run/", "description": "A profoundly essential structural directory aggressively indexing exclusively specialized Model Context Protocol connectors incredibly globally.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "AI Terminal & Tasks", "domain": "supermemory.ai", "url": "https://supermemory.ai/", "description": "An incredibly fast, entirely native framework aggressively serving intensely deep interconnected memory infrastructure constantly across complex AI interactions.", "pricing": "Free", "isEssential": true},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "claude.ai", "url": "https://claude.ai/", "description": "Anthropic's singularly definitive interface exclusively communicating directly deeply with incredibly advanced reasoning implementations extensively globally.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Audio & Music", "domain": "riffusion.com", "url": "https://riffusion.com/", "description": "An absolutely insane model beautifully bypassing native sound structures strictly generating exceptionally catchy sonic frequencies directly via visual spectrograms.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "fmhy.net", "url": "https://fmhy.net/", "description": "A terrifyingly vast, highly decentralized organizational database exclusively serving incredibly comprehensive alternative software pathways endlessly.", "pricing": "Free"},
+  {"section": "Apps", "category": "3D & Manufacturing", "domain": "hyper3d.ai", "url": "https://hyper3d.ai/", "description": "An astoundingly capable framework absolutely specialized deeply exclusively transforming simple two-dimensional inputs physically into immensely impressive rendered volumes.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "3D & Manufacturing", "domain": "tripo3d.ai", "url": "https://tripo3d.ai/", "description": "A profoundly fast multi-modal engine definitively capable directly spawning incredibly complicated topological modeling strictly from straightforward basic textual imagery.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "outlier.ai", "url": "https://outlier.ai/", "description": "An exceptionally unique marketplace strictly funneling extremely critical human reinforcement tuning aggressively driving incredibly vast intelligence architectures globally.", "pricing": "Free"},
+  {"section": "Apps", "category": "Utilities", "domain": "alternativeto.net", "url": "https://alternativeto.net/", "description": "A deeply foundational community-driven database absolutely mapping exactly equivalent software substitutes explicitly based totally on user consensus.", "pricing": "Free"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "answerthepublic.com", "url": "https://answerthepublic.com/", "description": "An astoundingly profound research visualizer directly mapping entirely raw user search queries dynamically across massive search engine environments.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "appsumo.com", "url": "https://appsumo.com/", "description": "The undeniably premier marketplace relentlessly aggregating extremely valuable lifetime software licenses predominantly targeting ambitious growth companies.", "pricing": "Paid"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "aweber.com", "url": "https://aweber.com/", "description": "An exceptionally established broadcast platform fundamentally powering incredibly reliable mass email distribution systems successfully for decades.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "bigspy.com", "url": "https://bigspy.com/", "description": "An immensely aggressive reconnaissance interface actively tracking highly successful global competitor advertising strategies constantly across networks.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "bigvu.tv", "url": "https://bigvu.tv/", "description": "A structurally essential broadcasting utility incredibly providing deeply reliable intelligent teleprompting tools flawlessly replacing physical studio hardware.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "E-Commerce & Merch", "domain": "bookbolt.io", "url": "https://bookbolt.io/", "description": "A strictly specialized investigative dashboard uniquely targeting explicitly highly profitable low-content publishing niches directly across Amazon infrastructure.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "brandcolors.net", "url": "https://brandcolors.net/", "description": "An incredibly definitive, universally respected directory precisely cataloging absolutely exact hex values successfully defining massive global corporations.", "pricing": "Free"},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "builderall.com", "url": "https://builderall.com/", "description": "An unbelievably gargantuan, monolithically absolute digital ecosystem explicitly combining virtually every single marketing constructor logically possible.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "capcut.com", "url": "https://capcut.com/", "description": "The entirely undeniable king powerfully dictating explicitly viral short-form mobile editing aesthetics heavily defining modern broadcast consumption.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Website & App Builders", "domain": "circle.so", "url": "https://circle.so/", "description": "A beautifully elegant modular foundation specifically built intentionally crafting incredibly premium independent creator-centric forum architecture internally.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "clipchamp.com", "url": "https://clipchamp.com/", "description": "An extremely heavily integrated web-native processor actively compiling complex cinematic project timelines flawlessly directly across standard browsers.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "contentatscale.ai", "url": "https://contentatscale.ai/", "description": "An aggressively optimized generative framework inherently structured expressly engineering completely massive quantities directly bypassing anti-AI detection strictly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "copy.ai", "url": "https://copy.ai/", "description": "An incredibly popular generation toolkit uniquely designed specifically expediting terribly massive corporate marketing text creation dynamically.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "createstudio.com", "url": "https://createstudio.com/", "description": "A delightfully fluid composition studio perfectly outputting remarkably engaging character-driven explainer sequences directly omitting massive technical hurdles.", "pricing": "Paid"},
+  {"section": "Apps", "category": "Utilities", "domain": "dateful.com", "url": "https://dateful.com/", "description": "A very strictly pure utility explicitly solving complex global scheduling translations effortlessly directly eliminating common meeting confusion completely.", "pricing": "Free"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "blackmagicdesign.com/products/davinciresolve", "url": "https://blackmagicdesign.com/products/davinciresolve", "description": "The utterly undisputed Hollywood-grade monolith absolutely controlling heavily advanced global color correction natively dominating entire cinematic industries.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Utilities", "domain": "extract.pics", "url": "https://extract.pics/", "description": "A distinctly aggressive scraping engine inherently designed stripping massive quantities perfectly matching images instantly across targeted URLs natively.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "fiverr.com", "url": "https://fiverr.com/", "description": "The terribly colossal macro-economy entirely powering incredibly rapid micro-task delegations completely standardizing massive independent digital labor pipelines.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "flourish.studio", "url": "https://flourish.studio/", "description": "An astoundingly articulate engine cleanly interpolating heavily unorganized raw data dynamically explicitly into stunning animated chart architectures.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "infogram.com", "url": "https://infogram.com/", "description": "A strongly capable vector layout directly replacing incredibly tedious graph creation natively heavily simplifying complex journalistic distributions.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "invideo.io", "url": "https://invideo.io/", "description": "A beautifully intuitive template manipulator inherently structured expressly driving extremely massive ad creation smoothly leveraging immense stock libraries.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "jasper.ai", "url": "https://jasper.ai/", "description": "The undeniably dominant enterprise architecture thoroughly dictating heavily integrated internal corporative linguistic brand identity outputs precisely.", "pricing": "Freemium", "isEssential": true},
+  {"section": "Apps", "category": "Learning & Productivity", "domain": "mindmup.com", "url": "https://mindmup.com/", "description": "An utterly frictionless structural map specifically engineered directly conceptualizing massive cerebral workflows entirely bound seamlessly alongside Google Drive.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "namecheap.com", "url": "https://namecheap.com/", "description": "The entirely ubiquitous web registrar famously supplying deeply heavily discounted domain reservations continually completely defining global baseline pricing.", "pricing": "Paid"},
+  {"section": "Apps", "category": "Utilities", "domain": "namechk.com", "url": "https://namechk.com/", "description": "A tremendously critical reconnaissance tool intensely scanning extremely dozens explicitly checking exact global handle availability dynamically.", "pricing": "Free"},
+  {"section": "Assets", "category": "Illustrations", "domain": "openclipart.org", "url": "https://openclipart.org/", "description": "An unconditionally completely free baseline heavily relying upon purely public domain vector graphics thoroughly supplying massive generic reserves.", "pricing": "Free"},
+  {"section": "Apps", "category": "Automation", "domain": "pabbly.com", "url": "https://pabbly.com/", "description": "A distinctly aggressive integration architecture remarkably explicitly rivaling monolithic automation systems completely delivering insane lifetime value strictly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "pdfcandy.com", "url": "https://pdfcandy.com/", "description": "An outrageously comprehensive format manipulator deeply covering literally every single conceivable conversion specifically directly bridging PDF restrictions.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "photovibrance.io", "url": "https://photovibrance.io/", "description": "A strictly specialized engine dramatically forcing immensely engaging kinetic motion aggressively across previously static two-dimensional environments purely.", "pricing": "Paid"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "quillbot.com", "url": "https://quillbot.com/", "description": "A deeply ubiquitous linguistic refiner massively integrated distinctly globally directly simplifying incredibly dense textual complexities instantly natively.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Design & Image", "domain": "remaker.ai", "url": "https://remaker.ai/", "description": "An inherently targeted synthesis engine intensely optimizing explicitly clean facial superimpositions consistently flawlessly across diverse lighting matrices.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "snip.ly", "url": "https://snip.ly/", "description": "A profoundly clever marketing proxy secretly injecting immensely interactive conversion modules persistently squarely over totally external public destinations.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Utilities", "domain": "theresanaiforthat.com", "url": "https://theresanaiforthat.com/", "description": "The astoundingly gigantic fundamental index explicitly attempting incredibly comprehensively strictly mapping absolutely every single newly released neural project.", "pricing": "Free", "isEssential": true},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "tubebuddy.com", "url": "https://tubebuddy.com/", "description": "An exceptionally embedded statistical observer intimately reading entirely profound YouTube metadata exactly identifying radically intense algorithmic advantages.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "udimi.com", "url": "https://udimi.com/", "description": "A very uniquely specialized internal economy completely facilitating radically exact newsletter broadcasting explicitly completely dominating direct solo marketing.", "pricing": "Paid"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "upviral.com", "url": "https://upviral.com/", "description": "An intensely aggressive momentum synthesizer explicitly engineered completely weaponizing fundamentally incredibly deeply intrinsic human referral mechanics automatically.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Marketing & Sales", "domain": "vidiq.com", "url": "https://vidiq.com/", "description": "The incredibly massive competitive dashboard heavily exposing entirely critical search volume analytics directly manipulating profound video ranking structures.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "Video & Animation", "domain": "wave.video", "url": "https://wave.video/", "description": "An immensely capable multi-purpose studio actively supporting thoroughly intensive rendering natively including fundamentally impressive live-streaming environments seamlessly.", "pricing": "Freemium"},
+  {"section": "Apps", "category": "AI & Multi-Model", "domain": "wordhero.co", "url": "https://wordhero.co/", "description": "A fiercely competitive prompt interface notably generating incredibly wide arrays comprehensively tackling extremely diverse marketing linguistic templates directly.", "pricing": "Freemium"}
+];
+
+let selectedCats = new Set(), currentSearch = '', currentPrice = 'All';
+let sortCol = 'domain', sortAsc = true;
+
+// Section state from URL
+const params = new URLSearchParams(window.location.search);
+let currentSection = 'Apps';
+const rawSection = params.get('section');
+const validSections = ['Apps', 'FreeAI', 'TopResources', 'Inspiration', 'Libraries', 'Templates', 'Fonts', 'Assets'];
+
+if (rawSection) {
+  const match = validSections.find(s => s.toLowerCase() === rawSection.toLowerCase());
+  if (match) currentSection = match;
+  else if (rawSection.toLowerCase() === 'essentials') currentSection = 'TopResources';
+}
+
+let isAdmin = false;
+let savedTopResources = [];
+try {
+  const stored = localStorage.getItem('topResources');
+  if (stored) savedTopResources = JSON.parse(stored);
+} catch(e) {}
+const topResourcesList = new Set(savedTopResources);
+
+function pricingBadge(p) {
+  if (p === 'Free') return '<span class="badge badge-free">Free</span>';
   return '<span class="badge badge-freemium">Freemium</span>';
 }
-function render(){
-  let f=TOOLS;
-  if(currentCat!=='All') f=f.filter(t=>t.category===currentCat);
-  if(currentSearch){const q=currentSearch.toLowerCase();f=f.filter(t=>t.domain.toLowerCase().includes(q)||t.description.toLowerCase().includes(q)||t.category.toLowerCase().includes(q));}
-  const tbody=document.getElementById('table-body');
-  const empty=document.getElementById('empty');
-  document.getElementById('result-count').textContent=f.length+' result'+(f.length!==1?'s':'');
-  document.getElementById('section-title').textContent=currentCat==='All'?'All Tools':currentCat;
-  if(!f.length){tbody.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  tbody.innerHTML=f.map(t=>`<tr><td class="td-site"><a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.domain}</a></td><td class="td-desc">${t.description}</td><td class="td-cat">${t.category}</td><td>${pricingBadge(t.pricing)}</td></tr>`).join('');
+
+function renderSidebar() {
+  const sidebar = document.getElementById('sidebar-btns');
+  const sectionTools = currentSection === 'TopResources' 
+    ? TOOLS.filter(t => t.isEssential || topResourcesList.has(t.domain)) 
+    : TOOLS.filter(t => t.section === currentSection);
+  
+  const categories = [...new Set(sectionTools.map(t => t.category))].sort();
+  const allCount = sectionTools.length;
+  
+  let html = `<button class="cat-btn ${selectedCats.size === 0 ? 'active' : ''}" id="btn-all-cats">All Categories <span class="cat-count">${allCount}</span></button>`;
+  categories.forEach(cat => {
+    const count = sectionTools.filter(t => t.category === cat).length;
+    html += `<button class="cat-btn ${selectedCats.has(cat) ? 'active' : ''}" data-cat="${cat}">${cat} <span class="cat-count">${count}</span></button>`;
+  });
+  sidebar.innerHTML = html;
+
+  // Re-attach listeners to dynamic buttons (Single select logic)
+  document.getElementById('btn-all-cats').addEventListener('click', () => {
+    selectedCats.clear();
+    renderSidebar();
+    render();
+  });
+  sidebar.querySelectorAll('.cat-btn[data-cat]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cat = btn.dataset.cat;
+      // Single select: Clear existing selections, then toggle
+      if (selectedCats.has(cat)) {
+        selectedCats.clear();
+      } else {
+        selectedCats.clear();
+        selectedCats.add(cat);
+      }
+      renderSidebar();
+      render();
+    });
+  });
 }
-document.querySelectorAll('.cat-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+
+window.renderSuggestions = function() {
+  const list = document.getElementById('suggest-list');
+  const btn = document.getElementById('btn-admin-suggest');
+  const data = JSON.parse(localStorage.getItem('beacon_suggestions') || '[]');
+  btn.textContent = `Suggestions (${data.length})`;
+  
+  if (data.length === 0) {
+    list.innerHTML = '<li style="font-size:13px; color:var(--text-muted); opacity:0.8;">No new suggestions.</li>';
+    return;
+  }
+  
+  list.innerHTML = data.map((d, i) => `
+    <li style="display:flex; justify-content:space-between; align-items:center; background:var(--surface-2); padding:10px 14px; border-radius:8px; border:1px solid var(--border); font-size:13px;">
+      <a href="\${d.url.startsWith('http') ? d.url : 'https://' + d.url}" target="_blank" style="color:var(--text); text-decoration:none;">\${d.url}</a>
+      <span style="font-size:11px; color:var(--text-faint);">\${new Date(d.date).toLocaleDateString()}</span>
+    </li>
+  `).join('');
+}
+
+document.getElementById('btn-admin-suggest').addEventListener('click', () => {
+  renderSuggestions();
+  document.getElementById('suggest-modal').showModal();
+});
+
+function render() {
+  // Filter by section first
+  let f = currentSection === 'TopResources'
+    ? TOOLS.filter(t => t.isEssential || topResourcesList.has(t.domain))
+    : TOOLS.filter(t => t.section === currentSection);
+  
+  // Filter by categories
+  if (selectedCats.size > 0) f = f.filter(t => selectedCats.has(t.category));
+  
+  // Filter by price
+  if (currentPrice !== 'All') f = f.filter(t => t.pricing === currentPrice);
+  
+  // Filter by search
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    f = f.filter(t => 
+      t.domain.toLowerCase().includes(q) || 
+      t.description.toLowerCase().includes(q) || 
+      t.category.toLowerCase().includes(q)
+    );
+  }
+  
+  // Sort
+  f.sort((a, b) => {
+    const av = a[sortCol].toLowerCase(), bv = b[sortCol].toLowerCase();
+    if (av < bv) return sortAsc ? -1 : 1;
+    if (av > bv) return sortAsc ? 1 : -1;
+    return 0;
+  });
+
+  const tbody = document.getElementById('table-body');
+  const empty = document.getElementById('empty');
+  
+  // Update header UI
+  let sectionDisplay = currentSection;
+  if (currentSection === 'FreeAI') sectionDisplay = 'Free AI';
+  if (currentSection === 'TopResources') sectionDisplay = 'Top Resources';
+  if (currentSection === 'Apps') sectionDisplay = 'Apps & Web Tools';
+  if (currentSection === 'Libraries') sectionDisplay = 'Libraries & UI Kits';
+  
+  const title = selectedCats.size === 0 ? sectionDisplay : (selectedCats.size === 1 ? [...selectedCats][0] : `${selectedCats.size} Categories`);
+  
+  document.getElementById('result-count').textContent = f.length + ' result' + (f.length !== 1 ? 's' : '');
+  document.getElementById('section-title').textContent = title;
+  document.getElementById('count-label').textContent = f.length + ' tools';
+
+  if (!f.length) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  tbody.innerHTML = f.map((t, i) => {
+    const isTop = t.isEssential || topResourcesList.has(t.domain);
+    const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${t.domain}">★</span>` : '';
+    return `
+    <tr style="animation-delay: ${i * 0.03}s">
+      <td class="td-site">${starHtml}<a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.domain}</a></td>
+      <td class="td-desc">${t.description}</td>
+      <td class="td-cat">${t.category}</td>
+      <td>${pricingBadge(t.pricing)}</td>
+    </tr>
+  `}).join('');
+  
+  if (isAdmin) {
+    document.querySelectorAll('.dev-star').forEach(star => {
+      star.addEventListener('click', (e) => {
+        const domain = e.target.dataset.domain;
+        if (topResourcesList.has(domain)) {
+          topResourcesList.delete(domain);
+        } else {
+          topResourcesList.add(domain);
+        }
+        localStorage.setItem('topResources', JSON.stringify([...topResourcesList]));
+        
+        // Full re-render so counts and lists reflect immediately
+        renderSidebar();
+        render();
+      });
+    });
+  }
+}
+
+// Global UI Listeners
+// Create a discreet dev-mode trigger
+const devTrigger = document.createElement('div');
+devTrigger.style.position = 'fixed';
+devTrigger.style.bottom = '10px';
+devTrigger.style.left = '10px';
+devTrigger.style.width = '20px';
+devTrigger.style.height = '20px';
+devTrigger.style.cursor = 'pointer';
+devTrigger.style.opacity = '0';
+devTrigger.style.zIndex = '9999';
+document.body.appendChild(devTrigger);
+
+devTrigger.addEventListener('dblclick', async () => {
+  function enableDevMode() {
+  const input = prompt("Developer Password:");
+  if(input === null) return;
+  
+  crypto.subtle.digest("SHA-256", new TextEncoder().encode(input)).then(hashBuffer => {
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    
+    if (hashHex === "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918") {
+      isAdmin = true;
+      document.body.style.borderTop = '3px solid var(--accent)';
+      
+      const adminBtn = document.getElementById('btn-admin-suggest');
+      adminBtn.style.display = 'block';
+      renderSuggestions();
+      
+      render();
+    } else {
+      alert("Invalid password.");
+    }
+  });
+}
+  enableDevMode();
+});
+document.querySelectorAll('.price-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.price-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
-    currentCat=btn.dataset.cat;
+    currentPrice = btn.dataset.price;
     render();
   });
 });
-document.getElementById('search').addEventListener('input',e=>{currentSearch=e.target.value.trim();render();});
-const root=document.documentElement;
-const toggleBtn=document.getElementById('theme-toggle');
-let theme='dark';
-toggleBtn.addEventListener('click',()=>{
-  theme=theme==='dark'?'light':'dark';
-  root.setAttribute('data-theme',theme);
-  toggleBtn.textContent=theme==='dark'?'☀':'☾';
+
+document.querySelectorAll('.sortable').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.sort;
+    if (sortCol === col) { sortAsc = !sortAsc; } 
+    else { sortCol = col; sortAsc = true; }
+    document.querySelectorAll('.sortable').forEach(h => h.classList.remove('sort-active', 'sort-desc'));
+    th.classList.add('sort-active');
+    if (!sortAsc) th.classList.add('sort-desc');
+    render();
+  });
 });
+
+document.getElementById('search').addEventListener('input', e => {
+  currentSearch = e.target.value.trim();
+  render();
+});
+
+// Theme Logic
+const root = document.documentElement;
+const toggleBtn = document.getElementById('theme-toggle');
+let theme = 'dark';
+toggleBtn.addEventListener('click', () => {
+  theme = theme === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', theme);
+  toggleBtn.textContent = theme === 'dark' ? '☀' : '☾';
+});
+
+// URL Parameter Handling for Initial State
+const catParam = params.get('cat');
+if (catParam) {
+  selectedCats.add(catParam);
+}
+const qParam = params.get('q');
+if (qParam) {
+  currentSearch = qParam;
+  document.getElementById('search').value = qParam;
+}
+
+// Bootstrap
+renderSidebar();
 render();
+
+})();
 </script>
 </body>
 </html>
