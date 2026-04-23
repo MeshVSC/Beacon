@@ -36,9 +36,10 @@ body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);fon
 .count-badge{font-size:11px;color:var(--text-muted);letter-spacing:0.5px}
 .theme-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--text-muted);font-size:13px;transition:all 0.15s}
 .theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-.hero-header{margin-bottom:32px;padding:24px 0 8px;animation:fade-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;display:flex;justify-content:space-between;gap:32px;align-items:stretch}
-.hero-header-left{flex-shrink:0;max-width:360px;display:flex;flex-direction:column;justify-content:space-between}
-.hero-header-right{flex:1;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;gap:20px}
+.hero-header{margin-bottom:32px;padding:24px 0 8px;animation:fade-down 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;display:flex;flex-direction:column;gap:16px}
+.header-row-1{display:flex;justify-content:flex-end}
+.header-row-2{display:flex;justify-content:space-between;align-items:flex-end;gap:20px}
+.header-row-3{display:flex;justify-content:flex-start}
 .section-title{display:block;font-size:clamp(2.5rem, 5vw, 4rem);line-height:0.95;font-weight:700;letter-spacing:-1.8px;color:var(--text);margin-top:-6px}
 .horizontal-nav {
   display: flex;
@@ -115,6 +116,11 @@ th.sort-desc svg{transform:rotate(180deg)}
       <input type="text" id="search" placeholder="Search tools..." autocomplete="off">
     </div>
     <div class="topbar-right">
+      <select id="lang-select" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:4px 8px;outline:none;font-size:12px;cursor:pointer;">
+        <option value="en">EN</option>
+        <option value="es">ES</option>
+        <option value="ca">CA</option>
+      </select>
       <span class="count-badge" id="count-label">194 tools</span>
       <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">☀</button>
     </div>
@@ -122,29 +128,31 @@ th.sort-desc svg{transform:rotate(180deg)}
 
   <main class="main">
     <div class="hero-header">
-      <div class="hero-header-left">
-        <h1 class="section-title" id="section-title">All Tools</h1>
-        <span class="result-count" id="result-count" style="font-size:14px;color:var(--text-muted);font-weight:500;letter-spacing:0.5px"></span>
-      </div>
-      <div class="hero-header-right">
+      <div class="header-row-1">
         <div class="price-filters">
           <button class="price-btn active" data-price="All">All</button>
           <button class="price-btn" data-price="Free">Free</button>
           <button class="price-btn" data-price="Freemium">Freemium</button>
         </div>
+      </div>
+      <div class="header-row-2">
+        <h1 class="section-title" id="section-title">All Tools</h1>
         <div class="horizontal-nav" id="sidebar-btns">
           <!-- Dynamic categories load here -->
         </div>
+      </div>
+      <div class="header-row-3">
+        <span class="result-count" id="result-count" style="font-size:14px;color:var(--text-muted);font-weight:500;letter-spacing:0.5px"></span>
       </div>
     </div>
     
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th class="sortable sort-active" data-sort="domain">Website <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
-          <th class="sortable" data-sort="description">Description <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
-          <th class="sortable" data-sort="category">Category <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
-          <th class="sortable" data-sort="pricing">Pricing <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable sort-active" data-sort="domain"><span class="th-txt">Website</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="description"><span class="th-txt">Description</span> <svg viewBox="0 0 24 24" fill="none" stroke=\"currentColor\" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="category"><span class="th-txt">Category</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th class="sortable" data-sort="pricing"><span class="th-txt">Pricing</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
         </tr></thead>
         <tbody id="table-body"></tbody>
       </table>
@@ -165,6 +173,114 @@ th.sort-desc svg{transform:rotate(180deg)}
 
 <script>
 (() => {
+
+const i18n = {
+  en: {
+    searchPlaceholder: "Search tools...",
+    allTools: "All Tools",
+    all: "All",
+    free: "Free",
+    freemium: "Freemium",
+    website: "Website",
+    description: "Description",
+    category: "Category",
+    pricing: "Pricing",
+    noTools: "No tools found",
+    catAll: "All Categories",
+    categoriesLabel: "Categories",
+    resultSingle: "result",
+    resultPlural: "results",
+    toolsSuffix: "tools",
+    Apps: "Apps & Web Tools",
+    FreeAI: "Free AI",
+    TopResources: "Top Resources",
+    Libraries: "Libraries & UI Kits",
+    Inspiration: "Inspiration",
+    Templates: "Templates",
+    Fonts: "Fonts",
+    Assets: "Assets",
+    "AI & Multi-Model": "AI & Multi-Model",
+    "Automation": "Automation",
+    "Design & Image": "Design & Image",
+    "Video & Animation": "Video & Animation"
+  },
+  es: {
+    searchPlaceholder: "Buscar herramientas...",
+    allTools: "Todas las herramientas",
+    all: "Todo",
+    free: "Gratis",
+    freemium: "Freemium",
+    website: "Sitio Web",
+    description: "Descripción",
+    category: "Categoría",
+    pricing: "Precios",
+    noTools: "No se encontraron herramientas",
+    catAll: "Todas las categorías",
+    categoriesLabel: "Categorías",
+    resultSingle: "resultado",
+    resultPlural: "resultados",
+    toolsSuffix: "herramientas",
+    Apps: "Aplicaciones",
+    FreeAI: "IA Gratis",
+    TopResources: "Mejores Recursos",
+    Libraries: "Librerías y UI",
+    Inspiration: "Inspiración",
+    Templates: "Plantillas",
+    Fonts: "Fuentes",
+    Assets: "Recursos",
+    "AI & Multi-Model": "IA y Multi-Modelos",
+    "Automation": "Automatización",
+    "Design & Image": "Diseño e Imagen",
+    "Video & Animation": "Video y Animación"
+  },
+  ca: {
+    searchPlaceholder: "Cercar eines...",
+    allTools: "Totes les eines",
+    all: "Tot",
+    free: "Gratuït",
+    freemium: "Freemium",
+    website: "Lloc Web",
+    description: "Descripció",
+    category: "Categoria",
+    pricing: "Preus",
+    noTools: "No s'han trobat eines",
+    catAll: "Totes les categories",
+    categoriesLabel: "Categories",
+    resultSingle: "resultat",
+    resultPlural: "resultats",
+    toolsSuffix: "eines",
+    Apps: "Aplicacions",
+    FreeAI: "IA Gratuïta",
+    TopResources: "Millors Recursos",
+    Libraries: "Llibreries i UI",
+    Inspiration: "Inspiració",
+    Templates: "Plantilles",
+    Fonts: "Fonts",
+    Assets: "Recursos",
+    "AI & Multi-Model": "IA i Multi-Models",
+    "Automation": "Automatització",
+    "Design & Image": "Disseny i Imatge",
+    "Video & Animation": "Vídeo i Animació"
+  }
+};
+
+let currentLang = localStorage.getItem('site_lang') || 'en';
+function t(key) { return i18n[currentLang] && i18n[currentLang][key] ? i18n[currentLang][key] : (i18n['en'][key] || key); }
+
+function applyStaticTranslations() {
+  document.getElementById('search').placeholder = t('searchPlaceholder');
+  document.getElementById('empty').textContent = t('noTools');
+  document.querySelector('[data-price="All"]').textContent = t('all');
+  document.querySelector('[data-price="Free"]').textContent = t('free');
+  document.querySelector('[data-price="Freemium"]').textContent = t('freemium');
+  const ths = document.querySelectorAll('.th-txt');
+  if (ths.length === 4) {
+    ths[0].textContent = t('website');
+    ths[1].textContent = t('description');
+    ths[2].textContent = t('category');
+    ths[3].textContent = t('pricing');
+  }
+}
 
 const TOOLS = [
   {"section": "Apps", "category": "AI & Multi-Model", "domain": "abacus.ai/chatllm", "url": "https://abacus.ai/chatllm", "description": "Build custom AI agents, deploy workflows, and write code seamlessly.", "pricing": "Freemium"},
@@ -554,8 +670,8 @@ try {
 const topResourcesList = new Set(savedTopResources);
 
 function pricingBadge(p) {
-  if (p === 'Free') return '<span class="badge badge-free">Free</span>';
-  return '<span class="badge badge-freemium">Freemium</span>';
+  if (p === 'Free') return `<span class="badge badge-free">${t('free')}</span>`;
+  return `<span class="badge badge-freemium">${t('freemium')}</span>`;
 }
 
 function renderSidebar() {
@@ -567,10 +683,10 @@ function renderSidebar() {
   const categories = [...new Set(sectionTools.map(t => t.category))].sort();
   const allCount = sectionTools.length;
   
-  let html = `<button class="cat-btn ${selectedCats.size === 0 ? 'active' : ''}" id="btn-all-cats">All Categories <span class="cat-count">${allCount}</span></button>`;
+  let html = `<button class="cat-btn ${selectedCats.size === 0 ? 'active' : ''}" id="btn-all-cats">${t('catAll')} <span class="cat-count">${allCount}</span></button>`;
   categories.forEach(cat => {
     const count = sectionTools.filter(t => t.category === cat).length;
-    html += `<button class="cat-btn ${selectedCats.has(cat) ? 'active' : ''}" data-cat="${cat}">${cat} <span class="cat-count">${count}</span></button>`;
+    html += `<button class="cat-btn ${selectedCats.has(cat) ? 'active' : ''}" data-cat="${cat}">${t(cat)} <span class="cat-count">${count}</span></button>`;
   });
   sidebar.innerHTML = html;
 
@@ -654,17 +770,13 @@ function render() {
   const empty = document.getElementById('empty');
   
   // Update header UI
-  let sectionDisplay = currentSection;
-  if (currentSection === 'FreeAI') sectionDisplay = 'Free AI';
-  if (currentSection === 'TopResources') sectionDisplay = 'Top Resources';
-  if (currentSection === 'Apps') sectionDisplay = 'Apps & Web Tools';
-  if (currentSection === 'Libraries') sectionDisplay = 'Libraries & UI Kits';
+  let sectionDisplay = t(currentSection);
   
-  const title = selectedCats.size === 0 ? sectionDisplay : (selectedCats.size === 1 ? [...selectedCats][0] : `${selectedCats.size} Categories`);
+  const title = selectedCats.size === 0 ? sectionDisplay : (selectedCats.size === 1 ? t([...selectedCats][0]) : `${selectedCats.size} ${t('categoriesLabel')}`);
   
-  document.getElementById('result-count').textContent = f.length + ' result' + (f.length !== 1 ? 's' : '');
+  document.getElementById('result-count').textContent = f.length + ' ' + (f.length !== 1 ? t('resultPlural') : t('resultSingle'));
   document.getElementById('section-title').textContent = title;
-  document.getElementById('count-label').textContent = f.length + ' tools';
+  document.getElementById('count-label').textContent = f.length + ' ' + t('toolsSuffix');
 
   if (!f.length) {
     tbody.innerHTML = '';
@@ -789,6 +901,15 @@ if (qParam) {
 }
 
 // Bootstrap
+document.getElementById('lang-select').value = currentLang;
+document.getElementById('lang-select').addEventListener('change', (e) => {
+  currentLang = e.target.value;
+  localStorage.setItem('site_lang', currentLang);
+  applyStaticTranslations();
+  renderSidebar();
+  render();
+});
+applyStaticTranslations();
 renderSidebar();
 render();
 
