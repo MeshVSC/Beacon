@@ -11,14 +11,14 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root,[data-theme="light"]{
   --bg:#f7f6f2;--surface:#f0efeb;--surface-2:#e8e6e1;--border:rgba(40,37,29,0.1);
-  --text:#28251d;--text-muted:#7a7974;--text-faint:#bab9b4;
+  --text:#1f1c16;--text-muted:#5a5752;--text-faint:#8a8882;
   --accent:#01696f;--accent-hover:#0c4e54;--accent-bg:rgba(1,105,111,0.08);
   --radius:12px;
 }
 [data-theme="dark"]{
-  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.07);
-  --text:#d4d3d0;--text-muted:#6b6a68;--text-faint:#3a3937;
-  --accent:#4f98a3;--accent-hover:#3d8490;--accent-bg:rgba(79,152,163,0.1);
+  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.12);
+  --text:#f4f4f5;--text-muted:#a1a1aa;--text-faint:#71717a;
+  --accent:#5eb8c4;--accent-hover:#4ca8b5;--accent-bg:rgba(94,184,196,0.12);
   --radius:12px;
 }
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
@@ -33,7 +33,7 @@ nav{display:flex;align-items:center;padding:0 40px;height:58px;border-bottom:1px
 .theme-btn:hover{border-color:var(--accent);color:var(--accent)}
 
 /* HERO */
-.hero{max-width:760px;margin:0 auto;padding:96px 40px 72px;text-align:center}
+.hero{max-width:760px;margin:0 auto;padding:96px 40px 48px;text-align:center}
 .hero-tag{display:inline-block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;font-weight:500}
 .hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-0.5px;line-height:1.1;margin-bottom:20px;color:var(--text)}
 .hero p{font-size:15px;color:var(--text-muted);max-width:480px;margin:0 auto 32px;line-height:1.7}
@@ -66,11 +66,28 @@ nav{display:flex;align-items:center;padding:0 40px;height:58px;border-bottom:1px
 
 .browse-link svg{width:16px;height:16px;transition:transform 0.15s}
 .browse-link:hover svg{transform:translateX(3px)}
-.search-hero{display:flex;align-items:center;max-width:440px;margin:0 auto;background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-.search-hero:focus-within{border-color:var(--accent);box-shadow:0 0 0 4px var(--accent-bg);transform:scale(1.02)}
-.search-hero input{flex:1;background:none;border:none;padding:14px 20px;font-size:14px;color:var(--text);outline:none}
+.search-hero{display:flex;align-items:center;max-width:240px;margin:24px auto 0;background:transparent;border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all 0.2s}
+.search-hero:focus-within{border-color:var(--accent);background:var(--surface)}
+.search-hero input{flex:1;background:none;border:none;padding:8px 16px;font-size:12px;color:var(--text);outline:none;text-align:center}
 .search-hero input::placeholder{color:var(--text-faint)}
-.search-hero span{padding:0 16px;color:var(--text-faint);font-size:12px;letter-spacing:1px}
+
+/* FEATURED TOOLS BANNER */
+.featured-section{width:100%;max-width:1600px;margin:0 auto 80px;animation:fade-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;opacity:0}
+@keyframes fade-up { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
+.featured-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-faint);text-align:center;margin-bottom:24px;font-weight:600}
+.diagonal-banner{display:flex;width:100%;height:180px;overflow:hidden;background:var(--bg)}
+.diagonal-slice{flex:1;background:var(--surface);transform:skewX(-16deg);margin:0 -20px;border-left:4px solid var(--bg);border-right:4px solid var(--bg);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);text-decoration:none;display:flex;align-items:center;justify-content:center;position:relative;background-size:cover;background-position:center;overflow:hidden}
+.diagonal-slice::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);z-index:1;transition:opacity 0.4s}
+.diagonal-slice:hover::before{opacity:0.6}
+.diagonal-slice:nth-child(1){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('file:///Users/kira/.gemini/antigravity/brain/1cae191e-6404-4992-98ca-e40fc6272c65/lm_arena_bg_1777020874835.png');margin-left:-40px;padding-left:40px}
+.diagonal-slice:nth-child(2){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('file:///Users/kira/.gemini/antigravity/brain/1cae191e-6404-4992-98ca-e40fc6272c65/chatjimmy_bg_1777020900886.png')}
+.diagonal-slice:nth-child(3){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('file:///Users/kira/.gemini/antigravity/brain/1cae191e-6404-4992-98ca-e40fc6272c65/google_ai_bg_1777020927925.png')}
+.diagonal-slice:nth-child(4){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('file:///Users/kira/.gemini/antigravity/brain/1cae191e-6404-4992-98ca-e40fc6272c65/zai_bg_1777020955951.png')}
+.diagonal-slice:nth-child(5){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('file:///Users/kira/.gemini/antigravity/brain/1cae191e-6404-4992-98ca-e40fc6272c65/puter_bg_1777020992321.png');margin-right:-40px;padding-right:40px}
+.diagonal-slice:hover{flex:1.5;transform:skewX(-16deg) scale(1.02);z-index:2}
+.slice-content{transform:skewX(16deg);display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 30px;z-index:2;position:relative}
+.slice-content h4{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-0.5px;text-shadow:0 2px 15px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4)}
+.slice-content p{font-size:13px;font-weight:500;color:rgba(255,255,255,0.95);line-height:1.4;max-width:160px;text-shadow:0 1px 10px rgba(0,0,0,0.8)}
 
 /* STATS */
 .stats{display:flex;justify-content:center;gap:40px;padding:0 40px 72px;border-bottom:1px solid var(--border);max-width:760px;margin:0 auto}
@@ -116,17 +133,46 @@ footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;fo
   <h1>Everything you need.<br>All in one place.</h1>
   <p>A curated directory of tools, inspiration, libraries, templates, fonts and assets for builders and creatives.</p>
   <div class="search-hero">
-    <input type="text" placeholder="Search across Beacon..." id="hero-search">
-    <span>↵</span>
+    <input type="text" placeholder="Quick search..." id="hero-search">
   </div>
-  <a href="./beacon.html" class="browse-link">Browse all 363 tools <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  <a href="./beacon.html" class="browse-link">Browse the directory <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </section>
 
-<div class="stats">
-  <div class="stat"><div class="stat-num">363</div><div class="stat-label">Tools</div></div>
-  <div class="stat"><div class="stat-num">8</div><div class="stat-label">Sections</div></div>
-  <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Curated</div></div>
-</div>
+<section class="featured-section">
+  <div class="featured-label">Featured Free Discoveries</div>
+  <div class="diagonal-banner">
+    <a href="https://lmarena.ai/" target="_blank" class="diagonal-slice">
+      <div class="slice-content">
+        <h4>LM Arena</h4>
+        <p>Testing AI blindly</p>
+      </div>
+    </a>
+    <a href="https://chatjimmy.ai/" target="_blank" class="diagonal-slice">
+      <div class="slice-content">
+        <h4>ChatJimmy</h4>
+        <p>15,000+ tokens/sec</p>
+      </div>
+    </a>
+    <a href="https://aistudio.google.com/" target="_blank" class="diagonal-slice">
+      <div class="slice-content">
+        <h4>Google AI Studio</h4>
+        <p>Build with Gemini</p>
+      </div>
+    </a>
+    <a href="https://z.ai/" target="_blank" class="diagonal-slice">
+      <div class="slice-content">
+        <h4>Z.AI</h4>
+        <p>Reasoning & Images</p>
+      </div>
+    </a>
+    <a href="https://puter.com/" target="_blank" class="diagonal-slice">
+      <div class="slice-content">
+        <h4>Puter</h4>
+        <p>Free cloud OS</p>
+      </div>
+    </a>
+  </div>
+</section>
 
 <section class="categories">
   <div class="section-label">Browse</div>

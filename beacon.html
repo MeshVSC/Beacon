@@ -11,13 +11,13 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root,[data-theme="light"]{
   --bg:#f7f6f2;--surface:#f0efeb;--surface-2:#e8e6e1;--border:rgba(40,37,29,0.1);
-  --text:#28251d;--text-muted:#7a7974;--text-faint:#bab9b4;
+  --text:#1f1c16;--text-muted:#5a5752;--text-faint:#8a8882;
   --accent:#01696f;--accent-hover:#0c4e54;--accent-bg:rgba(1,105,111,0.08);
   --shadow:0 2px 8px rgba(40,37,29,0.08);--radius:10px;
 }
 [data-theme="dark"]{
-  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.1);
-  --text:#eeeded;--text-muted:#a8a7a5;--text-faint:#6b6a68;
+  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.12);
+  --text:#f4f4f5;--text-muted:#a1a1aa;--text-faint:#71717a;
   --accent:#5eb8c4;--accent-hover:#4ca8b5;--accent-bg:rgba(94,184,196,0.12);
   --shadow:0 2px 8px rgba(0,0,0,0.3);--radius:10px;
 }
@@ -322,7 +322,6 @@ const TOOLS = [
   {"section": "Apps", "category": "Design & Image", "domain": "insmind.com", "url": "https://insmind.com/", "description": "Advanced AI photo editing focused on portrait enhancement.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Design & Image", "domain": "picwish.com", "url": "https://picwish.com/", "description": "Quickly unblur images and remove backgrounds with AI precision.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Design & Image", "domain": "promeai.pro", "url": "https://promeai.pro/", "description": "Transform architectural sketches and 3D models into photorealistic renders.", "pricing": "Freemium"},
-  {"section": "Apps", "category": "Design & Image", "domain": "magic.chenjungfeng.xyz", "url": "https://magic.chenjungfeng.xyz/", "description": "Convert rough, basic sketches into highly detailed illustrations.", "pricing": "Free"},
   {"section": "Apps", "category": "Design & Image", "domain": "en.eagle.cool", "url": "https://en.eagle.cool/", "description": "Organize, tag, and browse your massive visual design asset library.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Design & Image", "domain": "jitter.video", "url": "https://jitter.video/", "description": "Create smooth, professional motion graphics and UI animations.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Design & Image", "domain": "lordicon.com", "url": "https://lordicon.com/", "description": "Extensive library of highly customizable animated Lottie icons.", "pricing": "Freemium"},
@@ -438,7 +437,6 @@ const TOOLS = [
   {"section": "Apps", "category": "Utilities", "domain": "drfone.wondershare.com", "url": "https://drfone.wondershare.com/", "description": "A dense utility suite exclusively focused on facilitating difficult smartphone data back-ups and delicate cross-platform transfers.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Utilities", "domain": "carcarekiosk.com", "url": "https://carcarekiosk.com/", "description": "A highly valuable library consisting of brief, specific, model-accurate vehicle maintenance instruction videos.", "pricing": "Free"},
   {"section": "Apps", "category": "Utilities", "domain": "atlas.org", "url": "https://atlas.org/", "description": "A robust macroscopic data visualization project designed to analyze immensely complex global trade networks.", "pricing": "Free"},
-  {"section": "Apps", "category": "Utilities", "domain": "12ft.io", "url": "https://12ft.io/", "description": "A straightforward proxy service attempting to render unreadable paywalled news articles completely accessible.", "pricing": "Free"},
   {"section": "Apps", "category": "Utilities", "domain": "temp-mail.org", "url": "https://temp-mail.org/", "description": "Generates a highly disposable, totally anonymous email inbox preventing spam associated with mandatory registrations.", "pricing": "Free"},
   {"section": "Apps", "category": "Utilities", "domain": "haveibeenpwned.com", "url": "https://haveibeenpwned.com/", "description": "The authoritative database reliably checking your email addresses against globally recognized historical data breaches.", "pricing": "Free"},
   {"section": "Apps", "category": "Utilities", "domain": "web.archive.org", "url": "https://web.archive.org/", "description": "The internet's fundamental backbone library, constantly capturing and historically preserving the lifespan of billions of distinct webpages.", "pricing": "Free"},
@@ -453,6 +451,7 @@ const TOOLS = [
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "aichatgptfree.org", "url": "https://aichatgptfree.org/", "description": "A dedicated, heavily-optimized site specifically architected around providing completely unmetered access to advanced GPT-based interactions.", "pricing": "Free"},
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "copilot.microsoft.com", "url": "https://copilot.microsoft.com/", "description": "Microsoft's deeply integrated ecosystem companion, natively powered by the absolute latest and most advanced iterations of OpenAI technology.", "pricing": "Free"},
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "groq.com", "url": "https://groq.com/", "description": "An astoundingly fast inference engine explicitly designed around proprietary LPU hardware, generating hundreds of intelligent tokens per second.", "pricing": "Free"},
+  {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "chatjimmy.ai", "url": "https://chatjimmy.ai/", "description": "An experimental demonstration of ultra-high-speed AI hardware, generating text at an astounding 15,000+ tokens per second.", "pricing": "Free"},
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "heck.ai", "url": "https://heck.ai/", "description": "A streamlined multi-purpose platform rapidly alternating connections specifically targeting fast instances of DeepSeek and Google's Gemini grids.", "pricing": "Free"},
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "link.fuckicoding.com", "url": "https://link.fuckicoding.com/", "description": "An aggressive workaround proxy specifically tuned to bypass general API limits while surfacing capable instances of Claude and GPT subsets.", "pricing": "Free"},
   {"section": "FreeAI", "category": "Free Chat (No Signup)", "domain": "pi.ai", "url": "https://pi.ai/", "description": "An intimately tuned conversational companion explicitly focused on providing highly empathetic, emotionally supportive, back-and-forth dialogue.", "pricing": "Free"},
