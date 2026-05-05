@@ -565,6 +565,16 @@ const TOOLS = [
   {"section": "Apps", "category": "Job Boards & Remote", "domain": "flexjobs.com", "url": "https://flexjobs.com/", "description": "A distinctly premium, rigorously hand-screened board strictly validating totally legitimate hybrid and global remote roles.", "pricing": "Paid"},
   {"section": "Apps", "category": "Job Boards & Remote", "domain": "remoters.net", "url": "https://remoters.net/", "description": "A comprehensive hub delivering expansive resources explicitly targeting professional digital nomads exploring widespread remote work.", "pricing": "Free"},
   {"section": "Apps", "category": "Job Boards & Remote", "domain": "workingnomads.com", "url": "https://workingnomads.com/", "description": "A very heavily newsletter-driven platform directly surfacing carefully organized remote development and digital marketing openings.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "web3.career", "url": "https://web3.career/", "description": "A leading platform dedicated to aggregating blockchain and Web3 career opportunities.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "remoteok.com", "url": "https://remoteok.com/", "description": "One of the most popular remote job boards for developers and designers.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "jobspresso.co", "url": "https://jobspresso.co/", "description": "Expertly curated remote jobs in tech, marketing, customer support and more.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "justremote.co", "url": "https://justremote.co/", "description": "Discover fully and partially remote jobs from the greatest remote working companies.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "stillhiring.today", "url": "https://stillhiring.today/", "description": "A continuously updated directory tracking companies actively hiring despite market conditions.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "underdog.io", "url": "https://underdog.io/", "description": "A curated marketplace connecting top talent with rapidly growing technology companies.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "builtin.com", "url": "https://builtin.com/", "description": "An extensive network connecting tech professionals with innovative tech companies.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "remote.co", "url": "https://remote.co/", "description": "A comprehensive resource offering remote jobs across dozens of professional categories.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "skipthedrive.com", "url": "https://skipthedrive.com/", "description": "A free telecommuting job board providing remote work opportunities without registration.", "pricing": "Free"},
+  {"section": "Apps", "category": "Job Boards & Remote", "domain": "virtualvocations.com", "url": "https://virtualvocations.com/", "description": "A massive hand-screened directory strictly focused on legitimate telecommuting positions.", "pricing": "Freemium"},
   {"section": "Apps", "category": "Website & App Builders", "domain": "bubble.io", "url": "https://bubble.io/", "description": "An astoundingly powerful, fully exhaustive visual programming suite deeply replacing entire backend engineering dependencies completely.", "pricing": "Freemium", "isEssential": true},
   {"section": "Apps", "category": "Website & App Builders", "domain": "flutterflow.io", "url": "https://flutterflow.io/", "description": "An incredibly sophisticated visual editor cleanly outputting flawlessly compiled, natively deployable comprehensive Flutter architectures.", "pricing": "Freemium", "isEssential": true},
   {"section": "Apps", "category": "Website & App Builders", "domain": "softr.io", "url": "https://softr.io/", "description": "A wildly fast logic layer incredibly designed specifically to immediately translate raw Airtable databases into interactive client portals.", "pricing": "Freemium"},
@@ -675,9 +685,13 @@ function pricingBadge(p) {
 
 function renderSidebar() {
   const sidebar = document.getElementById('sidebar-btns');
-  const sectionTools = currentSection === 'TopResources' 
+  let sectionTools = currentSection === 'TopResources' 
     ? TOOLS.filter(t => t.isEssential || topResourcesList.has(t.domain)) 
     : TOOLS.filter(t => t.section === currentSection);
+  
+  if (!isAdmin) {
+    sectionTools = sectionTools.filter(t => t.category !== 'Job Boards & Remote');
+  }
   
   const categories = [...new Set(sectionTools.map(t => t.category))].sort();
   const allCount = sectionTools.length;
@@ -740,6 +754,10 @@ function render() {
   let f = currentSection === 'TopResources'
     ? TOOLS.filter(t => t.isEssential || topResourcesList.has(t.domain))
     : TOOLS.filter(t => t.section === currentSection);
+    
+  if (!isAdmin) {
+    f = f.filter(t => t.category !== 'Job Boards & Remote');
+  }
   
   // Filter by categories
   if (selectedCats.size > 0) f = f.filter(t => selectedCats.has(t.category));
