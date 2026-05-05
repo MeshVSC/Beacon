@@ -138,7 +138,7 @@ footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;fo
   <h1 data-i18n="hero_title">Everything you need.<br>All in one place.</h1>
   <p data-i18n="hero_desc">A curated directory of tools, inspiration, libraries, templates, fonts and assets for builders and creatives.</p>
   <div class="search-hero">
-    <input type="text" placeholder="Quick search..." id="hero-search">
+    <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Quick search..." id="hero-search">
   </div>
   <a href="./beacon.html" class="browse-link"><span data-i18n="browse_btn">Browse the directory</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
 </section>
@@ -149,31 +149,31 @@ footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;fo
     <a href="https://lmarena.ai/" target="_blank" class="diagonal-slice">
       <div class="slice-content">
         <h4>LM Arena</h4>
-        <p>Testing AI blindly</p>
+        <p data-i18n="lmarena_desc">Testing AI blindly</p>
       </div>
     </a>
     <a href="https://chatjimmy.ai/" target="_blank" class="diagonal-slice">
       <div class="slice-content">
         <h4>ChatJimmy</h4>
-        <p>15,000+ tokens/sec</p>
+        <p data-i18n="chatjimmy_desc">15,000+ tokens/sec</p>
       </div>
     </a>
     <a href="https://aistudio.google.com/" target="_blank" class="diagonal-slice">
       <div class="slice-content">
         <h4>Google AI Studio</h4>
-        <p>Build with Gemini</p>
+        <p data-i18n="google_desc">Build with Gemini</p>
       </div>
     </a>
     <a href="https://z.ai/" target="_blank" class="diagonal-slice">
       <div class="slice-content">
         <h4>Z.AI</h4>
-        <p>Reasoning & Images</p>
+        <p data-i18n="zai_desc">Reasoning & Images</p>
       </div>
     </a>
     <a href="https://puter.com/" target="_blank" class="diagonal-slice">
       <div class="slice-content">
         <h4>Puter</h4>
-        <p>Free cloud OS</p>
+        <p data-i18n="puter_desc">Free cloud OS</p>
       </div>
     </a>
   </div>
@@ -207,52 +207,52 @@ footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;fo
     <a class="card" href="./beacon.html?section=Inspiration">
       <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
       <span class="card-count">18 tools</span>
-      <h3>Inspiration</h3>
-      <p>Awwwards, Dribbble, Behance, Mobbin and more design galleries.</p>
+      <h3 data-i18n="inspiration_title">Inspiration</h3>
+      <p data-i18n="inspiration_desc">Awwwards, Dribbble, Behance, Mobbin and more design galleries.</p>
     </a>
 
     <a class="card" href="./beacon.html?section=Libraries">
       <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
       <span class="card-count">19 tools</span>
-      <h3>Libraries & UI Kits</h3>
-      <p>shadcn, Tailwind, Radix, Framer Motion and component libraries.</p>
+      <h3 data-i18n="libraries_title">Libraries & UI Kits</h3>
+      <p data-i18n="libraries_desc">shadcn, Tailwind, Radix, Framer Motion and component libraries.</p>
     </a>
 
     <a class="card" href="./beacon.html?section=Templates">
       <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 17h6M17 14v6"/></svg>
       <span class="card-count">14 tools</span>
-      <h3>Templates</h3>
-      <p>HTML, React, Figma and design system starter templates.</p>
+      <h3 data-i18n="templates_title">Templates</h3>
+      <p data-i18n="templates_desc">HTML, React, Figma and design system starter templates.</p>
     </a>
 
     <a class="card" href="./beacon.html?section=Fonts">
       <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h3m0 0V4m0 3a5 5 0 0 0 10 0m0 0V4m0 3h3M4 20h16"/><text x="7" y="19" font-size="7" fill="currentColor" stroke="none" font-family="serif">Aa</text></svg>
       <span class="card-count">12 tools</span>
-      <h3>Fonts</h3>
-      <p>Google Fonts, Fontshare, type foundries and free typefaces.</p>
+      <h3 data-i18n="fonts_title">Fonts</h3>
+      <p data-i18n="fonts_desc">Google Fonts, Fontshare, type foundries and free typefaces.</p>
     </a>
 
     <a class="card" href="./beacon.html?section=Assets">
       <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M7 12h.01"/><path d="M17 12h.01"/></svg>
       <span class="card-count">21 tools</span>
-      <h3>Assets</h3>
-      <p>Icons, illustrations, stock photos, 3D models and free resources.</p>
+      <h3 data-i18n="assets_title">Assets</h3>
+      <p data-i18n="assets_desc">Icons, illustrations, stock photos, 3D models and free resources.</p>
     </a>
 
   </div>
 </section>
 
 <section class="suggest-section">
-  <h3>Missing a tool?</h3>
-  <p>Got a suggestion for a great developer or design tool? Drop it here.</p>
+  <h3 data-i18n="missing_title">Missing a tool?</h3>
+  <p data-i18n="missing_desc">Got a suggestion for a great developer or design tool? Drop it here.</p>
   <div class="suggest-form">
-    <input type="text" id="suggestion-input" placeholder="Tool name or URL..." autocomplete="off">
-    <button id="suggestion-btn">Submit</button>
+    <input type="text" id="suggestion-input" data-i18n-placeholder="suggest_placeholder" placeholder="Tool name or URL..." autocomplete="off">
+    <button id="suggestion-btn" data-i18n="submit_btn">Submit</button>
   </div>
-  <div id="suggestion-msg">Suggestion saved! Thanks.</div>
+  <div id="suggestion-msg" data-i18n="suggestion_saved">Suggestion saved! Thanks.</div>
 </section>
 
-<footer>Beacon · A curated index for builders and creatives</footer>
+<footer data-i18n="footer_text">Beacon · A curated index for builders and creatives</footer>
 
 <script>
 const root=document.documentElement;
@@ -298,7 +298,29 @@ document.getElementById('suggestion-btn').addEventListener('click', () => {
       "apps_title": "Apps & Web Tools",
       "apps_desc": "AI tools, automation, design, video, builders, coding utilities and more.",
       "freeai_title": "Free AI",
-      "freeai_desc": "Free chat, image gen, dev APIs and tools — no paywall, no credit card."
+      "freeai_desc": "Free chat, image gen, dev APIs and tools — no paywall, no credit card.",
+      "lmarena_desc": "Testing AI blindly",
+      "chatjimmy_desc": "15,000+ tokens/sec",
+      "google_desc": "Build with Gemini",
+      "zai_desc": "Reasoning & Images",
+      "puter_desc": "Free cloud OS",
+      "inspiration_title": "Inspiration",
+      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin and more design galleries.",
+      "libraries_title": "Libraries & UI Kits",
+      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion and component libraries.",
+      "templates_title": "Templates",
+      "templates_desc": "HTML, React, Figma and design system starter templates.",
+      "fonts_title": "Fonts",
+      "fonts_desc": "Google Fonts, Fontshare, type foundries and free typefaces.",
+      "assets_title": "Assets",
+      "assets_desc": "Icons, illustrations, stock photos, 3D models and free resources.",
+      "missing_title": "Missing a tool?",
+      "missing_desc": "Got a suggestion for a great developer or design tool? Drop it here.",
+      "submit_btn": "Submit",
+      "suggestion_saved": "Suggestion saved! Thanks.",
+      "footer_text": "Beacon · A curated index for builders and creatives",
+      "search_placeholder": "Quick search...",
+      "suggest_placeholder": "Tool name or URL..."
     },
     "es": {
       "hero_tag": "Curado por desarrolladores, para desarrolladores",
@@ -313,7 +335,29 @@ document.getElementById('suggestion-btn').addEventListener('click', () => {
       "apps_title": "Apps y Herramientas Web",
       "apps_desc": "Herramientas de IA, automatización, diseño, video, utilidades de código y más.",
       "freeai_title": "IA Gratuita",
-      "freeai_desc": "Chat gratuito, generación de imágenes, APIs y herramientas — sin muro de pago."
+      "freeai_desc": "Chat gratuito, generación de imágenes, APIs y herramientas — sin muro de pago.",
+      "lmarena_desc": "Probar IA a ciegas",
+      "chatjimmy_desc": "15,000+ tokens/seg",
+      "google_desc": "Construye con Gemini",
+      "zai_desc": "Razonamiento e Imágenes",
+      "puter_desc": "OS en la nube gratuito",
+      "inspiration_title": "Inspiración",
+      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin y más galerías.",
+      "libraries_title": "Bibliotecas y UI",
+      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion y más componentes.",
+      "templates_title": "Plantillas",
+      "templates_desc": "Plantillas iniciales de HTML, React, Figma y diseño.",
+      "fonts_title": "Fuentes",
+      "fonts_desc": "Google Fonts, Fontshare, fundiciones y tipografías gratis.",
+      "assets_title": "Recursos",
+      "assets_desc": "Iconos, ilustraciones, fotos de stock, modelos 3D y más.",
+      "missing_title": "¿Falta una herramienta?",
+      "missing_desc": "¿Tienes una sugerencia de herramienta o diseño? Déjala aquí.",
+      "submit_btn": "Enviar",
+      "suggestion_saved": "¡Sugerencia guardada! Gracias.",
+      "footer_text": "Beacon · Un índice curado para desarrolladores y creadores",
+      "search_placeholder": "Búsqueda rápida...",
+      "suggest_placeholder": "Nombre o URL..."
     },
     "ca": {
       "hero_tag": "Comissariat per desenvolupadors, per a desenvolupadors",
@@ -328,7 +372,29 @@ document.getElementById('suggestion-btn').addEventListener('click', () => {
       "apps_title": "Apps i Eines Web",
       "apps_desc": "Eines d'IA, automatització, disseny, vídeo, utilitats de codi i més.",
       "freeai_title": "IA Gratuïta",
-      "freeai_desc": "Xat gratuït, generació d'imatges, APIs i eines — sense mur de pagament."
+      "freeai_desc": "Xat gratuït, generació d'imatges, APIs i eines — sense mur de pagament.",
+      "lmarena_desc": "Provar IA a cegues",
+      "chatjimmy_desc": "15,000+ tokens/seg",
+      "google_desc": "Construeix amb Gemini",
+      "zai_desc": "Raonament i Imatges",
+      "puter_desc": "OS al núvol gratuït",
+      "inspiration_title": "Inspiració",
+      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin i més galeries.",
+      "libraries_title": "Biblioteques i UI",
+      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion i més components.",
+      "templates_title": "Plantilles",
+      "templates_desc": "Plantilles inicials d'HTML, React, Figma i disseny.",
+      "fonts_title": "Tipografies",
+      "fonts_desc": "Google Fonts, Fontshare, foses i tipografies gratis.",
+      "assets_title": "Recursos",
+      "assets_desc": "Icones, il·lustracions, fotos d'estoc, models 3D i més.",
+      "missing_title": "Falta una eina?",
+      "missing_desc": "Tens un suggeriment d'eina o disseny? Deixa-la aquí.",
+      "submit_btn": "Enviar",
+      "suggestion_saved": "Suggeriment guardat! Gràcies.",
+      "footer_text": "Beacon · Un índex comissariat per a desenvolupadors i creadors",
+      "search_placeholder": "Cerca ràpida...",
+      "suggest_placeholder": "Nom o URL..."
     }
   };
 
@@ -340,6 +406,12 @@ document.getElementById('suggestion-btn').addEventListener('click', () => {
       const key = el.getAttribute('data-i18n');
       if(translations[lang][key]) {
         el.innerHTML = translations[lang][key];
+      }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      if(translations[lang][key]) {
+        el.placeholder = translations[lang][key];
       }
     });
     document.documentElement.lang = lang;
