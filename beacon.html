@@ -120,18 +120,44 @@ th.sort-desc svg{transform:rotate(180deg)}
 .launch-btn { display: flex; align-items: center; justify-content: center; width: 100%; background: var(--accent); color: #fff; border: none; padding: 14px; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
 .launch-btn:hover { background: var(--accent-hover); }
 
+.app-screenshots { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 24px; }
+.app-screenshots img { width: 180px; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+.app-changelog { font-size: 13px; color: var(--text-muted); background: var(--surface-2); padding: 12px; border-radius: 8px; margin-bottom: 24px; line-height: 1.5; }
+.section-title-small { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
+
+/* Rich Row Styles */
+.row-icon { width: 20px; height: 20px; border-radius: 4px; object-fit: contain; flex-shrink: 0; }
+.row-meta { display: flex; flex-direction: column; gap: 2px; }
+.row-title { font-size: 14px; font-weight: 600; color: var(--text); transition: color 0.2s; }
+.app-row:hover .row-title { color: var(--accent); }
+.row-stats { display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); }
+.row-stat-item { display: flex; align-items: center; gap: 4px; }
+.row-launch-btn { background: var(--accent-bg); color: var(--accent); border: none; padding: 5px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.row-launch-btn:hover { background: var(--accent); color: #fff; }
+
+/* Interactive Star Rating */
+.star-rating { display: inline-flex; gap: 2px; cursor: pointer; }
+.star-rating .star { font-size: 16px; color: var(--border); transition: color 0.15s; user-select: none; }
+.star-rating .star.filled { color: #f59e0b; }
+.star-rating .star.hovered { color: #fbbf24; }
+.star-rating-value { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-left: 6px; }
+
 .workspace-overlay {
   position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
   background: var(--bg); z-index: 200; display: none; flex-direction: column;
 }
 .workspace-overlay.active { display: flex; }
-.workspace-header { height: 48px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; flex-shrink: 0; }
-.workspace-title { font-size: 13px; font-weight: 600; color: var(--text); }
-.workspace-actions { display: flex; gap: 12px; }
-.workspace-btn { background: var(--surface-2); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 12px; color: var(--text); cursor: pointer; transition: all 0.2s; text-decoration: none; }
-.workspace-btn:hover { background: var(--border); }
-.workspace-btn.close-btn { color: #ef4444; border-color: rgba(239, 68, 68, 0.2); }
-.workspace-btn.close-btn:hover { background: rgba(239, 68, 68, 0.1); }
+.workspace-header { height: 52px; background: var(--bg); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
+.workspace-logo { display: flex; align-items: center; gap: 10px; }
+.workspace-logo svg { width: 22px; height: 22px; }
+.workspace-logo .ws-logo-name { font-weight: 600; font-size: 14px; color: var(--text); }
+.workspace-logo .ws-divider { width: 1px; height: 18px; background: var(--border); margin: 0 4px; }
+.workspace-title { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+.workspace-actions { display: flex; gap: 10px; }
+.workspace-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 6px 12px; font-size: 12px; color: var(--text); cursor: pointer; transition: all 0.2s; text-decoration: none; }
+.workspace-btn:hover { background: var(--surface-2); }
+.workspace-btn.close-btn { background: var(--accent-bg); color: var(--accent); border-color: transparent; }
+.workspace-btn.close-btn:hover { background: var(--accent); color: #fff; }
 .workspace-iframe { flex: 1; width: 100%; border: none; background: #fff; }
 </style>
 </head>
@@ -206,11 +232,19 @@ th.sort-desc svg{transform:rotate(180deg)}
 <!-- App Details Panel -->
 <div class="app-details-panel" id="app-details-panel">
   <button class="app-details-close" onclick="closeAppDetails()">×</button>
-  <img src="assets/app_banner_placeholder.png" alt="App Banner" style="width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:24px; box-shadow:var(--shadow);">
+  <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCAC0ALQDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAABAABAgMFBgf/xAA8EAACAQMDAgMFBgUCBgMAAAABAgMABBEFEiExQRNRYSJxgZHRBhQyQlLBFSMzobEk8ENTYmNy4YKS8f/EABkBAAMBAQEAAAAAAAAAAAAAAAECAwAEBf/EACQRAAICAgICAwADAQAAAAAAAAABAhEDIRIxBEETIlEUI2Gh/9oADAMBAAIRAxEAPwDySnp2Ug01WEFTgUsVbEgPJrIBXtNLFFeGCOlUOuDijRiNKnxSoGGpU+KWKxhsUqliliiYjSp8UsVjDU1SpqBhqapYpsVjEaWM0+KJtYdz5NZKzF1ja49thR5/HTIABgVGSRYzkmqJUJ2W7gOppVky3jNISOlKtyDRqSQW3ZKEvrSOOEOBgmtyDTWJLMRgUFeWMtzIcEbR0puDo51mjHTZz4FWRtjg0ZcabLbruYcUERg1NpovGamrQR4gAoZjuYmlzSxWGGp8U+KfFAJHFPT4p8UQEcUsVLFOgBcZ86xrEkLyfhUmoshUkEciuzt7O3OnL4KhW25ZjXKXa4uXUc4NPKHFEoZOTaBcZqRidVyQcURBbksCQT6Cugns5b2xjiitCpH5sVowsTJnUGkcpg1bHau5HatG40q4sxkxEnzoVSUJMh58qKgk9l4TjJWmTSxjU+024+laVjpMl1kW8ZJFZscmDnFdj9kftBaaeWW4UZPenXF6SNKT9I527hksmKyrtI86x7iYyMfKun+2N3FfXfiwDCGuUK0kkLifKNlVKpEUqnRQ6nVL8wKII2570HaNPO4UEnNDurXFwWPJJrWW5ttBtop7mN3abIQIBxjzzXS1W2cGV0qStsWrFYLRYWOXPWuZfrV1/rAvJmfa4z50F94UnoahOSb0V8bFKEft2WgUVb2ck/4FLH0FBLcJkcGuh+z/ANorTSJy1xbPKCOgA+tCNeyuRyS+qMqW2eIlWUgiqdvpWzqOuWN9dNKltIik9MD60N9/04LxBKT6gfWi0v0WEptbRn4p1XJotr2zPSF/kKibu27RN8qBTYKRinAI5q5ri3Yf02FU+IvT2sVghh1G48IRBiB6UrS1e4mCqNzsaF+8qcZU8VsaDren6bOZrqGaRu2xQf8AJp07e2Qyuag3FWzrdM+z0Gn2wmuFDSEZ5oa+vpgxWJlQDyrO1D7cW90CIoZ1HqB9axv4ytzMEVJSWPTA+tW+SK0jz8Phyk+ebbNpbiViRM6sD51mXmmpJIZFcDParS8ZQhd24dzWfNqMUZZCWYjqV6UspJ9noQxRg7iif8PwvDipQaexkHt1ZasZFDMjKCMjd1IoqOaGB1Z1dskAKoyWPkPOjBx9nRF/poDQPvcaKW4I4rmNUsG0+6aFu1d1/qo1STYqIoztJ5FcXq98NQvGlHStkcb0NUY6iZJU+VKr+KVQFs6HTbENJ4kgwq8k1lfae8F3PHGh9iLOK0r/AFWNYTDb8Dua5ieXdJluarllqjz/ABoSnk+SQMR502MURtVhkc08FpLcXCQRLueRsKK5qPSuh7HTL7UnZbK0luCgy3hrnaPU9qNfRdTjG2WxmTA4JA+tdZC8Wl2Eem2B3KDl2HWVz1b9h6VVJZm4lCPcqHPUY4Hnk1b40kcMPJnOTdUv+nHS28sBAljZM9M1OCFXBJ5rfm0+31SZYra7UhAQilGGfMk+tYLKYnIBxSuNF4ZVPS7ISRhJCo6CmxUwjNk4JpbKBSyGKWKs20fo6WJu2+/4EYjJUsTgN2yB193eslboDdKzLxTEVqwabLqmpNFZRtIHclAq4JGevkB7+BWtffZ+3j2I1xZRTogUwpI7b28y2MD3DinUGyMvIhGSi3s5RY2kbailj5AZrVsbQ26lpEIkbrkdBSBlhkMRUqVPtbRhT8B2rek1G2v/ALK/cbfT9l5C+5rgDJcE9B3/APyjGCLSlrRzl9e4DRQnkn2mH+BRH2etIJy7yqHZfwg/5rLkjK1dbGaKMbCUy3UdaRrexqo2NQnFrKFRdzEEAZ4HPeqtNuktLmK9uDvKyc58vIChJZ/FRUEYZlGMjJPWhJBKoO9XHllSKGxdHc6lrNtPaM0FxH4ZU9G5rgkYniqGyT1FaWnWoml3twgNGKcnQ3rRbDYSSxhsdaVajX8MR2IuQoxSro4R/SFS/TmZJW86a3tJbzxDEjP4YBO0ZIpm5p7YYkJDlGHQiuZVy2dEUkQMTIe4IrX0wG2jMhH86QYB/Sv1P+KHe9kIAu0juVPG48N8xz880ZbX6PIrRzIp4ys0a5x/5fWrRhG9MaSTWjo9GsmkXxW/G3C+g86j9oYBptsLOI5uLjmU/pXsvx6n0qEf2gmt5PZmSEflItgcD0NDtqVgsrXVxO93LndtZCAzepPar/VKmeRN5FPrX5+iuo49B0UKx/112uSO8cZ/dv8AHvrlvE8VyT1ou/1B9QuXlmbc7nJJoaKINuOVXapPtHGfQetcs5W9HV4+Nwi5T7Z0n2cW1ubW4sXskmnl2iOVmI8Pn07VC+0q3s5ngktZVlQ4YMTwfd1FLTd9lA0mwrI5QthSMLnp+5qyK3m1W/w+5pFbDnPLeXNUStBSjHlJszhZxsPYiJU/9ZH+aruNPktWAkiYB13ISPynvnzr0WWOx0e2VJYUmm2+1uH4fSs+zvLO61SCKa0thA78kp1IGQPnijwRz/yW05JaRDSkOg/ZwTGLbe3nJJHKRj8I/f41lyy3DFpJ5pFbGdoOMDtn39hXZX1wixKZ4Y/GGSqleEHXLfSuYuphcS+zApGc5K8k+Z9ao4vpC+LHk3Otsy08eaVVMrk9MbjWwlzFoVqswlMsrupdB1Rc5B+JHX60Tb6YpgMrqiPtJAA6j/f71zYieQ38t3KxG0qcL+JvygfHHwFOo8F/p6sKjr2Zly51PUpZkiHiXErOEUcAsc4FHQ6bIFIggWcrw80n9JT5D9R/3jvTWKx2SMCFNyy5d25WFO/vJ8vh3oK91Se8kALkRpxGh7D61z0ltkXt0w+eKe3XM91egf8AZj8JKHEgf+lqV7G3/VJuH7VVatfRfzInaJe5Ztqn50bFJpl62y4dY5/1QLwf2+X96NJ9C8Mb67BmWUqfH8C846tGAR8Rg/3oKOU7BFH360bfxSWH9KFdrD2ZS28MPTtQ9qiQQmVzzjilVp0Zf1p6osBjhGxuT3pUDJOrOTSochKYOcY6VBAuWJ7VZnNW2jIpaGYhY5+Nx/Iw6H3dj6Go0dDdIokKlUCtkbvPNRA2ygFaVzE0MhjddrK2CD2rT0XS49RyGkXcM87ugrexr1Y0DeGcRTPFleQeRQ0okYEMd/qDVmWguJYiwJQlcj0NVBtxPGaNvoUpSNywVQSScAYrViU2ZCKoe4zycZ2nyH7mrdPt3QCVRmWTIiz+Ud2+H18qNt9Jub5JFsYZJljx4jR45z0yTwPdVYQdWSnJe9InJJcXLmVHk3SkFQT088+6uo0lYbGzbUpAPFX2UGMbj+r/AH6etA6Jot5DbTWtxYmMTEMZWdT4YHl7+/wqrU5rwyhI0KJGNiAMOn/v96t0ckuOT6p6Kr+7e6fADvPKwKgc8H08zTWqHTlkkYRyXoxsRnBEXqe2fLy99DowttWlluZPBCxloie5IwuPn/asq7uxOTHCrO7YBIXAwOwHX4nyoJe2Ux4eWn0EXes3DMyRXMjBjl3zzIfoO1T0m8umvUaa6k8FcsSW4OOx+OKBiISCSARxyyS4y5GTHg9FPn50ZP4VrbC1LYdvalI6qf8Af9/dTxTe2ztUNP0jR1HUpYZReyMp3j+WobguO/uHB/tWRNqMt8kcbBFEfICjClj+Y+Z/sKpu47cXA8IFICoKh5Bnp159artpo4nIjYNIo4cDhfd5mklkdidXRK8kSFTagPI+d0rdMnyz6f591Z4u5lH8lFj9QOfmaulf2RQ33e4A5iI95Arncm2BQXsbEkzEySknzJzTfgbAYkjoadLebJxGTnyIqh2IJzSWUSNmy1j2Gt7lRJG/UHz8x5GgpHMgC54FAlsnNFqabm2qZmr7G2ClSY80qUBKGIyOFUUr1ArIi/lzn1rRtYDFHwMu39qF1GEQsitksxOSO1UcaiJF8pDRrHqMSwSuEuEGI5GOA47KT2Pkfh5UIIbizuShDxSLwRyCKuS1uHODC3PfHBrQ8SeGNY7z7vNGowqzNlh7iPaFLVgtxeujMiRssT3oywsnuZBkHwweSOP7/v2q+J4Jpdtrpiyv19qRio+HHHvq251RoI9gkR5RwPDULHH/AOIHU+vy86pDGu30OlOXqkX3svgMLC3KtPLhZGXgIvZB5AdSa2NB1IWjFIzm1TKHj+qx6n9/lXIafMH1BVkbCy5jLHtu7/PFdJpwNnDuuImxGxEfPU55OPSqQfKRPNjhOPB9G9qTy2kJAJIflmB6ehrAkvTkAxxnHcryav8A43HuxLHMVHAYEZH1HpQVzcWkjeJFFIAeCARjNPJL0yUYRSpF82qMLGRTbW0uFwPEjztGe3lWV94ll/DFCE7hY8D44oiRkdGhW3uHAI3lBkA/p6U8MtrZsjzWlyCThdxwGPl+GnjG/ejsxY0toKtoktbeTUpURDk+FGowM+YHkP8AOKzYblmm8dWO8k78ngD9xjrUtQ1RtSkGIzFGgwBH0X4f+6FkEcQEQmVd348g5A8ulCc03UekUnJNqMRatfyX0gVnzFCuIgx52nn4nmg1neS5eSSXxHYcsT1q7WGsfvzDTpJXtlACNKoVjx3A9c0JbxGaTkjavLH0+tck23JiS02HW0LSbX/MThPr8K0otMR1/pqw/U/U1OwtSRuZduR0H5R2FdBpVgLq43THZBGNznyFNDHZO6VgEOgrb2n3gxRK78RZ/u3uFcbqtsttcHw+Ym5Qg5yBwTz616NrN0l67x58CGOPMhH/AAYh0Uep/f1rzfVbkXNy8gAVeiqPygdBVMuJRhbKxxSUOU+2Bh1z35otDQHPlRimuNAZMnmlREdvuTLdTSpqYlo25LiO3iLADPasGW6uJZ2aIBj69qe8u2mJ547Cs6VuatkmukOoxiqQeJrwjbNOqr5M4GPlzUklsYSTIj3DeQcqvzxk1nxwvJyOBTvA8fWpc66QaXoOk1SaSMwoFhhP/DjGAff3PxobcTyaHDVMNQc2+zO2XA4Ndtpl617pvj34ieTBWNNpDPj8x599cNGw3jNdfqmo6I1pai0vXVooY45FEBy2ByM9OuarjlVnHnSbUWnsEuNTZHcJbWbqnBJDD96oh1C4u7hIbS3gEjHqkZOPXk9qDutXtriff/D0Cg5C+I3Pqcd6p/i1xFIWtmFqMYxB7PHv6n403yK9jYsai9xOjdbe0tyk8rIiYKRqcySHuSO2fM1j3uoS3qlHXaqkeGoPEYGfrWab24bOZn5681XvJPJzTZM/LS6Oty/DVsLv7hcpNGUeRDkF+UHv86EuJWmmeZsbnYscDzqlWY9Bj31IZA5OR/ioOTaojxSlyKyp99bv2ZsI76RlKuWjOdq49rPv8qyAAelHabdSWMxkjVWJUqQw7GtCr2Ll5OL49nbi3sYPYIuMjrwtNdanFaW4jhTgn2UJBaRu2fQVyTXQlck20Wfj9aGuNQe3Q+HFHGW43AHI+ZrvjkxpWVwwiqcmF6xqLyRG2glD5bfMc8yP9B2+NczKX3HevPqKUszMeaK02NbqR45JSFC5CnnNcmXKsjLTnyYDkeorRs4953N0FBXEaxXLxq25VbANalupbEa9O9c8VsjIuCM/KjilWjFAFjAxSq3EQ5ljmqyAZFz0zVlQIqT2UCVZOisPnU5A7RECNj5cUEBzxWtpkU922xT0rRV6FnLirMnwZuvhP/8AU0vCl/5bfKupuLXwY9vBasm4MsJ7H0pnjolHK5dIzPDl/wCW/wAqWyX9DfKizczdxTGeT0ocSicn6BNj/ob5U+125Ck+4UTGJZ3CZ61oizMahEGSetUhhcysYtmLsccbG+VTCSAZKNj3V0EljFDCJZWAOOlZNzMZX2rwooyxKPbNSS2DBtvXj31YjhvzKPeajNhsAdaSW5xk8CpVukK0XLgHMeZD3Aq1Z9jDcQvoeKojJQ/y+vnVcpZ2JbrW6E9mnFcQZyZUH/ypXLWlyu1pY8DvuGaxtlNsrcmGiy4tljyY5kkX0YZoYA59nOfSrNlSiwrg0gxWI3JA2N8q6OwgIAJHJqvTrJJMSNnmultLS2RAW4q+OGyMsiugRI8LSrYWOyx1pV2cA8/8PNc1EmlmmzXmlCyNdxxXVWdlJYaek6D2pK5uzAadAemRXpMsdqdIiRZU3BfOr4kcHlZ/jaTWmcvJLk4Jy57VnXFvL4pZgcUdLHHbXDSSSjA9aBvNbEp2Kg2imbVbKJt1w6M+YvI+EXpSS0lY5IIHrVyakqfhjXNUz30kh64HpU7RVc+kjb0iOwt0Z5pBvqVzqMKsfBx765rxW8zTbz51aPkOMeKOuORqNGpNP42TJL8KDdkBIBofcfOlmpSyWI3ZaHA6DmnMjN1NVA0+4VPkKWoxXpTZ55qAYmnCk0AUOQKbbTg44NSFYJHbTCPnIqynAo0A6HQplZdroCFrQuNRRchYulczaXT25ypos6jI3UCurHNJHLGElkv0aH8T/wC0aVZn31/IUq6Plid1owc02abNLNeUAsSQqciiv4jcbceK2PfQOabNFOhHBPsIkuHk/ExNUk5qOabNaxkkiQNSY1CnJoGFT01LNE1D04qOacGsYlUhioCnBrGLBUgagDTg0QEyM0wJHBpA1MRlhWAIVYqk1WMRHk5qzxcjjgUTFirzU8VSrYNWBs0yYCYHFKnB4pUbNZjU1KlUCgqalSrGFSpUqJh6elSrGI09KlWMKnFKlWMSp6VKsAcdKmvJpUqIAlUVUyBzVRdietKlTAQ3Uc1GM+0RSpUAlwqaUqVEBevSlSpUwD//2Q==" alt="App Banner" style="width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:24px; box-shadow:var(--shadow);">
   <h2 class="app-title" id="ad-title">App Name</h2>
   <div class="app-developer" id="ad-developer">by Unknown</div>
   <div style="margin-bottom: 24px;" id="ad-badges"></div>
   <p class="app-long-desc" id="ad-desc">Long description...</p>
+  
+  <div class="section-title-small" id="ad-screenshots-label">Screenshots</div>
+  <div class="app-screenshots" id="ad-screenshots"></div>
+  
+  <div class="section-title-small" id="ad-whatsnew-label">What's New</div>
+  <div class="app-changelog" id="ad-changelog"></div>
+
+  <div class="section-title-small" id="ad-features-label">Key Features</div>
   <ul class="app-features" id="ad-features"></ul>
   <button class="launch-btn" id="ad-launch">Launch App Workspace</button>
 </div>
@@ -218,10 +252,17 @@ th.sort-desc svg{transform:rotate(180deg)}
 <!-- Workspace Overlay -->
 <div class="workspace-overlay" id="workspace-overlay">
   <div class="workspace-header">
-    <div class="workspace-title" id="ws-title">Workspace - App Name</div>
+    <div class="workspace-logo">
+      <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="14,2 26,9 26,21 14,28 2,21 2,9" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
+      </svg>
+      <span class="ws-logo-name">Beacon</span>
+      <span class="ws-divider"></span>
+      <span class="workspace-title" id="ws-title">App Name</span>
+    </div>
     <div class="workspace-actions">
-      <a href="#" target="_blank" class="workspace-btn" id="ws-external">Open in New Tab</a>
-      <button class="workspace-btn close-btn" onclick="closeWorkspace()">Close Workspace</button>
+      <a href="#" target="_blank" class="workspace-btn" id="ws-external">Open in New Tab ↗</a>
+      <button class="workspace-btn close-btn" id="ws-back" onclick="closeWorkspace()">← Back to Beacon</button>
     </div>
   </div>
   <iframe class="workspace-iframe" id="ws-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
@@ -258,7 +299,56 @@ const i18n = {
     "AI & Multi-Model": "AI & Multi-Model",
     "Automation": "Automation",
     "Design & Image": "Design & Image",
-    "Video & Animation": "Video & Animation"
+    "Video & Animation": "Video & Animation",
+    "3D & Manufacturing": "3D & Manufacturing",
+    "3D Models & Elements": "3D Models & Elements",
+    "AI Terminal & Tasks": "AI Terminal & Tasks",
+    "Advanced Layouts": "Advanced Layouts",
+    "Animations": "Animations",
+    "Audio & Music": "Audio & Music",
+    "CSS Frameworks": "CSS Frameworks",
+    "Coding & Dev": "Coding & Dev",
+    "Component Libraries": "Component Libraries",
+    "Creative & Branding": "Creative & Branding",
+    "Dashboards": "Dashboards",
+    "E-Commerce & Merch": "E-Commerce & Merch",
+    "E-Commerce": "E-Commerce",
+    "Free AI APIs": "Free AI APIs",
+    "Free Chat (No Signup)": "Free Chat (No Signup)",
+    "Free Chat (Signup)": "Free Chat (Signup)",
+    "General Foundries": "General Foundries",
+    "Home & Interior": "Home & Interior",
+    "Icons & Symbols": "Icons & Symbols",
+    "Icons & Vectors": "Icons & Vectors",
+    "Illustrations": "Illustrations",
+    "Image & Video Gen": "Image & Video Gen",
+    "Job Boards & Remote": "Job Boards & Remote",
+    "Landing Pages": "Landing Pages",
+    "Learning & Productivity": "Learning & Productivity",
+    "Marketing & Sales": "Marketing & Sales",
+    "PDF & Documents": "PDF & Documents",
+    "Portfolios": "Portfolios",
+    "Premium Typefaces": "Premium Typefaces",
+    "Specialty & Display": "Specialty & Display",
+    "Stock Photography": "Stock Photography",
+    "Travel & Geography": "Travel & Geography",
+    "UI Elements": "UI Elements",
+    "Utilities": "Utilities",
+    "Video & Audio": "Video & Audio",
+    "Web Design": "Web Design",
+    "Webflow & Framer": "Webflow & Framer",
+    "Website & App Builders": "Website & App Builders",
+    screenshots: "Screenshots",
+    whatsNew: "What's New",
+    keyFeatures: "Key Features",
+    launchApp: "Launch App Workspace",
+    openNewTab: "Open in New Tab ↗",
+    backToBeacon: "← Back to Beacon",
+    timesAccessed: "times accessed",
+    launch: "Launch",
+    noRecentUpdates: "No recent updates.",
+    byPrefix: "by",
+    paid: "Paid"
   },
   es: {
     searchPlaceholder: "Buscar herramientas...",
@@ -287,7 +377,56 @@ const i18n = {
     "AI & Multi-Model": "IA y Multi-Modelos",
     "Automation": "Automatización",
     "Design & Image": "Diseño e Imagen",
-    "Video & Animation": "Video y Animación"
+    "Video & Animation": "Vídeo y Animación",
+    "3D & Manufacturing": "3D y Fabricación",
+    "3D Models & Elements": "Modelos 3D y Elementos",
+    "AI Terminal & Tasks": "Terminal IA y Tareas",
+    "Advanced Layouts": "Diseños Avanzados",
+    "Animations": "Animaciones",
+    "Audio & Music": "Audio y Música",
+    "CSS Frameworks": "Frameworks CSS",
+    "Coding & Dev": "Código y Desarrollo",
+    "Component Libraries": "Librerías de Componentes",
+    "Creative & Branding": "Creatividad y Marca",
+    "Dashboards": "Paneles de Control",
+    "E-Commerce & Merch": "E-Commerce y Merchandising",
+    "E-Commerce": "E-Commerce",
+    "Free AI APIs": "APIs de IA Gratuitas",
+    "Free Chat (No Signup)": "Chat Gratis (Sin Registro)",
+    "Free Chat (Signup)": "Chat Gratis (Con Registro)",
+    "General Foundries": "Fundiciones Generales",
+    "Home & Interior": "Hogar e Interiorismo",
+    "Icons & Symbols": "Iconos y Símbolos",
+    "Icons & Vectors": "Iconos y Vectores",
+    "Illustrations": "Ilustraciones",
+    "Image & Video Gen": "Generación de Imagen y Vídeo",
+    "Job Boards & Remote": "Bolsas de Trabajo y Remoto",
+    "Landing Pages": "Páginas de Aterrizaje",
+    "Learning & Productivity": "Aprendizaje y Productividad",
+    "Marketing & Sales": "Marketing y Ventas",
+    "PDF & Documents": "PDF y Documentos",
+    "Portfolios": "Portfolios",
+    "Premium Typefaces": "Tipografías Premium",
+    "Specialty & Display": "Especiales y Display",
+    "Stock Photography": "Fotografía de Stock",
+    "Travel & Geography": "Viajes y Geografía",
+    "UI Elements": "Elementos de UI",
+    "Utilities": "Utilidades",
+    "Video & Audio": "Vídeo y Audio",
+    "Web Design": "Diseño Web",
+    "Webflow & Framer": "Webflow y Framer",
+    "Website & App Builders": "Constructores de Web y Apps",
+    screenshots: "Capturas de Pantalla",
+    whatsNew: "Novedades",
+    keyFeatures: "Características Clave",
+    launchApp: "Abrir Espacio de Trabajo",
+    openNewTab: "Abrir en Nueva Pestaña ↗",
+    backToBeacon: "← Volver a Beacon",
+    timesAccessed: "veces accedido",
+    launch: "Abrir",
+    noRecentUpdates: "Sin actualizaciones recientes.",
+    byPrefix: "por",
+    paid: "De pago"
   },
   ca: {
     searchPlaceholder: "Cercar eines...",
@@ -316,12 +455,67 @@ const i18n = {
     "AI & Multi-Model": "IA i Multi-Models",
     "Automation": "Automatització",
     "Design & Image": "Disseny i Imatge",
-    "Video & Animation": "Vídeo i Animació"
+    "Video & Animation": "Vídeo i Animació",
+    "3D & Manufacturing": "3D i Fabricació",
+    "3D Models & Elements": "Models 3D i Elements",
+    "AI Terminal & Tasks": "Terminal IA i Tasques",
+    "Advanced Layouts": "Dissenys Avançats",
+    "Animations": "Animacions",
+    "Audio & Music": "Àudio i Música",
+    "CSS Frameworks": "Frameworks CSS",
+    "Coding & Dev": "Codi i Desenvolupament",
+    "Component Libraries": "Llibreries de Components",
+    "Creative & Branding": "Creativitat i Marca",
+    "Dashboards": "Taulers de Control",
+    "E-Commerce & Merch": "E-Commerce i Merchandising",
+    "E-Commerce": "E-Commerce",
+    "Free AI APIs": "APIs d'IA Gratuïtes",
+    "Free Chat (No Signup)": "Xat Gratuït (Sense Registre)",
+    "Free Chat (Signup)": "Xat Gratuït (Amb Registre)",
+    "General Foundries": "Foses Generals",
+    "Home & Interior": "Llar i Interiorisme",
+    "Icons & Symbols": "Icones i Símbols",
+    "Icons & Vectors": "Icones i Vectors",
+    "Illustrations": "Il·lustracions",
+    "Image & Video Gen": "Generació d'Imatge i Vídeo",
+    "Job Boards & Remote": "Borses de Treball i Remot",
+    "Landing Pages": "Pàgines d'Aterratge",
+    "Learning & Productivity": "Aprenentatge i Productivitat",
+    "Marketing & Sales": "Màrqueting i Vendes",
+    "PDF & Documents": "PDF i Documents",
+    "Portfolios": "Portfolis",
+    "Premium Typefaces": "Tipografies Premium",
+    "Specialty & Display": "Especials i Display",
+    "Stock Photography": "Fotografia d'Estoc",
+    "Travel & Geography": "Viatges i Geografia",
+    "UI Elements": "Elements de UI",
+    "Utilities": "Utilitats",
+    "Video & Audio": "Vídeo i Àudio",
+    "Web Design": "Disseny Web",
+    "Webflow & Framer": "Webflow i Framer",
+    "Website & App Builders": "Constructors de Web i Apps",
+    screenshots: "Captures de Pantalla",
+    whatsNew: "Novetats",
+    keyFeatures: "Característiques Clau",
+    launchApp: "Obrir Espai de Treball",
+    openNewTab: "Obrir en una Nova Pestanya ↗",
+    backToBeacon: "← Tornar a Beacon",
+    timesAccessed: "vegades accedit",
+    launch: "Obrir",
+    noRecentUpdates: "Sense actualitzacions recents.",
+    byPrefix: "per",
+    paid: "De pagament"
   }
 };
 
 let currentLang = localStorage.getItem('site_lang') || 'en';
 function t(key) { return i18n[currentLang] && i18n[currentLang][key] ? i18n[currentLang][key] : (i18n['en'][key] || key); }
+
+function tDesc(tool) {
+  if (currentLang === 'es' && tool.desc_es) return tool.desc_es;
+  if (currentLang === 'ca' && tool.desc_ca) return tool.desc_ca;
+  return tool.description;
+}
 
 function applyStaticTranslations() {
   document.getElementById('search').placeholder = t('searchPlaceholder');
@@ -329,6 +523,14 @@ function applyStaticTranslations() {
   document.querySelector('[data-price="All"]').textContent = t('all');
   document.querySelector('[data-price="Free"]').textContent = t('free');
   document.querySelector('[data-price="Freemium"]').textContent = t('freemium');
+  // Panel & workspace strings
+  const el = id => document.getElementById(id);
+  if (el('ad-screenshots-label')) el('ad-screenshots-label').textContent = t('screenshots');
+  if (el('ad-whatsnew-label')) el('ad-whatsnew-label').textContent = t('whatsNew');
+  if (el('ad-features-label')) el('ad-features-label').textContent = t('keyFeatures');
+  if (el('ad-launch')) el('ad-launch').textContent = t('launchApp');
+  if (el('ws-external')) el('ws-external').textContent = t('openNewTab');
+  if (el('ws-back')) el('ws-back').textContent = t('backToBeacon');
   const ths = document.querySelectorAll('.th-txt');
   if (ths.length === 4) {
     ths[0].textContent = t('website');
@@ -337,6 +539,732 @@ function applyStaticTranslations() {
     ths[3].textContent = t('pricing');
   }
 }
+
+const BEACON_DESC_ES = {
+  "abacus.ai/chatllm": "Cree agentes de IA personalizados, implemente flujos de trabajo y escriba c\u00f3digo sin problemas.",
+  "chatplayground.ai": "Compare y charle con m\u00faltiples modelos premium de IA simult\u00e1neamente.",
+  "aithor.com": "Asistente de redacci\u00f3n acad\u00e9mica y ensayos de IA con generaci\u00f3n indetectable.",
+  "mathgpt.ai": "Cargue problemas matem\u00e1ticos y obtenga soluciones de IA detalladas paso a paso.",
+  "schoolgoat.com": "Solucionador instant\u00e1neo de problemas de tareas dise\u00f1ado espec\u00edficamente para estudiantes.",
+  "nbi.ai": "Plataforma avanzada de an\u00e1lisis de datos que convierte n\u00fameros brutos en conocimientos.",
+  "mindgrasp.ai": "Convierta materiales de estudio y conferencias en mapas mentales interactivos de IA.",
+  "napkin.ai": "Transforme instant\u00e1neamente su texto en atractivos gr\u00e1ficos visuales.",
+  "summarybox.com": "Resuma art\u00edculos extensos y extraiga conceptos centrales en segundos.",
+  "shepherd.study": "Toma de notas de conferencias impulsada por IA y asistente de estudio personalizado.",
+  "adsdog.ai": "Plataforma de creaci\u00f3n de anuncios automatizada para creatividades con alta conversi\u00f3n.",
+  "ai-toolbox.co": "Un directorio completo y una colecci\u00f3n de utilidades de IA especializadas.",
+  "backpackbot.ai": "Su asistente personal de investigaci\u00f3n de IA para organizar datos complejos.",
+  "bigteam.ai": "Cree un equipo empresarial virtual completo utilizando agentes de IA especializados.",
+  "blaze.ai": "Suite de creaci\u00f3n de contenido de IA todo en uno dise\u00f1ada para especialistas en marketing.",
+  "browsercopilot.ai": "Asistente de navegador en l\u00ednea para escritura, edici\u00f3n y extracci\u00f3n de datos instant\u00e1neas.",
+  "copycopter.ai": "Motor de redacci\u00f3n publicitaria con IA de alta conversi\u00f3n para anuncios y p\u00e1ginas de destino.",
+  "edenx.ai": "Asistente creativo de IA vers\u00e1til para una generaci\u00f3n de contenido fluida.",
+  "socialbu.com": "Automatiza, planifica y optimiza campa\u00f1as masivas en redes sociales.",
+  "socialsonic.com": "Genere publicaciones virales y profesionales en LinkedIn a partir de indicaciones simples.",
+  "notebooklm.google.com": "Cargue sus documentos y deje que la IA responda preguntas bas\u00e1ndose \u00fanicamente en ellos.",
+  "perplexity.ai": "Motor de b\u00fasqueda conversacional de IA que ofrece respuestas citadas en tiempo real.",
+  "julius.ai": "Conecte los datos de su hoja de c\u00e1lculo y deje que la IA act\u00fae como su analista personal.",
+  "wisprflow.ai": "Herramienta de dictado contextual que formatea tu voz perfectamente.",
+  "higgsfield.ai": "Estudio profesional de creaci\u00f3n de videos impulsado por IA para producci\u00f3n de alto nivel.",
+  "elicit.com": "Analice y extraiga datos de millones de art\u00edculos de investigaci\u00f3n acad\u00e9mica.",
+  "consensus.app": "Motor de b\u00fasqueda que extrae espec\u00edficamente conocimientos de investigaciones cient\u00edficas.",
+  "explainpaper.com": "Resalte textos acad\u00e9micos confusos y reciba explicaciones sencillas.",
+  "make.com": "Potente plataforma visual sin c\u00f3digo para automatizar tareas en miles de aplicaciones.",
+  "freepik.com/ai": "Motor de IA integrado para generar fotograf\u00edas e ilustraciones de archivo \u00fanicas.",
+  "krea.ai": "Lienzo de IA en tiempo real para edici\u00f3n de generaci\u00f3n de im\u00e1genes y videos en vivo.",
+  "playgroundai.com": "Lienzo de IA vers\u00e1til que proporciona un control preciso sobre la generaci\u00f3n de arte.",
+  "recraft.ai": "Genere vectores SVG e \u00edconos 3D infinitamente escalables.",
+  "logodiffusion.com": "Dibuja bocetos personalizados y observa c\u00f3mo la IA los transforma en logotipos limpios.",
+  "stockimg.ai": "Genere fondos de pantalla personalizados, portadas de libros e im\u00e1genes de archivo.",
+  "kittl.com": "Suite de dise\u00f1o moderno con herramientas de inteligencia artificial dise\u00f1adas para dise\u00f1adores gr\u00e1ficos.",
+  "insmind.com": "Edici\u00f3n avanzada de fotograf\u00edas con IA centrada en la mejora de retratos.",
+  "picwish.com": "Desenfoque im\u00e1genes r\u00e1pidamente y elimine fondos con precisi\u00f3n de IA.",
+  "promeai.pro": "Transforme bocetos arquitect\u00f3nicos y modelos 3D en renderizados fotorrealistas.",
+  "en.eagle.cool": "Organice, etiquete y explore su enorme biblioteca de recursos de dise\u00f1o visual.",
+  "jitter.video": "Cree animaciones de interfaz de usuario y gr\u00e1ficos en movimiento profesionales y fluidos.",
+  "lordicon.com": "Amplia biblioteca de \u00edconos animados de Lottie altamente personalizables.",
+  "eyecannndy.com": "Enorme dep\u00f3sito de plantillas de efectos visuales virales y t\u00e9cnicas creativas.",
+  "inkarnate.com": "Crea impresionantes mapas de fantas\u00eda muy detallados para la construcci\u00f3n de mundos.",
+  "nvidia.com/en-us/studio/canvas": "Pinta formas simples y haz que la IA las transforme en paisajes realistas.",
+  "artflow.ai": "Genera personajes persistentes y col\u00f3calos en escenas animadas.",
+  "faceswapper.ai": "Intercambia caras sin problemas en fotos y v\u00eddeos manteniendo una iluminaci\u00f3n realista.",
+  "piccopilot.com": "Generar puesta en escena y fotograf\u00eda profesional de productos de comercio electr\u00f3nico.",
+  "pacdora.com": "Cree maquetas de empaques 3D personalizadas directamente en su navegador.",
+  "design.com": "Herramienta de identidad de marca todo en uno para generar logotipos y tarjetas de presentaci\u00f3n.",
+  "canva.com": "Plataforma de dise\u00f1o colaborativo est\u00e1ndar de la industria para gr\u00e1ficos modernos.",
+  "leonardo.ai": "Suite de generaci\u00f3n de IA altamente vers\u00e1til dise\u00f1ada espec\u00edficamente para recursos de juegos.",
+  "ideogram.ai": "Genere im\u00e1genes de alta calidad con texto interno perfectamente renderizado.",
+  "magnific.ai": "Mejorador de im\u00e1genes m\u00e1gico de IA que alucina impresionantes detalles faltantes.",
+  "remove.bg": "La herramienta confiable de referencia para eliminar fondos de im\u00e1genes al instante.",
+  "squoosh.app": "Herramienta basada en navegador para ajustar la compresi\u00f3n y los formatos de im\u00e1genes.",
+  "lumalabs.ai/dream-machine": "Modelo de IA de alta fidelidad para convertir im\u00e1genes est\u00e1ticas en v\u00eddeo din\u00e1mico.",
+  "kling.ai": "Genere videos en movimiento fotorrealistas o estilizados directamente a partir del texto.",
+  "pixverse.ai": "Plataforma de IA accesible para generar animaciones y B-roll creativos.",
+  "hailuoai.video": "Motor de IA avanzado que se centra en producir movimientos humanos muy realistas.",
+  "hedra.com": "Transforme fotograf\u00edas faciales est\u00e1ticas en avatares expresivos y parlantes.",
+  "invideo.io": "Cree instant\u00e1neamente cortos y carretes profesionales de YouTube a partir de un mensaje de texto.",
+  "magichour.ai": "Aplique filtros visuales estilizados para alterar completamente la apariencia del video.",
+  "instableep.com": "Detecta y emite autom\u00e1ticamente un pitido de malas palabras en tus v\u00eddeos subidos.",
+  "clipshort.co": "Divida autom\u00e1ticamente los podcasts de formato largo en clips verticales virales.",
+  "clipgoat.com": "Estructura grabaciones de v\u00eddeo sin procesar en cursos educativos totalmente segmentados.",
+  "ssemble.com": "Editor de v\u00eddeo basado en navegador que ofrece un conjunto de complementos inteligentes.",
+  "podcastle.ai": "Plataforma de grabaci\u00f3n de podcasts con calidad de estudio con eliminaci\u00f3n de ruido impulsada por IA.",
+  "dupdub.com": "Sincronice perfectamente el audio con fotograf\u00edas faciales para obtener v\u00eddeos realistas de cabezas parlantes.",
+  "sketch.metademolab.com": "Cargue el dibujo de un ni\u00f1o y observe c\u00f3mo la IA anima autom\u00e1ticamente sus extremidades.",
+  "phase.com": "Herramienta de dise\u00f1o de movimiento de interfaz de usuario interactiva dise\u00f1ada para dise\u00f1adores web y de aplicaciones.",
+  "alpha.genmo.ai": "Anima elementos est\u00e1ticos dentro de im\u00e1genes en fascinantes videos en bucle.",
+  "apob.ai": "Genere videos de mensajes personalizados en masa utilizando avatares de IA personalizados.",
+  "hautech.ai": "Motor de moda de IA dise\u00f1ado para generar sesiones de fotos de prendas impecables.",
+  "democreator.wondershare.com": "Grabador de pantalla todo en uno que ofrece potentes funciones de edici\u00f3n de tutoriales.",
+  "filmora.wondershare.com": "Editor de v\u00eddeo de escritorio para consumidores cargado con herramientas de mejora de IA.",
+  "runwayml.com": "La suite de IA creativa de \u00e9lite que impulsa el futuro de la generaci\u00f3n cinematogr\u00e1fica.",
+  "pika.art": "Plataforma de creaci\u00f3n de v\u00eddeos basada en mensajes famosa por sus impresionantes resultados estilizados.",
+  "10web.io": "Creador de sitios web automatizado de WordPress AI que proporciona alojamiento integrado.",
+  "durable.co": "Genere un sitio web comercial completamente dise\u00f1ado al instante desde un mensaje.",
+  "softgen.ai": "Construya f\u00e1cilmente aplicaciones web funcionales sin escribir c\u00f3digo.",
+  "relume.io": "Genere arquitectura y estructuras al\u00e1mbricas de sitios web complejos utilizando IA.",
+  "gamma.app": "Genere presentaciones y presentaciones magn\u00edficas e interactivas al instante.",
+  "plusdocs.com": "Generador de diapositivas AI nativo perfectamente integrado en Google Slides.",
+  "slideteam.net": "Biblioteca masiva de plantillas profesionales combinadas con un motor de diapositivas de IA.",
+  "co.dev": "Interfaz conversacional que le permite crear software en ingl\u00e9s sencillo.",
+  "dora.run": "Dise\u00f1e impresionantes sitios web animados en 3D utilizando un editor de nodos intuitivo.",
+  "chatbase.co": "Entrene un chatbot de soporte personalizado con sus datos e ins\u00e9rtelo en su sitio.",
+  "replit.com": "Entorno de codificaci\u00f3n en l\u00ednea mejorado con un agente de IA incre\u00edblemente capaz.",
+  "bolt.new": "Genere, ejecute y aloje aplicaciones web completas y completas en el navegador.",
+  "lovable.dev": "Cree interfaces web incre\u00edblemente pulidas simplemente describi\u00e9ndolas.",
+  "v0.dev": "La poderosa herramienta de Vercel que convierte ideas de UI en c\u00f3digo React/Tailwind perfecto.",
+  "codeium.com": "Extensi\u00f3n alternativa gratuita de gran capacidad para completar c\u00f3digo AI.",
+  "coddy.tech": "Cursos de codificaci\u00f3n interactivos dise\u00f1ados centr\u00e1ndose \u00edntegramente en ejercicios pr\u00e1cticos.",
+  "leetcodewizard.io": "Compa\u00f1ero de IA que lo asiste directamente durante entrevistas con algoritmos complejos.",
+  "roadmap.sh": "Mapas de aprendizaje visuales impulsados \u200b\u200bpor la comunidad para cada carrera profesional en software.",
+  "hackertyper.net": "Combina claves para simular la escritura de c\u00f3digo complejo como un hacker de pel\u00edculas.",
+  "explorer.globe.engineer": "Divida visualmente la arquitectura del sistema en temas interactivos y explorables.",
+  "github.com/features/copilot": "El programador de pares de IA est\u00e1ndar de la industria profundamente integrado en Git.",
+  "cursor.com": "El principal editor de c\u00f3digo basado en IA que combina una experiencia de usuario familiar con inteligencia extrema.",
+  "lightpdf.com": "Chatea directamente con tus archivos PDF cargados para consultar informaci\u00f3n al instante.",
+  "hipdf.com": "Conjunto completo de herramientas de navegador confiables para comprimir y dividir archivos PDF.",
+  "simplepdf.eu": "Editor de navegador limpio y respetuoso con la privacidad para completar y firmar formularios.",
+  "scribehow.com": "Genera autom\u00e1ticamente documentaci\u00f3n paso a paso con solo registrar sus clics.",
+  "nodsgy.com": "Convierte documentos PDF densos y complejos en diagramas de flujo visuales claros.",
+  "sobrief.com": "Obtenga res\u00famenes de texto y audio concisos para casi cualquier libro publicado.",
+  "pdf.wondershare.com": "S\u00f3lido modificador de PDF de escritorio con utilidades de resumen de IA integradas.",
+  "flowvoice.ai": "Dicte pensamientos largos y haga que la IA los formatee en p\u00e1rrafos perfectos.",
+  "castmagic.io": "Transforme podcasts de audio de una hora de duraci\u00f3n en textos de marketing escritos muy atractivos.",
+  "spellar.ai": "Cliente de reuniones automatizado que proporciona transcripciones y res\u00famenes en tiempo real.",
+  "meeting.ai": "Grabe reuniones digitales y genere instant\u00e1neamente tareas de seguimiento procesables.",
+  "tempolor.com": "Sugiere de forma inteligente pistas musicales similares basadas en tempos espec\u00edficos.",
+  "radio.garden": "Explora y escucha miles de transmisiones de radio en vivo distribuidas en un globo terr\u00e1queo 3D.",
+  "collov.ai": "Cargue una foto de una habitaci\u00f3n desnuda y genere ideas de dise\u00f1o de interiores completamente renderizadas.",
+  "home.by.me": "Elabora planos de planta precisos y visualiza tu futuro hogar en 3D.",
+  "homedesigns.ai": "Cambie instant\u00e1neamente el estilo de los muebles y habitaciones existentes con temas dram\u00e1ticamente nuevos.",
+  "layla.ai": "Charle con un agente de viajes de IA para crear itinerarios personalizados y altamente personalizados.",
+  "map-this.com": "Traduce materiales de estudio densos y datos geogr\u00e1ficos en itinerarios mapeados.",
+  "flightaware.com": "El recurso definitivo para el seguimiento integral de vuelos globales en vivo.",
+  "geo-fs.com": "Simulador de vuelo multijugador gratuito basado en navegador que abarca todo el mundo.",
+  "slowroads.io": "Carreteras virtuales infinitas generadas por procedimientos y dise\u00f1adas espec\u00edficamente para una conducci\u00f3n relajada.",
+  "thetruesize.com": "Una herramienta de mapas interactivos que explora la escala real y no distorsionada de los pa\u00edses.",
+  "lostgamer.io": "Juego de adivinanzas geogr\u00e1ficas que pone a prueba tu conocimiento de la ubicaci\u00f3n en los videojuegos.",
+  "learn-anything.xyz": "Un cat\u00e1logo comunitario abierto que traza los caminos \u00f3ptimos para dominar cualquier tema espec\u00edfico.",
+  "gitmind.com": "Motor de lluvia de ideas colaborativo mejorado con IA para estructurar ideas complejas.",
+  "edraw.ai": "Crea instant\u00e1neamente mapas mentales visuales y diagramas de flujo a partir de indicaciones de texto b\u00e1sicas.",
+  "edrawmax.wondershare.com": "Herramienta de diagramaci\u00f3n vers\u00e1til y multiuso que rivaliza con el software profesional est\u00e1ndar.",
+  "edrawsoft.com/edrawmind": "Software de mapas mentales independiente que incorpora conceptos modernos de generaci\u00f3n de IA.",
+  "entertain.ed.app": "Plataforma educativa enfocada \u00edntegramente a mejorar la pr\u00e1ctica de la comprensi\u00f3n lectora.",
+  "openlibrary.org": "Base de datos p\u00fablica masiva que proporciona acceso universal gratuito a millones de libros digitales.",
+  "musclewiki.com": "Haga clic en cualquier m\u00fasculo en un diagrama del cuerpo humano para recibir videos completos de ejercicios.",
+  "supercook.com": "Ingrese los ingredientes que se encuentran actualmente en su refrigerador para descubrir recetas que combinen.",
+  "namesnack.com": "Genere nombres de marcas atractivos y disponibles bas\u00e1ndose en palabras clave espec\u00edficas de la industria.",
+  "keyboardsimulator.xyz": "Personalice y pruebe complejos perfiles de sonido del teclado mec\u00e1nico a trav\u00e9s del simulador de navegador.",
+  "retrogames.onl": "Un archivo enorme y perfectamente emulado que te permite jugar juegos retro cl\u00e1sicos directamente en el navegador.",
+  "media.io": "Conjunto completo de conversores de formato de audio y v\u00eddeo nativos del navegador.",
+  "recoverit.wondershare.com": "Software de alta resistencia dise\u00f1ado espec\u00edficamente para recuperar archivos profundos eliminados permanentemente.",
+  "tinywow.com": "Cientos de microherramientas completamente gratuitas que abordan manipulaciones comunes de PDF, v\u00eddeos e im\u00e1genes.",
+  "govdeals.com": "Plataforma de subasta p\u00fablica que vende propiedades excedentes del gobierno local con grandes descuentos.",
+  "myretrotvs.com": "Un proyecto de navegador incre\u00edblemente nost\u00e1lgico que simula transmisiones de televisi\u00f3n antiguas secuencialmente por d\u00e9cada.",
+  "graphy.app": "Transforme los aburridos n\u00fameros de las hojas de c\u00e1lculo en gr\u00e1ficos web impresionantes, interactivos y vibrantes.",
+  "meshy.ai": "Un modelo generativo de vanguardia que construye r\u00e1pidamente modelos 3D completamente texturizados a partir de simples indicaciones de texto.",
+  "skybox.blockadelabs.com": "Simplemente dibuje dise\u00f1os simples y observe c\u00f3mo la IA sintetiza entornos masivos y cohesivos de 360 \u200b\u200bgrados.",
+  "rxresu.me": "Una utilidad de creaci\u00f3n de curr\u00edculums completamente gratuita, respetuosa con la privacidad y profundamente personalizable.",
+  "kickresume.com": "Una plataforma de generaci\u00f3n autom\u00e1tica de curr\u00edculums que emplea modelos de lenguaje para elaborar vi\u00f1etas hiperprofesionales.",
+  "shopyourtv.com": "Una base de datos altamente espec\u00edfica que identifica los conjuntos de vestuario precisos que aparecen en tus programas favoritos.",
+  "startmycar.com": "Una base de datos completa que alberga extensos manuales t\u00e9cnicos, diagramas de cajas de fusibles y gu\u00edas de luces de advertencia para autom\u00f3viles.",
+  "bricklink.com/v3/studio": "El motor sandbox digital robusto y definitivo para construir, renderizar y comprar modelos LEGO extremos.",
+  "tjukanovt.github.io/notable-people": "Un globo interactivo que mapea visualmente los lugares de nacimiento expl\u00edcitos de las figuras hist\u00f3ricamente m\u00e1s significativas de la Tierra.",
+  "printify.com": "Una enorme infraestructura de env\u00edo directo que le permite adjuntar dise\u00f1os personalizados a cientos de productos f\u00edsicos en blanco.",
+  "aicomicfactory.com": "Proporcione un concepto de historia corta simple y proc\u00e9selo hasta convertirlo en una tira c\u00f3mica estil\u00edsticamente coherente y con paneles completos.",
+  "drfone.wondershare.com": "Un denso conjunto de utilidades centrado exclusivamente en facilitar copias de seguridad de datos dif\u00edciles de tel\u00e9fonos inteligentes y transferencias delicadas entre plataformas.",
+  "carcarekiosk.com": "Una biblioteca muy valiosa que consta de v\u00eddeos de instrucciones de mantenimiento de veh\u00edculos breves, espec\u00edficos y precisos para el modelo.",
+  "atlas.org": "Un s\u00f3lido proyecto de visualizaci\u00f3n de datos macrosc\u00f3picos dise\u00f1ado para analizar redes comerciales globales inmensamente complejas.",
+  "temp-mail.org": "Genera una bandeja de entrada de correo electr\u00f3nico totalmente an\u00f3nima y altamente desechable que evita el spam asociado con registros obligatorios.",
+  "haveibeenpwned.com": "La base de datos autorizada verifica de manera confiable sus direcciones de correo electr\u00f3nico contra violaciones de datos hist\u00f3ricas reconocidas a nivel mundial.",
+  "web.archive.org": "La biblioteca fundamental de Internet, que captura constantemente y preserva hist\u00f3ricamente la vida \u00fatil de miles de millones de p\u00e1ginas web distintas.",
+  "lmarena.ai": "Un campo de pruebas a ciegas que enfrenta modelos fundamentales de primer nivel entre s\u00ed simult\u00e1neamente.",
+  "g4f.dev": "Un impresionante agregador de c\u00f3digo abierto que ofrece acceso conversacional a m\u00e1s de 200 modelos distintos de IA premium y boutique.",
+  "meta.ai": "La principal interfaz de consumidor de Meta, que proporciona acceso r\u00e1pido y sin restricciones directamente a los incre\u00edblemente robustos modelos arquitect\u00f3nicos de Llama.",
+  "sur.pollinations.ai": "Una interfaz sorprendentemente fluida y sencilla que permite conversaciones sin fricciones que abarcan m\u00faltiples modelos de backend.",
+  "deepinfra.com/chat": "Un \u00e1rea de juegos para desarrolladores altamente especializada que permite la verificaci\u00f3n conversacional instant\u00e1nea de modelos de c\u00f3digo abierto como DeepSeek y Qwen.",
+  "mirexa.vercel.app": "Un contenedor de interfaz personalizado, elegante y liviano que desbloquea un acceso web simple a API premium como GPT-4 e instancias de DeepSeek espec\u00edficas.",
+  "umint-ai.hf.space": "Un nodo HuggingFace alojado en la comunidad que ofrece espec\u00edficamente interacciones conversacionales sin procesar para modelos como Grok y versiones expansivas de DeepSeek.",
+  "sharedchat.cn": "Un grupo de recursos compartidos alojado internacionalmente que intenta distribuir continuamente y abiertamente el acceso restringido premium GPT-4.",
+  "aichatgptfree.org": "Un sitio dedicado y altamente optimizado dise\u00f1ado espec\u00edficamente para brindar acceso completamente ilimitado a interacciones avanzadas basadas en GPT.",
+  "copilot.microsoft.com": "El ecosistema compa\u00f1ero profundamente integrado de Microsoft, impulsado de forma nativa por las \u00faltimas y m\u00e1s avanzadas iteraciones de la tecnolog\u00eda OpenAI.",
+  "groq.com": "Un motor de inferencia sorprendentemente r\u00e1pido dise\u00f1ado expl\u00edcitamente en torno a hardware LPU patentado, que genera cientos de tokens inteligentes por segundo.",
+  "chatjimmy.ai": "Una demostraci\u00f3n experimental de hardware de inteligencia artificial de ultra alta velocidad, que genera texto a una asombrosa velocidad de m\u00e1s de 15\u00a0000 tokens por segundo.",
+  "heck.ai": "Una plataforma multiprop\u00f3sito optimizada que alterna r\u00e1pidamente conexiones dirigidas espec\u00edficamente a instancias r\u00e1pidas de DeepSeek y las redes Gemini de Google.",
+  "link.fuckicoding.com": "Un proxy de soluci\u00f3n agresiva dise\u00f1ado espec\u00edficamente para eludir los l\u00edmites generales de API y al mismo tiempo mostrar instancias capaces de subconjuntos de Claude y GPT.",
+  "pi.ai": "Un compa\u00f1ero de conversaci\u00f3n \u00edntimamente sintonizado y centrado expl\u00edcitamente en brindar un di\u00e1logo de ida y vuelta altamente emp\u00e1tico y de apoyo emocional.",
+  "origin.eqing.tech": "Una puerta de enlace de servicio autenticada pero generosa que presenta integraciones conversacionales directas que vinculan los principales modelos de la industria como GPT-4o y las iteraciones avanzadas de Claude.",
+  "lobechat.com": "Un marco web y de escritorio de c\u00f3digo abierto robusto y con todas las funciones que admite de manera \u00fanica redes masivas de complementos y, al mismo tiempo, enruta modelos de alta capacidad.",
+  "yupp.ai": "Una potencia organizacional que recopila espec\u00edficamente acceso, mecanismos de activaci\u00f3n y experiencias de usuario en un conjunto de m\u00e1s de 200 redes de IA diferentes.",
+  "chat.deepseek.com": "La puerta de enlace oficial orientada al consumidor que proporciona acceso expl\u00edcito y de alta prioridad espec\u00edficamente a estructuras de razonamiento incre\u00edblemente complejas a trav\u00e9s de DeepSeek R1 y Coder.",
+  "huggingface.co/spaces": "Un recurso absolutamente fundamental que permite a toda la comunidad de aprendizaje autom\u00e1tico experimentar libremente con prototipos funcionales de \u00faltima generaci\u00f3n e implementaciones de modelos abiertos.",
+  "kimi.com": "Un asistente excepcionalmente capaz y profundamente especializado en la ejecuci\u00f3n de an\u00e1lisis de documentos complejos y de contexto prolongado y en la gesti\u00f3n de memorias operativas continuas masivas.",
+  "warp.dev": "Una terminal muy modernizada escrita \u00edntegramente en Rust, que integra fundamentalmente inteligencia generativa directamente en metodolog\u00edas de interfaz de l\u00ednea de comandos.",
+  "goblin.tools": "Una suite accesible y notablemente optimizada que utiliza inteligencia \u00fanicamente para atomizar funciones ejecutivas abrumadoras en listas de verificaci\u00f3n diarias de tama\u00f1o reducido y altamente manejables.",
+  "ai.google.dev": "El portal de desarrollo directo de Google que proporciona a los ingenieros de software acceso program\u00e1tico totalmente gratuito y masivamente escalable dirigido expl\u00edcitamente a la compleja arquitectura Gemini.",
+  "llm7.io": "Un centro de intercambio de informaci\u00f3n de API optimizado que consolida eficazmente el acceso de los desarrolladores a trav\u00e9s de una vertiginosa variedad que comprende m\u00e1s de treinta proveedores de inteligencia distintos en puntos finales singulares.",
+  "uncloseai.com": "Una infraestructura altamente especializada que imita deliberadamente el formato exacto de las estructuras est\u00e1ndar de OpenAI para otorgar r\u00e1pidamente acceso ilimitado a modelos de la competencia sin problemas.",
+  "g4f.dev/docs": "La documentaci\u00f3n t\u00e9cnica completa que define estrictamente c\u00f3mo los ingenieros deben montar, consultar y mantener con precisi\u00f3n rutas automatizadas utilizando la enorme red de agregadores G4F.",
+  "developer.puter.com": "Un entorno operativo web experimental, completamente sin servidor, que inyecta de forma nativa capacidades multimodales que eliminan por completo la necesidad de flujos de autenticaci\u00f3n internos complejos.",
+  "phind.com": "Un motor de b\u00fasqueda incre\u00edblemente sofisticado, dise\u00f1ado exhaustivamente y calibrado agresivamente expl\u00edcitamente para ayudar a los desarrolladores de software a desentra\u00f1ar paradigmas t\u00e9cnicos complicados de manera eficiente.",
+  "pollinations.ai": "Un portal frontal completamente fluido que utiliza en gran medida arquitecturas de difusi\u00f3n latente que permite a los consumidores crear r\u00e1pidamente prototipos de conceptos complejos visualmente generativos sin restricciones.",
+  "vheer.com": "Un generador de activos generativos minimalista e hiperenfocado construido estrictamente en torno a la producci\u00f3n de im\u00e1genes fundamentales altamente estilizadas e inherentemente limpias dirigidas a aplicaciones est\u00e9ticas modernas.",
+  "perchance.org/wtr90dexsn": "Un motor de conversi\u00f3n de texto a im\u00e1genes excepcionalmente \u00fanico, muy aleatorio y sin restricciones que se basa constantemente fundamentalmente en mec\u00e1nicas estructurales de c\u00f3digo abierto.",
+  "bing.com/images/create": "La herramienta de consumo profundamente integrada de Microsoft que canaliza solicitudes de generaci\u00f3n extremadamente s\u00f3lidas y completamente sin modificaciones de forma segura a trav\u00e9s de la formidable red DALL-E 3 de OpenAI.",
+  "n8n.io": "Una suite de automatizaci\u00f3n de flujo de trabajo visual de c\u00f3digo abierto tremendamente poderosa que facilita profundamente las conexiones arquitect\u00f3nicas expl\u00edcitas que cruzan perfectamente los nodos de inteligencia.",
+  "awwwards.com": "El punto de referencia mundialmente reconocido que premia el dise\u00f1o digital de \u00e9lite y un incre\u00edble desarrollo web front-end.",
+  "mobbin.com": "Una biblioteca enormemente completa y con capacidad de b\u00fasqueda que consta en su totalidad de patrones de interfaz de usuario web y m\u00f3viles aut\u00e9nticos, meticulosamente capturados.",
+  "godly.website": "Una colecci\u00f3n asombrosamente seleccionada que muestra exclusivamente el pin\u00e1culo absoluto de los dise\u00f1os de dise\u00f1o web animados de \u00faltima generaci\u00f3n.",
+  "lapaninja.com": "Un repositorio denso que se centra en gran medida directamente en una arquitectura de p\u00e1gina de destino moderna, extremadamente hermosa y altamente eficaz.",
+  "siteinspire.com": "Una galer\u00eda claramente categorizada que destaca filosof\u00edas de dise\u00f1o interactivo minimalistas y extremadamente refinadas basadas en cuadr\u00edculas.",
+  "maxibestof.one": "Una selecci\u00f3n r\u00e1pida e hipercurada que presenta plantillas web responsivas extraordinariamente llamativas y modernas.",
+  "pageflows.com": "Una colecci\u00f3n masiva dedicada expl\u00edcitamente a registrar, analizar y estructurar flujos perfectos de incorporaci\u00f3n de usuarios.",
+  "curated.design": "Un recurso ampliamente catalogado que destaca elementos de interfaz extremadamente pulidos y dise\u00f1os de aplicaciones completos.",
+  "dribbble.com": "La plataforma comunitaria est\u00e1ndar de la industria creada expl\u00edcitamente en su totalidad para descubrir creatividades visuales y en movimiento de primer nivel.",
+  "behance.net": "La gigantesca red creativa de Adobe que muestra de forma nativa impresionantes carteras de ilustraciones y marcas profesionales.",
+  "savee.it": "Una alternativa a Pinterest distintivamente elegante, dise\u00f1ada expl\u00edcitamente para organizar a la perfecci\u00f3n paneles de estado de \u00e1nimo en bruto y sin desorden.",
+  "muz.li": "Una extensi\u00f3n de navegador muy optimizada que muestra continuamente agregaciones masivas de fuentes diarias de inspiraci\u00f3n de dise\u00f1o.",
+  "creativeboom.com": "Una revista digital aclamada internacionalmente que publica constantemente fotograf\u00edas y arte muy inspiradores.",
+  "ui-patterns.com": "Una base de datos s\u00f3lida y estructurada sistem\u00e1ticamente que categoriza activamente soluciones psicol\u00f3gicas recurrentes dirigidas a problemas de interfaz.",
+  "uigarage.net": "Un repositorio actualizado diariamente que recopila espec\u00edficamente men\u00fas de navegaci\u00f3n complejos, pies de p\u00e1gina y elementos granulares de la interfaz de usuario.",
+  "darkmodedesign.com": "Una galer\u00eda especializada enteramente dedicada exclusivamente a interfaces de modo oscuro maravillosamente ejecutadas e inherentemente con mucho contraste.",
+  "saaslandingpage.com": "Un archivo incre\u00edblemente enfocado que recopila expl\u00edcitamente p\u00e1ginas de destino SaaS densamente dise\u00f1adas y de alta conversi\u00f3n.",
+  "footer.design": "Una galer\u00eda profundamente enfocada que recopila espec\u00edficamente pies de p\u00e1gina de sitios web con una estructura \u00fanica y un dise\u00f1o impecable.",
+  "ui.shadcn.com": "Una biblioteca de componentes fundamentales tremendamente popular, sin estilo y completamente accesible que aprovecha en gran medida la estricta arquitectura Tailwind.",
+  "radix-ui.com": "Una colecci\u00f3n sin opiniones que suministra a la perfecci\u00f3n componentes primitivos y muy accesibles que impulsan fundamentalmente estructuras modernas y complejas.",
+  "chakra-ui.com": "Un marco React claramente modular y ampliamente accesible, inherentemente optimizado exclusivamente para una velocidad de desarrollo masiva.",
+  "mantine.dev": "Un marco React densamente empaquetado que ofrece cientos de ganchos construidos por expertos junto con interfaces altamente funcionales.",
+  "mui.com": "El marco React monol\u00edtico y est\u00e1ndar de la industria implementa masivamente las complejas pautas de Material Design de Google de manera impecable.",
+  "nextui.org": "Una biblioteca de interfaz de usuario bellamente optimizada dise\u00f1ada expl\u00edcitamente para renderizar componentes fundamentalmente hermosos de manera incre\u00edblemente r\u00e1pida.",
+  "daisyui.com": "Un complemento Tailwind absurdamente popular y completamente gratuito que reduce dr\u00e1sticamente la hinchaz\u00f3n masiva de HTML a trav\u00e9s de clases de utilidad sem\u00e1nticas.",
+  "flowbite.com": "Una biblioteca robusta de c\u00f3digo abierto que ensambla agresivamente interfaces altamente funcionales completamente a trav\u00e9s de estrictas convenciones de Tailwind.",
+  "headlessui.com": "Una colecci\u00f3n que enfatiza expl\u00edcitamente elementos de interfaz de usuario completamente sin estilo y perfectamente accesibles dise\u00f1ados directamente por los laboratorios Tailwind.",
+  "framer.com/motion": "Un motor de animaci\u00f3n listo para producci\u00f3n que ofrece de forma nativa interacciones de movimiento complejas y extraordinariamente fluidas exclusivamente para los componentes de React.",
+  "gsap.com": "Una plataforma de ejecuci\u00f3n de JavaScript legendaria y extremadamente robusta que impulsa millones de animaciones web incre\u00edblemente complejas en todo el mundo.",
+  "auto-animate.formkit.com": "Una primitiva incre\u00edblemente liviana y sin configuraci\u00f3n que automatiza completamente transiciones estructurales DOM simples de manera instant\u00e1nea.",
+  "lottiefiles.com": "El enorme ecosistema globalmente est\u00e1ndar que permite animaciones vectoriales incre\u00edblemente peque\u00f1as y perfectamente escalables directamente dentro de interfaces responsivas.",
+  "tailwindcss.com": "Un marco CSS profundamente transformador que prioriza las utilidades y que redefine por completo la forma en que los desarrolladores construyen r\u00e1pidamente aplicaciones modernas f\u00edsicamente.",
+  "getbootstrap.com": "El conjunto de herramientas de front-end hist\u00f3ricamente innegable que proporciona constantemente un andamiaje extremadamente confiable dirigido a arquitecturas l\u00f3gicas web orientadas a dispositivos m\u00f3viles.",
+  "bulma.io": "Un marco profundamente vers\u00e1til y altamente intuitivo basado fundamentalmente en los est\u00e1ndares modernos de cuadr\u00edcula Flexbox.",
+  "magicui.design": "Una galer\u00eda densamente poblada que ofrece espec\u00edficamente interfaces de aplicaciones React complejas, intensamente animadas y altamente experimentales a la perfecci\u00f3n.",
+  "aceternity.com": "Una biblioteca incre\u00edblemente estilizada que genera expl\u00edcitamente elementos de movimiento Tailwind y Framer visualmente alucinantes y muy gr\u00e1ficos de forma integral.",
+  "tremor.so": "Un repositorio muy especializado centrado expl\u00edcitamente en trazar r\u00e1pidamente y de forma sencilla an\u00e1lisis de paneles internos complejos y magn\u00edficos.",
+  "vercel.com/templates": "La biblioteca de plantillas de implementaci\u00f3n oficial de Next.js, incre\u00edblemente optimizada directamente para una implementaci\u00f3n empresarial a gran escala al instante.",
+  "shopify.com/themes": "El ecosistema est\u00e1ndar absoluto de la industria que presenta una est\u00e9tica de implementaci\u00f3n minorista de comercio electr\u00f3nico fundamentalmente optimizada y altamente confiable.",
+  "tailwindui.com": "El directorio oficial extremadamente premium que ofrece colecciones de componentes completamente impecables dise\u00f1adas directamente por los creadores de Tailwind.",
+  "cruip.com": "Una colecci\u00f3n bellamente refinada y con un dise\u00f1o elegante que ensambla con precisi\u00f3n y rapidez marcos de p\u00e1ginas de inicio impresionantes y altamente convertibles.",
+  "html5up.net": "Un recurso absolutamente cl\u00e1sico y famoso por su confiabilidad que distribuye de forma gratuita estructuras de portafolios HTML5 incre\u00edblemente s\u00f3lidas y con excelente capacidad de respuesta de manera impecable.",
+  "ui8.net": "Un mercado gigantesco que contiene literalmente miles de kits de dise\u00f1o premium de vanguardia y altamente experimentales.",
+  "framer.com/templates": "Una cuadr\u00edcula enorme, meticulosamente verificada, que ofrece dise\u00f1os inmediatos incre\u00edblemente impresionantes y perfectamente animados que soportan de forma nativa las estructuras de Framer.",
+  "webflow.com/templates": "La tienda incre\u00edblemente masiva y reconocida mundialmente que ofrece arquitecturas responsivas completamente integrales que impulsan directamente las aplicaciones Webflow de manera eficiente.",
+  "creative-tim.com": "Una plataforma muy amplia altamente dedicada espec\u00edficamente al suministro funcional de paneles backend de aplicaciones complicadas.",
+  "themeforest.net": "El repositorio m\u00e1s grande y de mayor importancia hist\u00f3rica que distribuye diariamente a nivel mundial miles de infraestructuras de sitios web completamente codificadas.",
+  "mui.com/store": "El repositorio premium est\u00e1 intr\u00ednsecamente conectado directamente a Material UI y proporciona interfaces empresariales intensamente complejas a nivel mundial.",
+  "astro.build/themes": "Una red incre\u00edblemente r\u00e1pida y excepcionalmente moderna que aloja espec\u00edficamente aplicaciones de arquitectura Astro de alto rendimiento constantemente.",
+  "themes.gohugo.io": "El \u00edndice fundamental que ofrece constantemente temas de generaci\u00f3n de blogs de rebajas est\u00e1ticas enormemente r\u00e1pidos y completamente simplificados.",
+  "ghost.org/themes": "Un ecosistema bellamente dise\u00f1ado y muy refinado que definitivamente respalda impecablemente implementaciones de periodismo tipogr\u00e1fico extremadamente elegantes.",
+  "fonts.google.com": "El directorio tipogr\u00e1fico de c\u00f3digo abierto absolutamente fundamental y abrumadoramente completo que empodera a la mitad de Internet al instante.",
+  "fontshare.com": "Un servicio de fuentes premium gratuito, incre\u00edblemente impresionante, que se ofrece de manera impecable y apunta expl\u00edcitamente a la est\u00e9tica digital moderna con elegancia.",
+  "typewolf.com": "El recurso de curaci\u00f3n independiente m\u00e1s confiable de la industria que perfila constantemente combinaciones de fuentes impresionantes.",
+  "dafont.com": "El repositorio innegablemente cl\u00e1sico e infinitamente ca\u00f3tico que contiene decenas de miles de tipograf\u00edas de software gratuito profundamente experimentales.",
+  "pangrampangram.com": "Una fundici\u00f3n incre\u00edblemente moderna y exclusivamente responsable de crear las arquitecturas sans-serif m\u00e1s limpias disponibles en todo el mundo.",
+  "myfonts.com": "El \u00edndice tipogr\u00e1fico comercial m\u00e1s exhaustivo que alberga literalmente miles de familias premium inmensamente complejas.",
+  "fonts.adobe.com": "Un ecosistema tremendamente masivo y fluido que impulsa exclusivamente implementaciones tipogr\u00e1ficas de alta gama fuertemente integradas de forma nativa en Adobe.",
+  "fontawesome.com": "El marco de \u00edconos fundacional astron\u00f3micamente masivo que impulsa exclusivamente gr\u00e1ficos vectoriales simples en innumerables plataformas en todo el mundo.",
+  "fonts.google.com/icons": "El est\u00e1ndar incre\u00edblemente estricto de Google define en gran medida la iconograf\u00eda de la interfaz perfectamente optimizada en todo el dise\u00f1o de materiales.",
+  "lucide.dev": "Un marco vectorial bellamente equilibrado e inmensamente claro que moderniza por completo los est\u00e1ndares de s\u00edmbolos de interfaz expl\u00edcitamente n\u00edtidos.",
+  "uncut.wtf": "Un cat\u00e1logo incre\u00edblemente vanguardista centrado exclusivamente en catalogar de forma fiable tipograf\u00edas excepcionalmente extra\u00f1as y de c\u00f3digo totalmente abierto.",
+  "velvetyne.fr": "Un colectivo de c\u00f3digo abierto ferozmente independiente que distribuye persistentemente conceptos de visualizaci\u00f3n radicalmente \u00fanicos y tremendamente experimentales continuamente.",
+  "unsplash.com": "El destino abrumadoramente fundamental que ofrece fotograf\u00edas est\u00e9ticas impresionantes y completamente gratuitas en todo el mundo.",
+  "pexels.com": "Una base de datos incre\u00edblemente masiva que cataloga constantemente y con elegancia im\u00e1genes de alt\u00edsima resoluci\u00f3n y sin derechos de autor.",
+  "pixabay.com": "Un marco incre\u00edblemente vasto que distribuye gratuitamente literalmente millones de recursos multimedia distintos y libres de derechos de autor enviados por la comunidad.",
+  "stocksy.com": "Una cooperativa altamente seleccionada y altamente premium que ofrece exclusivamente medios nativos libres de regal\u00edas, claramente art\u00edsticos y completamente aut\u00e9nticos.",
+  "flaticon.com": "La biblioteca vectorial unificada m\u00e1s grande que contiene constantemente millones de \u00edconos gr\u00e1ficos con estilos distintos.",
+  "svgrepo.com": "Un motor de b\u00fasqueda de c\u00f3digo abierto profundamente completo e incre\u00edblemente dedicado espec\u00edficamente a proporcionar vectores escalables perfectamente limpios.",
+  "streamlinehq.com": "Un marco vectorial absurdamente extenso y perfectamente consistente que contiene f\u00edsicamente cientos de miles de gr\u00e1ficos de interfaz distintos.",
+  "freepik.com": "Un est\u00e1ndar muy confiable que definitivamente ofrece compilaciones masivas de plantillas vectoriales esenciales sin esfuerzo en todo el mundo.",
+  "iconfinder.com": "Un mercado global incre\u00edblemente grande que ofrece exclusivamente conjuntos de \u00edconos de interfaz personalizados altamente especializados y dise\u00f1ados de manera premium.",
+  "undraw.co": "Una biblioteca incre\u00edblemente popular y totalmente gratuita que se centra exclusivamente en ilustraciones vectoriales distintas y bellamente escalables.",
+  "humaaans.com": "Una biblioteca de combinaci\u00f3n y combinaci\u00f3n notablemente din\u00e1mica dise\u00f1ada expl\u00edcitamente para combinar de forma divertida y constante vectores humanos completamente escalables.",
+  "illustrations.co": "Un hermoso marco de c\u00f3digo abierto cuidadosamente seleccionado que detalla exclusivamente cientos de interfaces gr\u00e1ficas minimalistas y limpias por completo.",
+  "opendoodles.com": "Una galer\u00eda completamente de c\u00f3digo abierto que proporciona im\u00e1genes incompletas dibujadas a mano, deliciosamente ca\u00f3ticas y profundamente encantadoras de manera confiable.",
+  "sketchfab.com": "La plataforma est\u00e1ndar de la industria inequ\u00edvocamente masiva que gestiona profundamente el procesamiento de modelos 3D en tiempo real intensamente complicado.",
+  "polyhaven.com": "Un almac\u00e9n de dominio p\u00fablico ferozmente protegido que reproduce libremente y exclusivamente geometr\u00edas gr\u00e1ficas incre\u00edblemente complejas y sin restricciones.",
+  "spline.design": "Un editor de navegador incre\u00edblemente accesible que une de forma inherente objetos tridimensionales extremadamente complejos de forma totalmente intuitiva.",
+  "turbosquid.com": "El mercado m\u00e1s dominante que alberga millones de geometr\u00edas de pol\u00edgonos comerciales impecablemente dise\u00f1adas funcionalmente.",
+  "mixkit.co": "Una galer\u00eda extremadamente confiable y de alta calidad que ofrece transiciones cinematogr\u00e1ficas inmensamente limpias y libres de regal\u00edas con gracia.",
+  "coverr.co": "Una biblioteca sin derechos de autor definitivamente hermosa y estrictamente dedicada espec\u00edficamente a ofrecer fondos de bucle masivos de alta fidelidad.",
+  "videezy.com": "Un repositorio incre\u00edblemente enorme que aloja constantemente cantidades masivas de composiciones de v\u00eddeo 4k muy distintas con facilidad.",
+  "bensound.com": "Un cat\u00e1logo notablemente cl\u00e1sico que ofrece fundamentalmente orquestaciones atmosf\u00e9ricas de fondo excepcionalmente n\u00edtidas y compuestas estrictamente al instante.",
+  "wellfound.com": "El principal directorio exclusivo que conecta activamente talentos ambiciosos espec\u00edficamente con nuevas empresas con gran financiaci\u00f3n.",
+  "upwork.com": "El mercado independiente, abrumadoramente masivo y utilizado a nivel mundial, une ampliamente a los clientes con contratistas independientes especializados.",
+  "weworkremotely.com": "Una comunidad incre\u00edblemente fundamental que cataloga con precisi\u00f3n cientos de puestos de dise\u00f1o e ingenier\u00eda remotos verificados de alta calidad.",
+  "nodesk.co": "Un agregador cuidadosamente seleccionado que rastrea constantemente oportunidades profesionales remotas asincr\u00f3nicas altamente flexibles.",
+  "flexjobs.com": "Un tablero claramente premium, rigurosamente seleccionado a mano, que valida estrictamente roles h\u00edbridos y remotos globales totalmente leg\u00edtimos.",
+  "remoters.net": "Un centro integral que ofrece amplios recursos dirigidos expl\u00edcitamente a n\u00f3madas digitales profesionales que exploran el trabajo remoto generalizado.",
+  "workingnomads.com": "Una plataforma basada en gran medida en boletines que muestra directamente oportunidades de desarrollo remoto y marketing digital cuidadosamente organizadas.",
+  "bubble.io": "Un paquete de programaci\u00f3n visual incre\u00edblemente potente y totalmente exhaustivo que reemplaza por completo todas las dependencias de ingenier\u00eda de backend.",
+  "flutterflow.io": "Un editor visual incre\u00edblemente sofisticado que genera de forma limpia arquitecturas integrales de Flutter compiladas de forma impecable e implementables de forma nativa.",
+  "softr.io": "Una capa l\u00f3gica tremendamente r\u00e1pida incre\u00edblemente dise\u00f1ada espec\u00edficamente para traducir inmediatamente bases de datos sin procesar de Airtable en portales interactivos para clientes.",
+  "glideapps.com": "Un motor excepcionalmente intuitivo que genera aplicaciones m\u00f3viles totalmente navegables y con una capacidad de respuesta impresionante estrictamente a partir de hojas de c\u00e1lculo.",
+  "weweb.io": "Un lienzo frontal profundamente flexible que une elegantemente elementos DOM con estilos visuales directamente en estructuras de bases de datos externas.",
+  "adalo.com": "Un constructor altamente intuitivo de arrastrar y soltar que se centra expresamente en implementaciones incre\u00edblemente r\u00e1pidas de tiendas de aplicaciones m\u00f3viles directamente.",
+  "backendless.com": "Una plataforma monol\u00edtica terriblemente densa y extremadamente capaz que maneja activamente la administraci\u00f3n masiva de bases de datos en tiempo real de forma nativa a trav\u00e9s de bloques visuales.",
+  "zapier.com/interfaces": "Una herramienta excepcionalmente integrada que genera din\u00e1micamente formularios p\u00fablicos interactivos que desencadena inmediatamente innumerables automatizaciones complejas en segundo plano.",
+  "kokonutui.com": "Una colecci\u00f3n de componentes de c\u00f3digo abierto distintivamente elegante y altamente modernizada centrada principalmente en una est\u00e9tica web interactiva pulida.",
+  "animejs.com": "Un motor de animaci\u00f3n brillantemente estructurado y enormemente liviano que domina por completo las extremadamente complejas transiciones de propiedades DOM CSS en gran medida.",
+  "motion-primitives.com": "Un ecosistema estrictamente estilizado que ofrece elementos de interacci\u00f3n altamente expresivos y impecablemente dise\u00f1ados, construidos expresamente para complementar las arquitecturas modernas de React.",
+  "21st.dev": "Un centro fenomenalmente curado que constantemente muestra cientos de abstracciones de interfaz de usuario de vanguardia, completamente incre\u00edbles y extremadamente experimentales.",
+  "figma.com": "El innegablemente fundamental entorno vectorial colaborativo que redefine por completo exactamente c\u00f3mo las organizaciones modernas conceptualizan las interfaces digitales.",
+  "brandbird.app": "Una utilidad deliciosamente especializada que convierte activamente capturas de pantalla aburridas y sin procesar en gr\u00e1ficos de marketing completamente estilizados e inmensamente atractivos.",
+  "uizard.io": "Una pizarra incre\u00edblemente futurista que aprovecha en gran medida la IA generativa exclusivamente para transmutar instant\u00e1neamente garabatos b\u00e1sicos en estructuras al\u00e1mbricas interactivas.",
+  "ngrok.com": "Una puerta de enlace de software con un mandato inequ\u00edvoco que obliga violentamente a URL p\u00fablicas seguras a atravesar cortafuegos locales altamente restrictivos.",
+  "apidog.com": "Un conjunto estructural extremadamente amplio que maneja perfectamente la documentaci\u00f3n del ciclo de vida de API, la depuraci\u00f3n, la orientaci\u00f3n y los ciclos de prueba masivos profundamente complejos.",
+  "firebase.google.com": "El monol\u00edtico backend como servicio de Google alimenta de forma nativa millones de intrincadas bases de datos escalables de forma totalmente segura y r\u00e1pida.",
+  "lindy.ai": "Una entidad aut\u00f3noma fenomenalmente avanzada, inherentemente capaz de navegar por completo en flujos de trabajo empresariales personales y organizacionales incre\u00edblemente diversos.",
+  "flowiseai.com": "Un lienzo arquitect\u00f3nico enormemente expl\u00edcito de arrastrar y soltar que dise\u00f1a directamente rutas de orquestaci\u00f3n LLM personalizadas extraordinariamente complejas de forma visual.",
+  "pitch.com": "Un entorno de edici\u00f3n visual incre\u00edblemente pulido e incre\u00edblemente colaborativo que reemplaza estructuralmente por completo los motores de presentaci\u00f3n tradicionales.",
+  "slidesgo.com": "Un archivo incre\u00edblemente gigantesco que proporciona constantemente estructuras de plantillas incre\u00edblemente bellas y muy diversas, completamente gratuitas, exclusivamente para Presentaciones de Google.",
+  "minicoursegenerator.com": "Una plataforma claramente \u00fanica que depende en gran medida de sistemas de inteligencia que extraen directamente curr\u00edculos interactivos profundamente atractivos de forma nativa a partir de textos sin formato.",
+  "vidu.studio": "Un motor de generaci\u00f3n espectacularmente agresivo que impulsa con fuerza interpretaciones r\u00e1pidas extremadamente espec\u00edficas en videos estilizados extraordinariamente distintos.",
+  "creatify.ai": "Un marco intencionalmente estructurado que genera espec\u00edficamente anuncios de video de comercio electr\u00f3nico automatizados profundamente persuasivos y atractivos al instante.",
+  "ozone.pro": "Un procesador de edici\u00f3n de video nativo de la nube profundamente r\u00e1pido que integra estrictamente una IA de asistencia multimodal abrumadoramente precisa en todas partes.",
+  "redbubble.com": "Una infraestructura minorista astron\u00f3micamente grande que depende completamente de obras de arte independientes extremadamente especializadas expl\u00edcitamente para la producci\u00f3n en masa.",
+  "teepublic.com": "Un gigantesco competidor estrechamente relacionado que apoya intensamente a comunidades de dise\u00f1o gr\u00e1fico profundamente creativas y muy diversas en todos los medios f\u00edsicos.",
+  "merch.amazon.com": "La fuerza innegablemente dominante que inyecta agresivamente solicitudes de productos f\u00edsicos imprimibles totalmente personalizados directamente en la log\u00edstica global de Amazon.",
+  "kdp.amazon.com": "El sistema de publicaci\u00f3n absolutamente fundamental que proporciona de forma nativa un acceso incre\u00edblemente completo que vincula directamente la literatura personalizada con los mercados globales.",
+  "mcp.run": "Un directorio estructural profundamente esencial que indexa agresivamente conectores de protocolo de contexto modelo exclusivamente especializados de manera incre\u00edblemente global.",
+  "supermemory.ai": "Un marco incre\u00edblemente r\u00e1pido y completamente nativo que sirve de manera agresiva y constante a una infraestructura de memoria interconectada intensamente a trav\u00e9s de interacciones complejas de IA.",
+  "claude.ai": "La interfaz singularmente definitiva de Anthropic se comunica exclusivamente de forma directa y profunda con implementaciones de razonamiento incre\u00edblemente avanzadas a nivel mundial.",
+  "riffusion.com": "Un modelo absolutamente loco que pasa por alto maravillosamente las estructuras de sonido nativas y genera estrictamente frecuencias sonoras excepcionalmente pegadizas directamente a trav\u00e9s de espectrogramas visuales.",
+  "fmhy.net": "Una base de datos organizacional terriblemente vasta y altamente descentralizada que sirve exclusivamente e infinitamente rutas de software alternativas incre\u00edblemente completas.",
+  "hyper3d.ai": "Un marco asombrosamente capaz, absolutamente especializado, profundamente y exclusivamente, que transforma f\u00edsicamente entradas bidimensionales simples en vol\u00famenes renderizados inmensamente impresionantes.",
+  "tripo3d.ai": "Un motor multimodal profundamente r\u00e1pido, definitivamente capaz de generar directamente un modelado topol\u00f3gico incre\u00edblemente complicado estrictamente a partir de im\u00e1genes textuales b\u00e1sicas y sencillas.",
+  "outlier.ai": "Un mercado excepcionalmente \u00fanico que canaliza estrictamente ajustes de refuerzo humano extremadamente cr\u00edticos que impulsan agresivamente arquitecturas de inteligencia incre\u00edblemente vastas a nivel mundial.",
+  "alternativeto.net": "Una base de datos profundamente fundamental impulsada por la comunidad que mapea absolutamente sustitutos de software exactamente equivalentes y se basa expl\u00edcitamente en el consenso de los usuarios.",
+  "answerthepublic.com": "Un visualizador de investigaci\u00f3n sorprendentemente profundo que mapea directamente consultas de b\u00fasqueda de usuarios completamente sin procesar de forma din\u00e1mica en entornos de motores de b\u00fasqueda masivos.",
+  "appsumo.com": "El innegable mercado l\u00edder que agrega incesantemente licencias de software de por vida extremadamente valiosas dirigidas principalmente a empresas ambiciosas en crecimiento.",
+  "aweber.com": "Una plataforma de transmisi\u00f3n excepcionalmente establecida que ha impulsado con \u00e9xito sistemas de distribuci\u00f3n masiva de correo electr\u00f3nico incre\u00edblemente confiables durante d\u00e9cadas.",
+  "bigspy.com": "Una interfaz de reconocimiento inmensamente agresiva que rastrea activamente y constantemente estrategias publicitarias de competidores globales de gran \u00e9xito a trav\u00e9s de las redes.",
+  "bigvu.tv": "Una utilidad de transmisi\u00f3n estructuralmente esencial que proporciona herramientas de teleprompting inteligentes profundamente confiables que reemplazan perfectamente el hardware f\u00edsico del estudio.",
+  "bookbolt.io": "Un panel de investigaci\u00f3n estrictamente especializado que se dirige exclusivamente a nichos de publicaci\u00f3n de bajo contenido expl\u00edcitamente altamente rentables directamente en toda la infraestructura de Amazon.",
+  "brandcolors.net": "Un directorio incre\u00edblemente definitivo y universalmente respetado que cataloga con precisi\u00f3n valores hexadecimales absolutamente exactos que definen con \u00e9xito corporaciones globales masivas.",
+  "builderall.com": "Un ecosistema digital incre\u00edblemente gigantesco y monol\u00edticamente absoluto que combina expl\u00edcitamente pr\u00e1cticamente todos los constructores de marketing l\u00f3gicamente posibles.",
+  "capcut.com": "El rey totalmente innegable que dicta poderosamente la est\u00e9tica de edici\u00f3n m\u00f3vil de formato corto expl\u00edcitamente viral que define en gran medida el consumo de radiodifusi\u00f3n moderno.",
+  "circle.so": "Una base modular bellamente elegante construida espec\u00edficamente intencionalmente creando internamente una arquitectura de foro independiente incre\u00edblemente premium centrada en el creador.",
+  "clipchamp.com": "Un procesador nativo web extremadamente integrado que compila activamente cronogramas complejos de proyectos cinematogr\u00e1ficos de manera impecable y directamente en navegadores est\u00e1ndar.",
+  "contentatscale.ai": "Un marco generativo agresivamente optimizado, estructurado inherentemente y expresamente dise\u00f1ando cantidades completamente masivas, evitando directamente la detecci\u00f3n anti-IA.",
+  "copy.ai": "Un conjunto de herramientas de generaci\u00f3n incre\u00edblemente popular, dise\u00f1ado de forma \u00fanica y espec\u00edficamente para acelerar din\u00e1micamente la creaci\u00f3n masiva de textos de marketing corporativo.",
+  "createstudio.com": "Un estudio de composici\u00f3n deliciosamente fluido que produce a la perfecci\u00f3n secuencias explicativas basadas en personajes notablemente atractivas, omitiendo directamente enormes obst\u00e1culos t\u00e9cnicos.",
+  "dateful.com": "Una utilidad muy estrictamente pura que resuelve expl\u00edcitamente traducciones complejas de programaci\u00f3n global, sin esfuerzo, eliminando directamente y por completo la confusi\u00f3n com\u00fan en las reuniones.",
+  "blackmagicdesign.com/products/davinciresolve": "El monolito absolutamente indiscutible de Hollywood que controla absolutamente la correcci\u00f3n de color global muy avanzada y domina de forma nativa industrias cinematogr\u00e1ficas enteras.",
+  "extract.pics": "Un motor de raspado claramente agresivo dise\u00f1ado inherentemente para eliminar cantidades masivas de im\u00e1genes que coinciden perfectamente al instante en las URL espec\u00edficas de forma nativa.",
+  "fiverr.com": "La macroeconom\u00eda terriblemente colosal impulsa por completo delegaciones de microtareas incre\u00edblemente r\u00e1pidas que estandarizan por completo canales de trabajo digitales independientes y masivos.",
+  "flourish.studio": "Un motor asombrosamente articulado que interpola de forma limpia y din\u00e1mica datos sin procesar muy desorganizados en impresionantes arquitecturas de gr\u00e1ficos animados.",
+  "infogram.com": "Un dise\u00f1o vectorial de gran capacidad que reemplaza directamente la incre\u00edblemente tediosa creaci\u00f3n de gr\u00e1ficos y simplifica en gran medida de forma nativa distribuciones period\u00edsticas complejas.",
+  "invideo.io": "Un manipulador de plantillas bellamente intuitivo, inherentemente estructurado y que impulsa expresamente la creaci\u00f3n de anuncios extremadamente masivos aprovechando sin problemas inmensas bibliotecas de archivos.",
+  "jasper.ai": "La arquitectura empresarial innegablemente dominante dicta minuciosamente los resultados de la identidad ling\u00fc\u00edstica corporativa interna fuertemente integrada de la marca con precisi\u00f3n.",
+  "mindmup.com": "Un mapa estructural absolutamente fluido, dise\u00f1ado espec\u00edficamente y que conceptualiza directamente flujos de trabajo cerebrales masivos, totalmente vinculados a la perfecci\u00f3n con Google Drive.",
+  "namecheap.com": "El omnipresente registrador web, famoso por ofrecer reservas de dominio con grandes descuentos, define continuamente por completo los precios de referencia globales.",
+  "namechk.com": "Una herramienta de reconocimiento tremendamente cr\u00edtica que escanea intensamente docenas de ellos y verifica expl\u00edcitamente y de forma din\u00e1mica la disponibilidad exacta del identificador global.",
+  "openclipart.org": "Una l\u00ednea de base completamente gratuita e incondicional que depende en gran medida de gr\u00e1ficos vectoriales de dominio puramente p\u00fablico que suministran reservas gen\u00e9ricas masivas.",
+  "pabbly.com": "Una arquitectura de integraci\u00f3n claramente agresiva que rivaliza de manera notablemente expl\u00edcita con los sistemas de automatizaci\u00f3n monol\u00edticos y que ofrece estrictamente un valor de vida \u00fatil incre\u00edble.",
+  "pdfcandy.com": "Un manipulador de formato escandalosamente completo que cubre en profundidad literalmente todas las conversiones imaginables y espec\u00edficamente salva directamente las restricciones de PDF.",
+  "photovibrance.io": "Un motor estrictamente especializado que fuerza dram\u00e1ticamente un movimiento cin\u00e9tico inmensamente atractivo de manera agresiva a trav\u00e9s de entornos bidimensionales previamente est\u00e1ticos puramente.",
+  "quillbot.com": "Un refinador ling\u00fc\u00edstico profundamente ubicuo, integrado masivamente de manera clara y global, que simplifica directamente complejidades textuales incre\u00edblemente densas de forma instant\u00e1nea y nativa.",
+  "remaker.ai": "Un motor de s\u00edntesis inherentemente dirigido que optimiza intensamente las superposiciones faciales expl\u00edcitamente limpias de manera consistente y perfecta en diversas matrices de iluminaci\u00f3n.",
+  "snip.ly": "Un proxy de marketing profundamente inteligente que inyecta en secreto m\u00f3dulos de conversi\u00f3n inmensamente interactivos de manera persistente y directa en destinos p\u00fablicos totalmente externos.",
+  "theresanaiforthat.com": "El \u00edndice fundamental asombrosamente gigantesco intenta expl\u00edcitamente mapear de manera incre\u00edblemente exhaustiva y estricta absolutamente cada proyecto neuronal reci\u00e9n lanzado.",
+  "tubebuddy.com": "Un observador estad\u00edstico excepcionalmente integrado que lee \u00edntimamente metadatos de YouTube completamente profundos y identifica exactamente ventajas algor\u00edtmicas radicalmente intensas.",
+  "udimi.com": "Una econom\u00eda interna muy especializada que facilita por completo la difusi\u00f3n de boletines radicalmente exacta y que domina expl\u00edcitamente por completo el marketing directo en solitario.",
+  "upviral.com": "Un sintetizador de impulso intensamente agresivo dise\u00f1ado expl\u00edcitamente y que convierte autom\u00e1ticamente en armas mec\u00e1nicas de referencia humana incre\u00edblemente profundamente intr\u00ednsecas.",
+  "vidiq.com": "El panel competitivo incre\u00edblemente masivo expone en gran medida an\u00e1lisis de volumen de b\u00fasqueda completamente cr\u00edticos que manipulan directamente estructuras profundas de clasificaci\u00f3n de videos.",
+  "wave.video": "Un estudio multiprop\u00f3sito inmensamente capaz que admite activamente un renderizado completamente intensivo de forma nativa, incluidos entornos de transmisi\u00f3n en vivo fundamentalmente impresionantes y sin problemas.",
+  "wordhero.co": "Una interfaz r\u00e1pida ferozmente competitiva que genera notablemente conjuntos incre\u00edblemente amplios que abordan de manera integral y directa plantillas ling\u00fc\u00edsticas de marketing extremadamente diversas."
+};
+
+const BEACON_DESC_CA = {
+  "abacus.ai/chatllm": "Creeu agents d'IA personalitzats, implementeu fluxos de treball i escriviu codi sense problemes.",
+  "chatplayground.ai": "Compara i xateja amb diversos models d'IA premium alhora.",
+  "aithor.com": "Assaig d'IA i ajudant d'escriptura acad\u00e8mica amb generaci\u00f3 indetectable.",
+  "mathgpt.ai": "Carregueu problemes de matem\u00e0tiques i obteniu solucions d'IA detallades i pas a pas.",
+  "schoolgoat.com": "Solucionador instantani de problemes de deures dissenyat espec\u00edficament per als estudiants.",
+  "nbi.ai": "Plataforma avan\u00e7ada d'an\u00e0lisi de dades que converteix els n\u00fameros en brut en informaci\u00f3.",
+  "mindgrasp.ai": "Converteix materials d'estudi i confer\u00e8ncies en mapes mentals interactius d'IA.",
+  "napkin.ai": "Transformeu instant\u00e0niament el vostre text en gr\u00e0fics visuals atractius.",
+  "summarybox.com": "Resumeix articles llargs i extreu els conceptes b\u00e0sics en segons.",
+  "shepherd.study": "Presa d'apunts de confer\u00e8ncies amb IA i assistent d'estudi personalitzat.",
+  "adsdog.ai": "Plataforma de creaci\u00f3 d'anuncis automatitzada per a creativitats amb alta conversi\u00f3.",
+  "ai-toolbox.co": "Un directori complet i una col\u00b7lecci\u00f3 d'utilitats especialitzades en IA.",
+  "backpackbot.ai": "El vostre assistent personal de recerca d'IA per organitzar dades complexes.",
+  "bigteam.ai": "Creeu un equip empresarial virtual complet mitjan\u00e7ant agents d'IA especialitzats.",
+  "blaze.ai": "Suite de creaci\u00f3 de contingut d'IA tot en un dissenyada per als venedors.",
+  "browsercopilot.ai": "Assistent del navegador en l\u00ednia per a l'escriptura instant\u00e0nia, edici\u00f3 i extracci\u00f3 de dades.",
+  "copycopter.ai": "Motor de redacci\u00f3 d'IA d'alta conversi\u00f3 per a anuncis i p\u00e0gines de destinaci\u00f3.",
+  "edenx.ai": "Assistent creatiu d'IA vers\u00e0til per a una generaci\u00f3 de contingut perfecta.",
+  "socialbu.com": "Automatitzeu, planifiqueu i optimitzeu campanyes massives de xarxes socials.",
+  "socialsonic.com": "Genereu publicacions virals i professionals de LinkedIn a partir d'indicacions senzilles.",
+  "notebooklm.google.com": "Carregueu els vostres documents i deixeu que l'IA respongui preguntes basant-se exclusivament en ells.",
+  "perplexity.ai": "Motor de cerca d'IA conversacional que ofereix respostes citades en temps real.",
+  "julius.ai": "Connecteu les dades del vostre full de c\u00e0lcul i deixeu que l'IA actu\u00ef com a analista personal.",
+  "wisprflow.ai": "Eina de dictat conscient del context que formatea perfectament la teva veu.",
+  "higgsfield.ai": "Estudi professional de creaci\u00f3 de v\u00eddeo impulsat per IA per a una producci\u00f3 de gamma alta.",
+  "elicit.com": "Analitzeu i extreu dades de milions de treballs de recerca acad\u00e8mica.",
+  "consensus.app": "Motor de cerca que extreu espec\u00edficament informaci\u00f3 de la investigaci\u00f3 cient\u00edfica.",
+  "explainpaper.com": "Ressaltar textos acad\u00e8mics conf\u00fas i rebre explicacions senzilles.",
+  "make.com": "Potent plataforma visual sense codi per automatitzar tasques en milers d'aplicacions.",
+  "freepik.com/ai": "Motor d'IA integrat per generar fotos i il\u00b7lustracions \u00faniques.",
+  "krea.ai": "Llen\u00e7 d'IA en temps real per a l'edici\u00f3 d'imatges i v\u00eddeos en directe.",
+  "playgroundai.com": "Llen\u00e7 d'IA vers\u00e0til que proporciona un control prec\u00eds sobre la generaci\u00f3 d'art.",
+  "recraft.ai": "Genereu vectors SVG infinitament escalables i icones 3D.",
+  "logodiffusion.com": "Dibuixa esbossos personalitzats i observa que la IA els transforma en logotips nets.",
+  "stockimg.ai": "Genera fons de pantalla personalitzats, portades de llibres i imatges d'estoc.",
+  "kittl.com": "Suite de disseny modern amb eines d'IA adaptades per a dissenyadors gr\u00e0fics.",
+  "insmind.com": "Edici\u00f3 avan\u00e7ada de fotografies amb intel\u00b7lig\u00e8ncia artificial centrada en la millora del retrat.",
+  "picwish.com": "Desenfoca r\u00e0pidament les imatges i elimina fons amb precisi\u00f3 d'IA.",
+  "promeai.pro": "Transformeu esbossos arquitect\u00f2nics i models 3D en renders fotorealistes.",
+  "en.eagle.cool": "Organitzeu, etiqueteu i navegueu per la vostra biblioteca massiva d'actius de disseny visual.",
+  "jitter.video": "Creeu gr\u00e0fics en moviment fluids i professionals i animacions d'interf\u00edcie d'usuari.",
+  "lordicon.com": "\u00c0mplia biblioteca d'icones de Lottie animades altament personalitzables.",
+  "eyecannndy.com": "Gran dip\u00f2sit de plantilles d'efectes visuals virals i t\u00e8cniques creatives.",
+  "inkarnate.com": "Creeu mapes fant\u00e0stics i molt detallats per a la construcci\u00f3 del m\u00f3n.",
+  "nvidia.com/en-us/studio/canvas": "Pinta formes senzilles i fes que la IA les converteixi en paisatges realistes.",
+  "artflow.ai": "Genereu personatges persistents i col\u00b7loqueu-los en escenes animades.",
+  "faceswapper.ai": "Canvia les cares de manera perfecta a les fotos i als v\u00eddeos mantenint una il\u00b7luminaci\u00f3 realista.",
+  "piccopilot.com": "Genereu la posada en escena i la fotografia de productes de comer\u00e7 electr\u00f2nic professional.",
+  "pacdora.com": "Creeu maquetes d'embalatge 3D personalitzades directament al vostre navegador.",
+  "design.com": "Eina d'identitat de marca tot en un per generar logotips i targetes de visita.",
+  "canva.com": "Plataforma de disseny col\u00b7laboratiu est\u00e0ndard de la ind\u00fastria per a gr\u00e0fics moderns.",
+  "leonardo.ai": "Suite de generaci\u00f3 d'IA molt vers\u00e0til ajustada espec\u00edficament per als actius del joc.",
+  "ideogram.ai": "Genereu imatges d'alta qualitat amb text intern perfectament representat.",
+  "magnific.ai": "M\u00e0gic escalador d'imatges d'IA que al\u00b7lucina detalls que falten impressionants.",
+  "remove.bg": "L'eina fiable est\u00e0ndard d'or per eliminar fons d'imatge a l'instant.",
+  "squoosh.app": "Eina basada en navegador per ajustar la compressi\u00f3 i els formats d'imatges.",
+  "lumalabs.ai/dream-machine": "Model d'IA d'alta fidelitat per convertir imatges est\u00e0tiques en v\u00eddeo din\u00e0mic.",
+  "kling.ai": "Genereu v\u00eddeos en moviment fotorealista o estilitzat directament a partir del text.",
+  "pixverse.ai": "Plataforma d'IA accessible per generar B-roll i animacions creatives.",
+  "hailuoai.video": "Motor d'IA avan\u00e7at centrat en la producci\u00f3 de moviment hum\u00e0 molt realista.",
+  "hedra.com": "Transformeu les fotos facials est\u00e0tiques en avatars expressius i parlants.",
+  "invideo.io": "Crea a l'instant curts i rodets de YouTube professionals des d'una sol\u00b7licitud de text.",
+  "magichour.ai": "Apliqueu filtres visuals estilitzats per alterar completament l'aparen\u00e7a dels v\u00eddeos.",
+  "instableep.com": "Detecta i emet autom\u00e0ticament paraules blasfemes dels teus v\u00eddeos penjats.",
+  "clipshort.co": "Divideu els podcasts de forma llarga en clips verticals virals autom\u00e0ticament.",
+  "clipgoat.com": "Estructureu les gravacions de v\u00eddeo en brut en cursos educatius totalment segmentats.",
+  "ssemble.com": "Editor de v\u00eddeo basat en navegador que ofereix un conjunt de connectors intel\u00b7ligents intel\u00b7ligents.",
+  "podcastle.ai": "Plataforma d'enregistrament de podcasts amb qualitat d'estudi amb eliminaci\u00f3 de soroll impulsada per IA.",
+  "dupdub.com": "Sincronitza perfectament l'\u00e0udio amb les fotos facials per obtenir v\u00eddeos realistes del cap parlant.",
+  "sketch.metademolab.com": "Penja el dibuix d'un nen i mira que la IA n'anima autom\u00e0ticament les extremitats.",
+  "phase.com": "Eina de disseny de moviment d'interf\u00edcie d'usuari interactiva adaptada per a dissenyadors d'aplicacions i web.",
+  "alpha.genmo.ai": "Anima els elements est\u00e0tics de les imatges en v\u00eddeos fascinants en bucle.",
+  "apob.ai": "Genereu v\u00eddeos de missatgeria personalitzats a granel mitjan\u00e7ant avatars d'IA personalitzats.",
+  "hautech.ai": "Motor de moda d'IA dissenyat per generar sessions fotogr\u00e0fiques de peces impecables.",
+  "democreator.wondershare.com": "Gravador de pantalla tot en un que ofereix potents funcions d'edici\u00f3 de tutorials.",
+  "filmora.wondershare.com": "Editor de v\u00eddeos d'escriptori per a consumidors carregat amb eines de millora d'IA.",
+  "runwayml.com": "La suite d'IA creativa d'elit que impulsa el futur de la generaci\u00f3 cinematogr\u00e0fica.",
+  "pika.art": "Plataforma de creaci\u00f3 de v\u00eddeo basada en missatges, famosa per les sorprenents sortides estilitzades.",
+  "10web.io": "Creador de llocs web automatitzat de WordPress AI que proporciona allotjament integrat.",
+  "durable.co": "Genereu un lloc web de negocis completament dissenyat a l'instant des d'un missatge.",
+  "softgen.ai": "Construeix f\u00e0cilment aplicacions web que funcionen sense escriure codi.",
+  "relume.io": "Genereu estructura i arquitectura de llocs web complexos amb IA.",
+  "gamma.app": "Genereu presentacions i presentacions magn\u00edfiques i interactives a l'instant.",
+  "plusdocs.com": "Generador de diapositives d'IA natiu perfectament integrat a Google Slides.",
+  "slideteam.net": "Biblioteca massiva de plantilles professionals combinades amb un motor de diapositives AI.",
+  "co.dev": "Interf\u00edcie de conversa que us permet crear programari en angl\u00e8s senzill.",
+  "dora.run": "Dissenyeu llocs web en 3D animats i impressionants utilitzant un editor de nodes intu\u00eftiu.",
+  "chatbase.co": "Entrena un chatbot d'assist\u00e8ncia personalitzat sobre les teves dades i incrusta'l al teu lloc.",
+  "replit.com": "Entorn de codificaci\u00f3 en l\u00ednia millorat amb un agent d'IA incre\u00efblement capa\u00e7.",
+  "bolt.new": "Genereu, executeu i allotgeu aplicacions web completes al navegador.",
+  "lovable.dev": "Creeu interf\u00edcies web incre\u00efblement polides simplement descrivint-les.",
+  "v0.dev": "La potent eina de Vercel que converteix les idees de la interf\u00edcie d'usuari en un codi perfecte de React/Tailwind.",
+  "codeium.com": "Extensi\u00f3 alternativa gratu\u00efta d'alta capacitat per completar el codi AI.",
+  "coddy.tech": "Cursos interactius de codificaci\u00f3 dissenyats centrats totalment en exercicis pr\u00e0ctics.",
+  "leetcodewizard.io": "Un company d'IA que us ajuda directament durant les entrevistes complexes d'algoritmes.",
+  "roadmap.sh": "Mapes d'aprenentatge visual impulsats per la comunitat per a cada carrera de programari.",
+  "hackertyper.net": "Mash keys per simular l'escriptura de codi complex com un hacker de pel\u00b7l\u00edcules.",
+  "explorer.globe.engineer": "Desglosseu visualment l'arquitectura del sistema en temes interactius i explorables.",
+  "github.com/features/copilot": "El programador de parells d'IA est\u00e0ndard de la ind\u00fastria est\u00e0 profundament integrat a Git.",
+  "cursor.com": "El primer editor de codi de IA que combina UX familiar amb una intel\u00b7lig\u00e8ncia extrema.",
+  "lightpdf.com": "Xateja directament amb els teus PDF penjats per consultar informaci\u00f3 a l'instant.",
+  "hipdf.com": "Paquet complet d'eines de navegador fiables per comprimir i dividir PDF.",
+  "simplepdf.eu": "Editor de navegador net i amigable amb la privadesa per omplir i signar formularis.",
+  "scribehow.com": "Genera autom\u00e0ticament documentaci\u00f3 pas a pas nom\u00e9s registrant els clics.",
+  "nodsgy.com": "Converteix documents PDF densos i complexos en diagrames de flux visuals clars.",
+  "sobrief.com": "Obteniu resums de text i \u00e0udio concisos per a gaireb\u00e9 qualsevol llibre publicat.",
+  "pdf.wondershare.com": "Modificador de PDF d'escriptori robust amb utilitats de resum d'IA integrades.",
+  "flowvoice.ai": "Dicteu pensaments llargs i feu que l'IA els formati en par\u00e0grafs perfectes.",
+  "castmagic.io": "Transformeu els podcasts d'\u00e0udio d'una hora en una c\u00f2pia de m\u00e0rqueting escrita molt atractiva.",
+  "spellar.ai": "Client de reunions automatitzats que ofereix transcripcions i resums en temps real.",
+  "meeting.ai": "Graveu reunions digitals i genereu a l'instant tasques de seguiment accionables.",
+  "tempolor.com": "Suggereix de manera intel\u00b7ligent pistes musicals similars basades en tempos espec\u00edfics.",
+  "radio.garden": "Exploreu i escolteu milers d'emissions de r\u00e0dio en directe dibuixades a trav\u00e9s d'un globus 3D.",
+  "collov.ai": "Penja una foto d'una habitaci\u00f3 nua i genera idees de disseny d'interiors completament renderitzades.",
+  "home.by.me": "Feu un esborrany de pl\u00e0nols precisos i visualitzeu la vostra futura casa en 3D.",
+  "homedesigns.ai": "Reformeu instant\u00e0niament els mobles i les habitacions existents amb temes espectacularment nous.",
+  "layla.ai": "Xateja amb un agent de viatges d'IA per elaborar itineraris personalitzats i altament personalitzats.",
+  "map-this.com": "Tradueix materials d'estudi densos i dades geogr\u00e0fiques en itineraris cartografiats.",
+  "flightaware.com": "El recurs definitiu per al seguiment global de vols en directe.",
+  "geo-fs.com": "Simulador de vol multijugador gratu\u00eft basat en navegador que abasta el m\u00f3n real.",
+  "slowroads.io": "Interminables carreteres virtuals generades per procediments constru\u00efdes espec\u00edficament per a una conducci\u00f3 relaxant.",
+  "thetruesize.com": "Una eina de mapa interactiu que explora l'escala real i no distorsionada dels pa\u00efsos.",
+  "lostgamer.io": "Joc d'endevinar la geografia que posa a prova la teva ubicaci\u00f3 als videojocs.",
+  "learn-anything.xyz": "Un cat\u00e0leg de comunitat obert que dibuixa els camins \u00f2ptims per dominar qualsevol tema espec\u00edfic.",
+  "gitmind.com": "Motor col\u00b7laboratiu de pluja d'idees millorat amb IA per estructurar idees complexes.",
+  "edraw.ai": "Feu girar a l'instant mapes mentals visuals i diagrames de flux a partir d'indicacions de text b\u00e0siques.",
+  "edrawmax.wondershare.com": "Eina de diagramaci\u00f3 vers\u00e0til i polivalent que rivalitza amb el programari professional est\u00e0ndard.",
+  "edrawsoft.com/edrawmind": "Programari aut\u00f2nom de mapes mentals que incorpora conceptes moderns de generaci\u00f3 d'IA.",
+  "entertain.ed.app": "Plataforma educativa centrada totalment a millorar la pr\u00e0ctica de la comprensi\u00f3 lectora.",
+  "openlibrary.org": "Base de dades p\u00fablica massiva que ofereix acc\u00e9s universal gratu\u00eft a milions de llibres digitals.",
+  "musclewiki.com": "Feu clic a qualsevol m\u00fascul d'un diagrama del cos hum\u00e0 per rebre v\u00eddeos complets d'entrenament.",
+  "supercook.com": "Introdu\u00efu els ingredients que actualment teniu a la vostra nevera per descobrir receptes coincidents.",
+  "namesnack.com": "Genera noms de marques disponibles i enganxosos basant-se en paraules clau espec\u00edfiques del sector.",
+  "keyboardsimulator.xyz": "Personalitzeu i proveu els complexos perfils de so del teclat mec\u00e0nic mitjan\u00e7ant el simulador del navegador.",
+  "retrogames.onl": "Un arxiu massiu i perfectament emulat que us permet jugar a jocs retro cl\u00e0ssics directament al navegador.",
+  "media.io": "Suite completa de convertidors de format d'\u00e0udio i v\u00eddeo nadius del navegador.",
+  "recoverit.wondershare.com": "Programari resistent dissenyat espec\u00edficament per recuperar fitxers profunds suprimits permanentment.",
+  "tinywow.com": "Centenars de microeines completament gratu\u00eftes que aborden les manipulacions habituals de PDF, v\u00eddeos i imatges.",
+  "govdeals.com": "Plataforma de subhastes p\u00fabliques que ven b\u00e9ns excedents del govern local amb molt descompte.",
+  "myretrotvs.com": "Un projecte de navegador incre\u00efblement nost\u00e0lgic que simula emissions de televisi\u00f3 d'\u00e8poca seq\u00fcencialment per d\u00e8cades.",
+  "graphy.app": "Transformeu els n\u00fameros avorrits de fulls de c\u00e0lcul en gr\u00e0fics web sorprenents, interactius i vibrants.",
+  "meshy.ai": "Un model generatiu d'avantguarda que construeix r\u00e0pidament models 3D amb textura totalment a partir d'indicacions de text senzilles.",
+  "skybox.blockadelabs.com": "Simplement dibuixeu dissenys senzills i observeu com la IA sintetitza entorns massius i cohesionats de 360 \u200b\u200bgraus.",
+  "rxresu.me": "Una utilitat de creaci\u00f3 de curr\u00edculums totalment gratu\u00efta, amigable amb la privadesa i profundament personalitzable.",
+  "kickresume.com": "Una plataforma de curr\u00edculum de generaci\u00f3 autom\u00e0tica que utilitza models ling\u00fc\u00edstics per crear punts hiperprofessionals.",
+  "shopyourtv.com": "Una base de dades molt espec\u00edfica que identifica els vestits d'armari que apareixen als vostres programes preferits.",
+  "startmycar.com": "Una base de dades completa que allotja amplis manuals t\u00e8cnics, diagrames de caixes de fusibles i guies de llums d'advert\u00e8ncia per a autom\u00f2bils.",
+  "bricklink.com/v3/studio": "El motor de sandbox digital definitiu i robust per construir, representar i comprar models LEGO extrems.",
+  "tjukanovt.github.io/notable-people": "Un globus terraq\u00fci interactiu que mapa visualment els llocs de naixement expl\u00edcits de les figures hist\u00f2ricament m\u00e9s significatives de la Terra.",
+  "printify.com": "Una infraestructura massiva d'enviament directe que us permet adjuntar dissenys personalitzats a centenars de productes f\u00edsics en blanc.",
+  "aicomicfactory.com": "Proporcioneu un concepte de hist\u00f2ria breu senzill i processeu-lo en una tira c\u00f2mica totalment en panell i cohesionada estil\u00edsticament.",
+  "drfone.wondershare.com": "Una densa suite d'utilitats centrada exclusivament a facilitar c\u00f2pies de seguretat de dades de tel\u00e8fons intel\u00b7ligents dif\u00edcils i transfer\u00e8ncies delicades entre plataformes.",
+  "carcarekiosk.com": "Una biblioteca molt valuosa que consta de v\u00eddeos d'instruccions de manteniment de vehicles breus, espec\u00edfics i precisos al model.",
+  "atlas.org": "Un projecte robust de visualitzaci\u00f3 de dades macrosc\u00f2piques dissenyat per analitzar xarxes comercials globals immensament complexes.",
+  "temp-mail.org": "Genera una safata d'entrada de correu electr\u00f2nic altament d'un sol \u00fas i totalment an\u00f2nima que evita el correu brossa associat als registres obligatoris.",
+  "haveibeenpwned.com": "La base de dades autoritzada que verifica de manera fiable les vostres adreces de correu electr\u00f2nic contra infraccions de dades hist\u00f2riques reconegudes a nivell mundial.",
+  "web.archive.org": "La biblioteca troncal fonamental d'Internet, que captura constantment i preserva hist\u00f2ricament la vida \u00fatil de milers de milions de p\u00e0gines web diferents.",
+  "lmarena.ai": "Un parc infantil de proves a cegues que enfronta simult\u00e0niament models b\u00e0sics de primer nivell.",
+  "g4f.dev": "Un impressionant agregador de codi obert que elimina l'acc\u00e9s conversacional a m\u00e9s de 200 models d'IA premium i boutique diferents.",
+  "meta.ai": "La interf\u00edcie de consum ins\u00edgnia de Meta, que proporciona un acc\u00e9s r\u00e0pid i sense restriccions directament als models arquitect\u00f2nics de Llama incre\u00efblement robusts.",
+  "sur.pollinations.ai": "Una interf\u00edcie sorprenentment fluida i depurada que permet converses totalment sense fricci\u00f3 que abasten diversos models de backend.",
+  "deepinfra.com/chat": "Un parc infantil molt especialitzat per a desenvolupadors que permet la comprovaci\u00f3 instant\u00e0nia de la conversa de models de codi obert com DeepSeek i Qwen.",
+  "mirexa.vercel.app": "Un embolcall d'interf\u00edcie personalitzat elegant i lleuger que desbloqueja un acc\u00e9s web senzill a API premium com GPT-4 i inst\u00e0ncies de DeepSeek orientades.",
+  "umint-ai.hf.space": "Un node HuggingFace allotjat per la comunitat que serveix espec\u00edficament per a interaccions de conversa en brut per a models com Grok i versions expansives de DeepSeek.",
+  "sharedchat.cn": "Un grup de recursos compartits allotjats internacionalment que intenta distribuir cont\u00ednuament l'acc\u00e9s GPT-4 premium restringit de manera oberta.",
+  "aichatgptfree.org": "Un lloc dedicat i molt optimitzat dissenyat espec\u00edficament per oferir un acc\u00e9s totalment il\u00b7limitat a interaccions avan\u00e7ades basades en GPT.",
+  "copilot.microsoft.com": "El company d'ecosistema profundament integrat de Microsoft, alimentat de manera nativa per les iteracions m\u00e9s recents i avan\u00e7ades de la tecnologia OpenAI.",
+  "groq.com": "Un motor d'infer\u00e8ncia incre\u00efblement r\u00e0pid dissenyat expl\u00edcitament al voltant del maquinari LPU propietari, que genera centenars de fitxes intel\u00b7ligents per segon.",
+  "chatjimmy.ai": "Una demostraci\u00f3 experimental de maquinari d'IA d'alta velocitat, que genera text amb m\u00e9s de 15.000 fitxes per segon.",
+  "heck.ai": "Una plataforma multiprop\u00f2sit simplificada que alterna connexions r\u00e0pidament orientades espec\u00edficament a inst\u00e0ncies r\u00e0pides de DeepSeek i les xarxes Gemini de Google.",
+  "link.fuckicoding.com": "Una soluci\u00f3 alternativa agressiva ajustada espec\u00edficament per evitar els l\u00edmits generals de l'API mentre apareixen inst\u00e0ncies compatibles de subconjunts Claude i GPT.",
+  "pi.ai": "Un company de conversa \u00edntimament afinat i centrat expl\u00edcitament a oferir un di\u00e0leg d'anada i tornada molt emp\u00e0tic, de suport emocional.",
+  "origin.eqing.tech": "Una passarel\u00b7la de serveis autenticada per\u00f2 generosa que aflora integracions conversacionals directes que uneixen els principals models de la ind\u00fastria com GPT-4o i iteracions avan\u00e7ades de Claude.",
+  "lobechat.com": "Un marc d'escriptori i web de codi obert robust i amb totes les funcions que admet de manera \u00fanica xarxes de connectors massives mentre encamina models d'alta capacitat.",
+  "yupp.ai": "Una pot\u00e8ncia organitzativa que recopila espec\u00edficament l'acc\u00e9s, els mecanismes de sol\u00b7licitud i les experi\u00e8ncies d'usuari en un conjunt de m\u00e9s de 200 xarxes d'IA diferents.",
+  "chat.deepseek.com": "La passarel\u00b7la oficial orientada al consumidor que proporciona un acc\u00e9s expl\u00edcit i d'alta prioritat espec\u00edficament a estructures de raonament incre\u00efblement complexes mitjan\u00e7ant DeepSeek R1 i Coder.",
+  "huggingface.co/spaces": "Un recurs absolutament fonamental que permet a tota la comunitat d'aprenentatge autom\u00e0tic experimentar lliurement amb prototips funcionals d'avantguarda i desplegaments de models oberts.",
+  "kimi.com": "Un assistent excepcionalment capa\u00e7, profundament especialitzat en l'execuci\u00f3 d'an\u00e0lisis de documents complexos i de context llarg i en la gesti\u00f3 de mem\u00f2ries operatives cont\u00ednues massives.",
+  "warp.dev": "Un terminal molt modernitzat escrit completament en Rust, que integra fonamentalment la intel\u00b7lig\u00e8ncia generativa directament a les metodologies d'interf\u00edcie de l\u00ednia d'ordres.",
+  "goblin.tools": "Una suite accessible i molt ajustada que utilitza la intel\u00b7lig\u00e8ncia \u00fanicament per atomitzar funcions executives aclaparadores en llistes de control di\u00e0ries molt manejables i de mida petita.",
+  "ai.google.dev": "El portal de desenvolupament directe de Google proporciona als enginyers de programari un acc\u00e9s program\u00e0tic totalment gratu\u00eft i escalable massivament orientat expl\u00edcitament a la complexa arquitectura Gemini.",
+  "llm7.io": "Un centre de compensaci\u00f3 d'API simplificat que consolida de manera efectiva l'acc\u00e9s dels desenvolupadors a trav\u00e9s d'una matriu vertiginosa que inclou m\u00e9s de trenta prove\u00efdors d'intel\u00b7lig\u00e8ncia diferents en punts finals singulars.",
+  "uncloseai.com": "Una infraestructura altament especialitzada que imita deliberadament el format exacte de les estructures est\u00e0ndard d'OpenAI per atorgar r\u00e0pidament un acc\u00e9s sense mesura als models competidors sense problemes.",
+  "g4f.dev/docs": "La documentaci\u00f3 t\u00e8cnica completa que defineix estrictament com els enginyers haurien de muntar, consultar i mantenir amb precisi\u00f3 les vies automatitzades utilitzant la xarxa d'agregadors G4F massiva.",
+  "developer.puter.com": "Un entorn operatiu web experimental, completament sense servidor, que injecta de manera nativa capacitats multimodals eliminant completament la necessitat de fluxos d'autenticaci\u00f3 interns complexos.",
+  "phind.com": "Un motor de cerca incre\u00efblement sofisticat \u00e0mpliament dissenyat i calibrat de manera agressiva de manera expl\u00edcita per ajudar els desenvolupadors de programari a desentranyar paradigmes t\u00e8cnics complicats de manera eficient.",
+  "pollinations.ai": "Un portal d'interf\u00edcie completament sense fricci\u00f3 que utilitza en gran mesura arquitectures de difusi\u00f3 latents que permeten als consumidors prototipar r\u00e0pidament conceptes visualment generatius complexos sense restriccions.",
+  "vheer.com": "Un generador d'actius generatius minimalista i hiper-enfocat dissenyat estrictament per produir imatges fonamentals molt estilitzades i inherentment netes orientades a aplicacions est\u00e8tiques modernes.",
+  "perchance.org/wtr90dexsn": "Un motor de text a imatge excepcionalment \u00fanic, molt aleatoritzat i totalment lliure de restriccions que es basa fonamentalment en mec\u00e0niques estructurals totalment de codi obert constantment.",
+  "bing.com/images/create": "L'eina de consum profundament integrada de Microsoft canalitza sol\u00b7licituds de generaci\u00f3 extremadament robustes i sense modificar de manera segura a trav\u00e9s de la formidable xarxa DALL-E 3 d'OpenAI.",
+  "n8n.io": "Una suite d'automatitzaci\u00f3 de flux de treball visual de codi obert tremendament potent que facilita profundament connexions arquitect\u00f2niques expl\u00edcites que creuen perfectament nodes d'intel\u00b7lig\u00e8ncia.",
+  "awwwards.com": "El punt de refer\u00e8ncia mundialment reconegut que premia el disseny digital d'elit i el desenvolupament web de front-end incre\u00efble.",
+  "mobbin.com": "Una biblioteca \u00e0mpliament completa i cercable que consta \u00edntegrament de patrons d'interf\u00edcie d'usuari web i m\u00f2bils aut\u00e8ntics capturats meticulosament.",
+  "godly.website": "Una col\u00b7lecci\u00f3 sorprenentment curada que mostra exclusivament el cim absolut dels dissenys de disseny web animats d'avantguarda.",
+  "lapaninja.com": "Un dip\u00f2sit dens centrat directament en una arquitectura moderna de p\u00e0gines de destinaci\u00f3 molt efica\u00e7 i molt bella.",
+  "siteinspire.com": "Una galeria netament categoritzada que destaca les filosofies de disseny interactiu basades en quadr\u00edcules minimalistes i extremadament refinades.",
+  "maxibestof.one": "Una selecci\u00f3 r\u00e0pida i molt curada que presenta plantilles web responsives extraordin\u00e0riament sorprenents i enfocades a la modernitat.",
+  "pageflows.com": "Una col\u00b7lecci\u00f3 massiva dedicada expl\u00edcitament a gravar, analitzar i estructurar fluxos perfectes d'incorporaci\u00f3 d'usuaris.",
+  "curated.design": "Un recurs \u00e0mpliament catalogat que destaca elements d'interf\u00edcie extremadament polits i dissenys complets d'aplicacions.",
+  "dribbble.com": "La plataforma comunit\u00e0ria est\u00e0ndard del sector constru\u00efda de manera expl\u00edcita per descobrir creativitats visuals i de moviment de primer nivell.",
+  "behance.net": "La gigantesca xarxa creativa d'Adobe que mostra de manera nativa carteres de marques i il\u00b7lustracions professionals impressionants.",
+  "savee.it": "Una alternativa de Pinterest clarament elegant dissenyada expl\u00edcitament per organitzar perfectament taulers d'humor sense desordre.",
+  "muz.li": "Una extensi\u00f3 de navegador molt optimitzada que apareix cont\u00ednuament agregacions massives de fonts di\u00e0ries d'inspiraci\u00f3 de disseny.",
+  "creativeboom.com": "Una revista digital aclamada internacionalment que publica constantment fotografia i art molt inspiradors.",
+  "ui-patterns.com": "Una base de dades robusta i sistem\u00e0ticament estructurada que categoritza activament solucions psicol\u00f2giques recurrents dirigides a problemes d'interf\u00edcie.",
+  "uigarage.net": "Un repositori actualitzat di\u00e0riament que recull espec\u00edficament men\u00fas de navegaci\u00f3 complexos, peus de p\u00e0gina i elements granulars de la interf\u00edcie d'usuari.",
+  "darkmodedesign.com": "Una galeria especialitzada totalment dedicada exclusivament a interf\u00edcies de mode fosc amb una execuci\u00f3 meravellosa i molt contrastada.",
+  "saaslandingpage.com": "Un arxiu incre\u00efblement enfocat que recull expl\u00edcitament p\u00e0gines de destinaci\u00f3 SaaS densament dissenyades i de gran conversi\u00f3.",
+  "footer.design": "Una galeria profundament hiper-enfocada que recull espec\u00edficament peus de p\u00e0gina de llocs web amb una estructura \u00fanica i un disseny impecable.",
+  "ui.shadcn.com": "Una biblioteca de components b\u00e0sics escandalosament popular, sense estil i completament accessible que aprofita en gran mesura l'arquitectura Tailwind estricta.",
+  "radix-ui.com": "Una col\u00b7lecci\u00f3 sense opini\u00f3 que proporciona perfectament components primitius i altament accessibles que alimenten fonamentalment marcs moderns complexos.",
+  "chakra-ui.com": "Un marc de React clarament modular i \u00e0mpliament accessible, optimitzat inherentment exclusivament per a una velocitat de desenvolupament massiva.",
+  "mantine.dev": "Un marc de React densament ple que ofereix centenars de ganxos constru\u00efts per experts juntament amb interf\u00edcies altament funcionals.",
+  "mui.com": "El marc de React monol\u00edtic i est\u00e0ndard de la ind\u00fastria que implementa de manera massiva les complexes directrius de disseny de materials de Google de manera perfecta.",
+  "nextui.org": "Una biblioteca d'interf\u00edcie d'usuari bellament optimitzada dissenyada expl\u00edcitament al voltant de la representaci\u00f3 de components fonamentalment bells de manera incre\u00efblement r\u00e0pida.",
+  "daisyui.com": "Un connector de Tailwind absurdament popular i completament gratu\u00eft que redueix dr\u00e0sticament la inflor massiva d'HTML mitjan\u00e7ant classes d'utilitat sem\u00e0ntica.",
+  "flowbite.com": "Una biblioteca robusta i de codi obert que assembla de manera agressiva interf\u00edcies altament funcionals completament mitjan\u00e7ant estrictes convencions Tailwind.",
+  "headlessui.com": "Una col\u00b7lecci\u00f3 que emfatitza expl\u00edcitament elements d'interf\u00edcie d'usuari completament sense estil i perfectament accessibles dissenyats directament pels laboratoris de Tailwind.",
+  "framer.com/motion": "Un motor d'animaci\u00f3 preparat per a la producci\u00f3 de manera nativa que aporta interaccions de moviment extraordin\u00e0riament fluides i complexes exclusivament als components de React.",
+  "gsap.com": "Una plataforma d'execuci\u00f3 JavaScript llegend\u00e0ria i extremadament robusta que alimenta milions d'animacions web incre\u00efblement complexes a tot el m\u00f3n.",
+  "auto-animate.formkit.com": "Un primitiu incre\u00efblement lleuger de configuraci\u00f3 zero que automatitza completament les transicions estructurals DOM senzilles de manera instant\u00e0nia.",
+  "lottiefiles.com": "L'ecosistema massiu i est\u00e0ndard a nivell mundial que permet animacions vectorials molt petites i perfectament escalables directament dins d'interf\u00edcies sensibles.",
+  "tailwindcss.com": "Un marc CSS profundament transformador que redefinir\u00e0 completament com els desenvolupadors construeixen f\u00edsicament aplicacions modernes r\u00e0pidament.",
+  "getbootstrap.com": "El conjunt d'eines de front-end hist\u00f2ricament innegable que ofereix constantment bastides extremadament fiables orientades a arquitectures l\u00f2giques web per a m\u00f2bils.",
+  "bulma.io": "Un marc profundament vers\u00e0til i altament intu\u00eftiu fonamentat fonamentalment en els est\u00e0ndards moderns de la xarxa Flexbox.",
+  "magicui.design": "Una galeria densament poblada que ofereix espec\u00edficament interf\u00edcies d'aplicacions React complexes i molt experimentals intensament animades sense problemes.",
+  "aceternity.com": "Una biblioteca incre\u00efblement estilitzada que genera de manera expl\u00edcita elements de moviment de Tailwind i Framer visualment al\u00b7lucinants i molt gr\u00e0fics.",
+  "tremor.so": "Un dip\u00f2sit molt especialitzat centrat expl\u00edcitament a tra\u00e7ar gr\u00e0fics de forma r\u00e0pida i senzilla amb an\u00e0lisis de taulers interns magn\u00edfics i complexos.",
+  "vercel.com/templates": "La biblioteca oficial de plantilles de desplegament Next.js, incre\u00efblement optimitzada directament per a un desplegament empresarial a gran escala a l'instant.",
+  "shopify.com/themes": "L'ecosistema est\u00e0ndard absolut de la ind\u00fastria amb una est\u00e8tica de desplegament de comer\u00e7 electr\u00f2nic de gran confian\u00e7a i optimitzada fonamentalment.",
+  "tailwindui.com": "El directori oficial, extremadament premium, que ofereix col\u00b7leccions de components completament impecables dissenyades directament pels creadors de Tailwind.",
+  "cruip.com": "Una col\u00b7lecci\u00f3 bellament refinada i de disseny n\u00edtid que munta amb precisi\u00f3 marcs de p\u00e0gines d'inici impressionants i altament convertibles r\u00e0pidament.",
+  "html5up.net": "Un recurs absolutament cl\u00e0ssic i fam\u00f3s i fiable que distribueix lliurement estructures de cartera HTML5 incre\u00efblement s\u00f2lides i molt sensibles a la perfecci\u00f3.",
+  "ui8.net": "Un mercat enormement ple que cont\u00e9 literalment milers de kits de disseny premium d'avantguarda altament experimentals f\u00edsicament.",
+  "framer.com/templates": "Una quadr\u00edcula enorme i verificada meticulosament que ofereix dissenys immediats incre\u00efblement impressionants i animats perfectament que suporten de forma nativa estructures Framer.",
+  "webflow.com/templates": "La botiga incre\u00efblement massiva i reconeguda a nivell mundial que ofereix arquitectures responsives completament completes que alimenten directament les aplicacions Webflow de manera eficient.",
+  "creative-tim.com": "Una plataforma molt expansiva altament dedicada espec\u00edficament a subministrar panells de fons d'aplicacions complicats de manera funcional.",
+  "themeforest.net": "El dip\u00f2sit m\u00e9s gran i m\u00e9s important hist\u00f2ricament a nivell mundial que distribueix di\u00e0riament milers d'infraestructures de llocs web codificades de manera exhaustiva.",
+  "mui.com/store": "El repositori premium connectat intr\u00ednsecament directament a la interf\u00edcie d'usuari de material que proporciona interf\u00edcies empresarials molt complexes a nivell mundial.",
+  "astro.build/themes": "Una xarxa molt r\u00e0pida i excepcionalment moderna que allotja espec\u00edficament aplicacions d'arquitectura Astro d'ultraperformance constantment.",
+  "themes.gohugo.io": "L'\u00edndex fundacional ofereix constantment temes de generaci\u00f3 de blocs de reducci\u00f3 est\u00e0tica totalment redu\u00efts i molt r\u00e0pids.",
+  "ghost.org/themes": "Un ecosistema ben dissenyat i molt refinat que admet definitivament els desplegaments de periodisme tipogr\u00e0fic extremadament elegants de manera impecable.",
+  "fonts.google.com": "El directori tipogr\u00e0fic de codi obert absolutament fonamental i aclaparadorament complet que potencia la meitat d'Internet a l'instant.",
+  "fontshare.com": "Un servei de tipus de lletra premium gratu\u00eft incre\u00efblement impressionant que s'ofereix de manera expl\u00edcita orientada a l'est\u00e8tica digital moderna amb gr\u00e0cia.",
+  "typewolf.com": "El recurs de curaci\u00f3 independent m\u00e9s fiable de la ind\u00fastria que perfila constantment combinacions de tipus de lletra impressionants.",
+  "dafont.com": "El dip\u00f2sit innegablement cl\u00e0ssic i ca\u00f2tic sense fi que cont\u00e9 desenes de milers de tipografies de programari gratu\u00eft profundament experimentals.",
+  "pangrampangram.com": "Una foneria incre\u00efblement moderna exclusivament responsable de la creaci\u00f3 fonamental de les arquitectures sans-serif m\u00e9s netes disponibles a tot el m\u00f3n.",
+  "myfonts.com": "L'\u00edndex tipogr\u00e0fic comercial m\u00e9s exhaustiu que allotja literalment milers de fam\u00edlies premium immensament complexes.",
+  "fonts.adobe.com": "Un ecosistema tremendament massiu i perfecte que alimenta exclusivament desplegaments tipogr\u00e0fics de gamma alta molt integrats de manera nativa a Adobe.",
+  "fontawesome.com": "El marc d'icones fundacional astron\u00f2micament massiu que alimenta exclusivament gr\u00e0fics vectorials senzills a infinitat de plataformes a nivell mundial.",
+  "fonts.google.com/icons": "L'est\u00e0ndard incre\u00efblement estricte de Google que defineix a la perfecci\u00f3 la iconografia d'interf\u00edcie optimitzada en tot el disseny del material.",
+  "lucide.dev": "Un marc vectorial molt equilibrat i immensament clar que modernitza completament els est\u00e0ndards de s\u00edmbols d'interf\u00edcie expl\u00edcitament n\u00edtids.",
+  "uncut.wtf": "Un cat\u00e0leg incre\u00efblement avantguardista enfocat exclusivament a catalogar de manera fiable tipus de lletra excepcionalment estranys i totalment de codi obert.",
+  "velvetyne.fr": "Un col\u00b7lectiu de codi obert ferotgement independent que distribueix cont\u00ednuament conceptes de visualitzaci\u00f3 radicalment \u00fanics i experimentals.",
+  "unsplash.com": "La destinaci\u00f3 aclaparadorament fonamental que ofereix una fotografia est\u00e8tica impressionant i totalment gratu\u00efta arreu del m\u00f3n.",
+  "pexels.com": "Una base de dades fant\u00e0sticament massiva que cataloga constantment imatges d'alta resoluci\u00f3 i sense drets d'autor amb eleg\u00e0ncia.",
+  "pixabay.com": "Un marc incre\u00efblement vast que distribueix lliurement literalment milions d'actius multim\u00e8dia diferents i lliures de drets d'autor enviats per la comunitat.",
+  "stocksy.com": "Una cooperativa molt curada i de gran qualitat que ofereix exclusivament mitjans de comunicaci\u00f3 totalment art\u00edstics i totalment aut\u00e8ntics de manera nativa.",
+  "flaticon.com": "La biblioteca vectorial unificada m\u00e9s gran que cont\u00e9 milions d'icones gr\u00e0fiques d'estil diferenciat constantment.",
+  "svgrepo.com": "Un motor de cerca de codi obert profundament complet, incre\u00efblement dedicat espec\u00edficament a subministrar vectors escalables perfectament nets.",
+  "streamlinehq.com": "Un marc vectorial absurdament extens i perfectament coherent que cont\u00e9 f\u00edsicament centenars de milers de gr\u00e0fics d'interf\u00edcie diferents.",
+  "freepik.com": "Un est\u00e0ndard molt confiat que serveix definitivament a compilacions massives de plantilles vectorials essencials sense esfor\u00e7 a nivell mundial.",
+  "iconfinder.com": "Un mercat global incre\u00efblement gran que serveix exclusivament matrius d'icones d'interf\u00edcie personalitzades altament especialitzades i dissenyades de primera qualitat.",
+  "undraw.co": "Una biblioteca incre\u00efblement popular i totalment gratu\u00efta que se centra exclusivament en il\u00b7lustracions vectorials diferents i molt escalables.",
+  "humaaans.com": "Una biblioteca de combinaci\u00f3 i combinaci\u00f3 molt din\u00e0mica dissenyada expl\u00edcitament per combinar de manera l\u00fadica vectors humans completament escalables constantment.",
+  "illustrations.co": "Un bell marc de codi obert ben curat que detalla completament centenars d'interf\u00edcies gr\u00e0fiques m\u00ednimes netes.",
+  "opendoodles.com": "Una galeria completament de codi obert que ofereix imatges esquem\u00e0tiques deliciosament ca\u00f2tiques dibuixades a m\u00e0 de manera fiable.",
+  "sketchfab.com": "La plataforma est\u00e0ndard de la ind\u00fastria inequ\u00edvocament massiva que gestiona profundament el processament de models 3D en temps real molt complicat.",
+  "polyhaven.com": "Un magatzem de domini p\u00fablic ferotgement protegit de manera exclusiva que representa geometries gr\u00e0fiques sense restriccions incre\u00efblement complexes.",
+  "spline.design": "Un editor de navegador incre\u00efblement accessible que uneix de manera inherent objectes tridimensionals extremadament complexos de manera intu\u00eftiva.",
+  "turbosquid.com": "El mercat m\u00e9s dominant alberga intensament milions de geometries de pol\u00edgons comercials dissenyades perfectament de manera funcional.",
+  "mixkit.co": "Una galeria extremadament fiable i d'alta qualitat que ofereix transicions cinematogr\u00e0fiques sense drets d'autor immensament netes amb gr\u00e0cia.",
+  "coverr.co": "Una biblioteca definitivament bonica sense drets d'autor, estrictament dedicada espec\u00edficament a oferir fons massius en bucle d'alta fidelitat.",
+  "videezy.com": "Un dip\u00f2sit incre\u00efblement enorme que allotja constantment quantitats massives de composicions de v\u00eddeo 4k molt diferents.",
+  "bensound.com": "Un cat\u00e0leg notablement cl\u00e0ssic que ofereix fonamentalment orquestracions atmosf\u00e8riques de fons de composici\u00f3 estricta i excepcionalment n\u00edtids a l'instant.",
+  "wellfound.com": "El directori exclusiu principal que connecta activament talent ambici\u00f3s espec\u00edficament amb startups molt finan\u00e7ades.",
+  "upwork.com": "El mercat aut\u00f2nom aclaparadorament massiu i utilitzat a nivell mundial uneix \u00e0mpliament els clients amb contractistes independents especialitzats.",
+  "weworkremotely.com": "Una comunitat incre\u00efblement fonamental que cataloga amb precisi\u00f3 centenars de llocs d'enginyeria i disseny remots verificats d'alta qualitat.",
+  "nodesk.co": "Un agregador netament seleccionat que fa un seguiment expl\u00edcit de les oportunitats professionals remotes asincr\u00f2niques altament flexibles constantment.",
+  "flexjobs.com": "Un tauler clarament premium i rigorosament seleccionat a m\u00e0 que valida estrictament els rols h\u00edbrids i remots globals totalment leg\u00edtims.",
+  "remoters.net": "Un centre complet que ofereix recursos expansius orientats expl\u00edcitament als n\u00f2mades digitals professionals que exploren el treball remot generalitzat.",
+  "workingnomads.com": "Una plataforma molt impulsada per butlletins que apareix directament a les obertures de m\u00e0rqueting digital i desenvolupament remot acuradament organitzades.",
+  "bubble.io": "Una suite de programaci\u00f3 visual incre\u00efblement potent i totalment exhaustiva que substitueix completament les depend\u00e8ncies d'enginyeria del backend.",
+  "flutterflow.io": "Un editor visual incre\u00efblement sofisticat que produeix arquitectures Flutter completes de forma nativa i compilades perfectament.",
+  "softr.io": "Una capa l\u00f2gica incre\u00efblement r\u00e0pida dissenyada espec\u00edficament per traduir immediatament bases de dades d'Airtable en brut a portals de clients interactius.",
+  "glideapps.com": "Un motor excepcionalment intu\u00eftiu que deriva poderosament aplicacions m\u00f2bils totalment navegables i amb una resposta impressionant, estrictament a partir de fulls de c\u00e0lcul.",
+  "weweb.io": "Un llen\u00e7 frontal profundament flexible que uneix elegantment elements DOM d'estil visual directament a estructures de bases de dades externes.",
+  "adalo.com": "Un constructor d'arrossegar i deixar anar molt intu\u00eftiu que se centra expressament en desplegaments incre\u00efblement r\u00e0pids de la botiga d'aplicacions m\u00f2bils directament.",
+  "backendless.com": "Una plataforma monol\u00edtica terriblement densa i extremadament capa\u00e7 que gestiona activament una gesti\u00f3 massiva de bases de dades en temps real de manera nativa mitjan\u00e7ant blocs visuals.",
+  "zapier.com/interfaces": "Una eina excepcionalment integrada que genera din\u00e0micament formularis p\u00fablics interactius que desencadena immediatament innombrables automatitzacions complexes de fons.",
+  "kokonutui.com": "Una col\u00b7lecci\u00f3 de components de codi obert clarament elegant i altament modernitzada centrada principalment en una est\u00e8tica web interactiva polida.",
+  "animejs.com": "Un motor d'animaci\u00f3 amb una estructura brillant i enormement lleuger que domina completament les transicions de propietats CSS DOM extremadament complexes.",
+  "motion-primitives.com": "Un ecosistema estrictament estilitzat que ofereix elements d'interacci\u00f3 molt expressius i impecablement dissenyats que complementen les arquitectures modernes de React.",
+  "21st.dev": "Un centre excepcionalment curat que aflora sense parar centenars d'abstraccions d'interf\u00edcie d'usuari extremadament incre\u00efbles i extremadament experimentals.",
+  "figma.com": "L'entorn vectorial col\u00b7laboratiu innegablement fonamental que redefineix completament exactament com les organitzacions modernes conceptualitzen les interf\u00edcies digitals.",
+  "brandbird.app": "Una utilitat deliciosament especialitzada que converteix activament captures de pantalla avorrides en gr\u00e0fics de m\u00e0rqueting molt estilitzats i immensament atractius.",
+  "uizard.io": "Una pissarra incre\u00efblement futurista que aprofita fortament la IA generativa exclusivament per transmutar instant\u00e0niament els gargots b\u00e0sics en marcs interactius.",
+  "ngrok.com": "Una passarel\u00b7la de programari obligada de manera inequ\u00edvoca que for\u00e7a violentament URL p\u00fablics segurs completament directament a trav\u00e9s de tallafocs locals altament restrictius.",
+  "apidog.com": "Una suite estructural extremadament expansiva que gestiona perfectament la documentaci\u00f3 del cicle de vida de l'API profundament complexa, la depuraci\u00f3, l'orientaci\u00f3 i els bucles de proves massius.",
+  "firebase.google.com": "El backend monol\u00edtic com a servei de Google alimenta de manera nativa milions de bases de dades escalables intricades de forma totalment segura i r\u00e0pida.",
+  "lindy.ai": "Una entitat aut\u00f2noma fenomenalment avan\u00e7ada, inherentment capa\u00e7 de navegar completament per fluxos de treball empresarials personals i organitzatius incre\u00efblement diversos.",
+  "flowiseai.com": "Un llen\u00e7 arquitect\u00f2nic d'arrossegar i deixar anar molt expl\u00edcit que dissenya directament vies d'orquestraci\u00f3 LLM personalitzades extraordin\u00e0riament complexes visualment.",
+  "pitch.com": "Un entorn d'edici\u00f3 visual sorprenentment polit i incre\u00efblement col\u00b7laboratiu que substitueix estructuralment els motors de presentaci\u00f3 tradicionals.",
+  "slidesgo.com": "Un arxiu incre\u00efblement gegant que ofereix constantment estructures de plantilles incre\u00efblement belles i molt diverses, totalment gratu\u00eftes, exclusivament per a Presentacions de Google.",
+  "minicoursegenerator.com": "Una plataforma clarament \u00fanica que dep\u00e8n en gran mesura dels sistemes d'intel\u00b7lig\u00e8ncia que extreuen directament curr\u00edculums interactius molt atractius de manera nativa de textos en brut.",
+  "vidu.studio": "Un motor de generaci\u00f3 espectacularment agressiu que impulsa a fons interpretacions puntuals extremadament espec\u00edfiques en v\u00eddeos estilitzats extraordin\u00e0riament diferents.",
+  "creatify.ai": "Un marc estructurat intencionadament que ofereix anuncis de v\u00eddeo de comer\u00e7 electr\u00f2nic automatitzats de manera \u00fanica i profundament persuasives a l'instant.",
+  "ozone.pro": "Un processador d'edici\u00f3 de v\u00eddeo natiu del n\u00favol profundament r\u00e0pid que integra estrictament una IA d'assist\u00e8ncia multimodal aclaparadorament precisa.",
+  "redbubble.com": "Una infraestructura comercial astron\u00f2micament gran que es basa completament en obres d'art independents extremadament especialitzades expl\u00edcitament per a la producci\u00f3 en massa.",
+  "teepublic.com": "Un gegant\u00ed competidor estretament relacionat que d\u00f3na suport intensament a comunitats de disseny gr\u00e0fic profundament creatives i molt diverses a trav\u00e9s de mitjans f\u00edsics.",
+  "merch.amazon.com": "La for\u00e7a innegable dominant que injecta en gran mesura sol\u00b7licituds de productes f\u00edsics imprimibles totalment personalitzats de manera agressiva directament a la log\u00edstica global d'Amazon.",
+  "kdp.amazon.com": "El sistema de publicaci\u00f3 absolutament fonamental que proporciona de manera nativa un acc\u00e9s incre\u00efblement complet que enlla\u00e7a directament la literatura personalitzada profundament als mercats globals.",
+  "mcp.run": "Un directori estructural profundament essencial que indexa de manera agressiva connectors de protocol de context de model exclusivament especialitzats a nivell mundial.",
+  "supermemory.ai": "Un marc incre\u00efblement r\u00e0pid i totalment natiu que serveix de manera agressiva a una infraestructura de mem\u00f2ria interconnectada intensament profunda constantment a trav\u00e9s d'interaccions complexes d'IA.",
+  "claude.ai": "La interf\u00edcie singularment definitiva d'Anthropic es comunica exclusivament directament profundament amb implementacions de raonament incre\u00efblement avan\u00e7ades a nivell mundial.",
+  "riffusion.com": "Un model absolutament boig que passa per alt les estructures sonores natives que genera estrictament freq\u00fc\u00e8ncies sonores excepcionalment enganxadores directament mitjan\u00e7ant espectrogrames visuals.",
+  "fmhy.net": "Una base de dades organitzativa terriblement extensa i altament descentralitzada que serveix exclusivament vies de programari alternatives incre\u00efblement completes sense parar.",
+  "hyper3d.ai": "Un marc incre\u00efblement capa\u00e7 absolutament especialitzat profundament i exclusivament transformant les entrades bidimensionals senzilles f\u00edsicament en volums renderitzats immensament impressionants.",
+  "tripo3d.ai": "Un motor multimodal profundament r\u00e0pid capa\u00e7 de generar directament un model topol\u00f2gic incre\u00efblement complicat estrictament a partir d'imatges textuals b\u00e0siques senzilles.",
+  "outlier.ai": "Un mercat excepcionalment \u00fanic que canalitza estrictament l'ajustament de refor\u00e7 hum\u00e0 extremadament cr\u00edtic impulsant agressivament arquitectures d'intel\u00b7lig\u00e8ncia incre\u00efblement vastes a nivell mundial.",
+  "alternativeto.net": "Una base de dades profundament basada en la comunitat que mapeja absolutament substituts de programari equivalents de manera expl\u00edcita, basats totalment en el consens dels usuaris.",
+  "answerthepublic.com": "Un visualitzador d'investigaci\u00f3 incre\u00efblement profund que mapeja directament consultes de cerca d'usuaris completament crues de manera din\u00e0mica en entorns de cerca massius.",
+  "appsumo.com": "El mercat innegablement principal que suma sense parar llic\u00e8ncies de programari de per vida extremadament valuoses dirigides principalment a empreses ambicioses en creixement.",
+  "aweber.com": "Una plataforma de difusi\u00f3 excepcionalment establerta que alimenta fonamentalment sistemes de distribuci\u00f3 massiva de correu electr\u00f2nic incre\u00efblement fiables amb \u00e8xit durant d\u00e8cades.",
+  "bigspy.com": "Una interf\u00edcie de reconeixement immensament agressiva que fa un seguiment actiu constant d'estrat\u00e8gies publicit\u00e0ries de competidors globals de gran \u00e8xit a trav\u00e9s de les xarxes.",
+  "bigvu.tv": "Una utilitat de difusi\u00f3 estructuralment essencial que ofereix incre\u00efblement eines de teleprompting intel\u00b7ligents profundament fiables que substitueixen perfectament el maquinari f\u00edsic de l'estudi.",
+  "bookbolt.io": "Un tauler d'investigaci\u00f3 estrictament especialitzat que s'orienta de manera expl\u00edcita a n\u00ednxols de publicaci\u00f3 de baix contingut molt rendibles directament a la infraestructura d'Amazon.",
+  "brandcolors.net": "Un directori incre\u00efblement definitiu i respectat universalment que cataloga amb precisi\u00f3 valors hexadecimals absolutament exactes que defineixen amb \u00e8xit grans corporacions globals.",
+  "builderall.com": "Un ecosistema digital incre\u00efblement enorme i monol\u00edticament absolut que combina de manera expl\u00edcita pr\u00e0cticament tots els constructors de m\u00e0rqueting l\u00f2gicament possibles.",
+  "capcut.com": "El rei totalment innegable que dicta poderosament l'est\u00e8tica d'edici\u00f3 m\u00f2bil de format breu expl\u00edcitament viral que defineix en gran mesura el consum d'emissi\u00f3 moderna.",
+  "circle.so": "Una base modular bellament elegant dissenyada espec\u00edficament per crear una arquitectura de f\u00f2rums independent i incre\u00efblement premium internament.",
+  "clipchamp.com": "Un processador natiu web extremadament integrat que compila activament l\u00ednies de temps complexes de projectes cinematogr\u00e0fics de manera perfecta directament als navegadors est\u00e0ndard.",
+  "contentatscale.ai": "Un marc generatiu optimitzat agressivament estructurat de manera inherent que dissenya expressament quantitats completament massives sense passar directament la detecci\u00f3 anti-IA estrictament.",
+  "copy.ai": "Un conjunt d'eines de generaci\u00f3 incre\u00efblement popular dissenyat espec\u00edficament per accelerar la creaci\u00f3 de text de m\u00e0rqueting corporatiu molt massiu de manera din\u00e0mica.",
+  "createstudio.com": "Un estudi de composici\u00f3 deliciosament fluid que produeix a la perfecci\u00f3 seq\u00fc\u00e8ncies explicatives de personatges notablement atractives i ometent directament obstacles t\u00e8cnics massius.",
+  "dateful.com": "Una utilitat molt estrictament pura que resol de manera expl\u00edcita traduccions complexes de programaci\u00f3 global sense esfor\u00e7, eliminant directament la confusi\u00f3 habitual de reunions.",
+  "blackmagicdesign.com/products/davinciresolve": "El mon\u00f2lit de grau Hollywood absolutament indiscutible que controla absolutament la correcci\u00f3 global del color molt avan\u00e7ada que domina de manera nativa ind\u00fastries cinematogr\u00e0fiques senceres.",
+  "extract.pics": "Un motor de raspat clarament agressiu dissenyat inherentment per eliminar quantitats massives que coincideixen perfectament amb imatges a l'instant a trav\u00e9s dels URL orientats de manera nativa.",
+  "fiverr.com": "La macroeconomia terriblement colossal que alimenta completament delegacions de microtasques incre\u00efblement r\u00e0pides estandarditzant completament canalitzacions de m\u00e0 d'obra digital independents massives.",
+  "flourish.studio": "Un motor sorprenentment articulat que interpola de manera neta dades en brut molt desorganitzades de manera din\u00e0mica i expl\u00edcita en impressionants arquitectures de gr\u00e0fics animats.",
+  "infogram.com": "Un disseny vectorial fortament capa\u00e7 que substitueix directament la creaci\u00f3 de gr\u00e0fics incre\u00efblement tedi\u00f3s de manera nativa que simplifica molt les complexes distribucions period\u00edstiques.",
+  "invideo.io": "Un manipulador de plantilles molt intu\u00eftiu, estructurat de manera inherent, que impulsa expressament una creaci\u00f3 d'anuncis extremadament massiva que aprofita sense problemes immenses biblioteques d'estoc.",
+  "jasper.ai": "L'arquitectura de l'empresa innegablement dominant dicta a fons les sortides d'identitat de marca ling\u00fc\u00edstica corporativa interna fortament integrades amb precisi\u00f3.",
+  "mindmup.com": "Un mapa estructural totalment sense fricci\u00f3 dissenyat espec\u00edficament per conceptualitzar directament fluxos de treball cerebrals massius lligats de manera perfecta al costat de Google Drive.",
+  "namecheap.com": "El registrador web completament omnipresent que ofereix reserves de dominis amb molt descomptes profunds defineix cont\u00ednuament els preus b\u00e0sics globals.",
+  "namechk.com": "Una eina de reconeixement tremendament cr\u00edtica que escaneja intensament desenes extremadament comprovant expl\u00edcitament la disponibilitat global exacta de la maneta de forma din\u00e0mica.",
+  "openclipart.org": "Una l\u00ednia de base incondicionalment totalment gratu\u00efta que dep\u00e8n en gran mesura de gr\u00e0fics vectorials de domini p\u00fablic purament que proporcionen reserves gen\u00e8riques massives.",
+  "pabbly.com": "Una arquitectura d'integraci\u00f3 clarament agressiva que rivalitza de manera expl\u00edcita amb els sistemes d'automatitzaci\u00f3 monol\u00edtics que ofereix completament un valor de vida \u00fatil de manera estricta.",
+  "pdfcandy.com": "Un manipulador de formats escandalosament complet que cobreix literalment totes les conversions concebibles espec\u00edficament que uneix directament les restriccions de PDF.",
+  "photovibrance.io": "Un motor estrictament especialitzat que for\u00e7a dr\u00e0sticament un moviment cin\u00e8tic immensament agressiu de manera agressiva en entorns bidimensionals pr\u00e8viament est\u00e0tics.",
+  "quillbot.com": "Un refinador ling\u00fc\u00edstic profundament omnipresent integrat massivament globalment i simplificar de manera directa complexitats textuals incre\u00efblement denses a l'instant de manera nativa.",
+  "remaker.ai": "Un motor de s\u00edntesi inherentment orientat que optimitza intensament les superposicions facials netes expl\u00edcitament de manera coherent i impecable a trav\u00e9s de diverses matrius d'il\u00b7luminaci\u00f3.",
+  "snip.ly": "Un proxy de m\u00e0rqueting profundament intel\u00b7ligent que injecta en secret m\u00f2duls de conversi\u00f3 immensament interactius de manera persistent sobre destinacions p\u00fabliques totalment externes.",
+  "theresanaiforthat.com": "L'\u00edndex fonamental incre\u00efblement gegant\u00ed intenta de manera expl\u00edcita mapejar de manera estricta i incre\u00efblement exhaustiva tots els projectes neuronals recentment llan\u00e7ats.",
+  "tubebuddy.com": "Un observador estad\u00edstic excepcionalment integrat que llegeix \u00edntimament metadades de YouTube completament profundes que identifica exactament avantatges algor\u00edtmics radicalment intensos.",
+  "udimi.com": "Una economia interna molt especialitzada que facilita completament la difusi\u00f3 de butlletins de not\u00edcies radicalment exactes, dominant de manera expl\u00edcita el m\u00e0rqueting directe en solitari.",
+  "upviral.com": "Un sintetitzador d'impuls intensament agressiu dissenyat de manera expl\u00edcita que arma autom\u00e0ticament la mec\u00e0nica de refer\u00e8ncia humana fonamentalment incre\u00efblement profundament intr\u00ednseca.",
+  "vidiq.com": "El tauler competitiu incre\u00efblement massiu que exposa en gran mesura l'an\u00e0lisi del volum de cerca totalment cr\u00edtic que manipula directament estructures profundes de classificaci\u00f3 de v\u00eddeos.",
+  "wave.video": "Un estudi multiusos immensament capa\u00e7 que suporta activament una renderitzaci\u00f3 molt intensa de manera nativa que inclou entorns de reproducci\u00f3 en directe fonamentalment impressionants sense problemes.",
+  "wordhero.co": "Una interf\u00edcie r\u00e0pida ferotgement competitiva que genera, sobretot, matrius incre\u00efblement \u00e0mplies, abordant directament plantilles ling\u00fc\u00edstiques de m\u00e0rqueting extremadament diverses."
+};
 
 const TOOLS = [
   {"section": "Apps", "category": "AI & Multi-Model", "domain": "abacus.ai/chatllm", "url": "https://abacus.ai/chatllm", "description": "Build custom AI agents, deploy workflows, and write code seamlessly.", "pricing": "Freemium"},
@@ -701,6 +1629,18 @@ const TOOLS = [
   {"section": "Apps", "category": "AI & Multi-Model", "domain": "wordhero.co", "url": "https://wordhero.co/", "description": "A fiercely competitive prompt interface notably generating incredibly wide arrays comprehensively tackling extremely diverse marketing linguistic templates directly.", "pricing": "Freemium"}
 ];
 
+// Assign translated descriptions from internal objects
+if (typeof BEACON_DESC_ES !== 'undefined') {
+  TOOLS.forEach(tool => {
+    if (BEACON_DESC_ES[tool.domain]) tool.desc_es = BEACON_DESC_ES[tool.domain];
+  });
+}
+if (typeof BEACON_DESC_CA !== 'undefined') {
+  TOOLS.forEach(tool => {
+    if (BEACON_DESC_CA[tool.domain]) tool.desc_ca = BEACON_DESC_CA[tool.domain];
+  });
+}
+
 // Add placeholder detailed info for Design & Image category (Sample Category)
 TOOLS.forEach(t => {
   if (t.category === 'Design & Image') {
@@ -711,10 +1651,40 @@ TOOLS.forEach(t => {
       "High-performance browser rendering"
     ];
     t.author = "Verified Publisher";
+    t.icon = "data:image/jpeg;base64,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";
+    t.version = "v" + (Math.random() * 3 + 1).toFixed(1) + "." + Math.floor(Math.random() * 10);
+    t.changelog = "<b>Latest Update:</b><br>- Improved rendering performance by 40%<br>- Added new glassmorphism UI components<br>- Fixed compatibility with Safari 17";
+    t.screenshots = ["data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEBLAEsAAD/2wBDAAoHBwgHBgoICAgLCgoLDhgQDg0NDh0VFhEYIx8lJCIfIiEmKzcvJik0KSEiMEExNDk7Pj4+JS5ESUM8SDc9Pjv/2wBDAQoLCw4NDhwQEBw7KCIoOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozv/wAARCADcANwDASIAAhEBAxEB/8QAGwAAAgMBAQEAAAAAAAAAAAAAAwQBAgUABgf/xABFEAACAQMBBQQIAgULBAMBAAABAgMABBESBRMhMVFBYXGRBhQiMkKBobFScyMzNMHhBxUkJUNEYnKC0fA1RVOSFqLC8f/EABoBAAMBAQEBAAAAAAAAAAAAAAABAgMEBQb/xAArEQACAgEEAQMDAwUAAAAAAAAAAQIRAwQSITFBEyJRI2GhBTKRFFJxgdH/2gAMAwEAAhEDEQA/APj/ALXSpBPSrYqwFaElQw6VIIqwFSFHSmI4Y60RRVRGD2VYRjsJpoQZFpy3X2hSSIw5PTlvvQRyNWhM2FHGDxrM9Ix/WP8AprTh3heHUuBms/0jH9Yf6at/tEuzC01GmilarisqKB4rsVfFdikBTFQRV8VGKAKYqoHGr4rgOIpDDzr7C+FLEU5cD2F8KVIpsEVQVcCoTtq2Ce2khkYrsjFWC1OKBFOPSowetE01Og0AC0ipwKbt9n3V02m3tpZSexEJrXi9BvSSaMOmyZ8HqAPvToLPPxRtLIsa+85CjxNDlk3Uzx4zoYjPLOKasf263/NX70L+83P5h+5qWNARcL2qasLiPtz5VsN6O3oGdMD55aXByKAuwrt1LC1BAYqfaA45Ix9DRyHAiLiL8WPlRFni/wDItGfYtypAayk4nSMDt6eNBfZkiZ1W8owAT7J4A8qLYUgySxHlIv8A7U9bMpYYYH51jGyAYqQ6sOYI41U2gHJz5VSk/gVI9svKDxrM9Ih/WH+mvOrFMnFJ2XHQkVL+tuctcu56s5NU8lqqEojBFVIpfF0Pjz867VdDsB8qjch0HxUYoO9uBzjz8qj1hxziP1o3IKDYqCKGLodsZHzqRdR9qsKLQUycVwHGpFxAeZI+VWWW3J/WAeINFoBi4HsL4UqRThlt5MDfJ50aK1gf+1Q+DCq7EZiDiaZgs7i4bTDDJIT2IpP2rctNl2pcahqr6Fa+k0GytlrFb7PTWi4HHSPtT2sLPnll6D+kN7gx7MlRT8UuEH1rfs/5JtqSYa7u7eAdoXLmmn9PNt3UzIrQWy5+BMnzNCl2tdXX7Tfzy57DIQPIUKIrNGL+Tr0a2eNW0trM5HMbxUHlzpqJfQbZf7Ns8XTjt3Zf6twrzu9gXiEGepqj3gHLAqtorPWP6ZbldGz9kRxL2F2A+i0k/pdtxmyJbaMfhEWfua8y96etBN4c86KQHlrH9ug/NX70BmC3VxnP6w/c0ayX+mwcf7RfvQGAN9ODyMp+5rFmiL7xepFFS8lQAJcSKBywxGKNFbWkkalrhY3PMMnKpawtwmRdwFsD2cnu/j5UAUXaV0uMXknskEZcnBHLnV4dq3cIxHdEeRxSrQKs4j1AjJ4g88dKP/N7HH6OXiMjHHhQAWCaa4vVlDqZiRjkOPIUfaMc4eNriFEYLgaVA1ceZ60oNmtgkJNwOD7OeNQdnSY5Sgd8dapqqozd33wdcT75QNyiEEnKjialJrdVAktdRA5h8UJrJk/tCPFSKr6vJ2SjzNZ0XaLhod+SY33XHChuI+dFUWBHE3CnwBpfcTD+0U/6q7c3A/CfmKQWi8SxMSJHKdDjNS6RCZUSbUhxlsYxQd3cfgz5V2mcc4j5GgYeW3RELLcRSf4QTmgFVPNR5VGZBzibyNRvMc1NAE7qM/AvlUbiI/AK7er0NcJU76AIFrGzAAEZOOdHbY0gVWIYK4ypIOGHLI4UNZVVgQeRzyp8bbuAsaiZsRAqnH3Qezl3CikAh/N0in2JDnOOBpsbM2ogwl0/gJf41Z9ptOyNM2socjJHXNasO34FQIyI4A0qJIlbA866MMMck9zMMspp+0xvVdtRHKyyE+Oaob/a8LFWm4jmGUf7VvDa9iyMGhgYnPtGIgjPgeyseWaE3xlaPfR590krq4U8uOEVcX+QxzlJ1JAxtnaY5rG3+n+NSNu3nxW6E92auZrFhg2TqcYyJe48cePGtVtobOb0da13IB3YRTwyJAqnOOfFtXHpwrnTfydCSYns+9m2hvFEBVkxkA55076ldnju/rWNsu6ltZ7ndNjUFz9adbaN0TnfNVxfHJm1yZ1mh9dg/MX70uf2+b80/c0zZ59cg/MX70GNdW1JAe2Y/c1FW0irqx71WI7OWfeaZMsCrH3sY4DvwfCotrZZ4z7MrSbxVXQARg5r2Q2DbDZsl7NFDGgJWJd37+DjBOa81bbLW52ncI04tbaBmLzNyQDOB3muvLgcKOHHqo5FLxRjsSk65ByurhRo71o86DIuejUGUASjByMNx61WNdTVzwjZ2t8Dse1JowQk0qAnJwe2jpty6RtYuZdQ5EgGlb6yaxl3TsjNpVso4YYIyOIpStHjSdMiMlJWjUXa8oYMJBkcsx5xVo9rskYjAhKLjAaPOMVlAVYUtiGaq7TUhg0FsQxJPs9apJcW8kZUW8KNww6scj5VngVYKTVLGhB9IPIjzrt3QtHdTEdsr28jkkOMaFx73WtI4NxSKaG76kBupoeg1GGHafOoeBlpjCRxuvty6DntXPCixWVpIp13UaHOMNFz76R1OPjbzqN7J+M1k8TRaQwLOJ+A3I4fFwq8eyVmXKmDJOMGTSaT3sn4vpXb+TqPKo20OhmfZJihMjBQvLKyhvpQLTZz3UeqNC+BkkMBjzqqztqAIXj3UWCItba9SjSoOCeJ8KVCkitzsuS00mZGQN7pyDmljAo5O3lTiRtPMsKsNTctTYHnRG2TehdW5BH+F1P76RBnbsjlIfKu0OOT0eSKSGQxyLpcY4eNWeGeAyJIjJoYK4I5HoaAA2GWml7SdNaYFovCTXq7aDseFX2ftKfHtwtCVPTJINDnmKykYBrVKoJmSlc2vgFZn+mQfmL96Ap07SlI7Jj9zW2be1iuId0uSJF4/OsP/uM35rfc1M4uLQ8clNWelXa109ujyGJ30F0RkPIcznOAeB/4aUtrO52pbXdx63FGqyKTG74MrseGB58aXtYbqWwnbemO2jGWLE6SexR3ml4bma31bmQpqGDitp5ZSS3dGb02xXBU2BlUpKFYYI1AiqKSvEVZ/fXwaqCs4GzCSFs4aqiiXAxL/pX7ChitX2KqJFXAqoFOW6QCItMuSWwMSaTy6VUVZLAAU9suGGa+hjuMiJnAcqcHHdQtEfHSoHTMmaPbQNq1cCBzwwrpxx5Il0P3Wwpre7MIXe5GqIqP1i9QPlxHUEUaz2HLe2jyQBpJYiC8QHEqe0fY1t2f9MsLdp5lAV8LMDkwuMcT3EYz8j1rRvr4IZrGyjWESBhIVHtMxBGWx58Otdyx3+1HHHJlnJQxq2eW/wDjF/JkpaSNjnpAJ8hWZdbLlt2KvGykcwRg16fZ+0L7ZN2qXikLnC6GBUntxngcdOFe0EmyvSS19VuVjecx6o5o+ZHXuPdUTSXNWiJ6jNgyVkXB8UeMqcUIrXpPSPYrbKvXhY6scVYDgynkRWHHA0sqxoMsxwBXFngo9Hs43uVoXSJ5G0opY9BXS20sQzJGyA8iRjNbcFkqIAbeUTIP0mhxy4Hrw7KU2osmiMuJgMnAlwfIjurja4LvmjKX3x416jYtrbSbFaSUKZF9wGLVr7s9leZX3x409bSFLYjeSq2kaNBwM57aeLIscraMc+N5I0mbybPs5I0aRIkZnKsrRnCjHA8D1qjbKsmbTqtQOPxOBWeLqEW6ZvbxZd4Q4HEBOwjjz7qBPfSRIpt9oXEjH3g6lcfWul6nE/H4Rxf02VefyzWGxbE5wbfIx/bkDzNCudjQC1lm1knGoaZ9eSAeY+VY42re543DfPjR5tozBZkW9WRQ2gYTGtTzI4UvXwPtfhC9HMun+WK7JuVis9oWx9+cxBfkSTVbtf05x0oOzot61wQcMukj61MkuHIYcRXLfsSOpJb20Py3KteQRRjAEi/esj/uM35x+5ppD/T4T1lX70qf+oTfnH7mom7ZWOKiqN2S12jLsS21zp6oNckMWoZz8Rxjnw7ayK1I7vaB2SFDQm3iBVc6dS5znHb1rLNXk28VfR0ZKpFH99fBqr2Hwqze8vg1V7D4UoGLGr+39VvXhzkAKR4FQf30AUxtG4N1fySlQudK4HcoH7qXFbOtzoUqvgstHH6pR3n91DjRm91SfAU9FZTNAsrQybsMRwU5Y8OArSEW+iG0kM7HjtN9qv0d4SrYCNpJOOfgKZNtE7FYmYqp9wkLj5Y+tLWtrdTu7mB1AQjOggDhyHCtKCzluYoY7exuDcx5DOVOHGeGBjgR9flXZjRxzrddmjse2LQXACyBREX4kEHBHTnwJqLO0O09Frc3E1sIjpSVCDrXsBGRnHYflWp6OLLBtKJJY3wTiRyhGeHLvFC2/YQ2l2oV92YGLLpIAZTxH3rqTT9hzYMv1nD5+DJvzJam92XJOk4jQSJNqyGHYQT+/jxIpbYk93s+4V1Z45FPsHBGPPrS4ngnvJfWB+hlAVJMciO0eZ8RXpthbTtLYR2d/bRSQA4SVeBPzH781zTyzxrdFWfQ48UcjUMn8/IX0ji/nDZEN7PnKPpyVwdLDV2d4bzryT7PR5YvUjLNqUagUwVbJ4DHZ319O9IF2dc7BRbRG0PKPZGMsQp6eNZeyLWLZaiWQLr05wvJBn715+pzuWPfFV9j0MOkivbFcI8vtr0ek2NsaC7uZyt1O+BCD7igZyT15cK8tcTLImNL6s5yzk163092gZ7q2jDZVYy/zJ/hXinOSa4dNveO59s59TUZ7V4KrxkXxFaMRjS3ZWj1MVGls408frWan61fEVpxuRAy6FOsAZI4jj2VvVnPHksJLLdIHtXLiQl2EmNS9g8R1pW7a1YKLeKWMj3tbhgfpRt+yBQEVgrasMOfcaobqMas2MBzyHHh9azapmchGrqIty2S291DT+HHb8+VTMyySFkhWIYHsqSR9agECFk3WXLAh88h0xSIDbABN7LwJBwDw8aLeWubl8KefSo9Grg21zcsHVRpXOR409NtW5eUsDHjwrphXpqzlk5LK6MVT/WMIHZKv3oB/wCoTfmn7mnLdEa5ic894p+tJn/qE35p+5rnkuTpiPQb+S1lgii1qMSuQOKhcjPhxpemWnlNgkSxlIwx1OucSHv8BS1OXguVcFH99fA1TsNXf318DQ+w1cCA05/pEn+aoWum/Xyf5q5Dg1r5EP2MUgkEmCI19891eghUzRLNbneR8lAPsr1Heayo9sPPs+LZ0oQRRZMbBBkEntzz+fKndibal2RcssqJLay+zIN2PZPXlwI6dtdDbgrx8iwe6e3KqRqWZu3lIVnLBTyPdXprCabZ6gyu2+PPJ93upLZW2Es7/exLEUkUrnQMYPbTV7Ks8jbvgw95en8K6sOWU+JLhndl/SdPOLNQtDeTRzIxjkyCSOTdQawfTa00bNgVgMoSuT28sH61pbGhkmlCjsIx/wA/5yrG9PdoCYyWqDKwKwcrxAJwcZ68PpWtbZ0ukfKPRvDqEl4POzw297bAw+yZFy+exx/HII6edAh1tAImBVoZB/tz+Y8qXl9q/c2gMEcmkhdWoE45/M8fnXq4vR9ltre4F4kcrAOzFSPkCM04JOW5ntPNHEljb58GoJfV9k2Sni5VnIPecfYUptHadtu47eEukw4zMeILdgHy+tRtvaCM+8R8mNVUE/EQK8xciaK3Fwx0mQFlL5HbjOTz7eWeVZajFFpOR6Gn1koQUe2A2hIdpXkxzlc6VIOQMcAR07wax7m2kgJEilSOtMRbpZNQJYrxLe6oH3P0o22dtT7UjtlmCgQR7tMDjpyeZ7TXjvcpUugcozTlLsyU/WL4itGK4jSB0ZVJYAZYcV45yKzV/WL4itW09V0H1hpRyxuwDnnnP0qujGLFWljPxigmaIMCWVgDyOeNPXTW392aXn8eOIpJ2PWspEsgXEAj0lFJ1htWccO0VeW7t3E2iFI9cgZNJ9wcfZFCyetcMEHOc1JItbyOksmg4zjNNCeXtAoViCZZcIG4DnTmg/8AhHnVxXHZL7F7VyLiIcPfX70v/f5vzT9zR4IQLmMhjwcfegf36b80/c1LGjTW8KWAgWHKEMHLZILHkw6EDhSdPx7QT+bms5YjjB0sp5HORkUhVzd1yUwb++vgap2GiP748DQ+w0QJCzfr38aqKmb9e/8AmqBWvkaCKaftWeYhEP6bkP8AGOhrPWtvY9qdy9we06V+XM116aDyT2o0jDc6NSx+C3j4HBUL1J6V7Cws5ZGhuS6RmPSxd2CrqHUnw5dteZ2bbm4uVKoWmbOFxzGPuf8AnbTu3dtta3yQ241epeyMjKufibvyfpivSlHwjonlljx8dvo39pbYuNlo8ltZxsr5Z7iGQM/e2nHLw868i7tfXHrKOHjfUshRcBw3A5HY38PGi2u2o9pXkclwWFw75ODgL0x48eHZWcjwttq/ijme2tWmb2Y8cPaIwOnCsntXsXNnnYMDX1p8yFo4J4IYVuI2QwyAAnkwIxjPio8693sR4tu7PMCyLFPaoinVwDgrw49c5FZFps+5TK2EhlixxtpsMsg6DPb3GtGxsCNk7SuNnvIscksZMIQq0JU8cntHH6U3ceOjmzRjqK29qv8AJj+kNncWTK7xZiYZjfmr94PbXl7ieaVVVmMmTgKx4ADp0519J2jAZdiPCitJbXKGRGc5MUmNWPv8ielfNtoRi3ZYo5ElLoCTGc4z8Pj1rHNkclyaaZtxbfgSlKkaIm4Zyc/EaBNkBQQR7P7zV3hlD6TG4bOMFTz6VWcT6U3okCqNKagcAc8CvPlR0bkwK++vjWpstrXfKLs4j0Hj2Z/59cVlL7w8a0tmGExTGS29YfdgRrkjBzz4Vi3TBrdFoJA1h6xPvmYQ6GWLUMtk8ATjpzpeAwiJzJo1fDkDnw7uXP50YR2ivcCUAurAKok0gdePbR9kWWzr6K8S6uhbvEheJ2IGroOP/ONZMoQDW5syCG3meo59h5Zxjv51oXs2zZNjWq28cYuVC7xh72e3NY45VI50gFrdis74JA4ZpyMswJLHn1oFjZyXcsojx7IGeNNnZk6HG8A+dVGMquh7Wzkj0XGOjj71nkFryZRzMh+5rWAzOT/jz9ayo/29/wA0/c08i6JiNx2F1KgeNLh0PJlQ4NX/AJqveRgufmuK0LKO8Nom72rbQxkcI3uACME/D2dpp9tlStsa4vn29AzQuMRJKW1E9/XiccD20bJVZl60LqzzsthJbOBOkqEg4DY8KoLdD2t501I7zkGa7EhGcFiTz59lVVIwf1y/+ppwNQZt0ZizFiT31ZbRCCQGIHP2qOFi/wDL/wDQ1xEQBxISez2f41vwNCixHf7tcsc4HfXsbpYdh7PhSYBmC4WPPF27T4Z7a8zs+6gs9qeszpvBEdSp2M2OGe7PH5VS9vpb+5e4uJ9bt/hOAOg6CvS0844se5dstTpNLtmvsfaTDbEN1K2dD68fCuOPAeVAvb+S7unlZYyWYnO7GazI5Ag4OfKu3vHgxpSzWueyObNF7s22qdBGLhjq0KoATvP+3n0oFrM0biZzqkd9R1cc+PjkmkhJg5BOaIGDBmHiR31ip27BNo9dsbbDIykNodPhPaOneK+g7Mure/huJIwI7iSI5A5OQOR6/evi0VwYnV84Ycv963Nn+kU9npeOTSynIri1k8s4bYs7dNHCpObXJ66423b20K259q2lUq47V/iDx8utfN9oIba9eNmzob3l7R1Hy40a92k0sjFWwCxYDpWZNM0rZY5OMV0Rn9Pns4M2OPrynHpjb3scrOJri6dcqVIbtHUGlLq4eZiDNLImcjeNk8qATUVi2QopHL7w8aIn6tfChr7wpmzsJ7qPMIZsYzhwuM//AMrGZoingKjB6HypwbGuSOOASuoAzgHHh17qDPs426MzvG2kgFVkJPGsxgajgO2q7pPw/U1KwxnmAPOkBbZj6ZLggkHAxxo+6d8s0hye+nPRbZFrtJtoPc3LQLborZUZyOOftTO42V2euHvygrWFVyRJuxRF4576xY/21/zD9zXoliwD3CvOx/tb/mH70ZVTQ4eTRha03Q3onL9ukgD5VwltQFAikb8WW+1UMqm3Ee4TOMB+3nQhWVjHLhYBCGitpo8ngztkUsvE8ONel2jt3aN1s7ZkB2csYgAETe/vDox7vhxrOebaz+yICmB8KAf85fetZLZKjPH61fWhtfx9vD/2Z2SOfDxqQwweAOe3pRTbXU87a1zKWw2SM5z/AAoU0MtuwWaMoxGQD0o3morKf0zeNQDUSviVvZHnVN4fwrT9Qdhg1dmg71ui+VdvX6jyFHqjsNmrxS7qRXGDpOcHkaW3r/iNRvH/ABt501mp2hDTyF5GfHEnOBXCRsdvlSmpvxN51HHqfOk8tuwTaGiWPYaqc0viuxS9QVBvmPMVHD8S+dCxXUvUYqChlHHUD4V630K9H7bbqzC6kkURIuAh55JrxtbWxrraMAK7PlkRmT2gh5gU4TW65dHNqsWXJhccUtsvk9RN6G7Pj2PfXu9mMkBl0Dhp9jOM8O6k5/R2wje0Vd7+lbDZbn7JPDh3Vhz3V+pkt57mcZJLxlzgk8TkZxS7CYsmZWOcacvy/wBq6oZ8MV+yzXQwlhbeZ7j1uzvR3Zcl/cwzoSkaxlQZSMZzn7UO82PseH0NF7GI/XDpw29yx9vB4Z6d1eeNiMMXvYPZ4H28/u40oRgeHbXDqH6srj7VZ6uTV4pJqONLv8/8NL0VOLfbH5K//qqagO2p9GDi32t+Uv76xru9l9YYRuVVeFNOonm1bPXm2IjkOOSn7V4uP9qf/P8Avr65NsgraXDaeUTH6GvkUX7S3+ets9WiMXk2LaS/WFBAhZB7uEB60G7W6ZhJcqRkYBwBw+VFguLVIAkvrZPaI5Qq/Y1c3dgRj1KZ8ctdyf3Cs1Bf3IpyfwCl2ndzRQxmXAh9wqMEcMc/Cg7+fSV3smDzGo8aaF7Zr7uyoj/nlkP7xVhtSNfc2ZYjxjZvu1VL3O5Sv+Sp5ck3ck2/uxPXIeGt/M0xJBAsGuS7PrBXJiZDkHoTR4fSGa3mSWO3sEKMGGLZOyg7W21Lte+lu52jRpMAqg4YAx41DUa4ZMXJvlGVL+taq1LkM5I5GoxWZZ1dXVGR1FAE11V1r+IV28TrQMtXVTep1PlUb5ehosAldQ990U1IaRhkRmgC9dVcTH4APnXbub/CKdMVotTEM+7UYfSaV3UnbIBVXRlGTITRTC0Om4BOS+flUG4X8TeVUNpCBF+ndtYyQBypV41SXTkkZptNdiTTGzcr1PnVTdL3fM166P0X2SoBNszcPikamo9g7LTlYQn/ADAn709jFuR5/wBGDm22qRxG6X99eflB3jcDzr6LPa29rs25W3hjiBjJIRQM8K8TLbM0hZGAB4kUOPFAmfQ7r+Uawkt5oY7aQ7yNkB045givlusJLJk/FwxR9ZqPZJzoXPhVT9wo+0H60fxNUb9j+I/Oj5A5AeVRrPWp2/cqwGuQ/A1dmT8FG1ZqNLHkpPyo2hYJVlc4AFFNrcBC5ZQB31eKKQHOhvKmijtCVxxPfQooLYglvJIQN7jNWa0KylDKTjupuG2kVlJxw76I1sWmMmoDPZijagtiPqidrsa67tooGjVM5aNWbJ7TT/qw/F9KU2if6a6jkiqvkBSaQWxPQvSrLhWDaVOOwjga6opcAPT7Rie2ENvs+C2PxSKWZj8yeFIVJqtIaOptUbSoxjh28KVAycda392uMEZwMVURMz/VJ9OoKCO41b1KU9ox3cabNsmcqWQ9VOK4JMnKQMP8Qq7JoXTZ4Y4NwM9MYNXOy4yMNKx8BRDdSwuNSRuOjLmtC32zAoAltQvfHj7UWvIciK2EfD2XbAxXHZ0SnU1uefM5rdj2hZz8EnVT0b2aMkKTMwe4SEBCVdgWUnsHDr1q6TFZojGkY5YFTqFYN/fXFrcSR20UbqrEBhNgEUf12WG2hkknt3aRSzIjfq+OME9e2h2I0L9h/N9x+Wa8bwraudt2rWssbyorMhAwwNYetR8S+dQ2UkKCFepqwhTofOr6VUlTNEzYzhG1Z+Y4VGaiyjhGn4RVgij4R5VwqQaYFhgchVgaoDVgaALCrCqg1IpoRcVIqoqQaYFhxOKx7x9d5M3VzWwp9oeNYLNqdm6kmokNHZrs1Ga7NQUTUV2a6gAluuu5jXq4rfrF2cuq9j7sn6Vt1cOiWdipxXV1WIBPbibnxxy44oBtpE92Q+DjP1p+upUBm5kX34iR1TjV0uzHHJuZyjBDwBweXSnGRT2eVCeBGRsgNw7RSpgY8l7PKG3k8rE9XNAOW55NaXqiD4RV1tR2J9Kna2VaM1cmIJulHtZ18c+HhRzEhOdNNSRrEnt+yCeGa5HtNP6QSMeoOKNorFIpMMcKvEdONFEndQolHE91TQhhg9WDUFauKYgoNSDQxVxQBcGrg0MVcUxFhVhVRVhTA5m0xs3RSfpWDnhXo51Q7JlOhQ3LUOfbXnKiZUTs11RmpyagZ3Gp41wFWVRQA/si3ked5FQsqIckccVq0DYH6ObUvAnnXpHsoLhSXTDY95eBraK4Ib5MOuxVmXS7KCcA4o8cCNeQQnJWQ8ePHlVIVi1dVpnFvtVrZUVoypxq5jiayrralzbyyQJoKasjUuSPnSboFyaZGFLEHSOZ7Kh13enXhA3IscCsVru4GlRO4WQ5ZQeGadvrSK0gikXU4IGUdiVOaE7CjWc7LunYQzPZOOakb2MeBHtAfI0GXZV5oLxAXSDm1u+8x4ge0PmKxGna1ZjAqIJB7Q05H8Kas7iV4llLEOCcFeBFPcn2RtkumBulLJgDiD5UnhhzXNeibaU0pVLpIrtScfp0yw8GGG+ta83ons5tDq86a0DFQwIHmCaHj8oPVp00f//Z", "data:image/jpeg;base64,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"];
   }
 });
 
 let selectedCats = new Set(), currentSearch = '', currentPrice = 'All';
+
+// --- Real Stats: localStorage helpers ---
+function getTimesAccessed(domain) {
+  try { return parseInt(localStorage.getItem('beacon_access_' + domain) || '0', 10); } catch(e) { return 0; }
+}
+function incrementTimesAccessed(domain) {
+  const count = getTimesAccessed(domain) + 1;
+  localStorage.setItem('beacon_access_' + domain, count);
+  return count;
+}
+function getUserRating(domain) {
+  try { return parseFloat(localStorage.getItem('beacon_rating_' + domain) || '0'); } catch(e) { return 0; }
+}
+function setUserRating(domain, rating) {
+  localStorage.setItem('beacon_rating_' + domain, rating);
+}
+function renderStarRating(domain, interactive) {
+  const rating = getUserRating(domain);
+  let html = '<span class="star-rating" data-domain="' + domain + '">';
+  for (let i = 1; i <= 5; i++) {
+    html += '<span class="star ' + (i <= rating ? 'filled' : '') + '" data-value="' + i + '">★</span>';
+  }
+  html += '</span>';
+  if (rating > 0) html += '<span class="star-rating-value">' + rating.toFixed(1) + '</span>';
+  return html;
+}
 let sortCol = 'domain', sortAsc = true;
 
 // Section state from URL
@@ -852,31 +1822,77 @@ function render() {
     return;
   }
   empty.style.display = 'none';
-  tbody.innerHTML = f.map((t, i) => {
-    const isTop = t.isEssential || topResourcesList.has(t.domain);
-    const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${t.domain}">★</span>` : '';
+  tbody.innerHTML = f.map((tool, i) => {
+    const isTop = tool.isEssential || topResourcesList.has(tool.domain);
+    const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${tool.domain}">★</span>` : '';
     
     // Design & Image acts as the sample launcher category
-    if (t.category === 'Design & Image') {
+    if (tool.category === 'Design & Image') {
+      const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
       return `
-      <tr style="animation-delay: ${i * 0.03}s; cursor: pointer;" onclick="openAppDetails('${t.domain}')">
-        <td class="td-site">${starHtml}<span style="font-size:14px;font-weight:600;color:var(--text);transition:color 0.2s" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text)'">${t.domain}</span></td>
-        <td class="td-desc">${t.description}</td>
-        <td class="td-cat">${t.category}</td>
-        <td>${pricingBadge(t.pricing)}</td>
+      <tr class="app-row" data-domain="${tool.domain}" style="animation-delay: ${i * 0.03}s; cursor: pointer;">
+        <td class="td-site">
+          <div style="display:flex; align-items:center; gap:10px;">
+            ${starHtml}
+            <img src="${favicon}" alt="" class="row-icon">
+            <span class="row-title">${tool.domain}</span>
+          </div>
+        </td>
+        <td class="td-desc" style="vertical-align: middle;">${tDesc(tool)}</td>
+        <td class="td-cat" style="vertical-align: middle;">${t(tool.category)}</td>
+        <td style="vertical-align: middle;">${pricingBadge(tool.pricing)}</td>
+        <td style="vertical-align: middle; text-align: center;">
+          <div class="row-stats" style="flex-direction:column; gap:4px; align-items:center;">
+            <span class="row-stat-item">${renderStarRating(tool.domain, true)}</span>
+            <span class="row-stat-item" style="font-size:11px;">↗ ${getTimesAccessed(tool.domain)} used</span>
+          </div>
+        </td>
+        <td style="vertical-align: middle; text-align: right;">
+          <button class="row-launch-btn" onclick="event.stopPropagation(); launchWorkspaceFromDomain('${tool.domain}')">${t('launch')} ▶</button>
+        </td>
       </tr>
       `;
     } else {
       return `
       <tr style="animation-delay: ${i * 0.03}s">
-        <td class="td-site">${starHtml}<a href="${t.url}" target="_blank" rel="noopener noreferrer">${t.domain}</a></td>
-        <td class="td-desc">${t.description}</td>
-        <td class="td-cat">${t.category}</td>
-        <td>${pricingBadge(t.pricing)}</td>
+        <td class="td-site">${starHtml}<a href="${tool.url}" target="_blank" rel="noopener noreferrer">${tool.domain}</a></td>
+        <td class="td-desc">${tDesc(tool)}</td>
+        <td class="td-cat">${t(tool.category)}</td>
+        <td>${pricingBadge(tool.pricing)}</td>
       </tr>
       `;
     }
   }).join('');
+  
+  // Attach event listeners for app details panel
+  document.querySelectorAll('.app-row').forEach(row => {
+    row.addEventListener('click', () => {
+      openAppDetails(row.dataset.domain);
+    });
+  });
+
+  // Attach interactive star rating listeners
+  document.querySelectorAll('.star-rating').forEach(container => {
+    const stars = container.querySelectorAll('.star');
+    const domain = container.dataset.domain;
+    stars.forEach(star => {
+      star.addEventListener('mouseenter', () => {
+        const val = parseInt(star.dataset.value);
+        stars.forEach(s => {
+          s.classList.toggle('hovered', parseInt(s.dataset.value) <= val);
+        });
+      });
+      star.addEventListener('mouseleave', () => {
+        stars.forEach(s => s.classList.remove('hovered'));
+      });
+      star.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const val = parseInt(star.dataset.value);
+        setUserRating(domain, val);
+        render();
+      });
+    });
+  });
   
   if (isAdmin) {
     document.querySelectorAll('.dev-star').forEach(star => {
@@ -984,20 +2000,31 @@ if (qParam) {
 
 // App Launcher UI Logic
 window.openAppDetails = function(domain) {
-  const t = TOOLS.find(x => x.domain === domain);
-  if (!t) return;
+  const tool = TOOLS.find(x => x.domain === domain);
+  if (!tool) return;
   
-  document.getElementById('ad-title').textContent = t.domain;
-  document.getElementById('ad-developer').textContent = 'by ' + (t.author || 'Unknown Publisher');
-  document.getElementById('ad-badges').innerHTML = pricingBadge(t.pricing);
-  document.getElementById('ad-desc').textContent = t.longDescription || t.description;
+  document.getElementById('ad-title').textContent = tool.domain;
+  document.getElementById('ad-developer').textContent = t('byPrefix') + ' ' + (tool.author || 'Unknown Publisher');
+  document.getElementById('ad-badges').innerHTML = pricingBadge(tool.pricing);
+  document.getElementById('ad-desc').textContent = tool.longDescription || tDesc(tool);
   
-  const feats = t.features || ["Standard feature 1", "Standard feature 2"];
+  // New rich data
+  document.getElementById('ad-changelog').innerHTML = tool.changelog || t('noRecentUpdates');
+  const shots = tool.screenshots || [];
+  document.getElementById('ad-screenshots').innerHTML = shots.map(src => `<img src="${src}" alt="Screenshot">`).join('');
+  document.getElementById('ad-screenshots').style.display = shots.length ? 'flex' : 'none';
+  
+  const feats = tool.features || ["Standard feature 1", "Standard feature 2"];
   document.getElementById('ad-features').innerHTML = feats.map(f => `<li>${f}</li>`).join('');
   
-  document.getElementById('ad-launch').onclick = () => launchWorkspace(t);
+  document.getElementById('ad-launch').onclick = () => launchWorkspace(tool);
   
   document.getElementById('app-details-panel').classList.add('open');
+};
+
+window.launchWorkspaceFromDomain = function(domain) {
+  const tool = TOOLS.find(x => x.domain === domain);
+  if(tool) launchWorkspace(tool);
 };
 
 window.closeAppDetails = function() {
@@ -1005,11 +2032,13 @@ window.closeAppDetails = function() {
 };
 
 window.launchWorkspace = function(t) {
-  document.getElementById('ws-title').textContent = `Workspace - ${t.domain}`;
+  incrementTimesAccessed(t.domain);
+  document.getElementById('ws-title').textContent = t.domain;
   document.getElementById('ws-external').href = t.url;
   document.getElementById('ws-iframe').src = t.url;
   document.getElementById('workspace-overlay').classList.add('active');
   closeAppDetails();
+  render();
 };
 
 window.closeWorkspace = function() {
