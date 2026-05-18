@@ -213,6 +213,8 @@ th.sort-desc svg{transform:rotate(180deg)}
           <th class="sortable" data-sort="description"><span class="th-txt">Description</span> <svg viewBox="0 0 24 24" fill="none" stroke=\"currentColor\" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
           <th class="sortable" data-sort="category"><span class="th-txt">Category</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
           <th class="sortable" data-sort="pricing"><span class="th-txt">Pricing</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg></th>
+          <th></th>
+          <th></th>
         </tr></thead>
         <tbody id="table-body"></tbody>
       </table>
@@ -1826,42 +1828,30 @@ function render() {
     const isTop = tool.isEssential || topResourcesList.has(tool.domain);
     const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${tool.domain}">★</span>` : '';
     
-    // Design & Image acts as the sample launcher category
-    if (tool.category === 'Design & Image') {
-      const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
-      return `
-      <tr class="app-row" data-domain="${tool.domain}" style="animation-delay: ${i * 0.03}s; cursor: pointer;">
-        <td class="td-site">
-          <div style="display:flex; align-items:center; gap:10px;">
-            ${starHtml}
-            <img src="${favicon}" alt="" class="row-icon">
-            <span class="row-title">${tool.domain}</span>
-          </div>
-        </td>
-        <td class="td-desc" style="vertical-align: middle;">${tDesc(tool)}</td>
-        <td class="td-cat" style="vertical-align: middle;">${t(tool.category)}</td>
-        <td style="vertical-align: middle;">${pricingBadge(tool.pricing)}</td>
-        <td style="vertical-align: middle; text-align: center;">
-          <div class="row-stats" style="flex-direction:column; gap:4px; align-items:center;">
-            <span class="row-stat-item">${renderStarRating(tool.domain, true)}</span>
-            <span class="row-stat-item" style="font-size:11px;">↗ ${getTimesAccessed(tool.domain)} used</span>
-          </div>
-        </td>
-        <td style="vertical-align: middle; text-align: right;">
-          <button class="row-launch-btn" onclick="event.stopPropagation(); launchWorkspaceFromDomain('${tool.domain}')">${t('launch')} ▶</button>
-        </td>
-      </tr>
-      `;
-    } else {
-      return `
-      <tr style="animation-delay: ${i * 0.03}s">
-        <td class="td-site">${starHtml}<a href="${tool.url}" target="_blank" rel="noopener noreferrer">${tool.domain}</a></td>
-        <td class="td-desc">${tDesc(tool)}</td>
-        <td class="td-cat">${t(tool.category)}</td>
-        <td>${pricingBadge(tool.pricing)}</td>
-      </tr>
-      `;
-    }
+    const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
+    return `
+    <tr class="app-row" data-domain="${tool.domain}" style="animation-delay: ${i * 0.03}s; cursor: pointer;">
+      <td class="td-site">
+        <div style="display:flex; align-items:center; gap:10px;">
+          ${starHtml}
+          <img src="${favicon}" alt="" class="row-icon">
+          <span class="row-title">${tool.domain}</span>
+        </div>
+      </td>
+      <td class="td-desc" style="vertical-align: middle;">${tDesc(tool)}</td>
+      <td class="td-cat" style="vertical-align: middle;">${t(tool.category)}</td>
+      <td style="vertical-align: middle;">${pricingBadge(tool.pricing)}</td>
+      <td style="vertical-align: middle; text-align: center;">
+        <div class="row-stats" style="flex-direction:column; gap:4px; align-items:center;">
+          <span class="row-stat-item">${renderStarRating(tool.domain, true)}</span>
+          <span class="row-stat-item" style="font-size:11px;">↗ ${getTimesAccessed(tool.domain)} used</span>
+        </div>
+      </td>
+      <td style="vertical-align: middle; text-align: right;">
+        <button class="row-launch-btn" onclick="event.stopPropagation(); launchWorkspaceFromDomain('${tool.domain}')">${t('launch')} ▶</button>
+      </td>
+    </tr>
+    `;
   }).join('');
   
   // Attach event listeners for app details panel
