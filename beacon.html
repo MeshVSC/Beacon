@@ -220,6 +220,7 @@ th.sort-desc svg{transform:rotate(180deg)}
       </table>
       <div class="empty" id="empty" style="display:none">No tools found</div>
     </div>
+    <div id="lazy-sentinel" style="height:1px;"></div>
   </main>
 </div>
 
@@ -272,6 +273,7 @@ th.sort-desc svg{transform:rotate(180deg)}
   <iframe class="workspace-iframe" id="ws-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
 </div>
 
+<script src="js/data.js"></script>
 <script>
 (() => {
 
@@ -1645,6 +1647,14 @@ if (typeof BEACON_DESC_CA !== 'undefined') {
   });
 }
 
+// Merge FMHY Tools
+if (typeof FMHY_TOOLS !== 'undefined') {
+  FMHY_TOOLS.forEach(t => { if (!t.section) t.section = 'Apps'; });
+  TOOLS.push(...FMHY_TOOLS);
+  if (typeof FMHY_DESC_ES !== 'undefined') Object.assign(BEACON_DESC_ES, FMHY_DESC_ES);
+  if (typeof FMHY_DESC_CA !== 'undefined') Object.assign(BEACON_DESC_CA, FMHY_DESC_CA);
+}
+
 // Add placeholder detailed info for ALL tools to support the rich UI
 TOOLS.forEach(t => {
   t.longDescription = `${t.description} This tool provides an advanced creative environment directly accessible from your browser. The detailed view allows you to inspect features before launching into the workspace.`;
@@ -1693,7 +1703,7 @@ let sortCol = 'domain', sortAsc = true;
 const params = new URLSearchParams(window.location.search);
 let currentSection = 'Apps';
 const rawSection = params.get('section');
-const validSections = ['Apps', 'FreeAI', 'TopResources', 'Inspiration', 'Libraries', 'Templates', 'Fonts', 'Assets'];
+const validSections = ['Apps', 'FreeAI', 'TopResources', 'Inspiration', 'Libraries', 'Templates', 'Fonts', 'Assets', 'Internet Tools', 'System Tools', 'Developer Tools', 'Image Tools', 'Video Tools', 'Streaming', 'Music & Audio', 'File Tools', 'Social Media', 'Text Tools', 'Gaming', 'Gaming Tools', 'Books & Reading', 'Educational', 'Downloading', 'Torrenting', 'Privacy & Security', 'Linux & macOS', 'Mobile', 'Miscellaneous'];
 
 if (rawSection) {
   const match = validSections.find(s => s.toLowerCase() === rawSection.toLowerCase());
@@ -1806,102 +1816,112 @@ function render() {
     return 0;
   });
 
-  const tbody = document.getElementById('table-body');
-  const empty = document.getElementById('empty');
-  
-  // Update header UI
-  let sectionDisplay = t(currentSection);
-  
-  const title = selectedCats.size === 0 ? sectionDisplay : (selectedCats.size === 1 ? t([...selectedCats][0]) : `${selectedCats.size} ${t('categoriesLabel')}`);
-  
-  document.getElementById('result-count').textContent = f.length + ' ' + (f.length !== 1 ? t('resultPlural') : t('resultSingle'));
-  document.getElementById('section-title').textContent = title;
-  document.getElementById('count-label').textContent = f.length + ' ' + t('toolsSuffix');
+// --- Lazy Loading State ---
+let filteredTools = [];
+let renderedCount = 0;
+const BATCH_SIZE = 50;
 
-  if (!f.length) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    return;
-  }
-  empty.style.display = 'none';
-  tbody.innerHTML = f.map((tool, i) => {
-    const isTop = tool.isEssential || topResourcesList.has(tool.domain);
-    const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${tool.domain}">★</span>` : '';
-    
-    const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
-    return `
-    <tr class="app-row" data-domain="${tool.domain}" style="animation-delay: ${i * 0.03}s; cursor: pointer;">
-      <td class="td-site">
-        <div style="display:flex; align-items:center; gap:10px;">
-          ${starHtml}
-          <img src="${favicon}" alt="" class="row-icon">
-          <span class="row-title">${tool.domain}</span>
-        </div>
-      </td>
-      <td class="td-desc" style="vertical-align: middle;">${tDesc(tool)}</td>
-      <td class="td-cat" style="vertical-align: middle;">${t(tool.category)}</td>
-      <td style="vertical-align: middle;">${pricingBadge(tool.pricing)}</td>
-      <td style="vertical-align: middle; text-align: center;">
-        <div class="row-stats" style="flex-direction:column; gap:4px; align-items:center;">
-          <span class="row-stat-item">${renderStarRating(tool.domain, true)}</span>
-          <span class="row-stat-item" style="font-size:11px;">↗ ${getTimesAccessed(tool.domain)} used</span>
-        </div>
-      </td>
-      <td style="vertical-align: middle; text-align: right;">
-        <button class="row-launch-btn" onclick="event.stopPropagation(); launchWorkspaceFromDomain('${tool.domain}')">${t('launch')} ▶</button>
-      </td>
-    </tr>
-    `;
-  }).join('');
-  
-  // Attach event listeners for app details panel
-  document.querySelectorAll('.app-row').forEach(row => {
-    row.addEventListener('click', () => {
-      openAppDetails(row.dataset.domain);
-    });
+function renderRow(tool, i) {
+  const isTop = tool.isEssential || topResourcesList.has(tool.domain);
+  const starHtml = isAdmin ? `<span class="dev-star ${isTop ? 'active' : ''}" data-domain="${tool.domain}">★</span>` : '';
+  const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
+  return `
+  <tr class="app-row" data-domain="${tool.domain}" style="animation-delay: ${(i % BATCH_SIZE) * 0.02}s; cursor: pointer;">
+    <td class="td-site">
+      <div style="display:flex; align-items:center; gap:10px;">
+        ${starHtml}
+        <img src="${favicon}" alt="" class="row-icon">
+        <span class="row-title">${tool.domain}</span>
+      </div>
+    </td>
+    <td class="td-desc" style="vertical-align: middle;">${tDesc(tool)}</td>
+    <td class="td-cat" style="vertical-align: middle;">${t(tool.category)}</td>
+    <td style="vertical-align: middle;">${pricingBadge(tool.pricing)}</td>
+    <td style="vertical-align: middle; text-align: center;">
+      <div class="row-stats" style="flex-direction:column; gap:4px; align-items:center;">
+        <span class="row-stat-item">${renderStarRating(tool.domain, true)}</span>
+        <span class="row-stat-item" style="font-size:11px;">↗ ${getTimesAccessed(tool.domain)} used</span>
+      </div>
+    </td>
+    <td style="vertical-align: middle; text-align: right;">
+      <button class="row-launch-btn" onclick="event.stopPropagation(); launchWorkspaceFromDomain('${tool.domain}')">${t('launch')} ▶</button>
+    </td>
+  </tr>`;
+}
+
+function attachRowListeners(rows) {
+  rows.forEach(row => {
+    row.addEventListener('click', () => openAppDetails(row.dataset.domain));
   });
-
-  // Attach interactive star rating listeners
   document.querySelectorAll('.star-rating').forEach(container => {
     const stars = container.querySelectorAll('.star');
     const domain = container.dataset.domain;
     stars.forEach(star => {
       star.addEventListener('mouseenter', () => {
         const val = parseInt(star.dataset.value);
-        stars.forEach(s => {
-          s.classList.toggle('hovered', parseInt(s.dataset.value) <= val);
-        });
+        stars.forEach(s => s.classList.toggle('hovered', parseInt(s.dataset.value) <= val));
       });
-      star.addEventListener('mouseleave', () => {
-        stars.forEach(s => s.classList.remove('hovered'));
-      });
-      star.addEventListener('click', (e) => {
+      star.addEventListener('mouseleave', () => stars.forEach(s => s.classList.remove('hovered')));
+      star.addEventListener('click', e => {
         e.stopPropagation();
-        const val = parseInt(star.dataset.value);
-        setUserRating(domain, val);
+        setUserRating(domain, parseInt(star.dataset.value));
         render();
       });
     });
   });
-  
   if (isAdmin) {
     document.querySelectorAll('.dev-star').forEach(star => {
-      star.addEventListener('click', (e) => {
-        const domain = e.target.dataset.domain;
-        if (topResourcesList.has(domain)) {
-          topResourcesList.delete(domain);
-        } else {
-          topResourcesList.add(domain);
-        }
+      star.addEventListener('click', e => {
+        const d = e.target.dataset.domain;
+        topResourcesList.has(d) ? topResourcesList.delete(d) : topResourcesList.add(d);
         localStorage.setItem('topResources', JSON.stringify([...topResourcesList]));
-        
-        // Full re-render so counts and lists reflect immediately
-        renderSidebar();
-        render();
+        renderSidebar(); render();
       });
     });
   }
 }
+
+function renderNextBatch() {
+  const tbody = document.getElementById('table-body');
+  const batch = filteredTools.slice(renderedCount, renderedCount + BATCH_SIZE);
+  if (!batch.length) return;
+  const html = batch.map((tool, i) => renderRow(tool, renderedCount + i)).join('');
+  const temp = document.createElement('tbody');
+  temp.innerHTML = html;
+  const newRows = [...temp.children];
+  newRows.forEach(row => tbody.appendChild(row));
+  attachRowListeners(newRows);
+  renderedCount += batch.length;
+}
+  
+  // Update header UI
+  let sectionDisplay = t(currentSection);
+  const title = selectedCats.size === 0 ? sectionDisplay : (selectedCats.size === 1 ? t([...selectedCats][0]) : `${selectedCats.size} ${t('categoriesLabel')}`);
+  document.getElementById('result-count').textContent = f.length + ' ' + (f.length !== 1 ? t('resultPlural') : t('resultSingle'));
+  document.getElementById('section-title').textContent = title;
+  document.getElementById('count-label').textContent = f.length + ' ' + t('toolsSuffix');
+
+  const tbody = document.getElementById('table-body');
+  const empty = document.getElementById('empty');
+
+  if (!f.length) {
+    tbody.innerHTML = '';
+    empty.style.display = 'block';
+    filteredTools = []; renderedCount = 0;
+    return;
+  }
+  empty.style.display = 'none';
+  filteredTools = f;
+  renderedCount = 0;
+  tbody.innerHTML = '';
+  renderNextBatch();
+}
+
+// IntersectionObserver: load more rows when sentinel scrolls into view
+const lazyObserver = new IntersectionObserver(entries => {
+  if (entries[0].isIntersecting) renderNextBatch();
+}, { rootMargin: '200px' });
+lazyObserver.observe(document.getElementById('lazy-sentinel'));
 
 // Global UI Listeners
 // Create a discreet dev-mode trigger
