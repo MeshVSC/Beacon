@@ -1,517 +1,383 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beacon</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#334a54",
+                    "error-container": "#93000a",
+                    "on-primary-fixed": "#181e00",
+                    "outline": "#8f9378",
+                    "inverse-primary": "#556500",
+                    "on-secondary-fixed-variant": "#474747",
+                    "secondary": "#c6c6c6",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#313030",
+                    "surface-dim": "#131313",
+                    "surface-variant": "#353535",
+                    "on-tertiary-fixed": "#051e27",
+                    "secondary-fixed": "#e2e2e2",
+                    "tertiary": "#ffffff",
+                    "surface-bright": "#393939",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container": "#20201f",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "on-tertiary": "#1c333d",
+                    "primary-fixed": "#cdf200",
+                    "on-primary": "#2b3400",
+                    "on-tertiary-container": "#516872",
+                    "primary": "#ffffff",
+                    "on-secondary-container": "#b5b5b5",
+                    "surface-tint": "#b4d400",
+                    "surface-container-highest": "#353535",
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary-container": "#cee6f2",
+                    "on-primary-fixed-variant": "#3f4c00",
+                    "tertiary-fixed": "#cee6f2",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#303030",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-container": "#cdf200",
+                    "secondary-container": "#474747",
+                    "outline-variant": "#454932",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#c5c9ac",
+                    "tertiary-fixed-dim": "#b2cad6",
+                    "on-primary-container": "#5a6b00",
+                    "on-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#b4d400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Geist", "sans-serif"],
+                    "label-mono": ["Geist Mono", "monospace"],
+                    "headline-lg": ["Geist", "sans-serif"],
+                    "display-lg-mobile": ["Geist", "sans-serif"],
+                    "button": ["Geist", "sans-serif"],
+                    "headline-md": ["Geist", "sans-serif"],
+                    "body-md": ["Geist", "sans-serif"],
+                    "body-lg": ["Geist", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg": ["80px", {"lineHeight": "88px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root,[data-theme="light"]{
-  --bg:#f7f6f2;--surface:#f0efeb;--surface-2:#e8e6e1;--border:rgba(40,37,29,0.1);
-  --text:#1f1c16;--text-muted:#5a5752;--text-faint:#8a8882;
-  --accent:#01696f;--accent-hover:#0c4e54;--accent-bg:rgba(1,105,111,0.08);
-  --radius:12px;
-}
-[data-theme="dark"]{
-  --bg:#111110;--surface:#1a1918;--surface-2:#232220;--border:rgba(255,255,255,0.12);
-  --text:#f4f4f5;--text-muted:#a1a1aa;--text-faint:#71717a;
-  --accent:#5eb8c4;--accent-hover:#4ca8b5;--accent-bg:rgba(94,184,196,0.12);
-  --radius:12px;
-}
-html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
-body{font-family:"DM Sans",sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
-
-/* NAV */
-nav{display:flex;align-items:center;padding:0 40px;height:58px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:100}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-name{font-size:15px;font-weight:600;letter-spacing:2px;color:var(--text);text-transform:uppercase}
-.nav-right{margin-left:auto;display:flex;align-items:center;gap:6px}
-.theme-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:5px 9px;cursor:pointer;color:var(--text-muted);font-size:13px;transition:all 0.15s}
-.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-
-/* HERO */
-.hero{max-width:760px;margin:0 auto;padding:96px 40px 48px;text-align:center}
-.hero-tag{display:inline-block;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;font-weight:500}
-.hero h1{font-size:clamp(2rem,5vw,3.2rem);font-weight:700;letter-spacing:-0.5px;line-height:1.1;margin-bottom:20px;color:var(--text)}
-.hero p{font-size:15px;color:var(--text-muted);max-width:480px;margin:0 auto 32px;line-height:1.7}
-.browse-link{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;color:var(--accent);text-decoration:none;letter-spacing:0.3px;transition:color 0.15s}
-.browse-link:hover{color:var(--accent)}
-.card-count{
-  position:absolute;
-  top:16px;
-  right:16px;
-  font-size:10px;
-  color:var(--text-faint);
-  letter-spacing:0.5px;
-  opacity:0.8;
-  transition:all 0.2s;
-  cursor:default;
-}
-.card:hover .card-count{opacity:1;color:var(--text)}
-
-.suggest-section { max-width: 600px; margin: 80px auto 40px; text-align: center; background: var(--surface); padding: 32px 24px; border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-.suggest-section:hover { transform: translateY(-3px); box-shadow: 0 16px 32px rgba(0,0,0,0.12); }
-.suggest-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; }
-.suggest-section p { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
-.suggest-form { display: flex; gap: 8px; max-width: 380px; margin: 0 auto; }
-.suggest-form input { flex: 1; min-width: 0; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; font-size: 13px; color: var(--text); outline: none; transition: border-color 0.15s; }
-.suggest-form input:focus { border-color: var(--accent); }
-.suggest-form button { background: var(--text); color: var(--bg); border: none; border-radius: 8px; padding: 0 20px; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity 0.15s; }
-.suggest-form button:hover { opacity: 0.9; }
-#suggestion-msg { font-size: 12px; margin-top: 12px; height: 18px; color: var(--accent); opacity: 0; transition: opacity 0.2s; }
-#suggestion-msg.visible { opacity: 1; }
-
-.browse-link svg{width:16px;height:16px;transition:transform 0.15s}
-.browse-link:hover svg{transform:translateX(3px)}
-.search-hero{display:flex;align-items:center;max-width:240px;margin:24px auto 0;background:transparent;border:1px solid var(--border);border-radius:24px;overflow:hidden;transition:all 0.2s}
-.search-hero:focus-within{border-color:var(--accent);background:var(--surface)}
-.search-hero input{flex:1;background:none;border:none;padding:8px 16px;font-size:12px;color:var(--text);outline:none;text-align:center}
-.search-hero input::placeholder{color:var(--text-faint)}
-
-/* FEATURED TOOLS BANNER */
-.featured-section{width:100%;max-width:1600px;margin:0 auto 80px;animation:fade-up 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;opacity:0}
-@keyframes fade-up { to { opacity: 1; transform: translateY(0); } from { opacity: 0; transform: translateY(20px); } }
-.featured-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-faint);text-align:center;margin-bottom:24px;font-weight:600}
-.diagonal-banner{display:flex;width:100%;height:180px;overflow:hidden;background:var(--bg)}
-.diagonal-slice{flex:1;background:var(--surface);transform:skewX(-16deg);margin:0 -20px;border-left:4px solid var(--bg);border-right:4px solid var(--bg);transition:all 0.4s cubic-bezier(0.4, 0, 0.2, 1);text-decoration:none;display:flex;align-items:center;justify-content:center;position:relative;background-size:cover;background-position:center;overflow:hidden}
-.diagonal-slice::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.9) 100%);z-index:1;transition:opacity 0.4s}
-.diagonal-slice:hover::before{opacity:0.6}
-.diagonal-slice:nth-child(1){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/lm_arena_bg.png');margin-left:-40px;padding-left:40px}
-.diagonal-slice:nth-child(2){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/chatjimmy_bg.png')}
-.diagonal-slice:nth-child(3){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/google_ai_bg.png')}
-.diagonal-slice:nth-child(4){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/zai_bg.png')}
-.diagonal-slice:nth-child(5){background-image:linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('assets/puter_bg.png');margin-right:-40px;padding-right:40px}
-.diagonal-slice:hover{flex:1.5;transform:skewX(-16deg) scale(1.02);z-index:2}
-.slice-content{transform:skewX(16deg);display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 30px;z-index:2;position:relative}
-.slice-content h4{font-size:20px;font-weight:800;color:#fff;margin-bottom:6px;letter-spacing:-0.5px;text-shadow:0 2px 15px rgba(0,0,0,0.8), 0 0 20px rgba(0,0,0,0.4)}
-.slice-content p{font-size:13px;font-weight:500;color:rgba(255,255,255,0.95);line-height:1.4;max-width:160px;text-shadow:0 1px 10px rgba(0,0,0,0.8)}
-
-/* STATS */
-.stats{display:flex;justify-content:center;gap:40px;padding:0 40px 72px;border-bottom:1px solid var(--border);max-width:760px;margin:0 auto}
-.stat{text-align:center}
-.stat-num{font-size:22px;font-weight:700;color:var(--text);letter-spacing:-0.5px}
-.stat-label{font-size:11px;color:var(--text-faint);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
-
-/* CATEGORIES */
-.categories{max-width:960px;margin:0 auto;padding:72px 40px}
-.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-faint);margin-bottom:32px;font-weight:500}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
-.card{text-decoration:none;display:flex;flex-direction:column;gap:12px;padding:20px;border:1px solid transparent;border-radius:16px;position:relative;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-.card:hover{background:var(--surface);border-color:var(--border);transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.1)}
-.card-top{display:flex;align-items:center;gap:14px}
-.card-icon{width:32px;height:32px;flex-shrink:0;color:var(--accent);transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1)}
-.card:hover .card-icon{transform:scale(1.1);color:var(--accent-hover)}
-.card-meta{display:flex;flex-direction:column;gap:2px}
-.card h3{font-size:15px;font-weight:600;color:var(--text);line-height:1.2}
-.card-count{font-size:11px;color:var(--text-faint);font-weight:500;letter-spacing:0.5px;transition:color 0.3s}
-.card:hover .card-count{color:var(--accent)}
-.card p{font-size:12px;color:var(--text-muted);line-height:1.6}
-.card-soon{opacity:1;cursor:default}
-.badge-soon{position:absolute;top:20px;right:20px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint);border:1px solid var(--border);border-radius:20px;padding:2px 8px}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:32px 40px;text-align:center;font-size:11px;color:var(--text-faint);letter-spacing:0.5px}
-</style>
+        body { color: #e5e2e1; }
+        .canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6; }
+        .beacon-dot { width: 4px; height: 4px; background-color: #cdf200; }
+        .superpower-focus:focus-within { border-color: #cdf200 !important; }
+        .card-hover:hover { border-top: 1px solid #cdf200; transition: border 0.3s ease; }
+        
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        .animate-ken-burns {
+            animation: ken-burns 40s ease-in-out infinite alternate;
+        }
+        .global-vignette {
+            background: radial-gradient(circle at center, transparent 20%, rgba(19, 19, 19, 0.95) 100%);
+        }
+    </style>
 </head>
-<body>
-
-<nav>
-  <a class="logo" href="#">
-    <svg viewBox="0 0 28 28" width="26" height="26" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="14,2 26,9 26,21 14,28 2,21 2,9" stroke="var(--accent)" stroke-width="1.8" fill="none" stroke-linejoin="round"/>
-    </svg>
-    <span class="logo-name">Beacon</span>
-  </a>
-  <div class="nav-right">
-    <select id="lang-toggle" class="theme-btn" aria-label="Change language">
-      <option value="en">EN</option>
-      <option value="es">ES</option>
-      <option value="ca">CA</option>
-    </select>
-    <button class="theme-btn" id="theme-toggle" aria-label="Toggle theme">☀</button>
-  </div>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container relative w-full min-h-screen">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 z-[-2] overflow-hidden bg-background w-full h-full">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA');"></div>
+</div>
+<!-- Dark Vignette Overlay -->
+<div class="fixed inset-0 z-[-1] pointer-events-none global-vignette bg-background/30 w-full h-full"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
+<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<a href="index.html" class="font-display-lg text-display-lg tracking-tighter text-primary no-underline">BEACON</a>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">APPS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">LABS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">ARCHIVE</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">DOCS</a>
+</div>
+<div class="flex items-center gap-6">
+<a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">
+                    LAUNCH
+                </a>
+</div>
+</div>
 </nav>
-
-<section class="hero">
-  <div class="hero-tag" data-i18n="hero_tag">Curated by developers, for developers</div>
-  <h1 data-i18n="hero_title">Everything you need.<br>All in one place.</h1>
-  <p data-i18n="hero_desc">A curated directory of tools, inspiration, libraries, templates, fonts and assets for builders and creatives.</p>
-  <div class="search-hero">
-    <input type="text" data-i18n-placeholder="search_placeholder" placeholder="Quick search..." id="hero-search">
-  </div>
-  <a href="./beacon.html" class="browse-link"><span data-i18n="browse_btn">Browse the directory</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+<canvas class="canvas-container" id="wavingLines"></canvas>
+<!-- Content Layer -->
+<div class="relative z-20 w-full max-w-3xl px-gutter text-center">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl">
+                INSTRUMENTING<br/>THE VOID
+            </h1>
+<!-- Superpower Search Bar -->
+<div class="superpower-focus group relative w-full bg-surface-container-lowest/80 backdrop-blur-sm border-b border-white transition-all duration-300 py-4 px-6 flex items-center">
+<input id="heroSearch" class="w-full bg-transparent border-none focus:ring-0 font-label-mono text-label-mono text-primary uppercase placeholder:text-on-surface-variant/50" placeholder="SEARCH 10,000+ TOOLS..." type="text"/>
+<div class="font-label-mono text-label-mono text-primary-container opacity-0 group-focus-within:opacity-100 transition-opacity">CMD + K</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4">
+<div class="font-label-mono text-label-mono uppercase tracking-[0.3em] text-on-surface-variant drop-shadow-md">SCROLL TO ANALYZE</div>
+<div class="w-[1px] h-12 bg-secondary-container relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-primary-container animate-[bounce_2s_infinite]"></div>
+</div>
+</div>
 </section>
-
-<section class="featured-section">
-  <div class="featured-label" data-i18n="featured_label">Featured Free Discoveries</div>
-  <div class="diagonal-banner">
-    <a href="https://lmarena.ai/" target="_blank" class="diagonal-slice">
-      <div class="slice-content">
-        <h4>LM Arena</h4>
-        <p data-i18n="lmarena_desc">Testing AI blindly</p>
-      </div>
-    </a>
-    <a href="https://chatjimmy.ai/" target="_blank" class="diagonal-slice">
-      <div class="slice-content">
-        <h4>ChatJimmy</h4>
-        <p data-i18n="chatjimmy_desc">15,000+ tokens/sec</p>
-      </div>
-    </a>
-    <a href="https://aistudio.google.com/" target="_blank" class="diagonal-slice">
-      <div class="slice-content">
-        <h4>Google AI Studio</h4>
-        <p data-i18n="google_desc">Build with Gemini</p>
-      </div>
-    </a>
-    <a href="https://z.ai/" target="_blank" class="diagonal-slice">
-      <div class="slice-content">
-        <h4>Z.AI</h4>
-        <p data-i18n="zai_desc">Reasoning & Images</p>
-      </div>
-    </a>
-    <a href="https://puter.com/" target="_blank" class="diagonal-slice">
-      <div class="slice-content">
-        <h4>Puter</h4>
-        <p data-i18n="puter_desc">Free cloud OS</p>
-      </div>
-    </a>
-  </div>
+<!-- Hot Choices Section -->
+<section class="py-[120px] relative w-full z-10 bg-transparent">
+<div class="max-w-container-max mx-auto px-gutter w-full">
+<div class="flex justify-between items-end mb-16 border-b border-secondary-container pb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<div class="beacon-dot"></div>
+<span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">ACTIVE TRENDS</span>
+</div>
+<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">HOT CHOICES</h2>
+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">5 FEATURED TOOLS</div>
+</div>
+<!-- Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<!-- LM Arena -->
+<a href="https://lmarena.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
+<img class="h-8" src="https://www.google.com/s2/favicons?domain=lmarena.ai&sz=64" alt=""/>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">LM ARENA</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">A blind testing playground pitting top-tier foundational models against each other simultaneously.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- ChatJimmy -->
+<a href="https://chatjimmy.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
+<img class="h-8" src="https://www.google.com/s2/favicons?domain=chatjimmy.ai&sz=64" alt=""/>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">SYSTEM</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">CHATJIMMY</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Ultra-high-speed AI hardware demo generating text at an astounding 15,000+ tokens per second.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- Google AI Studio -->
+<a href="https://aistudio.google.com/app/prompts/new_chat" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
+<img class="h-8" src="https://www.google.com/s2/favicons?domain=aistudio.google.com&sz=64" alt=""/>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">GOOGLE AI STUDIO</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Gemini 3.1 Pro access with prompt engineering tools and multi-modal capabilities.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- Z.ai -->
+<a href="https://chat.z.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
+<img class="h-8" src="https://www.google.com/s2/favicons?domain=chat.z.ai&sz=64" alt=""/>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE CHAT</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">Z.AI</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">GLM-5.1 and GLM-5-Turbo models with slides generation and conversational AI.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- Puter -->
+<a href="https://developer.puter.com/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
+<img class="h-8" src="https://www.google.com/s2/favicons?domain=developer.puter.com&sz=64" alt=""/>
+</div>
+<div class="flex gap-2 mb-4 flex-wrap">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI API</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
+</div>
+<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">PUTER</h3>
+<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Server-less web operating environment with native multi-modal AI capabilities and zero auth overhead.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+</div>
+</div>
 </section>
-
-<section class="categories">
-  <div class="section-label" data-i18n="browse_label">Browse</div>
-  <div class="grid">
-
-    <a class="card" href="./beacon.html?section=TopResources">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><div class="card-meta"><h3 data-i18n="top_resources">Top Resources</h3><span class="card-count" data-i18n="top_picks">Top Picks</span></div></div>
-      <p data-i18n="top_desc">The best of the best. Hand-picked daily drivers from all across the directory.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Apps">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg><div class="card-meta"><h3 data-i18n="apps_title">Apps & Web Tools</h3><span class="card-count">161 tools</span></div></div>
-      <p data-i18n="apps_desc">AI tools, automation, design, video, builders, coding utilities and more.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=FreeAI">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg><div class="card-meta"><h3 data-i18n="freeai_title">Free AI</h3><span class="card-count">33 tools</span></div></div>
-      <p data-i18n="freeai_desc">Free chat, image gen, dev APIs and tools — no paywall, no credit card.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Inspiration">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg><div class="card-meta"><h3 data-i18n="inspiration_title">Inspiration</h3><span class="card-count">18 tools</span></div></div>
-      <p data-i18n="inspiration_desc">Awwwards, Dribbble, Behance, Mobbin and more design galleries.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Libraries">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg><div class="card-meta"><h3 data-i18n="libraries_title">Libraries & UI Kits</h3><span class="card-count">19 tools</span></div></div>
-      <p data-i18n="libraries_desc">shadcn, Tailwind, Radix, Framer Motion and component libraries.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Templates">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h6v6H4z"/><path d="M14 4h6v6h-6z"/><path d="M4 14h6v6H4z"/><path d="M14 17h6M17 14v6"/></svg><div class="card-meta"><h3 data-i18n="templates_title">Templates</h3><span class="card-count">14 tools</span></div></div>
-      <p data-i18n="templates_desc">HTML, React, Figma and design system starter templates.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Fonts">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h3m0 0V4m0 3a5 5 0 0 0 10 0m0 0V4m0 3h3M4 20h16"/><text x="7" y="19" font-size="7" fill="currentColor" stroke="none" font-family="serif">Aa</text></svg><div class="card-meta"><h3 data-i18n="fonts_title">Fonts</h3><span class="card-count">12 tools</span></div></div>
-      <p data-i18n="fonts_desc">Google Fonts, Fontshare, type foundries and free typefaces.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Assets">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M12 12h.01"/><path d="M7 12h.01"/><path d="M17 12h.01"/></svg><div class="card-meta"><h3 data-i18n="assets_title">Assets</h3><span class="card-count">21 tools</span></div></div>
-      <p data-i18n="assets_desc">Icons, illustrations, stock photos, 3D models and free resources.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Streaming">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polygon points="10,8 16,12 10,16"/></svg><div class="card-meta"><h3>Streaming</h3><span class="card-count">658 tools</span></div></div>
-      <p>Movies, TV shows, anime, live TV, sports and torrent streaming sites.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Gaming">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="6" width="20" height="12" rx="4"/><circle cx="8" cy="12" r="1.5"/><circle cx="16" cy="12" r="1.5"/></svg><div class="card-meta"><h3>Gaming</h3><span class="card-count">720 tools</span></div></div>
-      <p>Game downloads, repacks, emulators, ROMs, browser games and retro titles.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Gaming Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><div class="card-meta"><h3>Gaming Tools</h3><span class="card-count">574 tools</span></div></div>
-      <p>Launchers, mods, saves, Steam/Epic tools, homebrew and Minecraft utilities.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Music %26 Audio">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><div class="card-meta"><h3>Music & Audio</h3><span class="card-count">601 tools</span></div></div>
-      <p>Music streaming, downloads, radio, podcasts, soundtracks and audio tools.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Books %26 Reading">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg><div class="card-meta"><h3>Books & Reading</h3><span class="card-count">648 tools</span></div></div>
-      <p>Ebooks, audiobooks, comics, manga, academic papers and magazines.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Educational">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg><div class="card-meta"><h3>Educational</h3><span class="card-count">1106 tools</span></div></div>
-      <p>Courses, documentaries, science, math, history, space and DIY skills.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Privacy %26 Security">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><div class="card-meta"><h3>Privacy & Security</h3><span class="card-count">197 tools</span></div></div>
-      <p>Adblockers, antivirus, VPNs, proxies, encryption and privacy tools.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Developer Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg><div class="card-meta"><h3>Developer Tools</h3><span class="card-count">662 tools</span></div></div>
-      <p>Code editors, Git tools, APIs, databases, hosting and dev communities.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Image Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><div class="card-meta"><h3>Image Tools</h3><span class="card-count">569 tools</span></div></div>
-      <p>Image editors, screenshots, upscaling, compression, OCR and color tools.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Video Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg><div class="card-meta"><h3>Video Tools</h3><span class="card-count">248 tools</span></div></div>
-      <p>Video players, editors, downloaders, converters and screen recording.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Text Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg><div class="card-meta"><h3>Text Tools</h3><span class="card-count">383 tools</span></div></div>
-      <p>Note-taking, pastebins, translators, office suites and markdown editors.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Social Media">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><div class="card-meta"><h3>Social Media</h3><span class="card-count">285 tools</span></div></div>
-      <p>Discord, Reddit, Telegram, YouTube, Twitter/X and Twitch tools.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Internet Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg><div class="card-meta"><h3>Internet Tools</h3><span class="card-count">444 tools</span></div></div>
-      <p>Browsers, extensions, network tools, search engines and web archiving.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=System Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg><div class="card-meta"><h3>System Tools</h3><span class="card-count">215 tools</span></div></div>
-      <p>System utilities, hardware tools, Windows customization and terminals.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=File Tools">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><div class="card-meta"><h3>File Tools</h3><span class="card-count">253 tools</span></div></div>
-      <p>Download managers, archivers, PDF tools, cloud storage and file transfer.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Downloading">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><div class="card-meta"><h3>Downloading</h3><span class="card-count">87 tools</span></div></div>
-      <p>Download directories, software sites, FOSS, Usenet and debrid services.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Torrenting">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg><div class="card-meta"><h3>Torrenting</h3><span class="card-count">60 tools</span></div></div>
-      <p>Torrent sites, clients, private trackers and helpful tools.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Linux %26 macOS">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg><div class="card-meta"><h3>Linux & macOS</h3><span class="card-count">264 tools</span></div></div>
-      <p>Linux distros, apps, tools, customization and Mac software.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Mobile">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg><div class="card-meta"><h3>Mobile</h3><span class="card-count">288 tools</span></div></div>
-      <p>Android APKs, modded apps, iOS tools and mobile utilities.</p>
-    </a>
-
-    <a class="card" href="./beacon.html?section=Miscellaneous">
-      <div class="card-top"><svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg><div class="card-meta"><h3>Miscellaneous</h3><span class="card-count">1061 tools</span></div></div>
-      <p>Maps, news, food & recipes, health, free stuff, sports and indexes.</p>
-    </a>
-
-  </div>
+<!-- Categories Section -->
+<section class="py-[120px] relative w-full z-10 bg-transparent">
+<div class="max-w-container-max mx-auto px-gutter w-full">
+<div class="flex justify-between items-end mb-16 border-b border-secondary-container pb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<div class="beacon-dot"></div>
+<span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">BROWSE BY CATEGORY</span>
+</div>
+<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">CATEGORIES</h2>
+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">40+ TAGS</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<a href="beacon.html?tag=ai" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">AI</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Artificial Intelligence</div>
+</a>
+<a href="beacon.html?tag=free-chat" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">FREE CHAT</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Chat Interfaces</div>
+</a>
+<a href="beacon.html?tag=ai-coding" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">AI CODING</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Code Assistants</div>
+</a>
+<a href="beacon.html?tag=ai-image" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">AI IMAGE</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Image Generation</div>
+</a>
+<a href="beacon.html?tag=ai-video" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">AI VIDEO</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Video Generation</div>
+</a>
+<a href="beacon.html?tag=streaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">STREAMING</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Media Streams</div>
+</a>
+<a href="beacon.html?tag=gaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">GAMING</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Games & Platforms</div>
+</a>
+<a href="beacon.html?tag=design" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">DESIGN</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Design Tools</div>
+</a>
+<a href="beacon.html?tag=dev-tools" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">DEV TOOLS</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Developer Utilities</div>
+</a>
+<a href="beacon.html?tag=music" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">MUSIC</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Audio & Music</div>
+</a>
+<a href="beacon.html?tag=education" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">EDUCATION</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Learning Resources</div>
+</a>
+<a href="beacon.html?tag=privacy" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
+<div class="font-headline-md text-[18px] text-primary mb-1">PRIVACY</div>
+<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Privacy Tools</div>
+</a>
+</div>
+<div class="mt-8 text-center">
+<a href="beacon.html" class="inline-block border border-secondary-container text-primary font-button text-button uppercase py-4 px-12 hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50 no-underline">VIEW ALL 10,000+ TOOLS</a>
+</div>
+</div>
 </section>
-
-<section class="suggest-section">
-  <h3 data-i18n="missing_title">Missing a tool?</h3>
-  <p data-i18n="missing_desc">Got a suggestion for a great developer or design tool? Drop it here.</p>
-  <div class="suggest-form">
-    <input type="text" id="suggestion-input" data-i18n-placeholder="suggest_placeholder" placeholder="Tool name or URL..." autocomplete="off">
-    <button id="suggestion-btn" data-i18n="submit_btn">Submit</button>
-  </div>
-  <div id="suggestion-msg" data-i18n="suggestion_saved">Suggestion saved! Thanks.</div>
-</section>
-
-<footer data-i18n="footer_text">Beacon · A curated index for builders and creatives</footer>
-
+<!-- Footer -->
+<footer class="w-full mt-auto relative z-10 border-t border-secondary-container bg-background/60 backdrop-blur-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary drop-shadow-sm">BEACON</div>
+<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant drop-shadow-sm">© 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED.</div>
+</div>
+<div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">SYSTEM STATUS</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">PRIVACY</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">ENCRYPTED</a>
+</div>
+</div>
+</footer>
 <script>
-const root=document.documentElement;
-const toggleBtn=document.getElementById('theme-toggle');
-let theme='dark';
-toggleBtn.addEventListener('click',()=>{
-  theme=theme==='dark'?'light':'dark';
-  root.setAttribute('data-theme',theme);
-  toggleBtn.textContent=theme==='dark'?'☀':'☾';
-});
-document.getElementById('hero-search').addEventListener('keydown',e=>{
-  if(e.key==='Enter'&&e.target.value.trim()){
-    window.location.href='beacon.html?q='+encodeURIComponent(e.target.value.trim());
-  }
-});
+        // Waving Tech Lines Animation
+        const canvas = document.getElementById('wavingLines');
+        const ctx = canvas.getContext('2d');
+        let width, height, lines = [];
 
-document.getElementById('suggestion-btn').addEventListener('click', () => {
-  const input = document.getElementById('suggestion-input');
-  const val = input.value.trim();
-  if(!val) return;
-  const existing = JSON.parse(localStorage.getItem('beacon_suggestions') || '[]');
-  existing.push({ url: val, date: new Date().toISOString() });
-  localStorage.setItem('beacon_suggestions', JSON.stringify(existing));
-  input.value = '';
-  const msg = document.getElementById('suggestion-msg');
-  msg.classList.add('visible');
-  setTimeout(() => msg.classList.remove('visible'), 3000);
-});
-</script>
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            lines = [];
+            for (let i = 0; i < 5; i++) {
+                lines.push({
+                    y: height * 0.5 + (i - 2) * 40,
+                    amplitude: 20 + i * 15,
+                    speed: 0.01 + i * 0.005,
+                    offset: Math.random() * 10,
+                    color: i % 2 === 0 ? '#cdf200' : '#ffffff'
+                });
+            }
+        }
 
-<script>
-  const translations = {
-    "en": {
-      "hero_tag": "Curated by developers, for developers",
-      "hero_title": "Everything you need.<br>All in one place.",
-      "hero_desc": "A curated directory of tools, inspiration, libraries, templates, fonts and assets for builders and creatives.",
-      "browse_btn": "Browse the directory",
-      "featured_label": "Featured Free Discoveries",
-      "browse_label": "Browse",
-      "top_picks": "Top Picks",
-      "top_resources": "Top Resources",
-      "top_desc": "The best of the best. Hand-picked daily drivers from all across the directory.",
-      "apps_title": "Apps & Web Tools",
-      "apps_desc": "AI tools, automation, design, video, builders, coding utilities and more.",
-      "freeai_title": "Free AI",
-      "freeai_desc": "Free chat, image gen, dev APIs and tools — no paywall, no credit card.",
-      "lmarena_desc": "Testing AI blindly",
-      "chatjimmy_desc": "15,000+ tokens/sec",
-      "google_desc": "Build with Gemini",
-      "zai_desc": "Reasoning & Images",
-      "puter_desc": "Free cloud OS",
-      "inspiration_title": "Inspiration",
-      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin and more design galleries.",
-      "libraries_title": "Libraries & UI Kits",
-      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion and component libraries.",
-      "templates_title": "Templates",
-      "templates_desc": "HTML, React, Figma and design system starter templates.",
-      "fonts_title": "Fonts",
-      "fonts_desc": "Google Fonts, Fontshare, type foundries and free typefaces.",
-      "assets_title": "Assets",
-      "assets_desc": "Icons, illustrations, stock photos, 3D models and free resources.",
-      "missing_title": "Missing a tool?",
-      "missing_desc": "Got a suggestion for a great developer or design tool? Drop it here.",
-      "submit_btn": "Submit",
-      "suggestion_saved": "Suggestion saved! Thanks.",
-      "footer_text": "Beacon · A curated index for builders and creatives",
-      "search_placeholder": "Quick search...",
-      "suggest_placeholder": "Tool name or URL..."
-    },
-    "es": {
-      "hero_tag": "Curado por desarrolladores, para desarrolladores",
-      "hero_title": "Todo lo que necesitas.<br>Todo en un solo lugar.",
-      "hero_desc": "Un directorio curado de herramientas, inspiración, bibliotecas, plantillas, fuentes y recursos para creadores.",
-      "browse_btn": "Explorar el directorio",
-      "featured_label": "Descubrimientos Gratuitos Destacados",
-      "browse_label": "Explorar",
-      "top_picks": "Mejores Selecciones",
-      "top_resources": "Recursos Principales",
-      "top_desc": "Lo mejor de lo mejor. Herramientas seleccionadas a mano de todo el directorio.",
-      "apps_title": "Apps y Herramientas Web",
-      "apps_desc": "Herramientas de IA, automatización, diseño, video, utilidades de código y más.",
-      "freeai_title": "IA Gratuita",
-      "freeai_desc": "Chat gratuito, generación de imágenes, APIs y herramientas — sin muro de pago.",
-      "lmarena_desc": "Probar IA a ciegas",
-      "chatjimmy_desc": "15,000+ tokens/seg",
-      "google_desc": "Construye con Gemini",
-      "zai_desc": "Razonamiento e Imágenes",
-      "puter_desc": "OS en la nube gratuito",
-      "inspiration_title": "Inspiración",
-      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin y más galerías.",
-      "libraries_title": "Bibliotecas y UI",
-      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion y más componentes.",
-      "templates_title": "Plantillas",
-      "templates_desc": "Plantillas iniciales de HTML, React, Figma y diseño.",
-      "fonts_title": "Fuentes",
-      "fonts_desc": "Google Fonts, Fontshare, fundiciones y tipografías gratis.",
-      "assets_title": "Recursos",
-      "assets_desc": "Iconos, ilustraciones, fotos de stock, modelos 3D y más.",
-      "missing_title": "¿Falta una herramienta?",
-      "missing_desc": "¿Tienes una sugerencia de herramienta o diseño? Déjala aquí.",
-      "submit_btn": "Enviar",
-      "suggestion_saved": "¡Sugerencia guardada! Gracias.",
-      "footer_text": "Beacon · Un índice curado para desarrolladores y creadores",
-      "search_placeholder": "Búsqueda rápida...",
-      "suggest_placeholder": "Nombre o URL..."
-    },
-    "ca": {
-      "hero_tag": "Comissariat per desenvolupadors, per a desenvolupadors",
-      "hero_title": "Tot el que necessites.<br>Tot en un sol lloc.",
-      "hero_desc": "Un directori comissariat d'eines, inspiració, biblioteques, plantilles, tipografies i recursos per a creadors.",
-      "browse_btn": "Explorar el directori",
-      "featured_label": "Descobriments Gratuïts Destacats",
-      "browse_label": "Explorar",
-      "top_picks": "Millors Seleccions",
-      "top_resources": "Recursos Principals",
-      "top_desc": "El millor del millor. Eines seleccionades a mà de tot el directori.",
-      "apps_title": "Apps i Eines Web",
-      "apps_desc": "Eines d'IA, automatització, disseny, vídeo, utilitats de codi i més.",
-      "freeai_title": "IA Gratuïta",
-      "freeai_desc": "Xat gratuït, generació d'imatges, APIs i eines — sense mur de pagament.",
-      "lmarena_desc": "Provar IA a cegues",
-      "chatjimmy_desc": "15,000+ tokens/seg",
-      "google_desc": "Construeix amb Gemini",
-      "zai_desc": "Raonament i Imatges",
-      "puter_desc": "OS al núvol gratuït",
-      "inspiration_title": "Inspiració",
-      "inspiration_desc": "Awwwards, Dribbble, Behance, Mobbin i més galeries.",
-      "libraries_title": "Biblioteques i UI",
-      "libraries_desc": "shadcn, Tailwind, Radix, Framer Motion i més components.",
-      "templates_title": "Plantilles",
-      "templates_desc": "Plantilles inicials d'HTML, React, Figma i disseny.",
-      "fonts_title": "Tipografies",
-      "fonts_desc": "Google Fonts, Fontshare, foses i tipografies gratis.",
-      "assets_title": "Recursos",
-      "assets_desc": "Icones, il·lustracions, fotos d'estoc, models 3D i més.",
-      "missing_title": "Falta una eina?",
-      "missing_desc": "Tens un suggeriment d'eina o disseny? Deixa-la aquí.",
-      "submit_btn": "Enviar",
-      "suggestion_saved": "Suggeriment guardat! Gràcies.",
-      "footer_text": "Beacon · Un índex comissariat per a desenvolupadors i creadors",
-      "search_placeholder": "Cerca ràpida...",
-      "suggest_placeholder": "Nom o URL..."
-    }
-  };
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            lines.forEach(line => {
+                ctx.beginPath();
+                ctx.strokeStyle = line.color;
+                ctx.lineWidth = 0.5;
+                ctx.globalAlpha = 0.3;
+                
+                for (let x = 0; x < width; x++) {
+                    const y = line.y + Math.sin(x * 0.002 + line.offset) * line.amplitude;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                
+                ctx.stroke();
+                line.offset += line.speed;
+            });
+            requestAnimationFrame(draw);
+        }
 
-  const langToggle = document.getElementById('lang-toggle');
-  
-  function applyTranslation(lang) {
-    if(!translations[lang]) return;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if(translations[lang][key]) {
-        el.innerHTML = translations[lang][key];
-      }
-    });
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      if(translations[lang][key]) {
-        el.placeholder = translations[lang][key];
-      }
-    });
-    document.documentElement.lang = lang;
-    langToggle.value = lang;
-  }
+        window.addEventListener('resize', init);
+        init();
+        draw();
 
-  const savedLang = localStorage.getItem('beacon_lang') || 'en';
-  applyTranslation(savedLang);
-
-  langToggle.addEventListener('change', (e) => {
-    const selected = e.target.value;
-    applyTranslation(selected);
-    localStorage.setItem('beacon_lang', selected);
-  });
-</script>
-</body>
-</html>
+        document.getElementById('heroSearch').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                var q = this.value.trim();
+                if (q) window.location.href = 'beacon.html?q=' + encodeURIComponent(q);
+            }
+        });
+    </script>
+</body></html>
