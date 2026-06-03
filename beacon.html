@@ -50,9 +50,9 @@
         tbody tr { border-bottom: 1px solid rgba(71,71,71,0.3); transition: all 0.2s; opacity: 0; animation: fade-up 0.4s ease-out forwards; cursor: pointer; }
         tbody tr:hover { background: #1c1b1b; }
         td { padding: 12px 16px; vertical-align: middle; font-size: 13px; }
-        .td-site { width: 1%; white-space: nowrap; padding-right: 24px; }
-        .td-desc { color: #c5c9ac; font-size: 12px; max-width: 280px; }
-        .td-cat { font-family: 'Geist', sans-serif; font-size: 10px; color: #c5c9ac; letter-spacing: 0.05em; text-transform: uppercase; }
+        .td-site { white-space: nowrap; width: 15%; }
+        .td-desc { color: #c5c9ac; font-size: 12px; width: 40%; }
+        .td-cat { font-family: 'Geist', sans-serif; font-size: 10px; color: #c5c9ac; letter-spacing: 0.05em; text-transform: uppercase; width: 15%; }
         .badge { display: inline-block; font-family: 'Geist', sans-serif; font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border: 1px solid; }
         .badge-free { border-color: #cdf200; color: #cdf200; }
         .badge-freemium { border-color: #474747; color: #c5c9ac; }
@@ -198,9 +198,13 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<a href="index.html" class="font-display-lg text-display-lg tracking-tighter text-primary no-underline">BEACON</a>
+<a href="index.html" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">BEACON</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=streaming">MEDIA</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=gaming">GAMING</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=dev-tools">DEV TOOLS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=free-chat">FREE CHAT</a>
 </div>
 <div class="flex items-center gap-6">
 <div class="hidden lg:block">
