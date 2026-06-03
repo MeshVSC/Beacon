@@ -297,10 +297,20 @@
           var cats = defaults;
           try { var s = localStorage.getItem('beacon_categories'); if (s) cats = JSON.parse(s); } catch(e) {}
           var grid = document.getElementById('catGrid');
+          var allTools = (typeof TOOLS !== 'undefined' ? TOOLS : []).concat(typeof FMHY_TOOLS !== 'undefined' ? FMHY_TOOLS : []);
           grid.innerHTML = cats.filter(function(c) { return c.visible; }).map(function(c) {
-            return '<a href="beacon.html?tag=' + c.tag + '" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">' +
-              '<div class="font-headline-md text-[18px] text-primary mb-1">' + c.label + '</div>' +
-              '<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">' + c.subtitle + '</div></a>';
+            var count = allTools.filter(function(t) { return (t.tags || []).indexOf(c.tag) !== -1; }).length;
+            return '<a href="beacon.html?tag=' + c.tag + '" class="group relative bg-surface-container-lowest/60 backdrop-blur-sm border border-secondary-container/30 no-underline overflow-hidden transition-all duration-300 hover:border-primary-container/80 hover:bg-surface-container-low/60" style="display:flex;flex-direction:column;justify-content:space-between;padding:20px 18px;min-height:120px;">' +
+              '<div style="position:absolute;top:0;left:0;width:100%;height:2px;background:#cdf200;opacity:0;transition:opacity 0.3s;" class="group-hover:opacity-100"></div>' +
+              '<div>' +
+              '<div class="font-headline-md text-[16px] text-primary mb-1 tracking-tight">' + c.label + '</div>' +
+              '<div class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase tracking-widest">' + c.subtitle + '</div>' +
+              '</div>' +
+              '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;">' +
+              '<span class="font-label-mono text-[10px] text-on-surface-variant/40 uppercase">' + count + ' tools</span>' +
+              '<span class="font-label-mono text-[10px] text-primary-container/0 group-hover:text-primary-container uppercase transition-all duration-300" style="letter-spacing:0.1em;">Explore</span>' +
+              '</div>' +
+              '</a>';
           }).join('');
         })();
 
