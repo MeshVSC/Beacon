@@ -29,7 +29,7 @@ const FMHY_TOOLS = [
     ],
     "domain": "aistudio.google.com",
     "url": "https://aistudio.google.com/app/prompts/new_chat",
-    "description": "Gemini 3.1 Pro / Google Sign-Up / Add Features / Subreddit / Discord",
+    "description": "Google's AI development platform with access to Gemini models for prototyping, testing, and building AI applications.",
     "pricing": "Free",
     "isEssential": false
   },
@@ -40,7 +40,7 @@ const FMHY_TOOLS = [
     ],
     "domain": "chat.z.ai",
     "url": "https://chat.z.ai/",
-    "description": "GLM-5.1 / GLM-5-Turbo / Slides / Sign-Up / Discord",
+    "description": "Free AI chat interface powered by Zhipu's GLM models with support for text generation and conversations.",
     "pricing": "Free",
     "isEssential": false
   },

@@ -200,10 +200,7 @@
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
 <a href="index.html" class="font-display-lg text-display-lg tracking-tighter text-primary no-underline">BEACON</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="#">APPS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">LABS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">ARCHIVE</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">DOCS</a>
+<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
 </div>
 <div class="flex items-center gap-6">
 <div class="hidden lg:block">
@@ -518,6 +515,7 @@ function render() {
 let filteredTools = [];
 let currentPage = 1;
 const PAGE_SIZE = 50;
+const BATCH_SIZE = PAGE_SIZE;
 
 function toolName(domain) {
   try { const o = JSON.parse(localStorage.getItem('beacon_name_overrides') || '{}'); if (o[domain]) return o[domain]; } catch {}
@@ -621,7 +619,7 @@ devTrigger.addEventListener('dblclick', () => {
   if (input === null) return;
   crypto.subtle.digest("SHA-256", new TextEncoder().encode(input)).then(hashBuffer => {
     const hashHex = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
-    if (hashHex === "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918") {
+    if (hashHex === "37c426d20d264088f1e0282a9580c899beefc4ed4a8104487a7bf7657d2873f8") {
       isAdmin = true; document.body.style.borderTop = '3px solid #cdf200';
       document.getElementById('btn-admin-suggest').style.display = 'block';
       document.getElementById('btn-backoffice').style.display = 'block';
