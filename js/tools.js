@@ -1,0 +1,3427 @@
+const TOOLS = [
+  {
+    "tags": [
+      "dev-tools",
+      "hosting"
+    ],
+    "domain": "abacus.ai/chatllm",
+    "url": "https://abacus.ai/chatllm",
+    "description": "Build custom AI agents, deploy workflows, and write code seamlessly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "chatplayground.ai",
+    "url": "https://chatplayground.ai/",
+    "description": "Compare and chat with multiple premium AI models simultaneously.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "aithor.com",
+    "url": "https://aithor.com/",
+    "description": "AI essay and academic writing assistant with undetectable generation.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "science"
+    ],
+    "domain": "mathgpt.ai",
+    "url": "https://mathgpt.ai/",
+    "description": "Upload math problems and get detailed, step-by-step AI solutions.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "schoolgoat.com",
+    "url": "https://schoolgoat.com/",
+    "description": "Instant homework problem solver designed specifically for students.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "nbi.ai",
+    "url": "https://nbi.ai/",
+    "description": "Advanced data analysis platform converting raw numbers into insights.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "mindgrasp.ai",
+    "url": "https://mindgrasp.ai/",
+    "description": "Convert study materials and lectures into interactive AI mind maps.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "napkin.ai",
+    "url": "https://napkin.ai/",
+    "description": "Instantly transform your text into engaging visual graphics.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "social"
+    ],
+    "domain": "summarybox.com",
+    "url": "https://summarybox.com/",
+    "description": "Summarize long articles and extract core concepts in seconds.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "shepherd.study",
+    "url": "https://shepherd.study/",
+    "description": "AI-powered lecture note-taking and customized study assistant.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "adsdog.ai",
+    "url": "https://adsdog.ai/",
+    "description": "Automated ad creation platform for highly converting creatives.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "ai-toolbox.co",
+    "url": "https://ai-toolbox.co/",
+    "description": "A comprehensive directory and collection of specialized AI utilities.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "backpackbot.ai",
+    "url": "https://backpackbot.ai/",
+    "description": "Your personal AI research assistant for organizing complex data.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "bigteam.ai",
+    "url": "https://bigteam.ai/",
+    "description": "Build an entire virtual business team using specialized AI agents.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "blaze.ai",
+    "url": "https://blaze.ai/",
+    "description": "All-in-one AI content creation suite tailored for marketers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding",
+      "browsers"
+    ],
+    "domain": "browsercopilot.ai",
+    "url": "https://browsercopilot.ai/",
+    "description": "Inline browser assistant for instant writing, editing, and data extraction.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "copycopter.ai",
+    "url": "https://copycopter.ai/",
+    "description": "High-conversion AI copywriting engine for ads and landing pages.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "edenx.ai",
+    "url": "https://edenx.ai/",
+    "description": "Versatile AI creative assistant for seamless content generation.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "social"
+    ],
+    "domain": "socialbu.com",
+    "url": "https://socialbu.com/",
+    "description": "Automate, plan, and optimize massive social media campaigns.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "socialsonic.com",
+    "url": "https://socialsonic.com/",
+    "description": "Generate viral, professional LinkedIn posts from simple prompts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "notebooklm.google.com",
+    "url": "https://notebooklm.google.com/",
+    "description": "Upload your documents and let AI answer questions based purely on them.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "streaming",
+      "search"
+    ],
+    "domain": "perplexity.ai",
+    "url": "https://perplexity.ai/",
+    "description": "Conversational AI search engine delivering cited, real-time answers.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "julius.ai",
+    "url": "https://julius.ai/",
+    "description": "Connect your spreadsheet data and let AI act as your personal analyst.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "wisprflow.ai",
+    "url": "https://wisprflow.ai/",
+    "description": "Contextually-aware dictation tool that formats your voice perfectly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "higgsfield.ai",
+    "url": "https://higgsfield.ai/",
+    "description": "Professional AI-driven video creation studio for high-end production.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "elicit.com",
+    "url": "https://elicit.com/",
+    "description": "Analyze and extract data from millions of academic research papers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "search"
+    ],
+    "domain": "consensus.app",
+    "url": "https://consensus.app/",
+    "description": "Search engine specifically extracting insights from scientific research.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "explainpaper.com",
+    "url": "https://explainpaper.com/",
+    "description": "Highlight confusing academic text and receive simple explanations.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "make.com",
+    "url": "https://make.com/",
+    "description": "Powerful visual no-code platform to automate tasks across thousands of apps.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "freepik.com/ai",
+    "url": "https://freepik.com/ai",
+    "description": "Built-in AI engine to generate unique stock photos and illustrations.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "krea.ai",
+    "url": "https://krea.ai/",
+    "description": "Real-time AI canvas for live image and video generation editing.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "playgroundai.com",
+    "url": "https://playgroundai.com/",
+    "description": "Versatile AI canvas providing precise control over art generation.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "recraft.ai",
+    "url": "https://recraft.ai/",
+    "description": "Generate infinitely scalable SVG vectors and 3D icons.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "logodiffusion.com",
+    "url": "https://logodiffusion.com/",
+    "description": "Draw custom sketches and watch AI transform them into clean logos.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "stockimg.ai",
+    "url": "https://stockimg.ai/",
+    "description": "Generate custom wallpapers, book covers, and stock imagery.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "kittl.com",
+    "url": "https://kittl.com/",
+    "description": "Modern design suite featuring AI tools tailored for graphic designers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "insmind.com",
+    "url": "https://insmind.com/",
+    "description": "Advanced AI photo editing focused on portrait enhancement.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "picwish.com",
+    "url": "https://picwish.com/",
+    "description": "Quickly unblur images and remove backgrounds with AI precision.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "promeai.pro",
+    "url": "https://promeai.pro/",
+    "description": "Transform architectural sketches and 3D models into photorealistic renders.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "en.eagle.cool",
+    "url": "https://en.eagle.cool/",
+    "description": "Organize, tag, and browse your massive visual design asset library.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "jitter.video",
+    "url": "https://jitter.video/",
+    "description": "Create smooth, professional motion graphics and UI animations.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "lordicon.com",
+    "url": "https://lordicon.com/",
+    "description": "Extensive library of highly customizable animated Lottie icons.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "eyecannndy.com",
+    "url": "https://eyecannndy.com/",
+    "description": "Huge repository of viral visual effects templates and creative techniques.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "inkarnate.com",
+    "url": "https://inkarnate.com/",
+    "description": "Create highly detailed, stunning fantasy maps for worldbuilding.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "nvidia.com/en-us/studio/canvas",
+    "url": "https://nvidia.com/en-us/studio/canvas",
+    "description": "Paint simple shapes and have AI render them into realistic landscapes.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "artflow.ai",
+    "url": "https://artflow.ai/",
+    "description": "Generate persistent characters and place them into animated scenes.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "faceswapper.ai",
+    "url": "https://faceswapper.ai/",
+    "description": "Seamlessly swap faces in photos and videos maintaining realistic lighting.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding"
+    ],
+    "domain": "piccopilot.com",
+    "url": "https://piccopilot.com/",
+    "description": "Generate professional e-commerce product staging and photography.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "pacdora.com",
+    "url": "https://pacdora.com/",
+    "description": "Create custom 3D packaging mockups directly in your browser.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "design.com",
+    "url": "https://design.com/",
+    "description": "All-in-one brand identity tool for generating logos and business cards.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "canva.com",
+    "url": "https://canva.com/",
+    "description": "Industry standard collaborative design platform for modern graphics.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image"
+    ],
+    "domain": "leonardo.ai",
+    "url": "https://leonardo.ai/",
+    "description": "Highly versatile AI generation suite specifically tuned for game assets.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image"
+    ],
+    "domain": "ideogram.ai",
+    "url": "https://ideogram.ai/",
+    "description": "Generate high-quality images with perfectly rendered internal text.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image"
+    ],
+    "domain": "magnific.ai",
+    "url": "https://magnific.ai/",
+    "description": "Magical AI image upscaler that hallucinates stunning missing details.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "image-editing"
+    ],
+    "domain": "remove.bg",
+    "url": "https://remove.bg/",
+    "description": "The gold-standard reliable tool for removing image backgrounds instantly.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "image-editing",
+      "browsers"
+    ],
+    "domain": "squoosh.app",
+    "url": "https://squoosh.app/",
+    "description": "Browser-based tool for fine-tuning image compression and formats.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-video"
+    ],
+    "domain": "lumalabs.ai/dream-machine",
+    "url": "https://lumalabs.ai/dream-machine",
+    "description": "High-fidelity AI model for converting static images into dynamic video.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-video",
+      "animation"
+    ],
+    "domain": "kling.ai",
+    "url": "https://kling.ai/",
+    "description": "Generate photorealistic or stylized motion video directly from text.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "pixverse.ai",
+    "url": "https://pixverse.ai/",
+    "description": "Accessible AI platform for generating creative B-roll and animations.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-video",
+      "animation"
+    ],
+    "domain": "hailuoai.video",
+    "url": "https://hailuoai.video/",
+    "description": "Advanced AI engine focusing on producing highly lifelike human motion.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "hedra.com",
+    "url": "https://hedra.com/",
+    "description": "Transform static facial photos into expressive, speaking avatars.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "invideo.io",
+    "url": "https://invideo.io/",
+    "description": "Instantly create professional YouTube shorts and Reels from a text prompt.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "magichour.ai",
+    "url": "https://magichour.ai/",
+    "description": "Apply stylized visual filters to completely alter video appearances.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "instableep.com",
+    "url": "https://instableep.com/",
+    "description": "Automatically detect and bleep profanity from your uploaded videos.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "clipshort.co",
+    "url": "https://clipshort.co/",
+    "description": "Slice long-form podcasts into viral vertical clips automatically.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "clipgoat.com",
+    "url": "https://clipgoat.com/",
+    "description": "Structure raw video recordings into fully segmented educational courses.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "ssemble.com",
+    "url": "https://ssemble.com/",
+    "description": "Browser-based video editor offering a suite of intelligent smart plugins.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "radio"
+    ],
+    "domain": "podcastle.ai",
+    "url": "https://podcastle.ai/",
+    "description": "Studio-quality podcast recording platform with AI-powered noise removal.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "dupdub.com",
+    "url": "https://dupdub.com/",
+    "description": "Seamlessly sync audio to facial photos for realistic talking head videos.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "sketch.metademolab.com",
+    "url": "https://sketch.metademolab.com/",
+    "description": "Upload a child's drawing and watch AI automatically animate its limbs.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "animation"
+    ],
+    "domain": "phase.com",
+    "url": "https://phase.com/",
+    "description": "Interactive UI motion design tool tailored for app and web designers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "alpha.genmo.ai",
+    "url": "https://alpha.genmo.ai/",
+    "description": "Animate static elements within imagery into mesmerizing looping videos.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "apob.ai",
+    "url": "https://apob.ai/",
+    "description": "Generate bulk personalized messaging videos using custom AI avatars.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "hautech.ai",
+    "url": "https://hautech.ai/",
+    "description": "AI fashion engine designed to generate flawless garment photoshoots.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "democreator.wondershare.com",
+    "url": "https://democreator.wondershare.com/",
+    "description": "All-in-one screen recorder offering powerful tutorial editing features.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "filmora.wondershare.com",
+    "url": "https://filmora.wondershare.com/",
+    "description": "Consumer desktop video editor loaded with AI enhancement tools.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-video"
+    ],
+    "domain": "runwayml.com",
+    "url": "https://runwayml.com/",
+    "description": "The elite creative AI suite driving the future of cinematic generation.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-video"
+    ],
+    "domain": "pika.art",
+    "url": "https://pika.art/",
+    "description": "Prompt-based video creation platform famous for stunning stylized outputs.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "10web.io",
+    "url": "https://10web.io/",
+    "description": "Automated WordPress AI website builder providing integrated hosting.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "durable.co",
+    "url": "https://durable.co/",
+    "description": "Generate a completely styled business website instantly from a prompt.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "softgen.ai",
+    "url": "https://softgen.ai/",
+    "description": "Easily construct functioning web applications without writing code.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "relume.io",
+    "url": "https://relume.io/",
+    "description": "Generate complex website wireframes and architecture using AI.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "gamma.app",
+    "url": "https://gamma.app/",
+    "description": "Generate gorgeous, interactive pitch decks and presentations instantly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "plusdocs.com",
+    "url": "https://plusdocs.com/",
+    "description": "Native AI slide generator perfectly integrated into Google Slides.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "slideteam.net",
+    "url": "https://slideteam.net/",
+    "description": "Massive library of professional templates merged with an AI slide engine.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "co.dev",
+    "url": "https://co.dev/",
+    "description": "Conversational interface allowing you to build software in plain english.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "dora.run",
+    "url": "https://dora.run/",
+    "description": "Design stunning, animated 3D websites utilizing an intuitive node editor.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "chatbase.co",
+    "url": "https://chatbase.co/",
+    "description": "Train a custom support chatbot on your data and embed it on your site.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai-coding",
+      "web-building"
+    ],
+    "domain": "replit.com",
+    "url": "https://replit.com/",
+    "description": "Online coding environment enhanced with an incredibly capable AI agent.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai-coding",
+      "web-building",
+      "browsers"
+    ],
+    "domain": "bolt.new",
+    "url": "https://bolt.new/",
+    "description": "Generate, run, and host complete full-stack web applications in-browser.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai-coding",
+      "web-building"
+    ],
+    "domain": "lovable.dev",
+    "url": "https://lovable.dev/",
+    "description": "Build incredibly polished web interfaces by simply describing them.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai-coding",
+      "web-building"
+    ],
+    "domain": "v0.dev",
+    "url": "https://v0.dev/",
+    "description": "Vercel's powerful tool that turns UI ideas into perfect React/Tailwind code.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding",
+      "browsers"
+    ],
+    "domain": "codeium.com",
+    "url": "https://codeium.com/",
+    "description": "Highly capable free alternative extension for AI code completion.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "ai-coding"
+    ],
+    "domain": "coddy.tech",
+    "url": "https://coddy.tech/",
+    "description": "Interactive coding courses designed focusing entirely on practical exercises.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "ai-coding"
+    ],
+    "domain": "leetcodewizard.io",
+    "url": "https://leetcodewizard.io/",
+    "description": "AI companion assisting you directly during complex algorithm interviews.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "ai-coding"
+    ],
+    "domain": "roadmap.sh",
+    "url": "https://roadmap.sh/",
+    "description": "Community-driven visual learning maps for every software career path.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "ai-coding"
+    ],
+    "domain": "hackertyper.net",
+    "url": "https://hackertyper.net/",
+    "description": "Mash keys to simulate writing complex code like a movie hacker.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "ai-coding"
+    ],
+    "domain": "explorer.globe.engineer",
+    "url": "https://explorer.globe.engineer/",
+    "description": "Visually break down system architecture into interactive, explorable topics.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding",
+      "dev-tools"
+    ],
+    "domain": "github.com/features/copilot",
+    "url": "https://github.com/features/copilot",
+    "description": "The industry standard AI pair programmer deeply integrated into Git.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding",
+      "dev-tools"
+    ],
+    "domain": "cursor.com",
+    "url": "https://cursor.com/",
+    "description": "The premier AI-first code editor combining familiar UX with extreme intelligence.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "lightpdf.com",
+    "url": "https://lightpdf.com/",
+    "description": "Chat directly with your uploaded PDFs to instantly query information.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "hipdf.com",
+    "url": "https://hipdf.com/",
+    "description": "Full suite of reliable browser tools for compressing and splitting PDFs.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers",
+      "privacy"
+    ],
+    "domain": "simplepdf.eu",
+    "url": "https://simplepdf.eu/",
+    "description": "Clean, privacy-friendly browser editor for filling out and signing forms.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "scribehow.com",
+    "url": "https://scribehow.com/",
+    "description": "Auto-generates step-by-step documentation just by recording your clicks.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "nodsgy.com",
+    "url": "https://nodsgy.com/",
+    "description": "Converts dense, complex PDF documents into clear visual flowcharts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "sobrief.com",
+    "url": "https://sobrief.com/",
+    "description": "Get concise text and audio summaries for almost any published book.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "office"
+    ],
+    "domain": "pdf.wondershare.com",
+    "url": "https://pdf.wondershare.com/",
+    "description": "Robust desktop PDF modifier featuring built-in AI summarization utilities.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "flowvoice.ai",
+    "url": "https://flowvoice.ai/",
+    "description": "Dictate long thoughts and have AI format them into perfect paragraphs.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "castmagic.io",
+    "url": "https://castmagic.io/",
+    "description": "Transform hour-long audio podcasts into highly engaging written marketing copy.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "spellar.ai",
+    "url": "https://spellar.ai/",
+    "description": "Automated meeting client providing real-time transcription and summaries.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "meeting.ai",
+    "url": "https://meeting.ai/",
+    "description": "Record digital meetings and instantly generate actionable follow-up tasks.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "tempolor.com",
+    "url": "https://tempolor.com/",
+    "description": "Intelligently suggests similar musical tracks based on specific tempos.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "music",
+      "radio"
+    ],
+    "domain": "radio.garden",
+    "url": "https://radio.garden/",
+    "description": "Explore and listen to thousands of live radio streams mapped out across a 3D globe.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "collov.ai",
+    "url": "https://collov.ai/",
+    "description": "Upload a bare room photo and generate fully rendered interior design ideas.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "home.by.me",
+    "url": "https://home.by.me/",
+    "description": "Draft precise floor plans and visualize your future home in full 3D.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "homedesigns.ai",
+    "url": "https://homedesigns.ai/",
+    "description": "Instantly restyle existing furniture and rooms into dramatically new themes.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "layla.ai",
+    "url": "https://layla.ai/",
+    "description": "Chat with an AI travel agent to craft custom, highly personalized itineraries.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "map-this.com",
+    "url": "https://map-this.com/",
+    "description": "Translates dense study materials and geographical data into mapped itineraries.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "flightaware.com",
+    "url": "https://flightaware.com/",
+    "description": "The definitive resource for comprehensive live global flight tracking.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "geo-fs.com",
+    "url": "https://geo-fs.com/",
+    "description": "Free, browser-based multiplayer flight simulator spanning the actual globe.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "slowroads.io",
+    "url": "https://slowroads.io/",
+    "description": "Endless, procedurally generated virtual roads built specifically for relaxing driving.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "thetruesize.com",
+    "url": "https://thetruesize.com/",
+    "description": "An interactive map tool exploring the actual, non-distorted scale of countries.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "lostgamer.io",
+    "url": "https://lostgamer.io/",
+    "description": "Geography-guessing game testing your location awareness within video games.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "learn-anything.xyz",
+    "url": "https://learn-anything.xyz/",
+    "description": "An open community catalog mapping out the optimal paths to master any specific topic.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "gitmind.com",
+    "url": "https://gitmind.com/",
+    "description": "Collaborative, AI-enhanced brainstorming engine for structuring complex ideas.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "edraw.ai",
+    "url": "https://edraw.ai/",
+    "description": "Instantly spin up visual mind maps and flowcharts from basic text prompts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "edrawmax.wondershare.com",
+    "url": "https://edrawmax.wondershare.com/",
+    "description": "Versatile all-purpose diagramming tool rivaling standard professional software.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "edrawsoft.com/edrawmind",
+    "url": "https://edrawsoft.com/edrawmind",
+    "description": "Standalone mind-mapping software incorporating modern AI generation concepts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "entertain.ed.app",
+    "url": "https://entertain.ed.app/",
+    "description": "Educational platform focused entirely on enhancing reading comprehension practice.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "books",
+      "dev-tools"
+    ],
+    "domain": "openlibrary.org",
+    "url": "https://openlibrary.org/",
+    "description": "Massive public database providing free universal access to millions of digital books.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "musclewiki.com",
+    "url": "https://musclewiki.com/",
+    "description": "Click any muscle on a human body diagram to receive comprehensive workout videos.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "supercook.com",
+    "url": "https://supercook.com/",
+    "description": "Input ingredients currently sitting in your fridge to discover matching recipes.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "namesnack.com",
+    "url": "https://namesnack.com/",
+    "description": "Generate available, catchy brand names relying on industry-specific keywords.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "keyboardsimulator.xyz",
+    "url": "https://keyboardsimulator.xyz/",
+    "description": "Customize and test intricate mechanical keyboard sound profiles via browser simulator.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "browsers",
+      "files"
+    ],
+    "domain": "retrogames.onl",
+    "url": "https://retrogames.onl/",
+    "description": "A massive, perfectly emulated archive allowing you to play classic retro games directly in browser.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "media.io",
+    "url": "https://media.io/",
+    "description": "Comprehensive suite of browser-native audio and video formatting converters.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "recoverit.wondershare.com",
+    "url": "https://recoverit.wondershare.com/",
+    "description": "Heavy-duty software specifically engineered to salvage permanently deleted deep files.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "tinywow.com",
+    "url": "https://tinywow.com/",
+    "description": "Hundreds of completely free micro-tools addressing common PDF, video, and image manipulations.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "govdeals.com",
+    "url": "https://govdeals.com/",
+    "description": "Public auction platform selling off highly discounted local government surplus property.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "myretrotvs.com",
+    "url": "https://myretrotvs.com/",
+    "description": "An incredibly nostalgic browser project simulating vintage television broadcasts sequentially by decade.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "graphy.app",
+    "url": "https://graphy.app/",
+    "description": "Transform boring spread-sheet numbers into stunning, interactive and vibrant web charts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "meshy.ai",
+    "url": "https://meshy.ai/",
+    "description": "A cutting-edge generative model rapidly constructing fully textured 3D models from simple text prompts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "skybox.blockadelabs.com",
+    "url": "https://skybox.blockadelabs.com/",
+    "description": "Simply sketch simple layouts, and watch the AI synthesize massive, cohesive 360-degree environments.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "privacy"
+    ],
+    "domain": "rxresu.me",
+    "url": "https://rxresu.me/",
+    "description": "A completely free, privacy-friendly, deeply customizable resume building utility.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "kickresume.com",
+    "url": "https://kickresume.com/",
+    "description": "An auto-generating resume platform employing language models to craft hyper-professional bullet points.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "shopyourtv.com",
+    "url": "https://shopyourtv.com/",
+    "description": "A highly specific crowdsourced database identifying the precise wardrobe outfits featured in your favorite shows.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "startmycar.com",
+    "url": "https://startmycar.com/",
+    "description": "A comprehensive database hosting extensive technical manuals, fuse box diagrams, and warning light guides for automobiles.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "bricklink.com/v3/studio",
+    "url": "https://bricklink.com/v3/studio",
+    "description": "The definitive, robust digital sandbox engine for constructing, rendering, and buying extreme LEGO models.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "tjukanovt.github.io/notable-people",
+    "url": "https://tjukanovt.github.io/notable-people",
+    "description": "An interactive globe visually mapping the explicit birthplaces of Earth's most historically significant figures.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "printify.com",
+    "url": "https://printify.com/",
+    "description": "A massive drop-shipping infrastructure allowing you to attach customized designs to hundreds of physical blank products.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "books"
+    ],
+    "domain": "aicomicfactory.com",
+    "url": "https://aicomicfactory.com/",
+    "description": "Provide a simple short story concept, and process it into a fully paneled, stylistically cohesive comic strip.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "mobile"
+    ],
+    "domain": "drfone.wondershare.com",
+    "url": "https://drfone.wondershare.com/",
+    "description": "A dense utility suite exclusively focused on facilitating difficult smartphone data back-ups and delicate cross-platform transfers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "carcarekiosk.com",
+    "url": "https://carcarekiosk.com/",
+    "description": "A highly valuable library consisting of brief, specific, model-accurate vehicle maintenance instruction videos.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "atlas.org",
+    "url": "https://atlas.org/",
+    "description": "A robust macroscopic data visualization project designed to analyze immensely complex global trade networks.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "privacy"
+    ],
+    "domain": "temp-mail.org",
+    "url": "https://temp-mail.org/",
+    "description": "Generates a highly disposable, totally anonymous email inbox preventing spam associated with mandatory registrations.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "haveibeenpwned.com",
+    "url": "https://haveibeenpwned.com/",
+    "description": "The authoritative database reliably checking your email addresses against globally recognized historical data breaches.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "search"
+    ],
+    "domain": "web.archive.org",
+    "url": "https://web.archive.org/",
+    "description": "The internet's fundamental backbone library, constantly capturing and historically preserving the lifespan of billions of distinct webpages.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "lmarena.ai",
+    "url": "https://lmarena.ai/",
+    "description": "A blind testing playground pitting top-tier foundational models against each other simultaneously.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "g4f.dev",
+    "url": "https://g4f.dev/",
+    "description": "An impressive open-source aggregator scraping conversational access to over 200 distinct premium and boutique AI models.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "meta.ai",
+    "url": "https://meta.ai/",
+    "description": "Meta's flagship consumer interface, providing rapid, unfettered access directly to the incredibly robust Llama architectural models.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "sur.pollinations.ai",
+    "url": "https://sur.pollinations.ai/",
+    "description": "A surprisingly fluid, stripped-back interface allowing entirely frictionless conversations spanning multiple backend models.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "deepinfra.com/chat",
+    "url": "https://deepinfra.com/chat",
+    "description": "A heavily specialized developer playground allowing instant conversational checking of open source models like DeepSeek and Qwen.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "mirexa.vercel.app",
+    "url": "https://mirexa.vercel.app/",
+    "description": "A sleek, lightweight custom frontend wrapper unlocking simple web access to premium APIs like GPT-4 and targeted DeepSeek instances.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "linux"
+    ],
+    "domain": "umint-ai.hf.space",
+    "url": "https://umint-ai.hf.space/",
+    "description": "A community-hosted HuggingFace node specifically serving raw conversational interactions for models like Grok and expansive DeepSeek versions.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "sharedchat.cn",
+    "url": "https://sharedchat.cn/",
+    "description": "An internationally hosted shared resource pool attempting to continuously distribute restricted premium GPT-4 access openly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "aichatgptfree.org",
+    "url": "https://aichatgptfree.org/",
+    "description": "A dedicated, heavily-optimized site specifically architected around providing completely unmetered access to advanced GPT-based interactions.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding"
+    ],
+    "domain": "copilot.microsoft.com",
+    "url": "https://copilot.microsoft.com/",
+    "description": "Microsoft's deeply integrated ecosystem companion, natively powered by the absolute latest and most advanced iterations of OpenAI technology.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-api",
+      "system"
+    ],
+    "domain": "groq.com",
+    "url": "https://groq.com/",
+    "description": "An astoundingly fast inference engine explicitly designed around proprietary LPU hardware, generating hundreds of intelligent tokens per second.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "chatjimmy.ai",
+    "url": "https://chatjimmy.ai/",
+    "description": "An experimental demonstration of ultra-high-speed AI hardware, generating text at an astounding 15,000+ tokens per second.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "heck.ai",
+    "url": "https://heck.ai/",
+    "description": "A streamlined multi-purpose platform rapidly alternating connections specifically targeting fast instances of DeepSeek and Google's Gemini grids.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "network"
+    ],
+    "domain": "link.fuckicoding.com",
+    "url": "https://link.fuckicoding.com/",
+    "description": "An aggressive workaround proxy specifically tuned to bypass general API limits while surfacing capable instances of Claude and GPT subsets.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat",
+      "no-signup"
+    ],
+    "domain": "pi.ai",
+    "url": "https://pi.ai/",
+    "description": "An intimately tuned conversational companion explicitly focused on providing highly empathetic, emotionally supportive, back-and-forth dialogue.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "origin.eqing.tech",
+    "url": "https://origin.eqing.tech/",
+    "description": "An authenticated but generous service gateway surfacing direct conversational integrations linking major industry models like GPT-4o and advanced iterations of Claude.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat"
+    ],
+    "domain": "lobechat.com",
+    "url": "https://lobechat.com/",
+    "description": "A robust, fully-featured open-source desktop and web framework uniquely supporting massive plugin networks while routing highly capable models.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat"
+    ],
+    "domain": "yupp.ai",
+    "url": "https://yupp.ai/",
+    "description": "An organizational powerhouse specifically collating access, prompting mechanisms, and user experiences across an aggregation of over 200 disparate AI networks.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "chat.deepseek.com",
+    "url": "https://chat.deepseek.com/",
+    "description": "The official consumer-facing gateway providing explicit, high-priority access specifically to incredibly complex reasoning structures via DeepSeek R1 and Coder.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "huggingface.co/spaces",
+    "url": "https://huggingface.co/spaces",
+    "description": "An absolutely fundamental resource allowing the entire machine learning community to freely experiment with bleeding-edge functional prototypes and open model deployments.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "free-chat"
+    ],
+    "domain": "kimi.com",
+    "url": "https://kimi.com/",
+    "description": "An exceptionally capable assistant deeply specialized in executing complex, long-context document analysis and managing massive continuous operational memories.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "warp.dev",
+    "url": "https://warp.dev/",
+    "description": "A heavily modernized terminal written entirely in Rust, fundamentally integrating generative intelligence directly into command-line interface methodologies.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding"
+    ],
+    "domain": "goblin.tools",
+    "url": "https://goblin.tools/",
+    "description": "An accessible, remarkably tuned suite utilizing intelligence solely to atomize overwhelming executive functions into highly manageable, bite-sized daily checklists.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "ai.google.dev",
+    "url": "https://ai.google.dev/",
+    "description": "Google's direct developmental portal furnishing software engineers with entirely free, massively scalable programmatic access explicitly targeting the complex Gemini architecture.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-api"
+    ],
+    "domain": "llm7.io",
+    "url": "https://llm7.io/",
+    "description": "A streamlined API clearinghouse effectively consolidating developer access across a dizzying array comprising over thirty distinct intelligence providers into singular endpoints.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-api"
+    ],
+    "domain": "uncloseai.com",
+    "url": "https://uncloseai.com/",
+    "description": "A highly specialized infrastructure deliberately mimicking the exact formatting of standard OpenAI structures to rapidly grant unmetered access to competing models seamlessly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "network"
+    ],
+    "domain": "g4f.dev/docs",
+    "url": "https://g4f.dev/docs",
+    "description": "The comprehensive technical documentation strictly defining how engineers should accurately mount, query, and sustain automated pathways utilizing the massive G4F aggregator network.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-api"
+    ],
+    "domain": "developer.puter.com",
+    "url": "https://developer.puter.com/",
+    "description": "An experimental, entirely server-less web operating environment natively injecting multi-modal capabilities completely eliminating the necessity for complex internal authentication flows.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "search"
+    ],
+    "domain": "phind.com",
+    "url": "https://phind.com/",
+    "description": "An incredibly sophisticated search engine extensively engineered and aggressively calibrated explicitly to assist software developers unravel complicated technical paradigms efficiently.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image",
+      "ai-video"
+    ],
+    "domain": "pollinations.ai",
+    "url": "https://pollinations.ai/",
+    "description": "A completely frictionless frontend portal heavily utilizing latent diffusion architectures allowing consumers to rapidly prototype complex visually generative concepts unrestricted.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image",
+      "ai-video"
+    ],
+    "domain": "vheer.com",
+    "url": "https://vheer.com/",
+    "description": "A minimalist, hyper-focused generative asset generator strictly built around producing highly stylized, inherently clean foundational imagery targeting modern aesthetic applications.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-image",
+      "ai-video"
+    ],
+    "domain": "perchance.org/wtr90dexsn",
+    "url": "https://perchance.org/wtr90dexsn",
+    "description": "An exceptionally unique, heavily randomized, and utterly unconstrained text-to-imagery engine relying fundamentally on entirely open-source structural mechanics constantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "network"
+    ],
+    "domain": "bing.com/images/create",
+    "url": "https://bing.com/images/create",
+    "description": "Microsoft's deeply integrated consumer tool funneling completely unmodified, extremely robust generation requests securely across OpenAI's formidable DALL-E 3 network.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "n8n.io",
+    "url": "https://n8n.io/",
+    "description": "A tremendously powerful open-source visual workflow automation suite deeply facilitating explicit architectural connections intersecting intelligence nodes perfectly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "system"
+    ],
+    "domain": "awwwards.com",
+    "url": "https://awwwards.com/",
+    "description": "The globally recognized benchmark awarding elite digital design and incredible front-end web development.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "mobbin.com",
+    "url": "https://mobbin.com/",
+    "description": "A massively comprehensive, searchable library consisting entirely of meticulously captured authentic mobile and web UI patterns.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "godly.website",
+    "url": "https://godly.website/",
+    "description": "An astoundingly curated collection exclusively showcasing the absolute pinnacle of bleeding-edge animated web design layouts.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "lapaninja.com",
+    "url": "https://lapaninja.com/",
+    "description": "A dense repository heavily focusing directly on highly effective, extremely beautiful modern landing page architecture.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "siteinspire.com",
+    "url": "https://siteinspire.com/",
+    "description": "A cleanly categorized gallery highlighting minimalist, extremely refined grid-based interactive design philosophies.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "maxibestof.one",
+    "url": "https://maxibestof.one/",
+    "description": "A fast, hyper-curated selection presenting extraordinarily striking, modern-focused responsive web templates.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "pageflows.com",
+    "url": "https://pageflows.com/",
+    "description": "A massive collection explicitly dedicated to recording, analyzing, and structuring perfect user onboarding flows.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "curated.design",
+    "url": "https://curated.design/",
+    "description": "An extensively cataloged resource highlighting extremely polished interface elements and full application layouts.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "animation"
+    ],
+    "domain": "dribbble.com",
+    "url": "https://dribbble.com/",
+    "description": "The industry-standard community platform explicitly built entirely for discovering top-tier visual and motion creatives.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "design",
+      "icons",
+      "network"
+    ],
+    "domain": "behance.net",
+    "url": "https://behance.net/",
+    "description": "Adobe's gargantuan creative network natively showcasing breathtaking professional branding and illustration portfolios.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "savee.it",
+    "url": "https://savee.it/",
+    "description": "A distinctly elegant, Pinterest-alternative explicitly designed to seamlessly organize raw mood boards without clutter.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "muz.li",
+    "url": "https://muz.li/",
+    "description": "A heavily optimized browser extension continually surfacing massive aggregations of daily design inspiration feeds.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "creativeboom.com",
+    "url": "https://creativeboom.com/",
+    "description": "An internationally acclaimed digital magazine consistently publishing highly inspiring photography and art.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "ui-patterns.com",
+    "url": "https://ui-patterns.com/",
+    "description": "A robust, systematically structured database actively categorizing recurring psychological solutions targeting interface problems.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "ui-libraries"
+    ],
+    "domain": "uigarage.net",
+    "url": "https://uigarage.net/",
+    "description": "A daily-updated repository specifically harvesting intricate navigation menus, footers, and granular UI elements.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "ui-libraries"
+    ],
+    "domain": "darkmodedesign.com",
+    "url": "https://darkmodedesign.com/",
+    "description": "A specialized gallery entirely devoted exclusively to wonderfully executed, inherently contrast-heavy dark mode interfaces.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "files"
+    ],
+    "domain": "saaslandingpage.com",
+    "url": "https://saaslandingpage.com/",
+    "description": "An incredibly focused archive explicitly collecting highly converting, densely engineered SaaS landing pages.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "ui-libraries"
+    ],
+    "domain": "footer.design",
+    "url": "https://footer.design/",
+    "description": "A deeply hyper-focused gallery specifically collecting uniquely structured, flawlessly designed website footers.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "ui.shadcn.com",
+    "url": "https://ui.shadcn.com/",
+    "description": "An outrageously popular, unstyled, completely accessible foundational component library heavily leveraging strict Tailwind architecture.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "radix-ui.com",
+    "url": "https://radix-ui.com/",
+    "description": "An unopinionated collection perfectly supplying primitive, highly accessible components fundamentally powering complex modern frameworks.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "chakra-ui.com",
+    "url": "https://chakra-ui.com/",
+    "description": "A distinctly modular, extensively accessible React framework inherently optimized purely for massive development speed.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "mantine.dev",
+    "url": "https://mantine.dev/",
+    "description": "A densely packed React framework offering hundreds of expertly constructed hooks alongside highly functional interfaces.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "mui.com",
+    "url": "https://mui.com/",
+    "description": "The monolithic, industry-standard React framework massively implementing Google's complex Material Design guidelines flawlessly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "nextui.org",
+    "url": "https://nextui.org/",
+    "description": "A beautifully optimized UI library explicitly engineered around rendering fundamentally beautiful components incredibly fast.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "daisyui.com",
+    "url": "https://daisyui.com/",
+    "description": "An absurdly popular, completely free Tailwind plugin drastically reducing massive HTML bloat via semantic utility classes.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "flowbite.com",
+    "url": "https://flowbite.com/",
+    "description": "A robust, open-source library aggressively assembling highly functional interfaces entirely through strict Tailwind conventions.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "headlessui.com",
+    "url": "https://headlessui.com/",
+    "description": "A collection explicitly emphasizing completely unstyled, perfectly accessible UI elements engineered directly by Tailwind labs.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "framer.com/motion",
+    "url": "https://framer.com/motion",
+    "description": "A production-ready animation engine natively bringing extraordinarily fluid, complex motion interactions exclusively to React components.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "gsap.com",
+    "url": "https://gsap.com/",
+    "description": "A legendary, extremely robust JavaScript execution platform powering millions of incredibly intricate web animations globally.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ui-libraries",
+      "animation"
+    ],
+    "domain": "auto-animate.formkit.com",
+    "url": "https://auto-animate.formkit.com/",
+    "description": "A zero-configuration, incredibly lightweight primitive completely automating simple DOM structural transitions instantaneously.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "animation",
+      "icons"
+    ],
+    "domain": "lottiefiles.com",
+    "url": "https://lottiefiles.com/",
+    "description": "The massive, globally standard ecosystem allowing impossibly small, perfectly scalable vector animations directly inside responsive interfaces.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "tailwindcss.com",
+    "url": "https://tailwindcss.com/",
+    "description": "A profoundly transformative utility-first CSS framework completely redefining how developers rapidly construct modern applications physically.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "getbootstrap.com",
+    "url": "https://getbootstrap.com/",
+    "description": "The historically undeniable front-end toolkit constantly providing extremely reliable scaffolding targeting mobile-first web logic architectures.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "bulma.io",
+    "url": "https://bulma.io/",
+    "description": "A deeply versatile, highly intuitive framework fundamentally grounded heavily within modern Flexbox grid standards entirely.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "magicui.design",
+    "url": "https://magicui.design/",
+    "description": "A densely populated gallery specifically offering intensely animated, highly experimental complex React application interfaces seamlessly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "aceternity.com",
+    "url": "https://aceternity.com/",
+    "description": "An incredibly stylized library explicitly generating visually mind-bending, heavily graphical Tailwind and Framer motion elements comprehensively.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "tremor.so",
+    "url": "https://tremor.so/",
+    "description": "A heavily specialized repository explicitly focused upon rapidly charting gorgeous, complex internal dashboard analytics simply.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "hosting",
+      "dev-tools",
+      "templates"
+    ],
+    "domain": "vercel.com/templates",
+    "url": "https://vercel.com/templates",
+    "description": "The official Next.js deployment template library, incredibly optimized directly for massive scale enterprise deployment instantly.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "shopify.com/themes",
+    "url": "https://shopify.com/themes",
+    "description": "The absolute industry standard ecosystem featuring highly trusted, fundamentally optimized e-commerce retail deployment aesthetics.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "tailwindui.com",
+    "url": "https://tailwindui.com/",
+    "description": "The official, extremely premium directory offering completely flawless component collections masterminded directly by Tailwind's creators.",
+    "pricing": "Paid",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "cruip.com",
+    "url": "https://cruip.com/",
+    "description": "A beautifully refined, sharply designed collection precisely assembling stunning, highly convertible startup page frameworks quickly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "html5up.net",
+    "url": "https://html5up.net/",
+    "description": "An absolutely classic, famously reliable resource freely distributing incredibly solid, beautifully responsive HTML5 portfolio structures flawlessly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "ui8.net",
+    "url": "https://ui8.net/",
+    "description": "A gargantuan marketplace intensely packed containing literally thousands of highly experimental, bleeding-edge premium design kits physically.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "framer.com/templates",
+    "url": "https://framer.com/templates",
+    "description": "An enormous, meticulously verified grid offering incredibly stunning, flawlessly animated immediate layouts natively supporting Framer structures.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "webflow.com/templates",
+    "url": "https://webflow.com/templates",
+    "description": "The incredibly massive, globally recognized store serving utterly comprehensive responsive architectures directly powering Webflow applications efficiently.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "templates",
+      "ui-libraries"
+    ],
+    "domain": "creative-tim.com",
+    "url": "https://creative-tim.com/",
+    "description": "A very expansive platform highly dedicated specifically toward supplying complicated application backend panels functionally.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates",
+      "ui-libraries"
+    ],
+    "domain": "themeforest.net",
+    "url": "https://themeforest.net/",
+    "description": "The largest, most historically significant repository globally distributing thousands of comprehensively coded website infrastructures daily.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "mui.com/store",
+    "url": "https://mui.com/store",
+    "description": "The premium repository intrinsically connected directly to Material UI supplying intensely complex enterprise interfaces globally.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "astro.build/themes",
+    "url": "https://astro.build/themes",
+    "description": "A blisteringly fast, exceptionally modern grid specifically hosting ultra-performant Astro architecture applications constantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "note-taking"
+    ],
+    "domain": "themes.gohugo.io",
+    "url": "https://themes.gohugo.io/",
+    "description": "The foundational index constantly offering completely stripped-back, massively fast static markdown blog generation themes.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "ghost.org/themes",
+    "url": "https://ghost.org/themes",
+    "description": "A beautifully crafted, heavily refined ecosystem definitively supporting extremely elegant typographic journalism deployments flawlessly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "fonts.google.com",
+    "url": "https://fonts.google.com/",
+    "description": "The absolutely foundational, overwhelmingly comprehensive open-source typographical directory empowering half the internet instantly.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "fontshare.com",
+    "url": "https://fontshare.com/",
+    "description": "An incredibly stunning, free premium font service flawlessly offered explicitly targeting modern digital aesthetics gracefully.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "typewolf.com",
+    "url": "https://typewolf.com/",
+    "description": "The industry's most trusted independent curation resource extensively profiling breathtaking font pairings constantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "dafont.com",
+    "url": "https://dafont.com/",
+    "description": "The undeniably classic, endlessly chaotic repository containing tens of thousands of deeply experimental freeware typography.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "pangrampangram.com",
+    "url": "https://pangrampangram.com/",
+    "description": "A stunningly modern foundry exclusively responsible fundamentally crafting the absolute cleanest sans-serif architectures available globally.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "myfonts.com",
+    "url": "https://myfonts.com/",
+    "description": "The single most exhaustive commercial typographical index hosting literally thousands of immensely complex premium families.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "fonts.adobe.com",
+    "url": "https://fonts.adobe.com/",
+    "description": "A tremendously massive, seamless ecosystem exclusively powering high-end typographic deployments heavily integrated natively into Adobe.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "fonts",
+      "icons"
+    ],
+    "domain": "fontawesome.com",
+    "url": "https://fontawesome.com/",
+    "description": "The astronomically massive foundational icon framework exclusively powering simple vector graphics across countless platforms globally.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "fonts.google.com/icons",
+    "url": "https://fonts.google.com/icons",
+    "description": "Google's incredibly strict standard heavily defining flawlessly optimized interface iconography across material design perfectly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "lucide.dev",
+    "url": "https://lucide.dev/",
+    "description": "A beautifully balanced, immensely clear vector framework completely modernizing explicitly crisp interface symbol standards.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "uncut.wtf",
+    "url": "https://uncut.wtf/",
+    "description": "An incredibly avant-garde catalog entirely focused solely on cataloging exceptionally strange, totally open-source typefaces reliably.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "fonts"
+    ],
+    "domain": "velvetyne.fr",
+    "url": "https://velvetyne.fr/",
+    "description": "A fiercely independent open-source collective persistently distributing radically unique wildly experimental display concepts continually.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "unsplash.com",
+    "url": "https://unsplash.com/",
+    "description": "The overwhelmingly fundamental destination entirely supplying breathtaking, completely free aesthetic photography everywhere globally.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "pexels.com",
+    "url": "https://pexels.com/",
+    "description": "A fantastically massive database consistently cataloging extremely high-resolution, completely uncopyrighted imagery elegantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "pixabay.com",
+    "url": "https://pixabay.com/",
+    "description": "An unbelievably vast framework freely distributing literally millions of distinct, copyright-free community submitted multimedia assets.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "stocksy.com",
+    "url": "https://stocksy.com/",
+    "description": "A fiercely curated, highly premium co-op exclusively supplying distinctly artistic, utterly authentic royalty-free media natively.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "flaticon.com",
+    "url": "https://flaticon.com/",
+    "description": "The single largest unified vector library thoroughly containing millions of distinctly styled graphic icons constantly.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "search"
+    ],
+    "domain": "svgrepo.com",
+    "url": "https://svgrepo.com/",
+    "description": "A profoundly comprehensive open-source search engine incredibly dedicated specifically to supplying perfectly clean scalable vectors.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "streamlinehq.com",
+    "url": "https://streamlinehq.com/",
+    "description": "An absurdly extensive, perfectly consistent vector framework physically containing hundreds of thousands of distinct interface graphics.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "freepik.com",
+    "url": "https://freepik.com/",
+    "description": "A heavily relied-upon standard definitively serving massive compilations of essential vector templates effortlessly globally.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "iconfinder.com",
+    "url": "https://iconfinder.com/",
+    "description": "An incredibly large global marketplace exclusively serving highly specialized, premiumly crafted custom interface icon arrays.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "undraw.co",
+    "url": "https://undraw.co/",
+    "description": "An incredibly popular, totally free library exclusively focusing on distinct, beautifully scalable vector illustrations.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "humaaans.com",
+    "url": "https://humaaans.com/",
+    "description": "A remarkably dynamic mix-and-match library explicitly designed to playfully combine completely scalable human vectors constantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "illustrations.co",
+    "url": "https://illustrations.co/",
+    "description": "A tightly curated beautiful open-source framework exclusively detailing hundreds of clean minimal graphic interfaces completely.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "opendoodles.com",
+    "url": "https://opendoodles.com/",
+    "description": "An entirely open-source gallery supplying deeply charming delightfully chaotic hand-drawn sketchy visuals reliably.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "3d"
+    ],
+    "domain": "sketchfab.com",
+    "url": "https://sketchfab.com/",
+    "description": "The unequivocally massive industry standard platform deeply managing intensely complicated realtime 3D model processing.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "3d",
+      "icons"
+    ],
+    "domain": "polyhaven.com",
+    "url": "https://polyhaven.com/",
+    "description": "A fiercely protected public domain warehouse freely exclusively rendering unbelievably complex unconstrained graphical geometries.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "browsers"
+    ],
+    "domain": "spline.design",
+    "url": "https://spline.design/",
+    "description": "An astoundingly accessible browser editor inherently bridging extremely complex three-dimensional objects intuitively entirely.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "3d",
+      "icons"
+    ],
+    "domain": "turbosquid.com",
+    "url": "https://turbosquid.com/",
+    "description": "The single most dominant marketplace intensely housing millions of flawlessly crafted commercial polygon geometries functionally.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "music"
+    ],
+    "domain": "mixkit.co",
+    "url": "https://mixkit.co/",
+    "description": "An extremely reliable, high-quality gallery absolutely offering immensely clean royalty-free cinematic transitions gracefully.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "music"
+    ],
+    "domain": "coverr.co",
+    "url": "https://coverr.co/",
+    "description": "A definitively beautiful uncopyrighted library strictly dedicated specifically towards serving massive high-fidelity looping backgrounds.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "music"
+    ],
+    "domain": "videezy.com",
+    "url": "https://videezy.com/",
+    "description": "An unbelievably enormous repository consistently hosting massive quantities of heavily distinct 4k video compositions easily.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "music"
+    ],
+    "domain": "bensound.com",
+    "url": "https://bensound.com/",
+    "description": "A notably classic catalog fundamentally offering strictly composed, exceptionally crisp background atmospheric orchestrations instantly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "wellfound.com",
+    "url": "https://wellfound.com/",
+    "description": "The premier exclusive directory actively connecting ambitious talent specifically with heavily funded startups.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "upwork.com",
+    "url": "https://upwork.com/",
+    "description": "The overwhelmingly massive, globally utilized freelance marketplace extensively bridging clients with specialized independent contractors.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "weworkremotely.com",
+    "url": "https://weworkremotely.com/",
+    "description": "An incredibly foundational community precisely cataloging hundreds of high-quality verified remote engineering and design positions.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "nodesk.co",
+    "url": "https://nodesk.co/",
+    "description": "A cleanly curated aggregator explicitly tracking highly flexible asynchronous remote career opportunities constantly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "video-editing"
+    ],
+    "domain": "flexjobs.com",
+    "url": "https://flexjobs.com/",
+    "description": "A distinctly premium, rigorously hand-screened board strictly validating totally legitimate hybrid and global remote roles.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "remoters.net",
+    "url": "https://remoters.net/",
+    "description": "A comprehensive hub delivering expansive resources explicitly targeting professional digital nomads exploring widespread remote work.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "workingnomads.com",
+    "url": "https://workingnomads.com/",
+    "description": "A very heavily newsletter-driven platform directly surfacing carefully organized remote development and digital marketing openings.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "bubble.io",
+    "url": "https://bubble.io/",
+    "description": "An astoundingly powerful, fully exhaustive visual programming suite deeply replacing entire backend engineering dependencies completely.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "flutterflow.io",
+    "url": "https://flutterflow.io/",
+    "description": "An incredibly sophisticated visual editor cleanly outputting flawlessly compiled, natively deployable comprehensive Flutter architectures.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "softr.io",
+    "url": "https://softr.io/",
+    "description": "A wildly fast logic layer incredibly designed specifically to immediately translate raw Airtable databases into interactive client portals.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "glideapps.com",
+    "url": "https://glideapps.com/",
+    "description": "An exceptionally intuitive engine powerfully deriving fully navigable, impressively responsive mobile applications strictly from spreadsheets.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "weweb.io",
+    "url": "https://weweb.io/",
+    "description": "A profoundly flexible front-end canvas elegantly binding visually styled DOM elements directly onto external database structures.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "adalo.com",
+    "url": "https://adalo.com/",
+    "description": "A highly intuitive drag-and-drop constructor expressly focusing on incredibly rapid mobile application store deployments directly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "backendless.com",
+    "url": "https://backendless.com/",
+    "description": "A terribly dense, extremely capable monolithic platform actively handling massive real-time database management natively via visual blocks.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "zapier.com/interfaces",
+    "url": "https://zapier.com/interfaces",
+    "description": "An exceptionally integrated tool dynamically generating interactive public forms immediately triggering countless complex background automations.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "kokonutui.com",
+    "url": "https://kokonutui.com/",
+    "description": "A distinctly elegant, highly modernized open-source component collection primarily focused entirely upon polished interactive web aesthetics.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries",
+      "animation"
+    ],
+    "domain": "animejs.com",
+    "url": "https://animejs.com/",
+    "description": "A brilliantly structured, enormously lightweight animation motor completely dominating extremely complex DOM CSS property transitions heavily.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries",
+      "animation"
+    ],
+    "domain": "motion-primitives.com",
+    "url": "https://motion-primitives.com/",
+    "description": "A strictly stylized ecosystem offering impeccably crafted, highly expressive interaction elements expressly built complementing modern React architectures.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ui-libraries"
+    ],
+    "domain": "21st.dev",
+    "url": "https://21st.dev/",
+    "description": "A phenomenally curated hub relentlessly surfacing hundreds of entirely unbelievable, extremely experimental bleeding-edge UI abstractions.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design",
+      "icons"
+    ],
+    "domain": "figma.com",
+    "url": "https://figma.com/",
+    "description": "The undeniably foundational collaborative vector environment completely redefining exactly how modern organizations conceptualize digital interfaces.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "brandbird.app",
+    "url": "https://brandbird.app/",
+    "description": "A delightfully specialized utility actively converting boring raw screenshots into thoroughly stylized, immensely engaging marketing graphics.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "uizard.io",
+    "url": "https://uizard.io/",
+    "description": "An incredibly futuristic whiteboard strongly leveraging generative AI exclusively for instantly transmuting basic scribbles into interactive wireframes.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "network"
+    ],
+    "domain": "ngrok.com",
+    "url": "https://ngrok.com/",
+    "description": "An unequivocally mandated software gateway violently forcing secure public URLs completely straight through highly restrictive local firewalls.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "apidog.com",
+    "url": "https://apidog.com/",
+    "description": "An extremely expansive structural suite perfectly handling deeply complex API lifecycle documentation, debugging, targeting, and massive testing loops.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "dev-tools",
+      "hosting"
+    ],
+    "domain": "firebase.google.com",
+    "url": "https://firebase.google.com/",
+    "description": "Google's monolithic backend-as-a-service natively powering millions of intricate scalable databases entirely securely and rapidly.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "lindy.ai",
+    "url": "https://lindy.ai/",
+    "description": "A phenomenally advanced autonomous entity inherently capable entirely navigating incredibly diverse personal and organizational enterprise workflows.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "flowiseai.com",
+    "url": "https://flowiseai.com/",
+    "description": "A massively explicit drag-and-drop architectural canvas directly engineering extraordinarily complex custom LLM orchestration pathways visually.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "pitch.com",
+    "url": "https://pitch.com/",
+    "description": "An astoundingly polished, incredibly collaborative visual editing environment structurally replacing traditional presentation engines utterly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates",
+      "files"
+    ],
+    "domain": "slidesgo.com",
+    "url": "https://slidesgo.com/",
+    "description": "An unbelievably gargantuan archive constantly supplying incredibly beautiful, widely diverse completely free template structures exclusively for Google Slides.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "minicoursegenerator.com",
+    "url": "https://minicoursegenerator.com/",
+    "description": "A distinctly unique platform heavily relying upon intelligence systems directly extracting deeply engaging interactive curriculums natively from raw texts.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "vidu.studio",
+    "url": "https://vidu.studio/",
+    "description": "A spectacularly aggressive generation engine thoroughly pushing extremely specific prompt interpretations strongly into extraordinarily distinct stylized video.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "creatify.ai",
+    "url": "https://creatify.ai/",
+    "description": "An intentionally structured framework specifically rendering deeply persuasive, uniquely compelling automated e-commerce video advertisements instantly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "ozone.pro",
+    "url": "https://ozone.pro/",
+    "description": "A profoundly fast cloud-native video editing processor strictly integrating overwhelmingly precise multi-modal assistive AI heavily throughout.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "redbubble.com",
+    "url": "https://redbubble.com/",
+    "description": "An astronomically large retail infrastructure completely relying upon extremely specialized independent artwork explicitly for mass production.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "teepublic.com",
+    "url": "https://teepublic.com/",
+    "description": "A closely related gigantic competitor intensely supporting highly diverse deeply creative graphic design communities widely across physical mediums.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "merch.amazon.com",
+    "url": "https://merch.amazon.com/",
+    "description": "The undeniably dominant force heavily injecting entirely custom printable physical product requests aggressively directly into global Amazon logistics.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "kdp.amazon.com",
+    "url": "https://kdp.amazon.com/",
+    "description": "The absolutely foundational publishing system natively providing insanely comprehensive access directly linking custom literature deeply into global markets.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding"
+    ],
+    "domain": "mcp.run",
+    "url": "https://mcp.run/",
+    "description": "A profoundly essential structural directory aggressively indexing exclusively specialized Model Context Protocol connectors incredibly globally.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "ai",
+      "ai-coding"
+    ],
+    "domain": "supermemory.ai",
+    "url": "https://supermemory.ai/",
+    "description": "An incredibly fast, entirely native framework aggressively serving intensely deep interconnected memory infrastructure constantly across complex AI interactions.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "claude.ai",
+    "url": "https://claude.ai/",
+    "description": "Anthropic's singularly definitive interface exclusively communicating directly deeply with incredibly advanced reasoning implementations extensively globally.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "music"
+    ],
+    "domain": "riffusion.com",
+    "url": "https://riffusion.com/",
+    "description": "An absolutely insane model beautifully bypassing native sound structures strictly generating exceptionally catchy sonic frequencies directly via visual spectrograms.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "fmhy.net",
+    "url": "https://fmhy.net/",
+    "description": "A terrifyingly vast, highly decentralized organizational database exclusively serving incredibly comprehensive alternative software pathways endlessly.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "3d",
+      "ai"
+    ],
+    "domain": "hyper3d.ai",
+    "url": "https://hyper3d.ai/",
+    "description": "An astoundingly capable framework absolutely specialized deeply exclusively transforming simple two-dimensional inputs physically into immensely impressive rendered volumes.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "3d",
+      "ai"
+    ],
+    "domain": "tripo3d.ai",
+    "url": "https://tripo3d.ai/",
+    "description": "A profoundly fast multi-modal engine definitively capable directly spawning incredibly complicated topological modeling strictly from straightforward basic textual imagery.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "outlier.ai",
+    "url": "https://outlier.ai/",
+    "description": "An exceptionally unique marketplace strictly funneling extremely critical human reinforcement tuning aggressively driving incredibly vast intelligence architectures globally.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "dev-tools"
+    ],
+    "domain": "alternativeto.net",
+    "url": "https://alternativeto.net/",
+    "description": "A deeply foundational community-driven database absolutely mapping exactly equivalent software substitutes explicitly based totally on user consensus.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "search"
+    ],
+    "domain": "answerthepublic.com",
+    "url": "https://answerthepublic.com/",
+    "description": "An astoundingly profound research visualizer directly mapping entirely raw user search queries dynamically across massive search engine environments.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "appsumo.com",
+    "url": "https://appsumo.com/",
+    "description": "The undeniably premier marketplace relentlessly aggregating extremely valuable lifetime software licenses predominantly targeting ambitious growth companies.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "aweber.com",
+    "url": "https://aweber.com/",
+    "description": "An exceptionally established broadcast platform fundamentally powering incredibly reliable mass email distribution systems successfully for decades.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "bigspy.com",
+    "url": "https://bigspy.com/",
+    "description": "An immensely aggressive reconnaissance interface actively tracking highly successful global competitor advertising strategies constantly across networks.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "bigvu.tv",
+    "url": "https://bigvu.tv/",
+    "description": "A structurally essential broadcasting utility incredibly providing deeply reliable intelligent teleprompting tools flawlessly replacing physical studio hardware.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates",
+      "web-building"
+    ],
+    "domain": "bookbolt.io",
+    "url": "https://bookbolt.io/",
+    "description": "A strictly specialized investigative dashboard uniquely targeting explicitly highly profitable low-content publishing niches directly across Amazon infrastructure.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "brandcolors.net",
+    "url": "https://brandcolors.net/",
+    "description": "An incredibly definitive, universally respected directory precisely cataloging absolutely exact hex values successfully defining massive global corporations.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "builderall.com",
+    "url": "https://builderall.com/",
+    "description": "An unbelievably gargantuan, monolithically absolute digital ecosystem explicitly combining virtually every single marketing constructor logically possible.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "capcut.com",
+    "url": "https://capcut.com/",
+    "description": "The entirely undeniable king powerfully dictating explicitly viral short-form mobile editing aesthetics heavily defining modern broadcast consumption.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "web-building"
+    ],
+    "domain": "circle.so",
+    "url": "https://circle.so/",
+    "description": "A beautifully elegant modular foundation specifically built intentionally crafting incredibly premium independent creator-centric forum architecture internally.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing"
+    ],
+    "domain": "clipchamp.com",
+    "url": "https://clipchamp.com/",
+    "description": "An extremely heavily integrated web-native processor actively compiling complex cinematic project timelines flawlessly directly across standard browsers.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "contentatscale.ai",
+    "url": "https://contentatscale.ai/",
+    "description": "An aggressively optimized generative framework inherently structured expressly engineering completely massive quantities directly bypassing anti-AI detection strictly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "copy.ai",
+    "url": "https://copy.ai/",
+    "description": "An incredibly popular generation toolkit uniquely designed specifically expediting terribly massive corporate marketing text creation dynamically.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "createstudio.com",
+    "url": "https://createstudio.com/",
+    "description": "A delightfully fluid composition studio perfectly outputting remarkably engaging character-driven explainer sequences directly omitting massive technical hurdles.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "dateful.com",
+    "url": "https://dateful.com/",
+    "description": "A very strictly pure utility explicitly solving complex global scheduling translations effortlessly directly eliminating common meeting confusion completely.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "video-editing"
+    ],
+    "domain": "blackmagicdesign.com/products/davinciresolve",
+    "url": "https://blackmagicdesign.com/products/davinciresolve",
+    "description": "The utterly undisputed Hollywood-grade monolith absolutely controlling heavily advanced global color correction natively dominating entire cinematic industries.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "extract.pics",
+    "url": "https://extract.pics/",
+    "description": "A distinctly aggressive scraping engine inherently designed stripping massive quantities perfectly matching images instantly across targeted URLs natively.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "education"
+    ],
+    "domain": "fiverr.com",
+    "url": "https://fiverr.com/",
+    "description": "The terribly colossal macro-economy entirely powering incredibly rapid micro-task delegations completely standardizing massive independent digital labor pipelines.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "flourish.studio",
+    "url": "https://flourish.studio/",
+    "description": "An astoundingly articulate engine cleanly interpolating heavily unorganized raw data dynamically explicitly into stunning animated chart architectures.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "infogram.com",
+    "url": "https://infogram.com/",
+    "description": "A strongly capable vector layout directly replacing incredibly tedious graph creation natively heavily simplifying complex journalistic distributions.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "templates"
+    ],
+    "domain": "invideo.io",
+    "url": "https://invideo.io/",
+    "description": "A beautifully intuitive template manipulator inherently structured expressly driving extremely massive ad creation smoothly leveraging immense stock libraries.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design"
+    ],
+    "domain": "jasper.ai",
+    "url": "https://jasper.ai/",
+    "description": "The undeniably dominant enterprise architecture thoroughly dictating heavily integrated internal corporative linguistic brand identity outputs precisely.",
+    "pricing": "Freemium",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "education",
+      "note-taking"
+    ],
+    "domain": "mindmup.com",
+    "url": "https://mindmup.com/",
+    "description": "An utterly frictionless structural map specifically engineered directly conceptualizing massive cerebral workflows entirely bound seamlessly alongside Google Drive.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "namecheap.com",
+    "url": "https://namecheap.com/",
+    "description": "The entirely ubiquitous web registrar famously supplying deeply heavily discounted domain reservations continually completely defining global baseline pricing.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "namechk.com",
+    "url": "https://namechk.com/",
+    "description": "A tremendously critical reconnaissance tool intensely scanning extremely dozens explicitly checking exact global handle availability dynamically.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "icons"
+    ],
+    "domain": "openclipart.org",
+    "url": "https://openclipart.org/",
+    "description": "An unconditionally completely free baseline heavily relying upon purely public domain vector graphics thoroughly supplying massive generic reserves.",
+    "pricing": "Free"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "pabbly.com",
+    "url": "https://pabbly.com/",
+    "description": "A distinctly aggressive integration architecture remarkably explicitly rivaling monolithic automation systems completely delivering insane lifetime value strictly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "system"
+    ],
+    "domain": "pdfcandy.com",
+    "url": "https://pdfcandy.com/",
+    "description": "An outrageously comprehensive format manipulator deeply covering literally every single conceivable conversion specifically directly bridging PDF restrictions.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "animation"
+    ],
+    "domain": "photovibrance.io",
+    "url": "https://photovibrance.io/",
+    "description": "A strictly specialized engine dramatically forcing immensely engaging kinetic motion aggressively across previously static two-dimensional environments purely.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "quillbot.com",
+    "url": "https://quillbot.com/",
+    "description": "A deeply ubiquitous linguistic refiner massively integrated distinctly globally directly simplifying incredibly dense textual complexities instantly natively.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "design",
+      "image-editing"
+    ],
+    "domain": "remaker.ai",
+    "url": "https://remaker.ai/",
+    "description": "An inherently targeted synthesis engine intensely optimizing explicitly clean facial superimpositions consistently flawlessly across diverse lighting matrices.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "network"
+    ],
+    "domain": "snip.ly",
+    "url": "https://snip.ly/",
+    "description": "A profoundly clever marketing proxy secretly injecting immensely interactive conversion modules persistently squarely over totally external public destinations.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "theresanaiforthat.com",
+    "url": "https://theresanaiforthat.com/",
+    "description": "The astoundingly gigantic fundamental index explicitly attempting incredibly comprehensively strictly mapping absolutely every single newly released neural project.",
+    "pricing": "Free",
+    "isEssential": true
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "tubebuddy.com",
+    "url": "https://tubebuddy.com/",
+    "description": "An exceptionally embedded statistical observer intimately reading entirely profound YouTube metadata exactly identifying radically intense algorithmic advantages.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "udimi.com",
+    "url": "https://udimi.com/",
+    "description": "A very uniquely specialized internal economy completely facilitating radically exact newsletter broadcasting explicitly completely dominating direct solo marketing.",
+    "pricing": "Paid"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "upviral.com",
+    "url": "https://upviral.com/",
+    "description": "An intensely aggressive momentum synthesizer explicitly engineered completely weaponizing fundamentally incredibly deeply intrinsic human referral mechanics automatically.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "automation"
+    ],
+    "domain": "vidiq.com",
+    "url": "https://vidiq.com/",
+    "description": "The incredibly massive competitive dashboard heavily exposing entirely critical search volume analytics directly manipulating profound video ranking structures.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "video-editing",
+      "animation"
+    ],
+    "domain": "wave.video",
+    "url": "https://wave.video/",
+    "description": "An immensely capable multi-purpose studio actively supporting thoroughly intensive rendering natively including fundamentally impressive live-streaming environments seamlessly.",
+    "pricing": "Freemium"
+  },
+  {
+    "tags": [
+      "ai"
+    ],
+    "domain": "wordhero.co",
+    "url": "https://wordhero.co/",
+    "description": "A fiercely competitive prompt interface notably generating incredibly wide arrays comprehensively tackling extremely diverse marketing linguistic templates directly.",
+    "pricing": "Freemium"
+  }
+];

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Geist:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-fixed-variant": "#334a54",
+                    "error-container": "#93000a",
+                    "on-primary-fixed": "#181e00",
+                    "outline": "#8f9378",
+                    "inverse-primary": "#556500",
+                    "on-secondary-fixed-variant": "#474747",
+                    "secondary": "#c6c6c6",
+                    "on-error": "#690005",
+                    "inverse-on-surface": "#313030",
+                    "surface-dim": "#131313",
+                    "surface-variant": "#353535",
+                    "on-tertiary-fixed": "#051e27",
+                    "secondary-fixed": "#e2e2e2",
+                    "tertiary": "#ffffff",
+                    "surface-bright": "#393939",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "surface-container": "#20201f",
+                    "secondary-fixed-dim": "#c6c6c6",
+                    "on-tertiary": "#1c333d",
+                    "primary-fixed": "#cdf200",
+                    "on-primary": "#2b3400",
+                    "on-tertiary-container": "#516872",
+                    "primary": "#ffffff",
+                    "on-secondary-container": "#b5b5b5",
+                    "surface-tint": "#b4d400",
+                    "surface-container-highest": "#353535",
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "tertiary-container": "#cee6f2",
+                    "on-primary-fixed-variant": "#3f4c00",
+                    "tertiary-fixed": "#cee6f2",
+                    "on-error-container": "#ffdad6",
+                    "on-secondary": "#303030",
+                    "surface-container-high": "#2a2a2a",
+                    "primary-container": "#cdf200",
+                    "secondary-container": "#474747",
+                    "outline-variant": "#454932",
+                    "on-secondary-fixed": "#1b1b1b",
+                    "error": "#ffb4ab",
+                    "on-surface-variant": "#c5c9ac",
+                    "tertiary-fixed-dim": "#b2cad6",
+                    "on-primary-container": "#5a6b00",
+                    "on-surface": "#e5e2e1",
+                    "surface": "#131313",
+                    "primary-fixed-dim": "#b4d400"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "32px",
+                    "margin-mobile": "24px",
+                    "unit": "8px",
+                    "margin-desktop": "64px",
+                    "container-max": "1440px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Geist", "sans-serif"],
+                    "label-mono": ["Geist Mono", "monospace"],
+                    "headline-lg": ["Geist", "sans-serif"],
+                    "display-lg-mobile": ["Geist", "sans-serif"],
+                    "button": ["Geist", "sans-serif"],
+                    "headline-md": ["Geist", "sans-serif"],
+                    "body-md": ["Geist", "sans-serif"],
+                    "body-lg": ["Geist", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg": ["80px", {"lineHeight": "88px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { color: #e5e2e1; }
+        .canvas-container { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; opacity: 0.6; }
+        .beacon-dot { width: 4px; height: 4px; background-color: #cdf200; }
+        .superpower-focus:focus-within { border-color: #cdf200 !important; }
+        .card-hover:hover { border-top: 1px solid #cdf200; transition: border 0.3s ease; }
+        
+        @keyframes ken-burns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        .animate-ken-burns {
+            animation: ken-burns 40s ease-in-out infinite alternate;
+        }
+        .global-vignette {
+            background: radial-gradient(circle at center, transparent 20%, rgba(19, 19, 19, 0.95) 100%);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container relative w-full min-h-screen">
+<!-- Cinematic Background -->
+<div class="fixed inset-0 z-[-2] overflow-hidden bg-background w-full h-full">
+<div class="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA');"></div>
+</div>
+<!-- Dark Vignette Overlay -->
+<div class="fixed inset-0 z-[-1] pointer-events-none global-vignette bg-background/30 w-full h-full"></div>
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
+<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg tracking-tighter text-primary">BEACON</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
+</div>
+<div class="flex items-center gap-6">
+<select id="lang-toggle" class="bg-transparent border border-secondary-container text-on-surface-variant font-label-mono text-label-mono uppercase px-2 py-1 outline-none cursor-pointer">
+<option value="en">EN</option>
+<option value="es">ES</option>
+<option value="ca">CA</option>
+</select>
+<a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">
+                    LAUNCH
+                </a>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
+<canvas class="canvas-container" id="wavingLines"></canvas>
+<!-- Content Layer -->
+<div class="relative z-20 w-full max-w-3xl px-gutter text-center">
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl">
+                INSTRUMENTING<br/>THE VOID
+            </h1>
+<!-- Superpower Search Bar -->
+<div class="superpower-focus group relative w-full bg-surface-container-lowest/80 backdrop-blur-sm border-b border-white transition-all duration-300 py-4 px-6 flex items-center">
+<input id="hero-search" class="w-full bg-transparent border-none focus:ring-0 font-label-mono text-label-mono text-primary uppercase placeholder:text-on-surface-variant/50" placeholder="SEARCH 10,000+ TOOLS..." type="text"/>
+<div class="font-label-mono text-label-mono text-primary-container opacity-0 group-focus-within:opacity-100 transition-opacity">CMD + K</div>
+</div>
+</div>
+<!-- Scroll Indicator -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4">
+<div class="font-label-mono text-label-mono uppercase tracking-[0.3em] text-on-surface-variant drop-shadow-md">SCROLL TO ANALYZE</div>
+<div class="w-[1px] h-12 bg-secondary-container relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-primary-container animate-[bounce_2s_infinite]"></div>
+</div>
+</div>
+</section>
+<!-- Hot Choices Section -->
+<section class="py-[120px] relative w-full z-10 bg-transparent">
+<div class="max-w-container-max mx-auto px-gutter w-full">
+<div class="flex justify-between items-end mb-16 border-b border-secondary-container pb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<div class="beacon-dot"></div>
+<span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">ACTIVE TRENDS</span>
+</div>
+<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">HOT CHOICES</h2>
+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">3 UPDATED RECENTLY</div>
+</div>
+<!-- Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- LM Arena -->
+<a href="https://lmarena.ai/" target="_blank" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4t-BZ_FCn9C-utGpwC_TtO0QzbGM8Sxh12yN0qc_zDxApXXaVwCwfHQ_B7HrGbHC9J5ubQ8EVPbV0mXQb_WLL_8rYRnH6GqwuYZCw0G8f9vTgwrPV8awOmG_dcw3ZNl6igC7mS544JkG0CBccy-grmvzcDuqP3OGdrki2F9RFQRjtr8WRMKzl5w4x_ZKhMk_7MNK7R8AdUTQr2Q36b6pxti8qfhsUIeBkIbn_kST5Ab7_VjYBXwcy3ult5kL5MMrKL5ADMcDqYG0" alt="LM Arena"/>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container font-label-mono text-[10px] px-2 py-1">FREE</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">BENCHMARK</span>
+</div>
+<h3 class="font-headline-md text-primary mb-4 drop-shadow-sm">LM ARENA</h3>
+<p class="font-body-md text-on-surface-variant mb-8 flex-grow">A blind testing arena that pits top-tier foundation models against each other simultaneously.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-4 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- Google AI Studio -->
+<a href="https://aistudio.google.com/" target="_blank" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANIVe12eqGltpSKzyLXgdDx9UWVlhGbHQ1hP1q8ruG5163nh13Q5NbYQGp80luryd8KcqXP5bfq7rYr4TGG5PWV-IKxnxdTT1tGHhVc25Axyv9--oI4DbfcHpubEW7syjacJop8jD6m5VXyVhcLJKPUda3AhWN519rqs9agDbzHQXVt0Z61lzi1awl-nIvAIqGG4LU_ZIkKCmh7Du8AEExSIOajfd3MoB-WCu3I2UQP6YayVnjlO8nFE6TG3hDV2TwxcCNgYwdYaA" alt="Google AI Studio"/>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container font-label-mono text-[10px] px-2 py-1">FREE</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI-API</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">DEV-TOOLS</span>
+</div>
+<h3 class="font-headline-md text-primary mb-4 drop-shadow-sm">GOOGLE AI STUDIO</h3>
+<p class="font-body-md text-on-surface-variant mb-8 flex-grow">Google's direct developer portal providing free, massively scalable programmatic access to Gemini.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-4 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+<!-- Puter -->
+<a href="https://puter.com/" target="_blank" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
+<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative">
+<img class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEQjD8fSLWixBYU7Es5UibOD1DvzhBAwgd6nd1u6-Dlu58LHeyHoFcRGMG04_kvZSbNCaL2ULguLohAhZqb2oHG5fvBfF_7kt_zQBylHVIycaf6mrWi0AZe-xBKVmYt_WZcE__50hTUkJnMbYidSbLJm1x2mv-JpwN0Qu-aRN0lY8picBefK8EyCxwuA5jL17zZzm0hGUdEjktXUakYaQJGZgMT6VEyvpD9rE15RiOmB5ZpkqMByTPissfnitAKzS8tQqtrNkVcjE" alt="Puter"/>
+<div class="absolute top-4 right-4 bg-primary-container text-on-primary-container font-label-mono text-[10px] px-2 py-1">FREE</div>
+</div>
+<div class="flex gap-2 mb-4">
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">NO-SIGNUP</span>
+<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">CLOUD OS</span>
+</div>
+<h3 class="font-headline-md text-primary mb-4 drop-shadow-sm">PUTER</h3>
+<p class="font-body-md text-on-surface-variant mb-8 flex-grow">An experimental, fully serverless web operating system that natively injects multimodal AI capabilities with zero auth.</p>
+<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-4 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
+</a>
+</div>
+</div>
+</section>
+<!-- Browse by Tag -->
+<section class="py-[120px] relative w-full z-10 bg-transparent">
+<div class="max-w-container-max mx-auto px-gutter w-full">
+<div class="flex justify-between items-end mb-16 border-b border-secondary-container pb-8">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<div class="beacon-dot"></div>
+<span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">DIRECTORY</span>
+</div>
+<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">BROWSE BY TAG</h2>
+</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">43 CATEGORIES</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<a href="beacon.html?tag=ai" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AI</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Multi-model chat, reasoning & agents</p></a>
+<a href="beacon.html?tag=free-chat" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">FREE CHAT</h3><p class="font-label-mono text-[10px] text-on-surface-variant">No paywall, no credit card</p></a>
+<a href="beacon.html?tag=ai-api" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AI API</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Dev playgrounds & endpoints</p></a>
+<a href="beacon.html?tag=ai-coding" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AI CODING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Code assistants & copilots</p></a>
+<a href="beacon.html?tag=ai-image" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AI IMAGE</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Generation, editing & upscaling</p></a>
+<a href="beacon.html?tag=ai-video" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AI VIDEO</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Video generation & motion</p></a>
+<a href="beacon.html?tag=automation" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">AUTOMATION</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Workflows & integrations</p></a>
+<a href="beacon.html?tag=streaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">STREAMING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Movies, TV, anime & sports</p></a>
+<a href="beacon.html?tag=gaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">GAMING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Downloads, ROMs & emulators</p></a>
+<a href="beacon.html?tag=game-tools" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">GAME TOOLS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Mods, launchers & saves</p></a>
+<a href="beacon.html?tag=music" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">MUSIC</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Streaming, downloads & production</p></a>
+<a href="beacon.html?tag=books" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">BOOKS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Ebooks, audiobooks & comics</p></a>
+<a href="beacon.html?tag=design" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">DESIGN</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Tools, galleries & inspiration</p></a>
+<a href="beacon.html?tag=image-editing" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">IMAGE EDITING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Editors, upscalers & compression</p></a>
+<a href="beacon.html?tag=video-editing" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">VIDEO EDITING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Editors, recorders & converters</p></a>
+<a href="beacon.html?tag=fonts" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">FONTS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Foundries & free typefaces</p></a>
+<a href="beacon.html?tag=icons" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">ICONS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">SVG libraries & symbol sets</p></a>
+<a href="beacon.html?tag=3d" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">3D</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Modeling, textures & rendering</p></a>
+<a href="beacon.html?tag=templates" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">TEMPLATES</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Starter kits & boilerplates</p></a>
+<a href="beacon.html?tag=ui-libraries" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">UI LIBRARIES</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Component frameworks</p></a>
+<a href="beacon.html?tag=animation" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">ANIMATION</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Motion libraries & effects</p></a>
+<a href="beacon.html?tag=dev-tools" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">DEV TOOLS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Editors, Git, APIs & databases</p></a>
+<a href="beacon.html?tag=hosting" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">HOSTING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Cloud, deployment & serverless</p></a>
+<a href="beacon.html?tag=web-building" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">WEB BUILDING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">No-code builders & generators</p></a>
+<a href="beacon.html?tag=education" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">EDUCATION</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Courses, science & learning</p></a>
+<a href="beacon.html?tag=note-taking" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">NOTE TAKING</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Notes, mind maps & bookmarks</p></a>
+<a href="beacon.html?tag=office" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">OFFICE</h3><p class="font-label-mono text-[10px] text-on-surface-variant">PDFs, spreadsheets & docs</p></a>
+<a href="beacon.html?tag=browsers" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">BROWSERS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Browsers, extensions & scripts</p></a>
+<a href="beacon.html?tag=search" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">SEARCH</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Engines & web discovery</p></a>
+<a href="beacon.html?tag=social" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">SOCIAL</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Discord, Reddit, YouTube & more</p></a>
+<a href="beacon.html?tag=privacy" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">PRIVACY</h3><p class="font-label-mono text-[10px] text-on-surface-variant">VPNs, adblockers & encryption</p></a>
+<a href="beacon.html?tag=network" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">NETWORK</h3><p class="font-label-mono text-[10px] text-on-surface-variant">DNS, speed tests & connectivity</p></a>
+<a href="beacon.html?tag=system" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">SYSTEM</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Utilities, hardware & terminals</p></a>
+<a href="beacon.html?tag=files" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">FILES</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Managers, archivers & storage</p></a>
+<a href="beacon.html?tag=downloads" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">DOWNLOADS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">FOSS, debrid & software sites</p></a>
+<a href="beacon.html?tag=torrents" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">TORRENTS</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Sites, clients & trackers</p></a>
+<a href="beacon.html?tag=mobile" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">MOBILE</h3><p class="font-label-mono text-[10px] text-on-surface-variant">APKs, mods & iOS tools</p></a>
+<a href="beacon.html?tag=linux" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">LINUX</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Distros, apps & Mac software</p></a>
+<a href="beacon.html?tag=no-signup" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 no-underline block group"><h3 class="font-headline-md text-[18px] text-primary mb-1 group-hover:text-primary-container transition-colors">NO SIGNUP</h3><p class="font-label-mono text-[10px] text-on-surface-variant">Use instantly, no account</p></a>
+</div>
+</div>
+</section>
+<!-- Suggestion -->
+<section class="py-16 relative w-full z-10 bg-transparent">
+<div class="max-w-lg mx-auto px-gutter text-center">
+<h3 class="font-headline-md text-primary mb-2 drop-shadow-sm">MISSING A TOOL?</h3>
+<p class="font-body-md text-on-surface-variant mb-8">Got a suggestion? Drop it here.</p>
+<div class="flex gap-2">
+<input type="text" id="suggestion-input" placeholder="Tool name or URL..." class="flex-1 bg-surface-container-lowest/80 backdrop-blur-sm border-b border-white text-primary font-label-mono text-label-mono uppercase placeholder:text-on-surface-variant/50 py-3 px-4 outline-none focus:border-primary-container transition-colors"/>
+<button id="suggestion-btn" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-3 transition-all duration-100 active:scale-95">SUBMIT</button>
+</div>
+<div id="suggestion-msg" class="font-label-mono text-label-mono text-primary-container mt-4 opacity-0 transition-opacity">Suggestion saved!</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full mt-auto relative z-10 border-t border-secondary-container bg-background/60 backdrop-blur-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary drop-shadow-sm">BEACON</div>
+<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant drop-shadow-sm">© 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED.</div>
+</div>
+<div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">SYSTEM STATUS</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">PRIVACY</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">ENCRYPTED</a>
+</div>
+</div>
+</footer>
+<script>
+        // Waving Tech Lines Animation
+        const canvas = document.getElementById('wavingLines');
+        const ctx = canvas.getContext('2d');
+        let width, height, lines = [];
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            lines = [];
+            for (let i = 0; i < 5; i++) {
+                lines.push({
+                    y: height * 0.5 + (i - 2) * 40,
+                    amplitude: 20 + i * 15,
+                    speed: 0.01 + i * 0.005,
+                    offset: Math.random() * 10,
+                    color: i % 2 === 0 ? '#cdf200' : '#ffffff'
+                });
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            lines.forEach(line => {
+                ctx.beginPath();
+                ctx.strokeStyle = line.color;
+                ctx.lineWidth = 0.5;
+                ctx.globalAlpha = 0.3;
+                
+                for (let x = 0; x < width; x++) {
+                    const y = line.y + Math.sin(x * 0.002 + line.offset) * line.amplitude;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                
+                ctx.stroke();
+                line.offset += line.speed;
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        draw();
+
+        // Search
+        document.getElementById('hero-search').addEventListener('keydown', e => {
+          if (e.key === 'Enter' && e.target.value.trim()) {
+            window.location.href = 'beacon.html?q=' + encodeURIComponent(e.target.value.trim());
+          }
+        });
+
+        // Suggestions
+        document.getElementById('suggestion-btn').addEventListener('click', () => {
+          const input = document.getElementById('suggestion-input');
+          const val = input.value.trim();
+          if (!val) return;
+          const existing = JSON.parse(localStorage.getItem('beacon_suggestions') || '[]');
+          existing.push({ url: val, date: new Date().toISOString() });
+          localStorage.setItem('beacon_suggestions', JSON.stringify(existing));
+          input.value = '';
+          const msg = document.getElementById('suggestion-msg');
+          msg.style.opacity = '1';
+          setTimeout(() => msg.style.opacity = '0', 3000);
+        });
+
+        // Language
+        const langToggle = document.getElementById('lang-toggle');
+        const savedLang = localStorage.getItem('beacon_lang') || 'en';
+        langToggle.value = savedLang;
+        langToggle.addEventListener('change', e => {
+          localStorage.setItem('beacon_lang', e.target.value);
+        });
+    </script>
+</body></html>

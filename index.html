@@ -3,6 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BEACON | App Discovery Hub</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -103,6 +104,8 @@
         .beacon-dot { width: 4px; height: 4px; background-color: #cdf200; }
         .superpower-focus:focus-within { border-color: #cdf200 !important; }
         .card-hover:hover { border-top: 1px solid #cdf200; transition: border 0.3s ease; }
+        .card-hover .card-img { transform: scale(1); transition: transform 0.6s ease; }
+        .card-hover:hover .card-img { transform: scale(1.25); }
         
         @keyframes ken-burns {
             0% { transform: scale(1); }
@@ -145,7 +148,7 @@
 <canvas class="canvas-container" id="wavingLines"></canvas>
 <!-- Content Layer -->
 <div class="relative z-20 w-full max-w-3xl px-gutter text-center">
-<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl">
+<h1 id="heroTitle" class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl">
                 INSTRUMENTING<br/>THE VOID
             </h1>
 <!-- Superpower Search Bar -->
@@ -171,77 +174,12 @@
 <div class="beacon-dot"></div>
 <span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">ACTIVE TRENDS</span>
 </div>
-<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">HOT CHOICES</h2>
+<h2 id="hotTitle" class="font-headline-lg text-primary uppercase drop-shadow-md">HOT CHOICES</h2>
 </div>
-<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">5 FEATURED TOOLS</div>
+<div id="hotCount" class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm"></div>
 </div>
 <!-- Card Grid -->
-<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-<!-- LM Arena -->
-<a href="https://lmarena.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
-<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
-<img class="h-8" src="https://www.google.com/s2/favicons?domain=lmarena.ai&sz=64" alt=""/>
-</div>
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">LM ARENA</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">A blind testing playground pitting top-tier foundational models against each other simultaneously.</p>
-<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
-</a>
-<!-- ChatJimmy -->
-<a href="https://chatjimmy.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
-<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
-<img class="h-8" src="https://www.google.com/s2/favicons?domain=chatjimmy.ai&sz=64" alt=""/>
-</div>
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">SYSTEM</span>
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">CHATJIMMY</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Ultra-high-speed AI hardware demo generating text at an astounding 15,000+ tokens per second.</p>
-<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
-</a>
-<!-- Google AI Studio -->
-<a href="https://aistudio.google.com/app/prompts/new_chat" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
-<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
-<img class="h-8" src="https://www.google.com/s2/favicons?domain=aistudio.google.com&sz=64" alt=""/>
-</div>
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">GOOGLE AI STUDIO</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Gemini 3.1 Pro access with prompt engineering tools and multi-modal capabilities.</p>
-<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
-</a>
-<!-- Z.ai -->
-<a href="https://chat.z.ai/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
-<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
-<img class="h-8" src="https://www.google.com/s2/favicons?domain=chat.z.ai&sz=64" alt=""/>
-</div>
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI</span>
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE CHAT</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">Z.AI</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">GLM-5.1 and GLM-5-Turbo models with slides generation and conversational AI.</p>
-<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
-</a>
-<!-- Puter -->
-<a href="https://developer.puter.com/" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">
-<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative flex items-center justify-center">
-<img class="h-8" src="https://www.google.com/s2/favicons?domain=developer.puter.com&sz=64" alt=""/>
-</div>
-<div class="flex gap-2 mb-4 flex-wrap">
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">AI API</span>
-<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">FREE</span>
-</div>
-<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">PUTER</h3>
-<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">Server-less web operating environment with native multi-modal AI capabilities and zero auth overhead.</p>
-<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>
-</a>
+<div id="hotGrid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
 </div>
 </div>
 </section>
@@ -254,59 +192,11 @@
 <div class="beacon-dot"></div>
 <span class="font-label-mono text-label-mono text-primary-container uppercase drop-shadow-sm">BROWSE BY CATEGORY</span>
 </div>
-<h2 class="font-headline-lg text-primary uppercase drop-shadow-md">CATEGORIES</h2>
+<h2 id="catTitle" class="font-headline-lg text-primary uppercase drop-shadow-md">CATEGORIES</h2>
 </div>
 <div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">40+ TAGS</div>
 </div>
-<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-<a href="beacon.html?tag=ai" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">AI</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Artificial Intelligence</div>
-</a>
-<a href="beacon.html?tag=free-chat" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">FREE CHAT</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Chat Interfaces</div>
-</a>
-<a href="beacon.html?tag=ai-coding" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">AI CODING</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Code Assistants</div>
-</a>
-<a href="beacon.html?tag=ai-image" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">AI IMAGE</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Image Generation</div>
-</a>
-<a href="beacon.html?tag=ai-video" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">AI VIDEO</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Video Generation</div>
-</a>
-<a href="beacon.html?tag=streaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">STREAMING</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Media Streams</div>
-</a>
-<a href="beacon.html?tag=gaming" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">GAMING</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Games & Platforms</div>
-</a>
-<a href="beacon.html?tag=design" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">DESIGN</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Design Tools</div>
-</a>
-<a href="beacon.html?tag=dev-tools" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">DEV TOOLS</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Developer Utilities</div>
-</a>
-<a href="beacon.html?tag=music" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">MUSIC</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Audio & Music</div>
-</a>
-<a href="beacon.html?tag=education" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">EDUCATION</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Learning Resources</div>
-</a>
-<a href="beacon.html?tag=privacy" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">
-<div class="font-headline-md text-[18px] text-primary mb-1">PRIVACY</div>
-<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">Privacy Tools</div>
-</a>
+<div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
 </div>
 <div class="mt-8 text-center">
 <a href="beacon.html" class="inline-block border border-secondary-container text-primary font-button text-button uppercase py-4 px-12 hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50 no-underline">VIEW ALL 10,000+ TOOLS</a>
@@ -318,7 +208,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
 <div class="space-y-4">
 <div class="font-headline-md text-headline-md text-primary drop-shadow-sm">BEACON</div>
-<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant drop-shadow-sm">© 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED.</div>
+<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant drop-shadow-sm">© 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</div>
 </div>
 <div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
 <a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity drop-shadow-sm" href="#">SYSTEM STATUS</a>
@@ -328,7 +218,108 @@
 </div>
 </div>
 </footer>
+<script src="js/data.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/names.js"></script>
 <script>
+        var FEATURED_DOMAINS = (function() { try { var s = localStorage.getItem('beacon_featured'); if (s) return JSON.parse(s); } catch(e) {} return ['lmarena.ai', 'chatjimmy.ai', 'aistudio.google.com', 'chat.z.ai', 'developer.puter.com']; })();
+
+        var TAG_DISPLAY = {
+          'ai':'AI','free-chat':'Free Chat','ai-api':'AI API','ai-coding':'AI Coding',
+          'ai-image':'AI Image','ai-video':'AI Video','automation':'Automation',
+          'streaming':'Streaming','live-tv':'Live TV','anime':'Anime','music':'Music',
+          'radio':'Radio','gaming':'Gaming','game-tools':'Game Tools','books':'Books',
+          'design':'Design','image-editing':'Image Editing','video-editing':'Video Editing',
+          'fonts':'Fonts','icons':'Icons','3d':'3D','templates':'Templates',
+          'ui-libraries':'UI Libraries','animation':'Animation','dev-tools':'Dev Tools',
+          'hosting':'Hosting','web-building':'Web Building','education':'Education',
+          'science':'Science','note-taking':'Note Taking','office':'Office',
+          'browsers':'Browsers','search':'Search','social':'Social','privacy':'Privacy',
+          'network':'Network','system':'System','files':'Files','downloads':'Downloads',
+          'torrents':'Torrents','mobile':'Mobile','linux':'Linux','no-signup':'No Signup'
+        };
+
+        var BEACON_BLOCKLIST = (function() { try { var s = localStorage.getItem('beacon_blocklist'); if (s) return JSON.parse(s); } catch(e) {} return []; })();
+        var BEACON_NAME_OVERRIDES = (function() { try { var s = localStorage.getItem('beacon_name_overrides'); if (s) return JSON.parse(s); } catch(e) {} return {}; })();
+
+        function beaconToolName(domain) {
+          if (BEACON_NAME_OVERRIDES[domain]) return BEACON_NAME_OVERRIDES[domain];
+          return (typeof TOOL_NAMES !== 'undefined' && TOOL_NAMES[domain]) ? TOOL_NAMES[domain] : domain;
+        }
+
+        function renderHotChoices() {
+          var allTools = (typeof TOOLS !== 'undefined' ? TOOLS : []).concat(typeof FMHY_TOOLS !== 'undefined' ? FMHY_TOOLS : []);
+          var featured = [];
+          FEATURED_DOMAINS.forEach(function(domain) {
+            if (BEACON_BLOCKLIST.indexOf(domain) !== -1) return;
+            for (var i = 0; i < allTools.length; i++) {
+              if (allTools[i].domain === domain) { featured.push(allTools[i]); break; }
+            }
+          });
+          document.getElementById('hotCount').textContent = featured.length + ' FEATURED TOOLS';
+          var grid = document.getElementById('hotGrid');
+          grid.innerHTML = featured.map(function(tool) {
+            var tags = (tool.tags || []).map(function(t) {
+              return '<span class="font-label-mono text-[10px] text-primary-container border border-primary-container/30 px-2 py-0.5">' + (TAG_DISPLAY[t] || t).toUpperCase() + '</span>';
+            }).join('');
+            var name = beaconToolName(tool.domain);
+            var thumbUrl = 'https://image.thum.io/get/width/600/' + tool.url;
+            return '<a href="' + tool.url + '" target="_blank" rel="noopener" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-6 flex flex-col group h-full no-underline">' +
+              '<div class="aspect-video bg-surface-container-low mb-6 overflow-hidden relative">' +
+              '<img class="w-full h-full object-cover card-img" src="' + thumbUrl + '" alt="' + tool.domain + '" loading="lazy"/>' +
+              '</div>' +
+              '<div class="flex gap-2 mb-4 flex-wrap">' + tags + '</div>' +
+              '<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">' + name + '</h3>' +
+              '<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">' + tool.description + '</p>' +
+              '<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>' +
+              '</a>';
+          }).join('');
+        }
+        renderHotChoices();
+
+        // Dynamic categories from localStorage
+        (function() {
+          var defaults = [
+            {tag:'ai',label:'AI',subtitle:'Artificial Intelligence',visible:true},
+            {tag:'free-chat',label:'FREE CHAT',subtitle:'Chat Interfaces',visible:true},
+            {tag:'ai-coding',label:'AI CODING',subtitle:'Code Assistants',visible:true},
+            {tag:'ai-image',label:'AI IMAGE',subtitle:'Image Generation',visible:true},
+            {tag:'ai-video',label:'AI VIDEO',subtitle:'Video Generation',visible:true},
+            {tag:'streaming',label:'STREAMING',subtitle:'Media Streams',visible:true},
+            {tag:'gaming',label:'GAMING',subtitle:'Games & Platforms',visible:true},
+            {tag:'design',label:'DESIGN',subtitle:'Design Tools',visible:true},
+            {tag:'dev-tools',label:'DEV TOOLS',subtitle:'Developer Utilities',visible:true},
+            {tag:'music',label:'MUSIC',subtitle:'Audio & Music',visible:true},
+            {tag:'education',label:'EDUCATION',subtitle:'Learning Resources',visible:true},
+            {tag:'privacy',label:'PRIVACY',subtitle:'Privacy Tools',visible:true}
+          ];
+          var cats = defaults;
+          try { var s = localStorage.getItem('beacon_categories'); if (s) cats = JSON.parse(s); } catch(e) {}
+          var grid = document.getElementById('catGrid');
+          grid.innerHTML = cats.filter(function(c) { return c.visible; }).map(function(c) {
+            return '<a href="beacon.html?tag=' + c.tag + '" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">' +
+              '<div class="font-headline-md text-[18px] text-primary mb-1">' + c.label + '</div>' +
+              '<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">' + c.subtitle + '</div></a>';
+          }).join('');
+        })();
+
+        // Copy overrides from localStorage
+        (function() {
+          try {
+            var copy = JSON.parse(localStorage.getItem('beacon_copy') || 'null');
+            if (!copy) return;
+            if (copy.hero) {
+              var words = copy.hero.split(' ');
+              var mid = Math.ceil(words.length / 2);
+              var el = document.getElementById('heroTitle');
+              if (el) el.innerHTML = words.slice(0, mid).join(' ') + '<br/>' + words.slice(mid).join(' ');
+            }
+            if (copy.searchPlaceholder) { var s = document.getElementById('heroSearch'); if (s) s.placeholder = copy.searchPlaceholder; }
+            if (copy.hotTitle) { var h = document.getElementById('hotTitle'); if (h) h.textContent = copy.hotTitle; }
+            if (copy.catTitle) { var c = document.getElementById('catTitle'); if (c) c.textContent = copy.catTitle; }
+          } catch(e) {}
+        })();
+
         // Waving Tech Lines Animation
         const canvas = document.getElementById('wavingLines');
         const ctx = canvas.getContext('2d');
@@ -373,10 +364,17 @@
         init();
         draw();
 
-        document.getElementById('heroSearch').addEventListener('keydown', function(e) {
+        var heroSearch = document.getElementById('heroSearch');
+        heroSearch.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
                 var q = this.value.trim();
                 if (q) window.location.href = 'beacon.html?q=' + encodeURIComponent(q);
+            }
+        });
+        document.addEventListener('keydown', function(e) {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                heroSearch.focus();
             }
         });
     </script>

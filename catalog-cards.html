@@ -1,0 +1,268 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>BEACON | CATALOG</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap');
+
+        body {
+            background-color: #131313;
+            color: #e5e2e1;
+            overflow-x: hidden;
+        }
+
+        .waving-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .beacon-active {
+            width: 4px;
+            height: 4px;
+            background-color: #cdf200;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 2px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #131313;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #cdf200;
+        }
+
+        /* Technical Noir Button Inversion */
+        .btn-noir {
+            background-color: #cdf200;
+            color: #131313;
+            transition: all 0.3s ease;
+        }
+        .btn-noir:hover {
+            background-color: transparent;
+            color: #cdf200;
+            box-shadow: inset 0 0 0 1px #cdf200;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#334a54",
+                        "error-container": "#93000a",
+                        "on-primary-fixed": "#181e00",
+                        "outline": "#8f9378",
+                        "inverse-primary": "#556500",
+                        "on-secondary-fixed-variant": "#474747",
+                        "secondary": "#c6c6c6",
+                        "on-error": "#690005",
+                        "inverse-on-surface": "#313030",
+                        "surface-dim": "#131313",
+                        "surface-variant": "#353535",
+                        "on-tertiary-fixed": "#051e27",
+                        "secondary-fixed": "#e2e2e2",
+                        "tertiary": "#ffffff",
+                        "surface-bright": "#393939",
+                        "on-background": "#e5e2e1",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-container": "#20201f",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "on-tertiary": "#1c333d",
+                        "primary-fixed": "#cdf200",
+                        "on-primary": "#2b3400",
+                        "on-tertiary-container": "#516872",
+                        "primary": "#ffffff",
+                        "on-secondary-container": "#b5b5b5",
+                        "surface-tint": "#b4d400",
+                        "surface-container-highest": "#353535",
+                        "background": "#131313",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-container": "#cee6f2",
+                        "on-primary-fixed-variant": "#3f4c00",
+                        "tertiary-fixed": "#cee6f2",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#303030",
+                        "surface-container-high": "#2a2a2a",
+                        "primary-container": "#cdf200",
+                        "secondary-container": "#474747",
+                        "outline-variant": "#454932",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "error": "#ffb4ab",
+                        "on-surface-variant": "#c5c9ac",
+                        "tertiary-fixed-dim": "#b2cad6",
+                        "on-primary-container": "#5a6b00",
+                        "on-surface": "#e5e2e1",
+                        "surface": "#131313",
+                        "primary-fixed-dim": "#b4d400"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "32px",
+                        "margin-mobile": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Geist"],
+                        "label-mono": ["Geist"],
+                        "headline-lg": ["Geist"],
+                        "display-lg-mobile": ["Geist"],
+                        "button": ["Geist"],
+                        "headline-md": ["Geist"],
+                        "body-md": ["Geist"],
+                        "body-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["80px", { "lineHeight": "88px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }],
+                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "display-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "button": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container"><div class="fixed inset-0 z-[-2] overflow-hidden bg-background"><div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA'); animation: ken-burns 20s linear infinite alternate;"></div><div class="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background/90"></div></div><style>@keyframes ken-burns { from { transform: scale(1.0); } to { transform: scale(1.1); } }</style>
+<!-- Background Waving Motif -->
+<canvas class="waving-lines absolute" id="wavingLines" width="1280" height="1251"></canvas>
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
+<nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<div class="font-display-lg text-display-lg tracking-tighter text-primary">BEACON</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="#">APPS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">LABS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">ARCHIVE</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">DOCS</a>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden lg:block">
+<input class="bg-transparent border-b border-white focus:border-primary-container focus:ring-0 text-label-mono uppercase px-2 py-1 transition-all outline-none" placeholder="SEARCH INSTRUMENTATION..." type="text">
+</div>
+<button class="btn-noir px-6 py-2 font-button text-button uppercase active:scale-95 duration-100">LAUNCH</button>
+</div>
+</nav>
+</header>
+<main class="pt-[120px] min-h-screen max-w-container-max mx-auto px-gutter gap-gutter">
+<!-- Sidebar Filters (Simplified from SideNavBar logic) -->
+<!-- Main Content Canvas -->
+<section class="flex-grow pb-24">
+<!-- Breadcrumbs & Stats -->
+<div class="mb-12"><div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"><div class="space-y-2"><div class="flex items-baseline gap-2 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant"><a class="hover:text-primary" href="#">Catalog</a><span class="">/</span><span class="text-primary">All Apps (12,482)</span></div><h1 class="font-display-lg text-display-lg uppercase tracking-tighter">Instrumentation Hub</h1></div><div class="flex flex-wrap gap-2"><button class="px-3 py-1 border border-primary-container text-primary-container font-label-mono text-[10px] uppercase tracking-wider">ALL_SYSTEMS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">INFRASTRUCTURE</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">INTELLIGENCE</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">DEVTOOLS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">TELEMETRY</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">CYBERNETICS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">NETWORKING</button></div></div></div>
+<!-- Apps Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.8.2.1-ALPHA</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">NEXUS_OVERSEER</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Real-time throughput orchestration and visual mesh monitoring for distributed neural clusters.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">STABLE_BUILD</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-on-surface-variant">V.3.4.0</div><div class="w-1 h-1 bg-transparent"></div></div><h2 class="font-headline-md text-xl text-primary">KRYPTOS_VAULT</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Quantum-resistant credential management with automated rotation.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">PROTECTED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.1.0.9-LTS</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">VOID_RECURSION</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Recursive log aggregation and anomalous event detection.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">DELEGATED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.12.0.2</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">TITAN_ORCHESTRATOR</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Massive-scale container management for multi-planetary architectures.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">SYSTEM_CRITICAL</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-on-surface-variant">V.4.2.1-BETA</div><div class="w-1 h-1 bg-transparent"></div></div><h2 class="font-headline-md text-xl text-primary">SPECTRAL_ANALYZER</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Non-destructive signal processing and packet forensics.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">MONITORED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article></div>
+<!-- Pagination Instrumentation -->
+<div class="mt-24 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-secondary-container pt-12">
+<div class="font-label-mono text-label-mono uppercase text-on-surface-variant">
+                    Displaying 5 of 12,482 Entries
+                </div>
+<div class="flex items-center gap-px bg-secondary-container">
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors border border-transparent hover:border-primary-container">PREV_INDEX</button>
+<button class="bg-background text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase border border-primary-container">01</button>
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">02</button>
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">03</button>
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">...</button>
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">2497</button>
+<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors border border-transparent hover:border-primary-container">NEXT_INDEX</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full mt-auto border-t border-secondary-container bg-background dark:bg-background">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary">BEACON</div>
+<p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">
+                    © 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED. <br>
+                    AUTONOMOUS INFRASTRUCTURE MANAGEMENT DIVISION.
+                </p>
+</div>
+<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-start pt-4">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">SYSTEM STATUS</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">PRIVACY</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">ENCRYPTED</a>
+</div>
+</div>
+</footer>
+<script>
+        const canvas = document.getElementById('wavingLines');
+        const ctx = canvas.getContext('2d');
+
+        let width, height, lines = [];
+        const lineCount = 12;
+
+        function init() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            lines = [];
+            for (let i = 0; i < lineCount; i++) {
+                lines.push({
+                    y: (height / lineCount) * i,
+                    amplitude: 20 + Math.random() * 40,
+                    frequency: 0.001 + Math.random() * 0.002,
+                    phase: Math.random() * Math.PI * 2,
+                    speed: 0.01 + Math.random() * 0.02,
+                    color: i % 2 === 0 ? '#cdf200' : '#ffffff'
+                });
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+
+            lines.forEach(line => {
+                ctx.beginPath();
+                ctx.lineWidth = 0.5;
+                ctx.strokeStyle = line.color;
+                ctx.globalAlpha = 0.15;
+
+                for (let x = 0; x < width; x += 5) {
+                    const y = line.y + Math.sin(x * line.frequency + line.phase) * line.amplitude;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+
+                ctx.stroke();
+                line.phase += line.speed;
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', init);
+        init();
+        animate();
+    </script>
+
+
+</body></html>
