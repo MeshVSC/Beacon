@@ -149,9 +149,7 @@
 <canvas class="canvas-container" id="wavingLines"></canvas>
 <!-- Content Layer -->
 <div class="relative z-20 w-full max-w-3xl px-gutter text-center">
-<h1 id="heroTitle" class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl">
-                INSTRUMENTING<br/>THE VOID
-            </h1>
+<h1 id="heroTitle" class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl"></h1>
 <!-- Superpower Search Bar -->
 <div class="superpower-focus group relative w-full bg-surface-container-lowest/80 backdrop-blur-sm border-b border-white transition-all duration-300 py-4 px-6 flex items-center">
 <input id="heroSearch" class="w-full bg-transparent border-none focus:ring-0 font-label-mono text-label-mono text-primary uppercase placeholder:text-on-surface-variant/50" placeholder="SEARCH 10,000+ TOOLS..." type="text"/>
@@ -195,9 +193,9 @@
 </div>
 <h2 id="catTitle" class="font-headline-lg text-primary uppercase drop-shadow-md">CATEGORIES</h2>
 </div>
-<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">40+ TAGS</div>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">8 CATEGORIES</div>
 </div>
-<div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
 </div>
 <div class="mt-8 text-center">
 <a href="beacon.html" class="inline-block border border-secondary-container text-primary font-button text-button uppercase py-4 px-12 hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50 no-underline">VIEW ALL 10,000+ TOOLS</a>
@@ -223,6 +221,28 @@
 <script src="js/tools.js"></script>
 <script src="js/names.js"></script>
 <script>
+        var TAGLINES = [
+          'DISCOVER YOUR NEXT TOOL',
+          '10,000+ TOOLS. ONE SEARCH.',
+          'EVERY TOOL. ONE PLACE.',
+          'FIND IT. LAUNCH IT.',
+          'THE TOOL DIRECTORY',
+          'YES, IT\'S ALL FREE.',
+          'FREE. YES, ALL OF IT.',
+          'YES, WE PROBABLY HAVE IT.',
+          'IF IT EXISTS, IT\'S HERE.',
+          'THE INTERNET\'S TOOLBOX.',
+          'EVERYTHING BUT THE KITCHEN SINK.',
+          'COME IN, WE\'RE OPEN.',
+          'YES, WE\'RE STILL FREE.',
+          'TAKE WHAT YOU NEED.',
+          'NO SIGNUP. NO PAYWALL. NO KIDDING.',
+          'ALL YOU CAN BROWSE.',
+          'THE EVERYTHING STORE. BUT FREE.',
+          'FREE. EXCEPT YOUR TIME.'
+        ];
+        document.getElementById('heroTitle').textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
+
         var FEATURED_DOMAINS = (function() { try { var s = localStorage.getItem('beacon_featured'); if (s) return JSON.parse(s); } catch(e) {} return ['lmarena.ai', 'chatjimmy.ai', 'aistudio.google.com', 'chat.z.ai', 'developer.puter.com']; })();
 
         var TAG_DISPLAY = {
@@ -278,29 +298,28 @@
         }
         renderHotChoices();
 
-        // Dynamic categories from localStorage
         (function() {
-          var defaults = [
-            {tag:'ai',label:'AI',subtitle:'Artificial Intelligence',visible:true},
-            {tag:'free-chat',label:'FREE CHAT',subtitle:'Chat Interfaces',visible:true},
-            {tag:'ai-coding',label:'AI CODING',subtitle:'Code Assistants',visible:true},
-            {tag:'ai-image',label:'AI IMAGE',subtitle:'Image Generation',visible:true},
-            {tag:'ai-video',label:'AI VIDEO',subtitle:'Video Generation',visible:true},
-            {tag:'streaming',label:'STREAMING',subtitle:'Media Streams',visible:true},
-            {tag:'gaming',label:'GAMING',subtitle:'Games & Platforms',visible:true},
-            {tag:'design',label:'DESIGN',subtitle:'Design Tools',visible:true},
-            {tag:'dev-tools',label:'DEV TOOLS',subtitle:'Developer Utilities',visible:true},
-            {tag:'music',label:'MUSIC',subtitle:'Audio & Music',visible:true},
-            {tag:'education',label:'EDUCATION',subtitle:'Learning Resources',visible:true},
-            {tag:'privacy',label:'PRIVACY',subtitle:'Privacy Tools',visible:true}
+          var CAT_GROUPS = [
+            {label:'AI & CHAT',subtitle:'Artificial Intelligence',link:'ai',tags:['ai','free-chat','ai-coding','ai-image','ai-video','ai-api','no-signup','automation']},
+            {label:'MEDIA',subtitle:'Streaming & Audio',link:'streaming',tags:['streaming','live-tv','anime','music','radio']},
+            {label:'GAMING',subtitle:'Games & Platforms',link:'gaming',tags:['gaming','game-tools']},
+            {label:'DESIGN & CREATIVE',subtitle:'Visual & Creative Tools',link:'design',tags:['design','image-editing','video-editing','fonts','icons','3d','templates','ui-libraries','animation']},
+            {label:'DEVELOPMENT',subtitle:'Developer Utilities',link:'dev-tools',tags:['dev-tools','hosting','web-building']},
+            {label:'KNOWLEDGE',subtitle:'Learning & Research',link:'education',tags:['education','science','books','note-taking','office']},
+            {label:'SYSTEM & PRIVACY',subtitle:'Security & Utilities',link:'privacy',tags:['browsers','search','social','privacy','network','system','files','downloads','torrents','mobile','linux']},
+            {label:'NSFW',subtitle:'Adult Content',link:'nsfw',tags:['nsfw']}
           ];
-          var cats = defaults;
+          var cats = CAT_GROUPS;
           try { var s = localStorage.getItem('beacon_categories'); if (s) cats = JSON.parse(s); } catch(e) {}
           var grid = document.getElementById('catGrid');
           var allTools = (typeof TOOLS !== 'undefined' ? TOOLS : []).concat(typeof FMHY_TOOLS !== 'undefined' ? FMHY_TOOLS : []);
-          grid.innerHTML = cats.filter(function(c) { return c.visible; }).map(function(c) {
-            var count = allTools.filter(function(t) { return (t.tags || []).indexOf(c.tag) !== -1; }).length;
-            return '<a href="beacon.html?tag=' + c.tag + '" class="group relative bg-surface-container-lowest/60 backdrop-blur-sm border border-secondary-container/30 no-underline overflow-hidden transition-all duration-300 hover:border-primary-container/80 hover:bg-surface-container-low/60" style="display:flex;flex-direction:column;justify-content:space-between;padding:20px 18px;min-height:120px;">' +
+          grid.innerHTML = cats.map(function(c) {
+            var count = allTools.filter(function(t) {
+              var tt = t.tags || [];
+              for (var i = 0; i < c.tags.length; i++) { if (tt.indexOf(c.tags[i]) !== -1) return true; }
+              return false;
+            }).length;
+            return '<a href="beacon.html?tag=' + c.link + '" class="group relative bg-surface-container-lowest/60 backdrop-blur-sm border border-secondary-container/30 no-underline overflow-hidden transition-all duration-300 hover:border-primary-container/80 hover:bg-surface-container-low/60" style="display:flex;flex-direction:column;justify-content:space-between;padding:20px 18px;min-height:120px;">' +
               '<div style="position:absolute;top:0;left:0;width:100%;height:2px;background:#cdf200;opacity:0;transition:opacity 0.3s;" class="group-hover:opacity-100"></div>' +
               '<div>' +
               '<div class="font-headline-md text-[16px] text-primary mb-1 tracking-tight">' + c.label + '</div>' +
