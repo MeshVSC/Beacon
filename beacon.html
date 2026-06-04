@@ -51,7 +51,7 @@
         tbody tr:hover { background: #1c1b1b; }
         td { padding: 12px 16px; vertical-align: middle; font-size: 13px; }
         .td-site { white-space: nowrap; width: 15%; }
-        .td-desc { color: #c5c9ac; font-size: 12px; width: 40%; }
+        .td-desc { color: #c5c9ac; font-size: 12px; width: 40%; max-width: 350px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .td-cat { font-family: 'Geist', sans-serif; font-size: 10px; color: #c5c9ac; letter-spacing: 0.05em; text-transform: uppercase; width: 15%; }
         .badge { display: inline-block; font-family: 'Geist', sans-serif; font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border: 1px solid; }
         .badge-free { border-color: #cdf200; color: #cdf200; }
@@ -198,7 +198,7 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<a href="index.html" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">BEACON</a>
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">BEACON</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
 <a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=streaming">MEDIA</a>
@@ -220,7 +220,7 @@
 </header>
 <main class="pt-[140px] min-h-screen flex max-w-container-max mx-auto px-gutter gap-gutter">
 <!-- Sidebar Filters (Simplified from SideNavBar logic) -->
-<aside class="hidden lg:flex flex-col w-64 flex-shrink-0 space-y-8 sticky top-[140px] h-[calc(100vh-140px)] border-r border-secondary-container pr-gutter overflow-y-auto custom-scrollbar">
+<aside class="hidden lg:flex flex-col w-64 flex-shrink-0 space-y-8 sticky top-[140px] h-[calc(100vh-140px)] border-r border-secondary-container pr-gutter overflow-y-auto custom-scrollbar pb-12">
 <div>
 <h3 class="font-label-mono text-label-mono uppercase text-on-surface-variant mb-6 tracking-[0.2em]">Pricing</h3>
 <nav class="space-y-3">
@@ -346,6 +346,7 @@
 <script src="js/desc-ca.js"></script>
 <script src="js/tools.js"></script>
 <script src="js/names.js"></script>
+<script src="js/descriptions.js"></script>
 <script>
 (() => {
 
@@ -376,7 +377,15 @@ if (typeof FMHY_TOOLS !== 'undefined') {
   if (typeof FMHY_DESC_CA !== 'undefined' && typeof BEACON_DESC_CA !== 'undefined') Object.assign(BEACON_DESC_CA, FMHY_DESC_CA);
 }
 
+if (typeof TOOL_DESCRIPTIONS !== 'undefined') {
+  TOOLS.forEach(t => { if (TOOL_DESCRIPTIONS[t.domain]) t.description = TOOL_DESCRIPTIONS[t.domain]; });
+}
+
 TOOLS.forEach(t => {
+  if (/nsfw/i.test(t.description) && !(t.tags || []).includes('nsfw')) {
+    if (!t.tags) t.tags = [];
+    t.tags.push('nsfw');
+  }
   t.longDescription = t.description + ' This tool provides an advanced environment directly accessible from your browser.';
   t.features = ["Zero-installation cloud execution","Seamless integration with modern workflows","High-performance browser rendering"];
   t.author = t.domain;
@@ -410,7 +419,7 @@ const TAG_DISPLAY = {
   'science':'Science','note-taking':'Note Taking','office':'Office',
   'browsers':'Browsers','search':'Search','social':'Social','privacy':'Privacy',
   'network':'Network','system':'System','files':'Files','downloads':'Downloads',
-  'torrents':'Torrents','mobile':'Mobile','linux':'Linux','no-signup':'No Signup'
+  'torrents':'Torrents','mobile':'Mobile','linux':'Linux','no-signup':'No Signup','nsfw':'NSFW'
 };
 function tTag(tag) { return TAG_DISPLAY[tag] || tag; }
 
@@ -444,22 +453,40 @@ function renderStarRating(domain) {
   return html;
 }
 
+const TAG_GROUPS = [
+  { label: 'AI & Chat', tags: ['ai','free-chat','ai-coding','ai-image','ai-video','ai-api','no-signup','automation'] },
+  { label: 'Media', tags: ['streaming','live-tv','anime','music','radio'] },
+  { label: 'Gaming', tags: ['gaming','game-tools'] },
+  { label: 'Design & Creative', tags: ['design','image-editing','video-editing','fonts','icons','3d','templates','ui-libraries','animation'] },
+  { label: 'Development', tags: ['dev-tools','hosting','web-building'] },
+  { label: 'Knowledge', tags: ['education','science','books','note-taking','office'] },
+  { label: 'System & Privacy', tags: ['browsers','search','social','privacy','network','system','files','downloads','torrents','mobile','linux'] },
+  { label: 'NSFW', tags: ['nsfw'] }
+];
+
 function renderSidebar() {
   const sidebar = document.getElementById('sidebar-tags');
   const tagCounts = {};
   TOOLS.forEach(tool => { (tool.tags || []).forEach(tag => { tagCounts[tag] = (tagCounts[tag] || 0) + 1; }); });
-  const sortedTags = Object.keys(tagCounts).sort((a, b) => tagCounts[b] - tagCounts[a]);
+
+  function tagLink(tag) {
+    const active = selectedTags.has(tag);
+    return '<a class="group flex items-center ' + (active ? 'text-primary' : 'text-on-surface-variant') + ' font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer" data-tag="' + tag + '">' +
+      (active ? '<span class="beacon-active"></span>' : '<span class="w-1 h-1 bg-transparent mr-2"></span>') +
+      tTag(tag) + ' <span style="font-size:9px;opacity:0.6;margin-left:4px;">' + (tagCounts[tag] || 0) + '</span></a>';
+  }
 
   let html = '<a class="group flex items-center ' + (selectedTags.size === 0 ? 'text-primary' : 'text-on-surface-variant') + ' font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer" id="btn-all-tags">' +
     (selectedTags.size === 0 ? '<span class="beacon-active"></span>' : '<span class="w-1 h-1 bg-transparent mr-2"></span>') +
     t('catAll') + ' <span style="font-size:9px;opacity:0.6;margin-left:4px;">' + TOOLS.length + '</span></a>';
 
-  sortedTags.forEach(tag => {
-    const active = selectedTags.has(tag);
-    html += '<a class="group flex items-center ' + (active ? 'text-primary' : 'text-on-surface-variant') + ' font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer" data-tag="' + tag + '">' +
-      (active ? '<span class="beacon-active"></span>' : '<span class="w-1 h-1 bg-transparent mr-2"></span>') +
-      tTag(tag) + ' <span style="font-size:9px;opacity:0.6;margin-left:4px;">' + tagCounts[tag] + '</span></a>';
+  TAG_GROUPS.forEach(group => {
+    const groupTags = group.tags.filter(t => tagCounts[t]);
+    if (!groupTags.length) return;
+    html += '<div style="margin-top:16px;margin-bottom:6px;font-size:9px;letter-spacing:0.15em;color:#8f9378;text-transform:uppercase;">' + group.label + '</div>';
+    groupTags.forEach(tag => { html += tagLink(tag); });
   });
+
   sidebar.innerHTML = html;
 
   document.getElementById('btn-all-tags').addEventListener('click', () => { selectedTags.clear(); renderSidebar(); render(); });
