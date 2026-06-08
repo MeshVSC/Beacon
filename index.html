@@ -141,9 +141,23 @@
 <a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">
                     LAUNCH
                 </a>
+<button id="mobile-menu-btn" class="md:hidden flex flex-col gap-[5px] p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="block w-5 h-[2px] bg-primary"></span>
+<span class="block w-5 h-[2px] bg-primary"></span>
+<span class="block w-5 h-[2px] bg-primary"></span>
+</button>
 </div>
 </div>
 </nav>
+<div id="mobile-menu" class="hidden fixed top-[73px] left-0 w-full z-40 bg-background/95 backdrop-blur-md border-b border-secondary-container md:hidden">
+<div class="flex flex-col px-gutter py-4 gap-1 max-w-container-max mx-auto">
+<a class="font-button text-button uppercase text-primary py-3 border-b border-secondary-container/30 no-underline" href="beacon.html">CATALOG</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="beacon.html?tag=streaming">MEDIA</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="beacon.html?tag=gaming">GAMING</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="beacon.html?tag=dev-tools">DEV TOOLS</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 no-underline" href="beacon.html?tag=free-chat">FREE CHAT</a>
+</div>
+</div>
 <!-- Hero Section -->
 <section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
 <canvas class="canvas-container" id="wavingLines"></canvas>
