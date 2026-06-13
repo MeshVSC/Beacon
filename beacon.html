@@ -1,7 +1,7 @@
 <!DOCTYPE html><html class="dark" lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>BEACON | CATALOG</title>
+<title>NEXUS | CATALOG</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -61,11 +61,11 @@
         .app-row:hover .row-title { color: #cdf200; }
         .row-launch-btn { background: transparent; color: #e5e2e1; border: 1px solid #474747; padding: 4px 10px; font-family: 'Geist', sans-serif; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
         .row-launch-btn:hover { background: #cdf200; color: #131313; border-color: #cdf200; }
-        .star-rating { display: inline-flex; gap: 2px; cursor: pointer; }
-        .star-rating .star { font-size: 14px; color: #474747; transition: color 0.15s; user-select: none; }
-        .star-rating .star.filled { color: #cdf200; }
+        .star-rating { display: inline-flex; gap: 1px; cursor: pointer; }
+        .star-rating .star { font-size: 10px; color: #333; transition: all 0.2s; user-select: none; }
+        .star-rating .star.filled { color: #cdf200; text-shadow: 0 0 4px rgba(205,242,0,0.3); }
         .star-rating .star.hovered { color: #e5e2e1; }
-        .star-rating-value { font-size: 11px; font-weight: 500; color: #c5c9ac; margin-left: 4px; }
+        .star-rating-value { font-size: 9px; font-weight: 500; color: #c5c9ac; margin-left: 3px; }
         .dev-star { cursor: pointer; opacity: 0.2; margin-right: 8px; transition: all 0.3s; font-size: 14px; user-select: none; display: inline-block; }
         .dev-star:hover { opacity: 0.8; }
         .dev-star.active { color: #f59e0b; opacity: 1; }
@@ -198,7 +198,7 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">BEACON</a>
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
 <a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=streaming">MEDIA</a>
@@ -287,7 +287,7 @@
 <footer class="w-full mt-auto border-t border-secondary-container bg-background dark:bg-background">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto">
 <div class="space-y-4">
-<div class="font-headline-md text-headline-md text-primary">BEACON</div>
+<div class="font-headline-md text-headline-md text-primary">NEXUS</div>
 <p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">
                     © 2026 MESH STUDIOS. ALL RIGHTS RESERVED.
                 </p>
@@ -320,13 +320,13 @@
 <div class="workspace-overlay" id="workspace-overlay">
   <div class="workspace-header">
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-weight:700;font-size:16px;color:#fff;">Beacon</span>
+      <span style="font-weight:700;font-size:16px;color:#fff;">Nexus</span>
       <span style="width:1px;height:18px;background:#474747;margin:0 8px;"></span>
       <span style="font-size:11px;color:#c5c9ac;text-transform:uppercase;letter-spacing:0.1em;" id="ws-title">App Name</span>
     </div>
     <div style="display:flex;gap:10px;">
       <a href="#" target="_blank" style="background:transparent;border:1px solid #474747;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:#e5e2e1;cursor:pointer;text-decoration:none;" id="ws-external">Open in New Tab</a>
-      <button style="background:#cdf200;color:#131313;border:1px solid #cdf200;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;" id="ws-back" onclick="closeWorkspace()">Back to Beacon</button>
+      <button style="background:#cdf200;color:#131313;border:1px solid #cdf200;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;" id="ws-back" onclick="closeWorkspace()">Back to Nexus</button>
     </div>
   </div>
   <iframe class="workspace-iframe" id="ws-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>

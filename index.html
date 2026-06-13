@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>BEACON | App Discovery Hub</title>
+<title>NEXUS | App Discovery Hub</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -129,7 +129,7 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
 <div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">BEACON</a>
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
 <a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=streaming">MEDIA</a>
@@ -172,7 +172,7 @@
 </div>
 <!-- Scroll Indicator -->
 <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-4">
-<div class="font-label-mono text-label-mono uppercase tracking-[0.3em] text-on-surface-variant drop-shadow-md">SCROLL TO ANALYZE</div>
+<div class="font-label-mono text-label-mono uppercase tracking-[0.3em] text-on-surface-variant drop-shadow-md">SCROLL TO EXPLORE</div>
 <div class="w-[1px] h-12 bg-secondary-container relative overflow-hidden">
 <div class="absolute top-0 left-0 w-full h-1/2 bg-primary-container animate-[bounce_2s_infinite]"></div>
 </div>
@@ -220,7 +220,7 @@
 <footer class="w-full mt-auto relative z-10 border-t border-secondary-container bg-background/60 backdrop-blur-sm">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
 <div class="space-y-4">
-<div class="font-headline-md text-headline-md text-primary drop-shadow-sm">BEACON</div>
+<div class="font-headline-md text-headline-md text-primary drop-shadow-sm">NEXUS</div>
 <div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant drop-shadow-sm">© 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</div>
 </div>
 <div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
@@ -234,28 +234,29 @@
 <script src="js/data.js"></script>
 <script src="js/tools.js"></script>
 <script src="js/names.js"></script>
+<script src="js/descriptions.js"></script>
 <script>
         var TAGLINES = [
-          'DISCOVER YOUR NEXT TOOL',
-          '10,000+ TOOLS. ONE SEARCH.',
-          'EVERY TOOL. ONE PLACE.',
-          'FIND IT. LAUNCH IT.',
-          'THE TOOL DIRECTORY',
-          'YES, IT\'S ALL FREE.',
-          'FREE. YES, ALL OF IT.',
-          'YES, WE PROBABLY HAVE IT.',
-          'IF IT EXISTS, IT\'S HERE.',
-          'THE INTERNET\'S TOOLBOX.',
-          'EVERYTHING BUT THE KITCHEN SINK.',
-          'COME IN, WE\'RE OPEN.',
-          'YES, WE\'RE STILL FREE.',
-          'TAKE WHAT YOU NEED.',
-          'NO SIGNUP. NO PAYWALL. NO KIDDING.',
-          'ALL YOU CAN BROWSE.',
-          'THE EVERYTHING STORE. BUT FREE.',
-          'FREE. EXCEPT YOUR TIME.'
+          'DISCOVER YOUR<br>NEXT TOOL',
+          '10,000+ TOOLS.<br>ONE SEARCH.',
+          'EVERY TOOL.<br>ONE PLACE.',
+          'FIND IT.<br>LAUNCH IT.',
+          'THE TOOL<br>DIRECTORY',
+          'YES,<br>IT\'S ALL FREE.',
+          'FREE.<br>YES, ALL OF IT.',
+          'YES,<br>WE PROBABLY<br>HAVE IT.',
+          'IF IT EXISTS,<br>IT\'S HERE.',
+          'THE INTERNET\'S<br>TOOLBOX.',
+          'EVERYTHING BUT<br>THE KITCHEN SINK.',
+          'COME IN,<br>WE\'RE OPEN.',
+          'YES,<br>WE\'RE STILL FREE.',
+          'TAKE WHAT<br>YOU NEED.',
+          'NO SIGNUP.<br>NO PAYWALL.<br>NO KIDDING.',
+          'ALL YOU<br>CAN BROWSE.',
+          'THE EVERYTHING STORE.<br>BUT FREE.',
+          'IT\'S ALL FREE.<br>EXCEPT YOUR TIME.'
         ];
-        document.getElementById('heroTitle').textContent = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
+        document.getElementById('heroTitle').innerHTML = TAGLINES[Math.floor(Math.random() * TAGLINES.length)];
 
         var FEATURED_DOMAINS = (function() { try { var s = localStorage.getItem('beacon_featured'); if (s) return JSON.parse(s); } catch(e) {} return ['lmarena.ai', 'chatjimmy.ai', 'aistudio.google.com', 'chat.z.ai', 'developer.puter.com']; })();
 
@@ -305,7 +306,7 @@
               '</div>' +
               '<div class="flex gap-2 mb-4 flex-wrap">' + tags + '</div>' +
               '<h3 class="font-headline-md text-[20px] text-primary mb-3 drop-shadow-sm">' + name + '</h3>' +
-              '<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">' + tool.description + '</p>' +
+              '<p class="font-body-md text-[14px] text-on-surface-variant mb-6 flex-grow">' + ((typeof TOOL_DESCRIPTIONS !== 'undefined' && TOOL_DESCRIPTIONS[tool.domain]) ? TOOL_DESCRIPTIONS[tool.domain] : tool.description) + '</p>' +
               '<div class="w-full mt-auto border border-secondary-container text-primary font-button text-button uppercase py-3 text-center hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50">LAUNCH</div>' +
               '</a>';
           }).join('');
@@ -328,22 +329,9 @@
           var grid = document.getElementById('catGrid');
           var allTools = (typeof TOOLS !== 'undefined' ? TOOLS : []).concat(typeof FMHY_TOOLS !== 'undefined' ? FMHY_TOOLS : []);
           grid.innerHTML = cats.map(function(c) {
-            var count = allTools.filter(function(t) {
-              var tt = t.tags || [];
-              for (var i = 0; i < c.tags.length; i++) { if (tt.indexOf(c.tags[i]) !== -1) return true; }
-              return false;
-            }).length;
-            return '<a href="beacon.html?tag=' + c.link + '" class="group relative bg-surface-container-lowest/60 backdrop-blur-sm border border-secondary-container/30 no-underline overflow-hidden transition-all duration-300 hover:border-primary-container/80 hover:bg-surface-container-low/60" style="display:flex;flex-direction:column;justify-content:space-between;padding:20px 18px;min-height:120px;">' +
-              '<div style="position:absolute;top:0;left:0;width:100%;height:2px;background:#cdf200;opacity:0;transition:opacity 0.3s;" class="group-hover:opacity-100"></div>' +
-              '<div>' +
-              '<div class="font-headline-md text-[16px] text-primary mb-1 tracking-tight">' + c.label + '</div>' +
-              '<div class="font-label-mono text-[9px] text-on-surface-variant/60 uppercase tracking-widest">' + c.subtitle + '</div>' +
-              '</div>' +
-              '<div style="display:flex;align-items:center;justify-content:space-between;margin-top:12px;">' +
-              '<span class="font-label-mono text-[10px] text-on-surface-variant/40 uppercase">' + count + ' tools</span>' +
-              '<span class="font-label-mono text-[10px] text-primary-container/0 group-hover:text-primary-container uppercase transition-all duration-300" style="letter-spacing:0.1em;">Explore</span>' +
-              '</div>' +
-              '</a>';
+            return '<a href="beacon.html?tag=' + c.link + '" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">' +
+              '<div class="font-headline-md text-[18px] text-primary mb-1">' + c.label + '</div>' +
+              '<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">' + c.subtitle + '</div></a>';
           }).join('');
         })();
 
