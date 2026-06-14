@@ -3,7 +3,7 @@
 <html class="dark" lang="en"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>NEXUS | App Discovery Hub</title>
+<title>NEXUS — Free Tool Directory | 10,000+ Apps & Websites</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <meta name="description" content="A free directory of 10,000+ tools, apps, and websites. No signup, no tracking, no catch."/>
 <meta property="og:type" content="website"/>
@@ -118,23 +118,14 @@
         .card-hover .card-img { transform: scale(1); transition: transform 0.6s ease; }
         .card-hover:hover .card-img { transform: scale(1.25); }
         
-        @keyframes ken-burns {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
-        }
-        .animate-ken-burns {
-            animation: ken-burns 40s ease-in-out infinite alternate;
-        }
         .global-vignette {
             background: radial-gradient(circle at center, transparent 20%, rgba(19, 19, 19, 0.95) 100%);
         }
     </style>
 </head>
 <body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container relative w-full min-h-screen">
-<!-- Cinematic Background -->
-<div class="fixed inset-0 z-[-2] overflow-hidden bg-background w-full h-full">
-<div class="absolute inset-0 w-full h-full bg-cover bg-center animate-ken-burns" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA');"></div>
-</div>
+<!-- Nexus Particle Background -->
+<canvas id="nexusBg" class="fixed inset-0 z-[-2] w-full h-full" style="background:#131313;"></canvas>
 <!-- Dark Vignette Overlay -->
 <div class="fixed inset-0 z-[-1] pointer-events-none global-vignette bg-background/30 w-full h-full"></div>
 <!-- TopNavBar -->
@@ -171,7 +162,6 @@
 </div>
 <!-- Hero Section -->
 <section class="relative h-screen w-full flex flex-col justify-center items-center overflow-hidden">
-<canvas class="canvas-container" id="wavingLines"></canvas>
 <!-- Content Layer -->
 <div class="relative z-20 w-full max-w-3xl px-gutter text-center">
 <h1 id="heroTitle" class="font-display-lg text-display-lg-mobile md:text-display-lg text-primary mb-12 drop-shadow-2xl"></h1>
@@ -361,49 +351,78 @@
           } catch(e) {}
         })();
 
-        // Waving Tech Lines Animation
-        const canvas = document.getElementById('wavingLines');
-        const ctx = canvas.getContext('2d');
-        let width, height, lines = [];
+        (function() {
+          var c = document.getElementById('nexusBg');
+          var ctx = c.getContext('2d');
+          var nodes = [], w, h, mouse = {x: -1000, y: -1000};
+          var CONNECT_DIST = 140, NODE_COUNT = 80;
 
-        function init() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            lines = [];
-            for (let i = 0; i < 5; i++) {
-                lines.push({
-                    y: height * 0.5 + (i - 2) * 40,
-                    amplitude: 20 + i * 15,
-                    speed: 0.01 + i * 0.005,
-                    offset: Math.random() * 10,
-                    color: i % 2 === 0 ? '#cdf200' : '#ffffff'
-                });
+          function resize() {
+            w = c.width = window.innerWidth;
+            h = c.height = window.innerHeight;
+          }
+
+          function createNodes() {
+            nodes = [];
+            for (var i = 0; i < NODE_COUNT; i++) {
+              nodes.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                vx: (Math.random() - 0.5) * 0.4,
+                vy: (Math.random() - 0.5) * 0.4,
+                r: Math.random() * 2 + 1,
+                bright: Math.random() > 0.85
+              });
             }
-        }
+          }
 
-        function draw() {
-            ctx.clearRect(0, 0, width, height);
-            lines.forEach(line => {
-                ctx.beginPath();
-                ctx.strokeStyle = line.color;
-                ctx.lineWidth = 0.5;
-                ctx.globalAlpha = 0.3;
-                
-                for (let x = 0; x < width; x++) {
-                    const y = line.y + Math.sin(x * 0.002 + line.offset) * line.amplitude;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
+          function draw() {
+            ctx.clearRect(0, 0, w, h);
+            for (var i = 0; i < nodes.length; i++) {
+              var a = nodes[i];
+              a.x += a.vx; a.y += a.vy;
+              if (a.x < 0 || a.x > w) a.vx *= -1;
+              if (a.y < 0 || a.y > h) a.vy *= -1;
+
+              for (var j = i + 1; j < nodes.length; j++) {
+                var b = nodes[j];
+                var dx = a.x - b.x, dy = a.y - b.y;
+                var dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < CONNECT_DIST) {
+                  var alpha = (1 - dist / CONNECT_DIST) * 0.15;
+                  ctx.beginPath();
+                  ctx.strokeStyle = 'rgba(205,242,0,' + alpha + ')';
+                  ctx.lineWidth = 0.5;
+                  ctx.moveTo(a.x, a.y);
+                  ctx.lineTo(b.x, b.y);
+                  ctx.stroke();
                 }
-                
-                ctx.stroke();
-                line.offset += line.speed;
-            });
-            requestAnimationFrame(draw);
-        }
+              }
 
-        window.addEventListener('resize', init);
-        init();
-        draw();
+              var mdx = a.x - mouse.x, mdy = a.y - mouse.y;
+              var mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+              if (mdist < 200) {
+                var malpha = (1 - mdist / 200) * 0.3;
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(205,242,0,' + malpha + ')';
+                ctx.lineWidth = 0.8;
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(mouse.x, mouse.y);
+                ctx.stroke();
+              }
+
+              ctx.beginPath();
+              ctx.fillStyle = a.bright ? '#cdf200' : 'rgba(255,255,255,0.4)';
+              ctx.arc(a.x, a.y, a.r, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            requestAnimationFrame(draw);
+          }
+
+          window.addEventListener('resize', function() { resize(); createNodes(); });
+          document.addEventListener('mousemove', function(e) { mouse.x = e.clientX; mouse.y = e.clientY; });
+          resize(); createNodes(); draw();
+        })();
 
         var heroSearch = document.getElementById('heroSearch');
         heroSearch.addEventListener('keydown', function(e) {

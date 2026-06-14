@@ -1,339 +1,274 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS | Tool Details</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<meta name="description" content="View tool details, screenshots, and launch directly from Nexus."/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Geist:wght@100..900&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-tertiary-fixed-variant": "#334a54",
-                        "error-container": "#93000a",
-                        "on-primary-fixed": "#181e00",
-                        "outline": "#8f9378",
-                        "inverse-primary": "#556500",
-                        "on-secondary-fixed-variant": "#474747",
-                        "secondary": "#c6c6c6",
-                        "on-error": "#690005",
-                        "inverse-on-surface": "#313030",
-                        "surface-dim": "#131313",
-                        "surface-variant": "#353535",
-                        "on-tertiary-fixed": "#051e27",
-                        "secondary-fixed": "#e2e2e2",
-                        "tertiary": "#ffffff",
-                        "surface-bright": "#393939",
-                        "on-background": "#e5e2e1",
-                        "inverse-surface": "#e5e2e1",
-                        "surface-container": "#20201f",
-                        "secondary-fixed-dim": "#c6c6c6",
-                        "on-tertiary": "#1c333d",
-                        "primary-fixed": "#cdf200",
-                        "on-primary": "#2b3400",
-                        "on-tertiary-container": "#516872",
-                        "primary": "#ffffff",
-                        "on-secondary-container": "#b5b5b5",
-                        "surface-tint": "#b4d400",
-                        "surface-container-highest": "#353535",
-                        "background": "#131313",
-                        "surface-container-low": "#1c1b1b",
-                        "surface-container-lowest": "#0e0e0e",
-                        "tertiary-container": "#cee6f2",
-                        "on-primary-fixed-variant": "#3f4c00",
-                        "tertiary-fixed": "#cee6f2",
-                        "on-error-container": "#ffdad6",
-                        "on-secondary": "#303030",
-                        "surface-container-high": "#2a2a2a",
-                        "primary-container": "#cdf200",
-                        "secondary-container": "#474747",
-                        "outline-variant": "#454932",
-                        "on-secondary-fixed": "#1b1b1b",
-                        "error": "#ffb4ab",
-                        "on-surface-variant": "#c5c9ac",
-                        "tertiary-fixed-dim": "#b2cad6",
-                        "on-primary-container": "#5a6b00",
-                        "on-surface": "#e5e2e1",
-                        "surface": "#131313",
-                        "primary-fixed-dim": "#b4d400"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "32px",
-                        "margin-mobile": "24px",
-                        "unit": "8px",
-                        "margin-desktop": "64px",
-                        "container-max": "1440px"
-                    },
-                    "fontFamily": {
-                        "display-lg": ["Geist"],
-                        "label-mono": ["Geist Mono"],
-                        "headline-lg": ["Geist"],
-                        "display-lg-mobile": ["Geist"],
-                        "button": ["Geist"],
-                        "headline-md": ["Geist"],
-                        "body-md": ["Geist"],
-                        "body-lg": ["Geist"]
-                    },
-                    "fontSize": {
-                        "display-lg": ["80px", {"lineHeight": "88px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
-                        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
-                        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
-                        "display-lg-mobile": ["48px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                        "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
-                        "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
-                        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}],
-                        "body-lg": ["18px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400"}]
-                    }
-                },
-            },
-        }
-    </script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        body {
-            background-color: #131313;
-            color: #e5e2e1;
-            overflow-x: hidden;
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #474747; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #cdf200; }
+    .badge { display: inline-block; font-family: 'Geist', sans-serif; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; padding: 3px 10px; border: 1px solid; }
+    .badge-free { border-color: #cdf200; color: #cdf200; }
+    .badge-freemium { border-color: #474747; color: #c5c9ac; }
+    .tag-pill { display: inline-block; font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; padding: 4px 10px; border: 1px solid #474747; color: #c5c9ac; transition: all 0.2s; cursor: pointer; text-decoration: none; }
+    .tag-pill:hover { border-color: #cdf200; color: #cdf200; }
+    .star-rating { display: inline-flex; gap: 2px; cursor: pointer; }
+    .star-rating .star { font-size: 18px; color: #333; transition: all 0.2s; user-select: none; }
+    .star-rating .star.filled { color: #cdf200; text-shadow: 0 0 6px rgba(205,242,0,0.3); }
+    .star-rating .star.hovered { color: #e5e2e1; }
+    .btn-launch { display: inline-flex; align-items: center; gap: 8px; background: #cdf200; color: #131313; border: none; padding: 14px 32px; font-family: 'Geist', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.3s; text-decoration: none; }
+    .btn-launch:hover { background: transparent; color: #cdf200; box-shadow: inset 0 0 0 1px #cdf200; }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #e5e2e1; border: 1px solid #474747; padding: 14px 32px; font-family: 'Geist', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: all 0.2s; text-decoration: none; }
+    .btn-secondary:hover { border-color: #cdf200; color: #cdf200; }
+</style>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffffff",
+                    "primary-container": "#cdf200",
+                    "secondary-container": "#474747",
+                    "on-surface": "#e5e2e1",
+                    "on-surface-variant": "#c5c9ac",
+                    "on-primary-container": "#5a6b00"
+                },
+                "spacing": {
+                    "gutter": "32px",
+                    "container-max": "1440px"
+                },
+                "fontFamily": {
+                    "display-lg": ["Geist", "sans-serif"],
+                    "label-mono": ["Geist Mono", "monospace"],
+                    "headline-lg": ["Geist", "sans-serif"],
+                    "headline-md": ["Geist", "sans-serif"],
+                    "button": ["Geist", "sans-serif"],
+                    "body-md": ["Geist", "sans-serif"]
+                },
+                "fontSize": {
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}]
+                }
+            }
         }
-        .waving-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-        .canvas-container {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-        }
-        .active-beacon {
-            width: 4px;
-            height: 4px;
-            background-color: #cdf200;
-        }
-        .custom-border-bottom {
-            border-bottom: 1px solid #333;
-        }
-        .lime-hover:hover {
-            background-color: transparent !important;
-            color: #cdf200 !important;
-            border: 1px solid #cdf200 !important;
-        }
-    @keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.1); } }</style>
+    }
+</script>
 </head>
-<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container"><div class="fixed inset-0 z-[-2] overflow-hidden">
-    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA'); animation: kenburns 20s linear infinite alternate;">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background/90"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(19,19,19,0.4)_100%)]"></div>
-</div>
-<!-- Waving Tech Lines Background Canvas -->
-<div class="waving-lines">
-<canvas id="techLinesCanvas" width="1280" height="1509"></canvas>
-</div>
-<!-- Top Navigation -->
-<nav class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container dark:border-secondary-container">
-<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<div class="font-display-lg text-display-lg tracking-tighter text-primary dark:text-primary">BEACON</div>
-<div class="hidden md:flex items-center space-gap-8 gap-8">
-<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 transition-colors duration-300" href="#">APPS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">LABS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">ARCHIVE</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">DOCS</a>
-</div>
-<button class="bg-primary-container text-on-primary-container px-6 py-2 font-button text-button uppercase active:scale-95 duration-100 lime-hover transition-all">LAUNCH</button>
+<body class="font-body-md text-body-md bg-background min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
+<nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
+<div class="flex items-center gap-6">
+<a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">CATALOG</a>
 </div>
 </nav>
-<!-- Side Navigation (App Detail Controls) -->
-<aside class="fixed right-0 top-0 h-full w-80 bg-surface-container-low dark:bg-surface-container-low border-l border-secondary-container z-40 hidden xl:flex flex-col p-gutter space-y-8 pt-32">
+</header>
+
+<main class="pt-[140px] min-h-screen max-w-container-max mx-auto px-gutter pb-24">
+<div class="mb-8">
+<div class="flex items-baseline gap-2 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant mb-2">
+<a class="hover:text-primary no-underline" href="beacon.html">Catalog</a>
+<span>/</span>
+<span class="text-primary" id="breadcrumb-name">Tool</span>
+</div>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12">
 <div>
-<div class="font-headline-md text-headline-md text-primary">APP DETAILS</div>
-<div class="font-body-md text-body-md text-on-surface-variant">V.2.0.4 CORE</div>
+<div style="background:#0e0e0e;border:1px solid #474747;overflow:hidden;margin-bottom:32px;">
+<img id="detail-screenshot" src="" alt="" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;" onerror="this.style.display='none'">
 </div>
-<div class="space-y-6">
-<div class="text-primary-container flex items-center gap-2 before:content-[''] before:w-1 before:h-1 before:bg-primary-container font-label-mono text-label-mono uppercase">
-<span class="material-symbols-outlined text-[18px]">settings_input_component</span>
-                SPECIFICATIONS
-            </div>
-<div class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-all font-label-mono text-label-mono uppercase">
-<span class="material-symbols-outlined text-[18px]">account_tree</span>
-                DEPENDENCIES
-            </div>
-<div class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-all font-label-mono text-label-mono uppercase">
-<span class="material-symbols-outlined text-[18px]">sensors</span>
-                UPTIME
-            </div>
-<div class="text-on-surface-variant flex items-center gap-2 hover:text-primary transition-all font-label-mono text-label-mono uppercase">
-<span class="material-symbols-outlined text-[18px]">analytics</span>
-                TELEMETRY
-            </div>
-</div>
-<div class="mt-auto pt-8">
-<button class="w-full bg-primary-container text-on-primary-container py-4 font-button text-button uppercase lime-hover transition-all">DEPLOY</button>
-</div>
-</aside>
-<main class="pt-40 pb-32 max-w-container-max mx-auto px-gutter xl:pr-96">
-<!-- Hero Section -->
-<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter mb-32">
-<div class="md:col-span-8 flex flex-col justify-start">
-<h1 class="font-display-lg text-display-lg md:text-[120px] md:leading-[110px] tracking-tighter mb-8">FORGE-CLI</h1>
-<p class="font-body-lg text-body-lg text-secondary max-w-2xl">
-                    High-performance command-line orchestration for decentralized beacon networks. Forge-CLI streamlines the deployment of secure nodes and provides surgical precision for real-time data streaming across low-latency architectures.
-                </p>
-<div class="mt-12 flex flex-wrap gap-4">
-<span class="px-3 py-1 border border-secondary-container font-label-mono text-label-mono uppercase">v2.4.0-stable</span>
-<span class="px-3 py-1 border border-secondary-container font-label-mono text-label-mono uppercase">x86_64 / arm64</span>
-<span class="px-3 py-1 border border-secondary-container font-label-mono text-label-mono uppercase">Rust-Core</span>
-</div>
-</div>
-<div class="md:col-span-4 mt-12 md:mt-0">
-<div class="bg-surface-container-low p-8 border-l border-primary-container">
-<div class="space-y-8">
+
+<div class="flex items-center gap-4 mb-6">
+<img id="detail-favicon" src="" alt="" style="width:32px;height:32px;">
 <div>
-<div class="font-label-mono text-label-mono uppercase text-on-surface-variant mb-2">Primary Action</div>
-<button class="w-full bg-primary-container text-on-primary-container py-3 font-button text-button uppercase lime-hover transition-all">LAUNCH APP</button>
-</div>
-<div class="grid grid-cols-1 gap-4">
-<a class="flex justify-between items-center py-3 border-b border-secondary-container hover:text-primary-container transition-colors group" href="#">
-<span class="font-button text-button uppercase">Documentation</span>
-<div class="w-2 h-2 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
-</a>
-<a class="flex justify-between items-center py-3 border-b border-secondary-container hover:text-primary-container transition-colors group" href="#">
-<span class="font-button text-button uppercase">Changelog</span>
-<div class="w-2 h-2 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
-</a>
-<a class="flex justify-between items-center py-3 border-b border-secondary-container hover:text-primary-container transition-colors group" href="#">
-<span class="font-button text-button uppercase">License</span>
-<div class="w-2 h-2 bg-primary-container opacity-0 group-hover:opacity-100 transition-opacity"></div>
-</a>
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase tracking-tight" id="detail-name">Tool Name</h1>
+<div class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-widest" id="detail-domain">domain.com</div>
 </div>
 </div>
+
+<div class="flex items-center gap-4 mb-8">
+<span id="detail-pricing"></span>
+<div id="detail-rating" class="star-rating"></div>
+<span id="detail-rating-value" class="font-label-mono text-label-mono text-on-surface-variant"></span>
+</div>
+
+<div class="mb-8">
+<h2 class="font-label-mono text-label-mono uppercase text-on-surface-variant tracking-[0.2em] mb-4">Description</h2>
+<p class="text-on-surface-variant leading-relaxed" id="detail-desc"></p>
+</div>
+
+<div class="mb-8">
+<h2 class="font-label-mono text-label-mono uppercase text-on-surface-variant tracking-[0.2em] mb-4">Tags</h2>
+<div id="detail-tags" class="flex flex-wrap gap-2"></div>
 </div>
 </div>
-</section>
-<!-- Visual Data Stream / Gallery -->
-<section class="mb-32">
-<div class="flex justify-between items-end mb-8">
-<h2 class="font-headline-lg text-headline-lg uppercase">Visual Interface</h2>
-<div class="font-label-mono text-label-mono text-on-surface-variant">001 / 004 SENSORY INPUT</div>
+
+<div class="lg:sticky lg:top-[140px] lg:self-start space-y-6">
+<a id="detail-launch" href="#" target="_blank" class="btn-launch w-full justify-center">Launch Tool</a>
+<a id="detail-catalog" href="beacon.html" class="btn-secondary w-full justify-center">Back to Catalog</a>
+
+<div style="background:#1c1b1b;border:1px solid #474747;padding:24px;">
+<h3 class="font-label-mono text-label-mono uppercase text-on-surface-variant tracking-[0.2em] mb-4">Info</h3>
+<div class="space-y-3">
+<div class="flex justify-between">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant">Domain</span>
+<span class="font-label-mono text-label-mono text-primary" id="info-domain"></span>
 </div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="aspect-video bg-surface-container-low overflow-hidden relative group">
-<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" data-alt="A sophisticated data visualization dashboard displayed on a sleek monitor in a dimly lit, high-tech control room. The screen shows complex network topologies and real-time telemetry graphs in monochromatic black and white, accented by sharp lime green highlights. The atmosphere is professional and surgical, reflecting a Beacon Instrumentation technological noir aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAd6cR3CmrrAW3IqtufCpovglUrO2BRJaoFuQ7_kGWd7iNn0QoE3pBwT045ywCqzQIQymkh06N-Sw10Dk_GDHdklQxWZTJ-L0Q4Hrfn8nYXL4LJwInAx6XIYZyYMLTYTaOReUkqckS7zVdYytZ9Jgfd1jHB7v4-wcN5VH47xpeij1TLbTK1MmaMCxRTKxMvsMW6HX0ycBu3_JjY_PtY8pfOjCOUrjG47KH4hnV9yaw3VNGUo16tKmZ1zP8qTkIlH5OdMmCVpVY3h8">
-<div class="absolute bottom-4 left-4 font-label-mono text-label-mono bg-background/80 px-2 py-1 uppercase">Topology View</div>
+<div style="height:1px;background:#474747;"></div>
+<div class="flex justify-between">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant">Pricing</span>
+<span class="font-label-mono text-label-mono text-primary" id="info-pricing"></span>
 </div>
-<div class="aspect-video bg-surface-container-low overflow-hidden relative group">
-<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" data-alt="Close-up of industrial server hardware inside a high-security data center, bathed in dark shadows with dramatic, sharp green light strips along the cabinet edges. The image emphasizes precision engineering and cold, technological power. The visual style is ultra-minimalist and high-contrast, perfectly aligning with the Beacon brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWSod-JIVNRPINZQl9bqdvKdHO8Mbgq_buMoJqjrvUqqqL7obv95FqxlW0IhQPiOT9MSpWFLqH9xCe9xiQ-asr-iRqOLuvuKd3vy8JyJhYB-nJRZybosdQPNxgjkJtPaE1i5oZsAZGHcngCIloiqMLTFHrHQ18-LWLNQhGlb3m41szG7C9Tli-6eq3NMrZXN2CChW2lbbK-5vgJjosidOXWRMPrqVmwOHZKa7Lu92LL8dieIZ8x4KtE6jx5JfcBwP5HEp_HspikCU">
-<div class="absolute bottom-4 left-4 font-label-mono text-label-mono bg-background/80 px-2 py-1 uppercase">Hardware Integration</div>
+<div style="height:1px;background:#474747;"></div>
+<div class="flex justify-between">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant">Category</span>
+<span class="font-label-mono text-label-mono text-primary" id="info-category"></span>
 </div>
-<div class="aspect-video bg-surface-container-low overflow-hidden relative group md:col-span-2 lg:col-span-1">
-<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-700" data-alt="An abstract macro shot of a complex circuit board, where the paths and nodes glow with a subtle lime green luminescence against a matte black surface. Thin waving tech lines are digitally superimposed to suggest active data movement. The mood is calm yet energetic, representing a cinematic fusion of hardware and software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAwtJGTmbDrfLvsuCseY-uT-epY4-dX79YriqZs_af63NCjxNOH1SRcMlbuDo03GVr9eZeuz3RdCS_9TkbLLNOw3ObpfSSBQlVfOCVYQEJYxcBTUb0zv7qnFO1S0s1Qlgz54Mz7nYNJpaDaqbzrsfYLcYAfN1t7-c9V6ZNuZ5NYdAQ5RxiSvR9GPtECMvwzaOpqjKX8Ir1M2IirJtT3EOpFw6_Ck0YY8iIuQJRBGf_al0M7Wd4K-OW_fenKKJVnwiAWD3tQitcxG0">
-<div class="absolute bottom-4 left-4 font-label-mono text-label-mono bg-background/80 px-2 py-1 uppercase">Packet Flow</div>
+<div style="height:1px;background:#474747;"></div>
+<div class="flex justify-between">
+<span class="font-label-mono text-label-mono uppercase text-on-surface-variant">Times Opened</span>
+<span class="font-label-mono text-label-mono text-primary" id="info-accessed">0</span>
 </div>
 </div>
-</section>
-<!-- Technical Metadata Bento -->
-<section class="grid grid-cols-1 md:grid-cols-3 gap-1 px-1 bg-secondary-container border border-secondary-container">
-<div class="bg-background p-12 flex flex-col justify-between aspect-square md:aspect-auto">
-<div class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-4">Architecture</div>
-<div class="font-headline-md text-headline-md uppercase">Distributed Ledger</div>
-<div class="mt-4 active-beacon"></div>
 </div>
-<div class="bg-background p-12 flex flex-col justify-between aspect-square md:aspect-auto">
-<div class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-4">Performance</div>
-<div class="font-headline-md text-headline-md uppercase">0.4ms Latency</div>
-<div class="mt-4 active-beacon"></div>
 </div>
-<div class="bg-background p-12 flex flex-col justify-between aspect-square md:aspect-auto">
-<div class="font-label-mono text-label-mono text-on-surface-variant uppercase mb-4">Uptime</div>
-<div class="font-headline-md text-headline-md uppercase">99.999% Core</div>
-<div class="mt-4 active-beacon"></div>
 </div>
-</section>
+
+<div id="not-found" style="display:none;" class="text-center py-24">
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase mb-4">Tool Not Found</h1>
+<p class="text-on-surface-variant mb-8">The tool you're looking for isn't in our directory.</p>
+<a href="beacon.html" class="btn-launch">Browse Catalog</a>
+</div>
 </main>
-<!-- Footer -->
-<footer class="w-full mt-auto border-t border-secondary-container bg-background dark:bg-background">
+
+<footer class="w-full mt-auto border-t border-secondary-container bg-background/60 backdrop-blur-sm">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto">
-<div class="flex flex-col gap-4">
-<div class="font-headline-md text-headline-md text-primary">BEACON</div>
-<p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">© 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED.</p>
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary">NEXUS</div>
+<p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">&copy; 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</p>
 </div>
-<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-center">
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-all" href="#">SYSTEM STATUS</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-all" href="#">LEGAL</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-all" href="#">PRIVACY</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-all" href="#">ENCRYPTED</a>
+<div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-start pt-4">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="legal.html">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="privacy.html">PRIVACY</a>
 </div>
 </div>
 </footer>
+
+<script src="js/data.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/names.js"></script>
+<script src="js/descriptions.js"></script>
 <script>
-        // Tech Lines Generative Background
-        const canvas = document.getElementById('techLinesCanvas');
-        const ctx = canvas.getContext('2d');
-        let width, height, lines = [];
+(() => {
 
-        function init() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            lines = [];
-            for (let i = 0; i < 15; i++) {
-                lines.push({
-                    y: Math.random() * height,
-                    amplitude: 20 + Math.random() * 50,
-                    frequency: 0.001 + Math.random() * 0.003,
-                    phase: Math.random() * Math.PI * 2,
-                    speed: 0.005 + Math.random() * 0.02,
-                    color: Math.random() > 0.5 ? '#cdf200' : '#ffffff'
-                });
-            }
-        }
+if (typeof FMHY_TOOLS !== 'undefined') TOOLS.push(...FMHY_TOOLS);
+if (typeof TOOL_DESCRIPTIONS !== 'undefined') TOOLS.forEach(t => { if (TOOL_DESCRIPTIONS[t.domain]) t.description = TOOL_DESCRIPTIONS[t.domain]; });
+try { const ct = JSON.parse(localStorage.getItem('beacon_custom_tools') || '[]'); ct.forEach(t => { if (!TOOLS.find(x => x.domain === t.domain)) TOOLS.push(t); }); } catch {}
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            ctx.lineWidth = 0.5;
+const TAG_DISPLAY = {
+  'ai':'AI','free-chat':'Free Chat','ai-api':'AI API','ai-coding':'AI Coding',
+  'ai-image':'AI Image','ai-video':'AI Video','automation':'Automation',
+  'streaming':'Streaming','live-tv':'Live TV','anime':'Anime','music':'Music',
+  'radio':'Radio','gaming':'Gaming','game-tools':'Game Tools','books':'Books',
+  'design':'Design','image-editing':'Image Editing','video-editing':'Video Editing',
+  'fonts':'Fonts','icons':'Icons','3d':'3D','templates':'Templates',
+  'ui-libraries':'UI Libraries','animation':'Animation','dev-tools':'Dev Tools',
+  'hosting':'Hosting','web-building':'Web Building','education':'Education',
+  'science':'Science','note-taking':'Note Taking','office':'Office',
+  'browsers':'Browsers','search':'Search','social':'Social','privacy':'Privacy',
+  'network':'Network','system':'System','files':'Files','downloads':'Downloads',
+  'torrents':'Torrents','mobile':'Mobile','linux':'Linux','no-signup':'No Signup','nsfw':'NSFW'
+};
+function tTag(tag) { return TAG_DISPLAY[tag] || tag; }
 
-            lines.forEach(line => {
-                ctx.beginPath();
-                ctx.strokeStyle = line.color;
-                ctx.moveTo(0, line.y);
+function toolName(domain) {
+  try { const o = JSON.parse(localStorage.getItem('beacon_name_overrides') || '{}'); if (o[domain]) return o[domain]; } catch {}
+  return (typeof TOOL_NAMES !== 'undefined' && TOOL_NAMES[domain]) ? TOOL_NAMES[domain] : domain;
+}
 
-                for (let x = 0; x < width; x += 5) {
-                    const y = line.y + Math.sin(x * line.frequency + line.phase) * line.amplitude;
-                    ctx.lineTo(x, y);
-                }
+function getUserRating(domain) {
+  try { return parseFloat(localStorage.getItem('beacon_rating_' + domain) || '0'); } catch { return 0; }
+}
+function setUserRating(domain, rating) {
+  localStorage.setItem('beacon_rating_' + domain, rating);
+  renderRating(domain);
+}
+function getTimesAccessed(domain) {
+  try { return parseInt(localStorage.getItem('beacon_access_' + domain) || '0', 10); } catch { return 0; }
+}
 
-                ctx.stroke();
-                line.phase += line.speed;
-            });
+function renderRating(domain) {
+  const container = document.getElementById('detail-rating');
+  const rating = getUserRating(domain);
+  let html = '';
+  for (let i = 1; i <= 5; i++) {
+    html += '<span class="star ' + (i <= rating ? 'filled' : '') + '" data-value="' + i + '">&#9733;</span>';
+  }
+  container.innerHTML = html;
+  document.getElementById('detail-rating-value').textContent = rating > 0 ? rating.toFixed(1) : '';
 
-            requestAnimationFrame(animate);
-        }
+  container.querySelectorAll('.star').forEach(star => {
+    star.addEventListener('mouseenter', () => {
+      const val = parseInt(star.dataset.value);
+      container.querySelectorAll('.star').forEach(s => s.classList.toggle('hovered', parseInt(s.dataset.value) <= val));
+    });
+    star.addEventListener('mouseleave', () => container.querySelectorAll('.star').forEach(s => s.classList.remove('hovered')));
+    star.addEventListener('click', () => setUserRating(domain, parseInt(star.dataset.value)));
+  });
+}
 
-        window.addEventListener('resize', init);
-        init();
-        animate();
+const params = new URLSearchParams(window.location.search);
+const domainParam = params.get('domain');
 
-        // Parallax Effect for Lines
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            canvas.style.transform = `translateY(${scrolled * 0.3}px)`;
-        });
-    </script>
+if (!domainParam) {
+  document.querySelector('main > .grid').style.display = 'none';
+  document.querySelector('main > .mb-8').style.display = 'none';
+  document.getElementById('not-found').style.display = 'block';
+} else {
+  const tool = TOOLS.find(t => t.domain === domainParam);
+  if (!tool) {
+    document.querySelector('main > .grid').style.display = 'none';
+    document.querySelector('main > .mb-8').style.display = 'none';
+    document.getElementById('not-found').style.display = 'block';
+  } else {
+    const name = toolName(tool.domain);
+    document.title = 'NEXUS | ' + name;
+    document.getElementById('breadcrumb-name').textContent = name;
+    document.getElementById('detail-name').textContent = name;
+    document.getElementById('detail-domain').textContent = tool.domain;
+    document.getElementById('detail-desc').textContent = tool.description || '';
+    document.getElementById('detail-screenshot').src = 'https://image.thum.io/get/width/1200/' + tool.url;
+    document.getElementById('detail-screenshot').alt = name;
+    document.getElementById('detail-favicon').src = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=64';
+    document.getElementById('detail-launch').href = tool.url;
+    document.getElementById('detail-pricing').innerHTML = tool.pricing === 'Free' ? '<span class="badge badge-free">Free</span>' : '<span class="badge badge-freemium">Freemium</span>';
+    document.getElementById('info-domain').textContent = tool.domain;
+    document.getElementById('info-pricing').textContent = tool.pricing || 'Free';
+    document.getElementById('info-category').textContent = (tool.tags || []).map(tTag).join(', ') || 'Uncategorized';
+    document.getElementById('info-accessed').textContent = getTimesAccessed(tool.domain);
 
+    const tagsHtml = (tool.tags || []).map(tag => '<a href="beacon.html?tag=' + tag + '" class="tag-pill">' + tTag(tag) + '</a>').join('');
+    document.getElementById('detail-tags').innerHTML = tagsHtml;
 
-</body></html>
+    renderRating(tool.domain);
+  }
+}
+
+})();
+</script>
+</body>
+</html>

@@ -1,268 +1,401 @@
-<!DOCTYPE html><html class="dark" lang="en"><head>
-<meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>BEACON | CATALOG</title>
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS Catalog — Browse 10,000+ Free Tools</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<meta name="description" content="Browse and launch 10,000+ free tools as visual cards. Filter by category, search, and discover new apps."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="NEXUS | 10,000+ Free Tools"/>
+<meta property="og:description" content="A free directory of 10,000+ tools, apps, and websites. No signup, no tracking."/>
+<meta property="og:image" content="https://nexusapp.vercel.app/og-image.png"/>
+<meta property="og:url" content="https://nexusapp.vercel.app/catalog-cards.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="NEXUS | 10,000+ Free Tools"/>
+<meta name="twitter:description" content="A free directory of 10,000+ tools, apps, and websites. No signup, no tracking."/>
+<meta name="twitter:image" content="https://nexusapp.vercel.app/og-image.png"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
 <style>
-        @import url('https://fonts.googleapis.com/css2?family=Geist:wght@100;300;400;500;600;700;800;900&display=swap');
-
-        body {
-            background-color: #131313;
-            color: #e5e2e1;
-            overflow-x: hidden;
-        }
-
-        .waving-lines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
-        .beacon-active {
-            width: 4px;
-            height: 4px;
-            background-color: #cdf200;
-            display: inline-block;
-            margin-right: 8px;
-        }
-
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 2px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #131313;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #333;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #cdf200;
-        }
-
-        /* Technical Noir Button Inversion */
-        .btn-noir {
-            background-color: #cdf200;
-            color: #131313;
-            transition: all 0.3s ease;
-        }
-        .btn-noir:hover {
-            background-color: transparent;
-            color: #cdf200;
-            box-shadow: inset 0 0 0 1px #cdf200;
-        }
-    </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-tertiary-fixed-variant": "#334a54",
-                        "error-container": "#93000a",
-                        "on-primary-fixed": "#181e00",
-                        "outline": "#8f9378",
-                        "inverse-primary": "#556500",
-                        "on-secondary-fixed-variant": "#474747",
-                        "secondary": "#c6c6c6",
-                        "on-error": "#690005",
-                        "inverse-on-surface": "#313030",
-                        "surface-dim": "#131313",
-                        "surface-variant": "#353535",
-                        "on-tertiary-fixed": "#051e27",
-                        "secondary-fixed": "#e2e2e2",
-                        "tertiary": "#ffffff",
-                        "surface-bright": "#393939",
-                        "on-background": "#e5e2e1",
-                        "inverse-surface": "#e5e2e1",
-                        "surface-container": "#20201f",
-                        "secondary-fixed-dim": "#c6c6c6",
-                        "on-tertiary": "#1c333d",
-                        "primary-fixed": "#cdf200",
-                        "on-primary": "#2b3400",
-                        "on-tertiary-container": "#516872",
-                        "primary": "#ffffff",
-                        "on-secondary-container": "#b5b5b5",
-                        "surface-tint": "#b4d400",
-                        "surface-container-highest": "#353535",
-                        "background": "#131313",
-                        "surface-container-low": "#1c1b1b",
-                        "surface-container-lowest": "#0e0e0e",
-                        "tertiary-container": "#cee6f2",
-                        "on-primary-fixed-variant": "#3f4c00",
-                        "tertiary-fixed": "#cee6f2",
-                        "on-error-container": "#ffdad6",
-                        "on-secondary": "#303030",
-                        "surface-container-high": "#2a2a2a",
-                        "primary-container": "#cdf200",
-                        "secondary-container": "#474747",
-                        "outline-variant": "#454932",
-                        "on-secondary-fixed": "#1b1b1b",
-                        "error": "#ffb4ab",
-                        "on-surface-variant": "#c5c9ac",
-                        "tertiary-fixed-dim": "#b2cad6",
-                        "on-primary-container": "#5a6b00",
-                        "on-surface": "#e5e2e1",
-                        "surface": "#131313",
-                        "primary-fixed-dim": "#b4d400"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "32px",
-                        "margin-mobile": "24px",
-                        "unit": "8px",
-                        "margin-desktop": "64px",
-                        "container-max": "1440px"
-                    },
-                    "fontFamily": {
-                        "display-lg": ["Geist"],
-                        "label-mono": ["Geist"],
-                        "headline-lg": ["Geist"],
-                        "display-lg-mobile": ["Geist"],
-                        "button": ["Geist"],
-                        "headline-md": ["Geist"],
-                        "body-md": ["Geist"],
-                        "body-lg": ["Geist"]
-                    },
-                    "fontSize": {
-                        "display-lg": ["80px", { "lineHeight": "88px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
-                        "label-mono": ["12px", { "lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500" }],
-                        "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
-                        "display-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "button": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "headline-md": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }]
-                    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #474747; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #cdf200; }
+    @keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes nexus-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes nexus-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+    #nexus-loader { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #131313; }
+    #nexus-loader .ring { width: 80px; height: 80px; position: relative; animation: nexus-spin 3s linear infinite; }
+    #nexus-loader .ring .dot { position: absolute; width: 8px; height: 8px; background: #cdf200; border-radius: 50%; }
+    #nexus-loader .ring .dot:nth-child(1) { top: 0; left: 36px; animation: nexus-pulse 1.2s ease-in-out 0s infinite; }
+    #nexus-loader .ring .dot:nth-child(2) { top: 10px; right: 4px; animation: nexus-pulse 1.2s ease-in-out 0.15s infinite; }
+    #nexus-loader .ring .dot:nth-child(3) { bottom: 10px; right: 4px; animation: nexus-pulse 1.2s ease-in-out 0.3s infinite; }
+    #nexus-loader .ring .dot:nth-child(4) { bottom: 0; left: 36px; animation: nexus-pulse 1.2s ease-in-out 0.45s infinite; }
+    #nexus-loader .ring .dot:nth-child(5) { bottom: 10px; left: 4px; animation: nexus-pulse 1.2s ease-in-out 0.6s infinite; }
+    #nexus-loader .ring .dot:nth-child(6) { top: 10px; left: 4px; animation: nexus-pulse 1.2s ease-in-out 0.75s infinite; }
+    #nexus-loader .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    #nexus-loader .label { margin-top: 24px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #474747; }
+    .tool-card { background: #1c1b1b; border: 1px solid #474747; transition: all 0.3s; opacity: 0; animation: fade-up 0.4s ease-out forwards; cursor: pointer; overflow: hidden; }
+    .tool-card:hover { border-color: #cdf200; transform: translateY(-2px); }
+    .tool-card:hover .card-title { color: #cdf200; }
+    .card-screenshot { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: #0e0e0e; display: block; }
+    .card-title { font-size: 14px; font-weight: 600; color: #e5e2e1; transition: color 0.2s; }
+    .card-desc { font-size: 12px; color: #c5c9ac; overflow: hidden; text-overflow: ellipsis; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-height: 1.5; }
+    .card-tag { display: inline-block; font-size: 9px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 6px; border: 1px solid #474747; color: #c5c9ac; }
+    .badge-free { border-color: #cdf200; color: #cdf200; }
+    .badge-freemium { border-color: #474747; color: #c5c9ac; }
+    .view-toggle a { font-family: 'Geist', sans-serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 14px; border: 1px solid #474747; color: #c5c9ac; text-decoration: none; transition: all 0.2s; }
+    .view-toggle a:hover { border-color: #cdf200; color: #cdf200; }
+    .view-toggle a.active { background: #cdf200; color: #131313; border-color: #cdf200; }
+    .btn-noir { background-color: #cdf200; color: #131313; transition: all 0.3s ease; }
+    .btn-noir:hover { background-color: transparent; color: #cdf200; box-shadow: inset 0 0 0 1px #cdf200; }
+</style>
+<script>
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                "colors": {
+                    "background": "#131313",
+                    "surface-container-low": "#1c1b1b",
+                    "surface-container-lowest": "#0e0e0e",
+                    "primary": "#ffffff",
+                    "primary-container": "#cdf200",
+                    "secondary-container": "#474747",
+                    "on-surface": "#e5e2e1",
+                    "on-surface-variant": "#c5c9ac",
+                    "on-primary-container": "#5a6b00"
                 },
-            },
+                "spacing": {
+                    "gutter": "32px",
+                    "container-max": "1440px"
+                },
+                "fontFamily": {
+                    "display-lg": ["Geist", "sans-serif"],
+                    "label-mono": ["Geist Mono", "monospace"],
+                    "headline-lg": ["Geist", "sans-serif"],
+                    "headline-md": ["Geist", "sans-serif"],
+                    "button": ["Geist", "sans-serif"],
+                    "body-md": ["Geist", "sans-serif"]
+                },
+                "fontSize": {
+                    "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+                    "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}]
+                }
+            }
         }
-    </script>
+    }
+</script>
 </head>
-<body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container"><div class="fixed inset-0 z-[-2] overflow-hidden bg-background"><div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40" style="background-image: url('https://lh3.googleusercontent.com/aida/ADBb0uitWZ-Cwv6XtgE8LD5YAkHzEV_R7DC3E_Fm78DnBBDu59ymCtk_TfDUOOCJQT7niHCtO6w1DekKPgG3vmwLbEbCvREKK_GqpBVaHPACeaoVWpQCOUKimy1Rg3Q-h7WQN-SDnjSgy9Ar96Q78lnJXJv3jMzeHRO99dh5hRsVnaZOKlL8xWM142a-degH5kmHAPv2QFaRiWUfCHHdCELIaK6qFb1Lbo_eZCe-sO54MLLKQY2Be1piNG4yhA'); animation: ken-burns 20s linear infinite alternate;"></div><div class="absolute inset-0 bg-gradient-to-b from-background/80 via-transparent to-background/90"></div></div><style>@keyframes ken-burns { from { transform: scale(1.0); } to { transform: scale(1.1); } }</style>
-<!-- Background Waving Motif -->
-<canvas class="waving-lines absolute" id="wavingLines" width="1280" height="1251"></canvas>
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
+<body class="font-body-md text-body-md bg-background min-h-screen selection:bg-primary-container selection:text-on-primary-container">
+<div id="nexus-loader">
+<div class="ring">
+<div class="dot"></div><div class="dot"></div><div class="dot"></div>
+<div class="dot"></div><div class="dot"></div><div class="dot"></div>
+<svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="40" cy="40" r="36" stroke="#474747" stroke-width="0.5" stroke-dasharray="4 6"/>
+</svg>
+</div>
+<div class="label">Loading Catalog</div>
+</div>
+
+<header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<div class="font-display-lg text-display-lg tracking-tighter text-primary">BEACON</div>
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
 <div class="hidden md:flex items-center gap-8">
-<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="#">APPS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">LABS</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">ARCHIVE</a>
-<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="#">DOCS</a>
+<a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="catalog-cards.html">CATALOG</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="catalog-cards.html?tag=streaming">MEDIA</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="catalog-cards.html?tag=gaming">GAMING</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="catalog-cards.html?tag=dev-tools">DEV TOOLS</a>
+<a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="catalog-cards.html?tag=free-chat">FREE CHAT</a>
 </div>
 <div class="flex items-center gap-6">
 <div class="hidden lg:block">
-<input class="bg-transparent border-b border-white focus:border-primary-container focus:ring-0 text-label-mono uppercase px-2 py-1 transition-all outline-none" placeholder="SEARCH INSTRUMENTATION..." type="text">
+<input id="search" class="bg-transparent border-b border-white focus:border-primary-container focus:ring-0 text-label-mono uppercase px-2 py-1 transition-all outline-none" placeholder="SEARCH TOOLS..." type="text">
 </div>
-<button class="btn-noir px-6 py-2 font-button text-button uppercase active:scale-95 duration-100">LAUNCH</button>
+<span id="count-label" class="font-label-mono text-label-mono uppercase text-on-surface-variant hidden sm:inline">0 tools</span>
+<button class="md:hidden flex flex-col gap-[5px] p-2" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+<span class="block w-5 h-[2px] bg-primary"></span>
+<span class="block w-5 h-[2px] bg-primary"></span>
+<span class="block w-5 h-[2px] bg-primary"></span>
+</button>
 </div>
 </nav>
-</header>
-<main class="pt-[120px] min-h-screen max-w-container-max mx-auto px-gutter gap-gutter">
-<!-- Sidebar Filters (Simplified from SideNavBar logic) -->
-<!-- Main Content Canvas -->
-<section class="flex-grow pb-24">
-<!-- Breadcrumbs & Stats -->
-<div class="mb-12"><div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"><div class="space-y-2"><div class="flex items-baseline gap-2 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant"><a class="hover:text-primary" href="#">Catalog</a><span class="">/</span><span class="text-primary">All Apps (12,482)</span></div><h1 class="font-display-lg text-display-lg uppercase tracking-tighter">Instrumentation Hub</h1></div><div class="flex flex-wrap gap-2"><button class="px-3 py-1 border border-primary-container text-primary-container font-label-mono text-[10px] uppercase tracking-wider">ALL_SYSTEMS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">INFRASTRUCTURE</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">INTELLIGENCE</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">DEVTOOLS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">TELEMETRY</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">CYBERNETICS</button><button class="px-3 py-1 border border-secondary-container text-on-surface-variant hover:border-white hover:text-white transition-colors font-label-mono text-[10px] uppercase tracking-wider">NETWORKING</button></div></div></div>
-<!-- Apps Grid -->
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.8.2.1-ALPHA</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">NEXUS_OVERSEER</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Real-time throughput orchestration and visual mesh monitoring for distributed neural clusters.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">STABLE_BUILD</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-on-surface-variant">V.3.4.0</div><div class="w-1 h-1 bg-transparent"></div></div><h2 class="font-headline-md text-xl text-primary">KRYPTOS_VAULT</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Quantum-resistant credential management with automated rotation.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">PROTECTED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.1.0.9-LTS</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">VOID_RECURSION</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Recursive log aggregation and anomalous event detection.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">DELEGATED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-primary-container">V.12.0.2</div><div class="w-1 h-1 bg-primary-container"></div></div><h2 class="font-headline-md text-xl text-primary">TITAN_ORCHESTRATOR</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Massive-scale container management for multi-planetary architectures.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">SYSTEM_CRITICAL</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article><article class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full"><div class="space-y-3"><div class="flex justify-between items-start"><div class="font-label-mono text-[10px] text-on-surface-variant">V.4.2.1-BETA</div><div class="w-1 h-1 bg-transparent"></div></div><h2 class="font-headline-md text-xl text-primary">SPECTRAL_ANALYZER</h2><p class="font-body-md text-xs text-on-surface-variant line-clamp-2">Non-destructive signal processing and packet forensics.</p></div><div class="mt-6 flex items-center justify-between gap-4"><span class="font-label-mono text-[9px] text-on-surface-variant">MONITORED</span><button class="text-[10px] font-button uppercase border border-white px-3 py-1 hover:bg-primary-container hover:text-on-primary-container transition-colors">LAUNCH</button></div></article></div>
-<!-- Pagination Instrumentation -->
-<div class="mt-24 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-secondary-container pt-12">
-<div class="font-label-mono text-label-mono uppercase text-on-surface-variant">
-                    Displaying 5 of 12,482 Entries
-                </div>
-<div class="flex items-center gap-px bg-secondary-container">
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors border border-transparent hover:border-primary-container">PREV_INDEX</button>
-<button class="bg-background text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase border border-primary-container">01</button>
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">02</button>
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">03</button>
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">...</button>
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors">2497</button>
-<button class="bg-background hover:text-primary-container px-4 py-2 font-label-mono text-label-mono uppercase text-on-surface-variant transition-colors border border-transparent hover:border-primary-container">NEXT_INDEX</button>
+<div id="mobile-menu" class="hidden fixed top-[73px] left-0 w-full z-40 bg-background/95 backdrop-blur-md border-b border-secondary-container md:hidden">
+<div class="flex flex-col px-gutter py-4 gap-1 max-w-container-max mx-auto">
+<input id="mobile-search" class="w-full bg-transparent border-b border-secondary-container focus:border-primary-container focus:ring-0 text-label-mono uppercase px-2 py-3 transition-all outline-none mb-2" placeholder="SEARCH TOOLS..." type="text"/>
+<a class="font-button text-button uppercase text-primary py-3 border-b border-secondary-container/30 no-underline" href="catalog-cards.html">CATALOG</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="catalog-cards.html?tag=streaming">MEDIA</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="catalog-cards.html?tag=gaming">GAMING</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="catalog-cards.html?tag=dev-tools">DEV TOOLS</a>
+<a class="font-button text-button uppercase text-on-surface-variant py-3 no-underline" href="catalog-cards.html?tag=free-chat">FREE CHAT</a>
 </div>
+</div>
+</header>
+
+<main class="pt-[140px] min-h-screen flex flex-col lg:flex-row max-w-container-max mx-auto px-gutter gap-gutter">
+<button id="mobile-filter-btn" class="lg:hidden flex items-center gap-2 font-label-mono text-label-mono uppercase text-primary-container border border-secondary-container px-4 py-3 mb-4 w-full justify-center" onclick="var s=document.getElementById('mobile-sidebar');s.classList.toggle('hidden');this.textContent=s.classList.contains('hidden')?'SHOW FILTERS':'HIDE FILTERS';">SHOW FILTERS</button>
+<aside id="mobile-sidebar" class="hidden lg:flex flex-col w-full lg:w-64 flex-shrink-0 space-y-8 lg:sticky lg:top-[140px] lg:h-[calc(100vh-140px)] border-b lg:border-b-0 lg:border-r border-secondary-container pb-6 lg:pb-12 lg:pr-gutter overflow-y-auto">
+<div>
+<h3 class="font-label-mono text-label-mono uppercase text-on-surface-variant mb-6 tracking-[0.2em]">Pricing</h3>
+<nav class="space-y-3">
+<a class="group flex items-center text-primary font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer price-btn active" data-price="All"><span style="width:4px;height:4px;background:#cdf200;border-radius:50%;margin-right:8px;flex-shrink:0;"></span>ALL</a>
+<a class="group flex items-center text-on-surface-variant font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer price-btn" data-price="Free"><span style="width:4px;height:4px;background:transparent;margin-right:8px;flex-shrink:0;"></span>FREE</a>
+<a class="group flex items-center text-on-surface-variant font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer price-btn" data-price="Freemium"><span style="width:4px;height:4px;background:transparent;margin-right:8px;flex-shrink:0;"></span>FREEMIUM</a>
+</nav>
+</div>
+<div>
+<h3 class="font-label-mono text-label-mono uppercase text-on-surface-variant mb-6 tracking-[0.2em]">Filter By Tag</h3>
+<nav id="sidebar-tags" class="space-y-3"></nav>
+</div>
+</aside>
+<section class="flex-grow pb-24">
+<div class="mb-12">
+<div class="flex items-baseline gap-2 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant mb-2">
+<a class="hover:text-primary" href="#">Catalog</a>
+<span>/</span>
+<span class="text-primary" id="breadcrumb-count">All Apps</span>
+</div>
+<div class="flex items-center justify-between flex-wrap gap-4">
+<h1 class="font-headline-lg text-headline-lg uppercase tracking-tighter" id="section-title">Catalog</h1>
+<div class="view-toggle flex gap-0">
+<a href="beacon.html">TABLE</a>
+<a href="catalog-cards.html" class="active">CARDS</a>
+</div>
+</div>
+</div>
+<div id="card-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+<div id="empty" class="py-16 text-center text-on-surface-variant font-label-mono text-label-mono uppercase" style="display:none">No tools found</div>
+<div class="mt-12 flex flex-col md:flex-row justify-between items-center gap-8 border-t border-secondary-container pt-8">
+<div id="result-count" class="font-label-mono text-label-mono uppercase text-on-surface-variant"></div>
+<div id="pagination" class="flex items-center gap-px bg-secondary-container"></div>
 </div>
 </section>
 </main>
-<!-- Footer -->
-<footer class="w-full mt-auto border-t border-secondary-container bg-background dark:bg-background">
+
+<footer class="w-full mt-auto border-t border-secondary-container bg-background/60 backdrop-blur-sm">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto">
 <div class="space-y-4">
-<div class="font-headline-md text-headline-md text-primary">BEACON</div>
-<p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">
-                    © 2024 BEACON INSTRUMENTATION. ALL RIGHTS RESERVED. <br>
-                    AUTONOMOUS INFRASTRUCTURE MANAGEMENT DIVISION.
-                </p>
+<div class="font-headline-md text-headline-md text-primary">NEXUS</div>
+<p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">&copy; 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</p>
 </div>
 <div class="flex flex-wrap gap-x-12 gap-y-4 md:justify-end items-start pt-4">
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">SYSTEM STATUS</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">LEGAL</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">PRIVACY</a>
-<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="#">ENCRYPTED</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="legal.html">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="privacy.html">PRIVACY</a>
 </div>
 </div>
 </footer>
+
+<script src="js/data.js"></script>
+<script src="js/tools.js"></script>
+<script src="js/names.js"></script>
+<script src="js/descriptions.js"></script>
 <script>
-        const canvas = document.getElementById('wavingLines');
-        const ctx = canvas.getContext('2d');
+(() => {
 
-        let width, height, lines = [];
-        const lineCount = 12;
+if (typeof FMHY_TOOLS !== 'undefined') TOOLS.push(...FMHY_TOOLS);
+if (typeof TOOL_DESCRIPTIONS !== 'undefined') TOOLS.forEach(t => { if (TOOL_DESCRIPTIONS[t.domain]) t.description = TOOL_DESCRIPTIONS[t.domain]; });
+TOOLS.forEach(t => {
+  if (/nsfw/i.test(t.description) && !(t.tags || []).includes('nsfw')) {
+    if (!t.tags) t.tags = [];
+    t.tags.push('nsfw');
+  }
+});
+try { const ct = JSON.parse(localStorage.getItem('beacon_custom_tools') || '[]'); ct.forEach(t => { if (!TOOLS.find(x => x.domain === t.domain)) TOOLS.push(t); }); } catch {}
 
-        function init() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-            lines = [];
-            for (let i = 0; i < lineCount; i++) {
-                lines.push({
-                    y: (height / lineCount) * i,
-                    amplitude: 20 + Math.random() * 40,
-                    frequency: 0.001 + Math.random() * 0.002,
-                    phase: Math.random() * Math.PI * 2,
-                    speed: 0.01 + Math.random() * 0.02,
-                    color: i % 2 === 0 ? '#cdf200' : '#ffffff'
-                });
-            }
-        }
+let selectedTags = new Set(), currentSearch = '', currentPrice = 'All';
+let filteredTools = [], currentPage = 1;
+const PAGE_SIZE = 40;
 
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
+const params = new URLSearchParams(window.location.search);
+const rawTag = params.get('tag');
+if (rawTag) rawTag.split(',').forEach(t => selectedTags.add(t.trim()));
 
-            lines.forEach(line => {
-                ctx.beginPath();
-                ctx.lineWidth = 0.5;
-                ctx.strokeStyle = line.color;
-                ctx.globalAlpha = 0.15;
+const TAG_DISPLAY = {
+  'ai':'AI','free-chat':'Free Chat','ai-api':'AI API','ai-coding':'AI Coding',
+  'ai-image':'AI Image','ai-video':'AI Video','automation':'Automation',
+  'streaming':'Streaming','live-tv':'Live TV','anime':'Anime','music':'Music',
+  'radio':'Radio','gaming':'Gaming','game-tools':'Game Tools','books':'Books',
+  'design':'Design','image-editing':'Image Editing','video-editing':'Video Editing',
+  'fonts':'Fonts','icons':'Icons','3d':'3D','templates':'Templates',
+  'ui-libraries':'UI Libraries','animation':'Animation','dev-tools':'Dev Tools',
+  'hosting':'Hosting','web-building':'Web Building','education':'Education',
+  'science':'Science','note-taking':'Note Taking','office':'Office',
+  'browsers':'Browsers','search':'Search','social':'Social','privacy':'Privacy',
+  'network':'Network','system':'System','files':'Files','downloads':'Downloads',
+  'torrents':'Torrents','mobile':'Mobile','linux':'Linux','no-signup':'No Signup','nsfw':'NSFW'
+};
+function tTag(tag) { return TAG_DISPLAY[tag] || tag; }
 
-                for (let x = 0; x < width; x += 5) {
-                    const y = line.y + Math.sin(x * line.frequency + line.phase) * line.amplitude;
-                    if (x === 0) ctx.moveTo(x, y);
-                    else ctx.lineTo(x, y);
-                }
+const TAG_GROUPS = [
+  { label: 'AI & Chat', tags: ['ai','free-chat','ai-coding','ai-image','ai-video','ai-api','no-signup','automation'] },
+  { label: 'Media', tags: ['streaming','live-tv','anime','music','radio'] },
+  { label: 'Gaming', tags: ['gaming','game-tools'] },
+  { label: 'Design & Creative', tags: ['design','image-editing','video-editing','fonts','icons','3d','templates','ui-libraries','animation'] },
+  { label: 'Development', tags: ['dev-tools','hosting','web-building'] },
+  { label: 'Knowledge', tags: ['education','science','books','note-taking','office'] },
+  { label: 'System & Privacy', tags: ['browsers','search','social','privacy','network','system','files','downloads','torrents','mobile','linux'] },
+  { label: 'NSFW', tags: ['nsfw'] }
+];
 
-                ctx.stroke();
-                line.phase += line.speed;
-            });
+function toolName(domain) {
+  try { const o = JSON.parse(localStorage.getItem('beacon_name_overrides') || '{}'); if (o[domain]) return o[domain]; } catch {}
+  return (typeof TOOL_NAMES !== 'undefined' && TOOL_NAMES[domain]) ? TOOL_NAMES[domain] : domain;
+}
 
-            requestAnimationFrame(animate);
-        }
+function renderSidebar() {
+  const sidebar = document.getElementById('sidebar-tags');
+  const tagCounts = {};
+  TOOLS.forEach(tool => { (tool.tags || []).forEach(tag => { tagCounts[tag] = (tagCounts[tag] || 0) + 1; }); });
 
-        window.addEventListener('resize', init);
-        init();
-        animate();
-    </script>
+  function tagLink(tag) {
+    const active = selectedTags.has(tag);
+    return '<a class="group flex items-center ' + (active ? 'text-primary' : 'text-on-surface-variant') + ' font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer" data-tag="' + tag + '">' +
+      (active ? '<span style="width:4px;height:4px;background:#cdf200;border-radius:50%;margin-right:8px;flex-shrink:0;"></span>' : '<span style="width:4px;height:4px;background:transparent;margin-right:8px;flex-shrink:0;"></span>') +
+      tTag(tag) + ' <span style="font-size:9px;opacity:0.6;margin-left:4px;">' + (tagCounts[tag] || 0) + '</span></a>';
+  }
 
+  let html = '<a class="group flex items-center ' + (selectedTags.size === 0 ? 'text-primary' : 'text-on-surface-variant') + ' font-label-mono text-label-mono uppercase hover:text-primary transition-all cursor-pointer" id="btn-all-tags">' +
+    (selectedTags.size === 0 ? '<span style="width:4px;height:4px;background:#cdf200;border-radius:50%;margin-right:8px;flex-shrink:0;"></span>' : '<span style="width:4px;height:4px;background:transparent;margin-right:8px;flex-shrink:0;"></span>') +
+    'All Tags <span style="font-size:9px;opacity:0.6;margin-left:4px;">' + TOOLS.length + '</span></a>';
 
-</body></html>
+  TAG_GROUPS.forEach(group => {
+    const groupTags = group.tags.filter(t => tagCounts[t]);
+    if (!groupTags.length) return;
+    html += '<div style="margin-top:16px;margin-bottom:6px;font-size:9px;letter-spacing:0.15em;color:#8f9378;text-transform:uppercase;">' + group.label + '</div>';
+    groupTags.forEach(tag => { html += tagLink(tag); });
+  });
+
+  sidebar.innerHTML = html;
+  document.getElementById('btn-all-tags').addEventListener('click', () => { selectedTags.clear(); renderSidebar(); render(); });
+  sidebar.querySelectorAll('[data-tag]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tag = btn.dataset.tag;
+      if (selectedTags.has(tag)) selectedTags.delete(tag); else selectedTags.add(tag);
+      renderSidebar(); render();
+    });
+  });
+}
+
+function render() {
+  let f = TOOLS.slice();
+  try { const bl = JSON.parse(localStorage.getItem('beacon_blocklist') || '[]'); if (bl.length) f = f.filter(t => !bl.includes(t.domain)); } catch {}
+  if (selectedTags.size > 0) f = f.filter(tool => { const tt = tool.tags || []; return [...selectedTags].some(st => tt.includes(st)); });
+  if (currentPrice !== 'All') f = f.filter(t => t.pricing === currentPrice);
+  if (currentSearch) {
+    const q = currentSearch.toLowerCase();
+    f = f.filter(t => t.domain.toLowerCase().includes(q) || t.description.toLowerCase().includes(q) || (t.tags || []).some(tag => tag.toLowerCase().includes(q)));
+  }
+  f.sort((a, b) => { const av = (a.domain || '').toLowerCase(); const bv = (b.domain || '').toLowerCase(); return av < bv ? -1 : av > bv ? 1 : 0; });
+
+  const title = selectedTags.size === 0 ? 'Catalog' : [...selectedTags].map(tTag).join(', ');
+  document.getElementById('section-title').textContent = title;
+  document.getElementById('count-label').textContent = f.length + ' tools';
+  document.getElementById('breadcrumb-count').textContent = 'All Apps (' + f.length + ')';
+
+  const grid = document.getElementById('card-grid');
+  const empty = document.getElementById('empty');
+  if (!f.length) { grid.innerHTML = ''; empty.style.display = 'block'; filteredTools = []; document.getElementById('pagination').innerHTML = ''; return; }
+  empty.style.display = 'none';
+  filteredTools = f;
+  currentPage = 1;
+  renderPage(1);
+}
+
+function renderCard(tool, i) {
+  const screenshot = 'https://image.thum.io/get/width/600/' + tool.url;
+  const favicon = 'https://www.google.com/s2/favicons?domain=' + tool.domain + '&sz=32';
+  const name = toolName(tool.domain);
+  const desc = tool.description || '';
+  const tags = (tool.tags || []).slice(0, 3).map(tg => '<span class="card-tag">' + tTag(tg) + '</span>').join(' ');
+  const pricing = tool.pricing === 'Free' ? '<span class="card-tag badge-free">Free</span>' : '<span class="card-tag badge-freemium">Freemium</span>';
+  return '<div class="tool-card" data-domain="' + tool.domain + '" data-url="' + tool.url + '" style="animation-delay:' + ((i % PAGE_SIZE) * 0.02) + 's;">' +
+    '<img class="card-screenshot" src="' + screenshot + '" alt="' + name + '" loading="lazy" onerror="this.style.display=\'none\'">' +
+    '<div class="p-4 space-y-3">' +
+    '<div class="flex items-center gap-2"><img src="' + favicon + '" alt="" style="width:16px;height:16px;"><span class="card-title">' + name + '</span></div>' +
+    '<p class="card-desc">' + desc + '</p>' +
+    '<div class="flex flex-wrap gap-1">' + tags + ' ' + pricing + '</div>' +
+    '</div></div>';
+}
+
+function renderPage(page) {
+  currentPage = page;
+  const grid = document.getElementById('card-grid');
+  const start = (page - 1) * PAGE_SIZE;
+  const batch = filteredTools.slice(start, start + PAGE_SIZE);
+  grid.innerHTML = batch.map((tool, i) => renderCard(tool, start + i)).join('');
+
+  grid.querySelectorAll('.tool-card').forEach(card => {
+    card.addEventListener('click', () => {
+      window.location.href = 'app-detail.html?domain=' + encodeURIComponent(card.dataset.domain);
+    });
+  });
+
+  document.getElementById('result-count').textContent = 'Displaying ' + (start + 1) + '-' + Math.min(start + PAGE_SIZE, filteredTools.length) + ' of ' + filteredTools.length + ' Entries';
+  renderPagination();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function renderPagination() {
+  const container = document.getElementById('pagination');
+  const totalPages = Math.ceil(filteredTools.length / PAGE_SIZE);
+  if (totalPages <= 1) { container.innerHTML = ''; return; }
+
+  const btnClass = 'bg-background px-4 py-2 font-label-mono text-label-mono uppercase transition-colors cursor-pointer';
+  const activeClass = btnClass + ' text-primary-container border border-primary-container';
+  const normalClass = btnClass + ' text-on-surface-variant hover:text-primary-container';
+  const disabledClass = btnClass + ' text-on-surface-variant opacity-30 cursor-default';
+
+  let html = '<button class="' + (currentPage === 1 ? disabledClass : normalClass + ' border border-transparent hover:border-primary-container') + '" data-page="prev">PREV</button>';
+  let pages = [];
+  if (totalPages <= 5) { for (let i = 1; i <= totalPages; i++) pages.push(i); }
+  else {
+    pages.push(1);
+    if (currentPage > 3) pages.push('...');
+    for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) pages.push(i);
+    if (currentPage < totalPages - 2) pages.push('...');
+    pages.push(totalPages);
+  }
+  pages.forEach(p => {
+    if (p === '...') html += '<span class="' + btnClass + ' text-on-surface-variant">...</span>';
+    else html += '<button class="' + (p === currentPage ? activeClass : normalClass) + '" data-page="' + p + '">' + String(p).padStart(2, '0') + '</button>';
+  });
+  html += '<button class="' + (currentPage === totalPages ? disabledClass : normalClass + ' border border-transparent hover:border-primary-container') + '" data-page="next">NEXT</button>';
+  container.innerHTML = html;
+  container.querySelectorAll('button[data-page]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const val = btn.dataset.page;
+      if (val === 'prev' && currentPage > 1) renderPage(currentPage - 1);
+      else if (val === 'next' && currentPage < totalPages) renderPage(currentPage + 1);
+      else if (val !== 'prev' && val !== 'next') renderPage(parseInt(val));
+    });
+  });
+}
+
+document.querySelectorAll('.price-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentPrice = btn.dataset.price;
+    document.querySelectorAll('.price-btn').forEach(b => { b.classList.remove('active', 'text-primary'); b.classList.add('text-on-surface-variant'); });
+    btn.classList.add('active', 'text-primary'); btn.classList.remove('text-on-surface-variant');
+    render();
+  });
+});
+
+document.getElementById('search').addEventListener('input', e => { currentSearch = e.target.value.trim(); var ms = document.getElementById('mobile-search'); if (ms) ms.value = e.target.value; render(); });
+var mobileSearch = document.getElementById('mobile-search');
+if (mobileSearch) mobileSearch.addEventListener('input', e => { currentSearch = e.target.value.trim(); document.getElementById('search').value = e.target.value; render(); });
+const qParam = params.get('q');
+if (qParam) { currentSearch = qParam; document.getElementById('search').value = qParam; if (mobileSearch) mobileSearch.value = qParam; }
+
+renderSidebar();
+render();
+var loader = document.getElementById('nexus-loader');
+if (loader) loader.style.display = 'none';
+
+})();
+</script>
+</body>
+</html>

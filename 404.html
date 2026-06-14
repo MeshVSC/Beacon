@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS — Page Not Found</title>
+<meta name="description" content="This page doesn't exist in the Nexus directory. Browse 10,000+ free tools or return home."/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "background": "#131313",
+        "surface-container-low": "#1c1b1b",
+        "surface-container-lowest": "#0e0e0e",
+        "primary": "#ffffff",
+        "primary-container": "#cdf200",
+        "secondary-container": "#474747",
+        "on-surface": "#e5e2e1",
+        "on-surface-variant": "#c5c9ac",
+        "on-primary-container": "#5a6b00"
+      },
+      "spacing": {
+        "gutter": "32px",
+        "container-max": "1440px"
+      },
+      "fontFamily": {
+        "display-lg": ["Geist", "sans-serif"],
+        "label-mono": ["Geist Mono", "monospace"],
+        "headline-lg": ["Geist", "sans-serif"],
+        "headline-md": ["Geist", "sans-serif"],
+        "button": ["Geist", "sans-serif"],
+        "body-md": ["Geist", "sans-serif"]
+      },
+      "fontSize": {
+        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}]
+      }
+    }
+  }
+}
+</script>
+</head>
+<body class="font-body-md text-body-md bg-background min-h-screen flex flex-col">
+
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
+<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
+<div class="flex items-center gap-6">
+<a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">CATALOG</a>
+</div>
+</div>
+</nav>
+
+<main class="flex-1 flex flex-col items-center justify-center px-gutter text-center">
+<div class="font-label-mono text-label-mono text-primary-container uppercase tracking-[0.3em] mb-6">Error 404</div>
+<h1 class="text-[clamp(60px,12vw,140px)] font-bold tracking-tighter text-primary leading-none mb-6">404</h1>
+<p class="font-headline-md text-headline-md text-primary uppercase tracking-tight mb-4">This tool doesn't exist. Yet.</p>
+<p class="text-on-surface-variant max-w-md mb-12">The page you're looking for isn't in our directory. It may have been moved, removed, or never existed in the first place.</p>
+<div class="flex flex-wrap gap-4 justify-center">
+<a href="/" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-8 py-3 transition-all duration-100 active:scale-95 no-underline">Home</a>
+<a href="beacon.html" class="border border-secondary-container text-on-surface font-button text-button uppercase px-8 py-3 transition-all duration-100 active:scale-95 no-underline hover:border-primary-container hover:text-primary-container">Browse Catalog</a>
+</div>
+</main>
+
+<footer class="w-full border-t border-secondary-container bg-background/60 backdrop-blur-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary">NEXUS</div>
+<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">&copy; 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</div>
+</div>
+<div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="legal.html">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="privacy.html">PRIVACY</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
