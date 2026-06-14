@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NEXUS | Privacy</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "background": "#131313",
+        "surface-container-low": "#1c1b1b",
+        "surface-container-lowest": "#0e0e0e",
+        "primary": "#ffffff",
+        "primary-container": "#cdf200",
+        "secondary-container": "#474747",
+        "on-surface": "#e5e2e1",
+        "on-surface-variant": "#c5c9ac",
+        "on-primary-container": "#5a6b00"
+      },
+      "spacing": {
+        "gutter": "32px",
+        "container-max": "1440px"
+      },
+      "fontFamily": {
+        "display-lg": ["Geist", "sans-serif"],
+        "label-mono": ["Geist Mono", "monospace"],
+        "headline-lg": ["Geist", "sans-serif"],
+        "headline-md": ["Geist", "sans-serif"],
+        "button": ["Geist", "sans-serif"],
+        "body-md": ["Geist", "sans-serif"]
+      },
+      "fontSize": {
+        "label-mono": ["12px", {"lineHeight": "16px", "letterSpacing": "0.1em", "fontWeight": "500"}],
+        "headline-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+        "headline-md": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+        "button": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+        "body-md": ["16px", {"lineHeight": "24px", "letterSpacing": "0em", "fontWeight": "400"}]
+      }
+    }
+  }
+}
+</script>
+<style>
+body { color: #e5e2e1; }
+h2 { color: #cdf200; margin-top: 48px; margin-bottom: 16px; font-size: 20px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
+p, li { color: #c5c9ac; line-height: 1.8; margin-bottom: 12px; }
+ul { list-style: none; padding: 0; }
+ul li::before { content: "—"; color: #474747; margin-right: 12px; }
+</style>
+</head>
+<body class="font-body-md text-body-md bg-background min-h-screen">
+
+<nav class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-secondary-container">
+<div class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
+<a href="/" class="font-headline-md text-headline-md tracking-tighter text-primary no-underline">NEXUS</a>
+<div class="flex items-center gap-6">
+<a href="beacon.html" class="bg-primary-container text-on-primary-container font-button text-button uppercase px-6 py-2 transition-all duration-100 active:scale-95 no-underline">CATALOG</a>
+</div>
+</div>
+</nav>
+
+<main class="max-w-3xl mx-auto px-gutter pt-40 pb-24">
+<div class="mb-4">
+<span class="font-label-mono text-label-mono text-primary-container uppercase tracking-widest">Privacy</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary uppercase mb-8">Privacy Policy</h1>
+<p class="text-on-surface-variant text-sm uppercase tracking-widest mb-16" style="font-family:'Geist Mono',monospace;">Last updated: June 2026</p>
+
+<h2>The Short Version</h2>
+<p>Nexus does not collect, store, or transmit any personal data. We have no accounts, no registration, no cookies, no analytics, and no tracking. Your privacy is not a feature we sell -- it is the default.</p>
+
+<h2>Data We Collect</h2>
+<p>None. Nexus is a fully client-side static website. There is no server processing your requests, no database storing your information, and no backend of any kind.</p>
+
+<h2>Local Storage</h2>
+<p>Nexus uses your browser's localStorage to save your preferences locally on your device. This includes:</p>
+<ul>
+<li>Star ratings you give to tools</li>
+<li>Language preference (EN/ES/CA)</li>
+<li>Any custom tools or category configurations</li>
+<li>Admin mode settings (if enabled)</li>
+</ul>
+<p>This data never leaves your browser. It is not sent to any server, not shared with anyone, and is fully under your control. You can clear it at any time through your browser settings.</p>
+
+<h2>Cookies</h2>
+<p>Nexus does not set any cookies. We do not use cookie-based tracking, session cookies, or any cookie consent mechanisms because there are no cookies to consent to.</p>
+
+<h2>Analytics & Tracking</h2>
+<p>Nexus does not use Google Analytics, Facebook Pixel, or any other analytics or tracking service. We do not track page views, clicks, user behavior, or any other metrics. We have no idea who you are or what you do on this site.</p>
+
+<h2>Third-Party Services</h2>
+<p>Nexus uses the following third-party services:</p>
+<ul>
+<li>Thum.io -- for generating website screenshot thumbnails. When a screenshot is displayed, your browser requests the image from thum.io's servers. Their privacy policy applies to that request.</li>
+<li>Google Favicons -- for displaying small website icons. Your browser requests these from Google's servers.</li>
+<li>Tailwind CSS CDN -- for styling. Loaded from cdn.tailwindcss.com.</li>
+<li>Google Fonts -- for the Geist typeface. Loaded from fonts.googleapis.com.</li>
+</ul>
+<p>These services may log standard web request data (IP address, user agent) according to their own privacy policies. Nexus has no control over this.</p>
+
+<h2>Third-Party Links</h2>
+<p>Nexus is a directory of links to third-party websites. When you click a link and leave Nexus, you are subject to that website's privacy policy and terms. We strongly recommend reviewing the privacy practices of any tool before providing it with personal information.</p>
+
+<h2>GDPR Compliance</h2>
+<p>Under the General Data Protection Regulation (GDPR):</p>
+<ul>
+<li>Nexus does not process personal data as defined by the GDPR</li>
+<li>No data controller or data processor relationship exists because no personal data is collected</li>
+<li>There is no personal data to access, rectify, erase, or port</li>
+<li>No consent mechanism is required because there is nothing to consent to</li>
+</ul>
+<p>If you believe any of the above is incorrect or have concerns about your data, please contact us.</p>
+
+<h2>Children's Privacy</h2>
+<p>Nexus does not knowingly collect any information from anyone, including children under 13. The NSFW section of the catalog contains links to adult content and should not be accessed by minors.</p>
+
+<h2>Changes to This Policy</h2>
+<p>If we ever change our data practices (which would mean we actually started collecting data), this policy will be updated accordingly. Given our architecture, this is unlikely.</p>
+
+<h2>Contact</h2>
+<p>For privacy-related questions or concerns, contact us at <a href="mailto:Stephcolors@hotmail.com" class="text-primary-container hover:underline">Stephcolors@hotmail.com</a>.</p>
+</main>
+
+<footer class="w-full border-t border-secondary-container bg-background/60 backdrop-blur-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto w-full">
+<div class="space-y-4">
+<div class="font-headline-md text-headline-md text-primary">NEXUS</div>
+<div class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">&copy; 2026 MESH STUDIOS. ALL RIGHTS RESERVED.</div>
+</div>
+<div class="flex flex-wrap md:justify-end gap-x-8 gap-y-4 items-center">
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="legal.html">LEGAL</a>
+<a class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant hover:text-primary-container transition-opacity" href="privacy.html">PRIVACY</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
