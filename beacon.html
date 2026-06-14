@@ -2,6 +2,17 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <title>NEXUS | CATALOG</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<meta name="description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
+<meta property="og:type" content="website"/>
+<meta property="og:title" content="NEXUS Catalog | Browse 10,000+ Free Tools"/>
+<meta property="og:description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
+<meta property="og:image" content="https://nexusapp.vercel.app/og-image.png"/>
+<meta property="og:url" content="https://nexusapp.vercel.app/beacon.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="NEXUS Catalog | Browse 10,000+ Free Tools"/>
+<meta name="twitter:description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
+<meta name="twitter:image" content="https://nexusapp.vercel.app/og-image.png"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -224,6 +235,7 @@
 </nav>
 <div id="mobile-menu" class="hidden fixed top-[73px] left-0 w-full z-40 bg-background/95 backdrop-blur-md border-b border-secondary-container md:hidden">
 <div class="flex flex-col px-gutter py-4 gap-1 max-w-container-max mx-auto">
+<input id="mobile-search" class="w-full bg-transparent border-b border-secondary-container focus:border-primary-container focus:ring-0 text-label-mono uppercase px-2 py-3 transition-all outline-none mb-2" placeholder="SEARCH TOOLS..." type="text"/>
 <a class="font-button text-button uppercase text-primary py-3 border-b border-secondary-container/30 no-underline" href="beacon.html">CATALOG</a>
 <a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="beacon.html?tag=streaming">MEDIA</a>
 <a class="font-button text-button uppercase text-on-surface-variant py-3 border-b border-secondary-container/30 no-underline" href="beacon.html?tag=gaming">GAMING</a>
@@ -232,9 +244,11 @@
 </div>
 </div>
 </header>
-<main class="pt-[140px] min-h-screen flex max-w-container-max mx-auto px-gutter gap-gutter">
+<main class="pt-[140px] min-h-screen flex flex-col lg:flex-row max-w-container-max mx-auto px-gutter gap-gutter">
+<!-- Mobile Filter Toggle -->
+<button id="mobile-filter-btn" class="lg:hidden flex items-center gap-2 font-label-mono text-label-mono uppercase text-primary-container border border-secondary-container px-4 py-3 mb-4 w-full justify-center" onclick="var s=document.getElementById('mobile-sidebar');s.classList.toggle('hidden');this.textContent=s.classList.contains('hidden')?'SHOW FILTERS':'HIDE FILTERS';">SHOW FILTERS</button>
 <!-- Sidebar Filters (Simplified from SideNavBar logic) -->
-<aside class="hidden lg:flex flex-col w-64 flex-shrink-0 space-y-8 sticky top-[140px] h-[calc(100vh-140px)] border-r border-secondary-container pr-gutter overflow-y-auto custom-scrollbar pb-12">
+<aside id="mobile-sidebar" class="hidden lg:flex flex-col w-full lg:w-64 flex-shrink-0 space-y-8 lg:sticky lg:top-[140px] lg:h-[calc(100vh-140px)] border-b lg:border-b-0 lg:border-r border-secondary-container pb-6 lg:pb-12 lg:pr-gutter overflow-y-auto custom-scrollbar">
 <div>
 <h3 class="font-label-mono text-label-mono uppercase text-on-surface-variant mb-6 tracking-[0.2em]">Pricing</h3>
 <nav class="space-y-3">
@@ -997,9 +1011,11 @@ document.querySelectorAll('.sortable').forEach(th => {
 });
 
 // Search
-document.getElementById('search').addEventListener('input', e => { currentSearch = e.target.value.trim(); render(); });
+document.getElementById('search').addEventListener('input', e => { currentSearch = e.target.value.trim(); var ms = document.getElementById('mobile-search'); if (ms) ms.value = e.target.value; render(); });
+var mobileSearch = document.getElementById('mobile-search');
+if (mobileSearch) mobileSearch.addEventListener('input', e => { currentSearch = e.target.value.trim(); document.getElementById('search').value = e.target.value; render(); });
 const qParam = params.get('q');
-if (qParam) { currentSearch = qParam; document.getElementById('search').value = qParam; }
+if (qParam) { currentSearch = qParam; document.getElementById('search').value = qParam; if (mobileSearch) mobileSearch.value = qParam; }
 
 // App details / workspace
 window.openAppDetails = function(domain) {
