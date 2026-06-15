@@ -1,18 +1,18 @@
 <!DOCTYPE html><html class="dark" lang="en"><head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>NEXUS Catalog — Browse 10,000+ Free Tools</title>
+<title>BEACON Catalog — Browse 10,000+ Free Tools</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <meta name="description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
 <meta property="og:type" content="website"/>
-<meta property="og:title" content="NEXUS Catalog | Browse 10,000+ Free Tools"/>
+<meta property="og:title" content="BEACON Catalog | Browse 10,000+ Free Tools"/>
 <meta property="og:description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
-<meta property="og:image" content="https://nexusapp.vercel.app/og-image.png"/>
-<meta property="og:url" content="https://nexusapp.vercel.app/beacon.html"/>
+<meta property="og:image" content="https://beacon-mesh.vercel.app/og-image.png"/>
+<meta property="og:url" content="https://beacon-mesh.vercel.app/beacon.html"/>
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:title" content="NEXUS Catalog | Browse 10,000+ Free Tools"/>
+<meta name="twitter:title" content="BEACON Catalog | Browse 10,000+ Free Tools"/>
 <meta name="twitter:description" content="Browse and launch 10,000+ free tools. Filter by category, search, and discover new apps."/>
-<meta name="twitter:image" content="https://nexusapp.vercel.app/og-image.png"/>
+<meta name="twitter:image" content="https://beacon-mesh.vercel.app/og-image.png"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
@@ -58,19 +58,19 @@
         }
 
         @keyframes fade-up { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes nexus-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @keyframes nexus-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
-        #nexus-loader { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #131313; }
-        #nexus-loader .ring { width: 80px; height: 80px; position: relative; animation: nexus-spin 3s linear infinite; }
-        #nexus-loader .ring .dot { position: absolute; width: 8px; height: 8px; background: #cdf200; border-radius: 50%; }
-        #nexus-loader .ring .dot:nth-child(1) { top: 0; left: 36px; animation: nexus-pulse 1.2s ease-in-out 0s infinite; }
-        #nexus-loader .ring .dot:nth-child(2) { top: 10px; right: 4px; animation: nexus-pulse 1.2s ease-in-out 0.15s infinite; }
-        #nexus-loader .ring .dot:nth-child(3) { bottom: 10px; right: 4px; animation: nexus-pulse 1.2s ease-in-out 0.3s infinite; }
-        #nexus-loader .ring .dot:nth-child(4) { bottom: 0; left: 36px; animation: nexus-pulse 1.2s ease-in-out 0.45s infinite; }
-        #nexus-loader .ring .dot:nth-child(5) { bottom: 10px; left: 4px; animation: nexus-pulse 1.2s ease-in-out 0.6s infinite; }
-        #nexus-loader .ring .dot:nth-child(6) { top: 10px; left: 4px; animation: nexus-pulse 1.2s ease-in-out 0.75s infinite; }
-        #nexus-loader .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
-        #nexus-loader .label { margin-top: 24px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #474747; }
+        @keyframes index-spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @keyframes index-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+        #index-loader { position: fixed; inset: 0; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #131313; }
+        #index-loader .ring { width: 80px; height: 80px; position: relative; animation: index-spin 3s linear infinite; }
+        #index-loader .ring .dot { position: absolute; width: 8px; height: 8px; background: #cdf200; border-radius: 50%; }
+        #index-loader .ring .dot:nth-child(1) { top: 0; left: 36px; animation: index-pulse 1.2s ease-in-out 0s infinite; }
+        #index-loader .ring .dot:nth-child(2) { top: 10px; right: 4px; animation: index-pulse 1.2s ease-in-out 0.15s infinite; }
+        #index-loader .ring .dot:nth-child(3) { bottom: 10px; right: 4px; animation: index-pulse 1.2s ease-in-out 0.3s infinite; }
+        #index-loader .ring .dot:nth-child(4) { bottom: 0; left: 36px; animation: index-pulse 1.2s ease-in-out 0.45s infinite; }
+        #index-loader .ring .dot:nth-child(5) { bottom: 10px; left: 4px; animation: index-pulse 1.2s ease-in-out 0.6s infinite; }
+        #index-loader .ring .dot:nth-child(6) { top: 10px; left: 4px; animation: index-pulse 1.2s ease-in-out 0.75s infinite; }
+        #index-loader .ring svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+        #index-loader .label { margin-top: 24px; font-family: 'Geist Mono', monospace; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: #474747; }
         tbody tr { border-bottom: 1px solid rgba(71,71,71,0.3); transition: all 0.2s; opacity: 0; animation: fade-up 0.4s ease-out forwards; cursor: pointer; }
         tbody tr:hover { background: #1c1b1b; }
         td { padding: 12px 16px; vertical-align: middle; font-size: 13px; }
@@ -214,7 +214,7 @@
     }
 </style></head>
 <body class="font-body-md text-body-md selection:bg-primary-container selection:text-on-primary-container">
-<div id="nexus-loader">
+<div id="index-loader">
 <div class="ring">
 <div class="dot"></div><div class="dot"></div><div class="dot"></div>
 <div class="dot"></div><div class="dot"></div><div class="dot"></div>
@@ -233,7 +233,7 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-background dark:bg-background border-b border-secondary-container">
 <nav class="flex justify-between items-center px-gutter py-6 max-w-container-max mx-auto">
-<a href="/" class="font-headline-lg text-headline-lg tracking-tighter text-primary no-underline">NEXUS</a>
+<a href="/" class="font-headline-lg text-headline-lg tracking-tighter text-primary no-underline">BEACON</a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-button text-button uppercase text-primary border-b-2 border-primary-container pb-1 hover:text-primary-container transition-colors duration-300" href="beacon.html">CATALOG</a>
 <a class="font-button text-button uppercase text-on-surface-variant hover:text-primary-container transition-colors duration-300" href="beacon.html?tag=streaming">MEDIA</a>
@@ -331,7 +331,7 @@
 <footer class="w-full mt-auto border-t border-secondary-container bg-background dark:bg-background">
 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 px-gutter py-12 max-w-container-max mx-auto">
 <div class="space-y-4">
-<div class="font-headline-lg text-headline-lg text-primary">NEXUS</div>
+<div class="font-headline-lg text-headline-lg text-primary">BEACON</div>
 <p class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant leading-relaxed">
                     © 2026 MESH STUDIOS. ALL RIGHTS RESERVED.
                 </p>
@@ -362,13 +362,13 @@
 <div class="workspace-overlay" id="workspace-overlay">
   <div class="workspace-header">
     <div style="display:flex;align-items:center;gap:10px;">
-      <span style="font-weight:700;font-size:16px;color:#fff;">Nexus</span>
+      <span style="font-weight:700;font-size:16px;color:#fff;">Beacon</span>
       <span style="width:1px;height:18px;background:#474747;margin:0 8px;"></span>
       <span style="font-size:11px;color:#c5c9ac;text-transform:uppercase;letter-spacing:0.1em;" id="ws-title">App Name</span>
     </div>
     <div style="display:flex;gap:10px;">
       <a href="#" target="_blank" style="background:transparent;border:1px solid #474747;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;color:#e5e2e1;cursor:pointer;text-decoration:none;" id="ws-external">Open in New Tab</a>
-      <button style="background:#cdf200;color:#131313;border:1px solid #cdf200;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;" id="ws-back" onclick="closeWorkspace()">Back to Nexus</button>
+      <button style="background:#cdf200;color:#131313;border:1px solid #cdf200;padding:6px 12px;font-size:10px;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;" id="ws-back" onclick="closeWorkspace()">Back to Beacon</button>
     </div>
   </div>
   <iframe class="workspace-iframe" id="ws-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
@@ -1105,7 +1105,7 @@ document.getElementById('lang-select').addEventListener('change', e => {
 // Bootstrap
 renderSidebar();
 render();
-var loader = document.getElementById('nexus-loader');
+var loader = document.getElementById('index-loader');
 if (loader) loader.style.display = 'none';
 
 })();
