@@ -210,7 +210,7 @@
 </div>
 <div class="font-label-mono text-label-mono text-on-surface-variant uppercase drop-shadow-sm">8 CATEGORIES</div>
 </div>
-<div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+<div id="catGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
 </div>
 <div class="mt-8 text-center">
 <a href="beacon.html" class="inline-block border border-secondary-container text-primary font-button text-button uppercase py-4 px-12 hover:bg-primary-container hover:text-on-primary-container transition-all backdrop-blur-md bg-background/50 no-underline">VIEW ALL 10,000+ TOOLS</a>
@@ -328,9 +328,20 @@
           var grid = document.getElementById('catGrid');
           var allTools = (typeof TOOLS !== 'undefined' ? TOOLS : []).concat(typeof FMHY_TOOLS !== 'undefined' ? FMHY_TOOLS : []);
           grid.innerHTML = cats.map(function(c) {
-            return '<a href="beacon.html?tag=' + c.link + '" class="card-hover bg-background/40 backdrop-blur-sm border border-secondary-container/50 p-5 text-center no-underline hover:border-primary-container/60 transition-all">' +
-              '<div class="font-headline-md text-[18px] text-primary mb-1">' + c.label + '</div>' +
-              '<div class="font-label-mono text-[10px] text-on-surface-variant uppercase">' + c.subtitle + '</div></a>';
+            var count = allTools.filter(function(t) { return c.tags.some(function(tag) { return (t.tags || []).indexOf(tag) !== -1; }); }).length;
+            return '<a href="beacon.html?tag=' + c.link + '" class="bg-surface-container-lowest border border-secondary-container/30 p-4 group hover:border-primary-container transition-all duration-300 flex flex-col justify-between h-full no-underline" style="min-height:120px;">' +
+              '<div class="space-y-3">' +
+              '<div class="flex justify-between items-start">' +
+              '<div class="font-label-mono text-[10px] text-primary-container">' + count + ' TOOLS</div>' +
+              '<div class="w-1 h-1 bg-primary-container"></div>' +
+              '</div>' +
+              '<h2 class="font-headline-md text-xl text-primary">' + c.label + '</h2>' +
+              '<p class="font-body-md text-xs text-on-surface-variant line-clamp-2">' + c.subtitle + '</p>' +
+              '</div>' +
+              '<div class="mt-6 flex items-center justify-between gap-4">' +
+              '<span class="font-label-mono text-[9px] text-on-surface-variant">BROWSE</span>' +
+              '<span class="text-[10px] font-button uppercase border border-white px-3 py-1 group-hover:bg-primary-container group-hover:text-on-primary-container transition-colors" style="color:#e5e2e1;">EXPLORE</span>' +
+              '</div></a>';
           }).join('');
         })();
 
